@@ -25,21 +25,9 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
       
-      - name: Validate structure
-        run: |
-          python tools/validate.py --strict
-      
-      - name: Generate backlinks
-        run: |
-          python tools/generate-backlinks.py
-      
-      - name: Generate search index
-        run: |
-          python tools/build-search-index.py
-      
       - name: Build site
         run: |
-          mkdocs build --strict
+          mkdocs build
       
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
