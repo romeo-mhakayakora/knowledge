@@ -73,15 +73,13 @@ extra_css:
 
 nav:
   - Home: index.md
-  - Domains:
-    - Mathematics: domains/mathematics.md
-    - Computer Science: domains/computer-science.md
-    - AI: domains/ai.md
-    - Economics: domains/economics.md
-    - Physics: domains/physics.md
-    - Systems: domains/systems.md
-    - Business: domains/business.md
-  - Search: search/index.md
-  - Tags: tags/index.md
+  - Mathematics: mathematics/README.md
+  - Computer Science: computer-science/README.md
+  - AI: ai/README.md
+  - Economics: economics/README.md
+  - Physics: physics/README.md
+  - Systems: systems/README.md
+  - Business: business/README.md
+  - Concepts: _concepts/README.md
 
 copyright: Copyright &copy; 2026 Romeo Mhakayakora
