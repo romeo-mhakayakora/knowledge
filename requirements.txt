@@ -1,0 +1,6 @@
+mkdocs>=1.5.3
+mkdocs-material>=9.4.0
+mkdocs-search-better-indexing>=0.1.6
+mkdocs-backlinks>=1.2.0
+pyyaml>=6.0
+python-frontmatter>=1.0.0

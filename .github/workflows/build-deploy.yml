@@ -1,0 +1,49 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Validate structure
+        run: |
+          python tools/validate.py --strict
+      
+      - name: Generate backlinks
+        run: |
+          python tools/generate-backlinks.py
+      
+      - name: Generate search index
+        run: |
+          python tools/build-search-index.py
+      
+      - name: Build site
+        run: |
+          mkdocs build --strict
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          cname: romeo-mhakayakora.github.io

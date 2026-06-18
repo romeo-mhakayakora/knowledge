@@ -1,0 +1,51 @@
+name: Scaffold New Subject
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain:
+        description: 'Domain (e.g., mathematics)'
+        required: true
+      subject:
+        description: 'Subject slug (e.g., probability)'
+        required: true
+      chapters:
+        description: 'Number of chapters'
+        required: false
+        default: '3'
+      title:
+        description: 'Subject title (optional)'
+        required: false
+
+jobs:
+  scaffold:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install pyyaml
+      
+      - name: Scaffold subject
+        run: |
+          python tools/scaffold-generator.py \
+            --domain ${{ github.event.inputs.domain }} \
+            --subject ${{ github.event.inputs.subject }} \
+            --chapters ${{ github.event.inputs.chapters }} \
+            --title "${{ github.event.inputs.title }}"
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "feat: scaffold new subject ${{ github.event.inputs.domain }}/${{ github.event.inputs.subject }}"
+          title: "New Subject: ${{ github.event.inputs.domain }}/${{ github.event.inputs.subject }}"
+          body: "Scaffolded new subject with ${{ github.event.inputs.chapters }} chapters"
+          branch: "scaffold/${{ github.event.inputs.domain }}-${{ github.event.inputs.subject }}"

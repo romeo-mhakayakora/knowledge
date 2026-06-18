@@ -1,0 +1,107 @@
+/* Custom CSS overrides for MkDocs Material */
+
+:root {
+  --md-primary-fg-color: #6366F1;
+  --md-primary-bg-color: #F3F4F6;
+}
+
+/* Wikilink styling */
+.wikilink {
+  color: var(--md-primary-fg-color);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.wikilink:hover {
+  color: var(--md-accent-fg-color);
+}
+
+/* Code block improvements */
+.language-python .highlight {
+  background-color: #F8F9FA;
+}
+
+/* Math equation styling */
+.arithmatex {
+  margin: 1rem 0;
+}
+
+/* Frontmatter badges */
+.frontmatter-meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-draft {
+  background-color: #FECACA;
+  color: #7F1D1D;
+}
+
+.status-in-progress {
+  background-color: #FED7AA;
+  color: #92400E;
+}
+
+.status-complete {
+  background-color: #BBFBEE;
+  color: #134E4A;
+}
+
+.status-review {
+  background-color: #BFDBFE;
+  color: #1E3A8A;
+}
+
+.difficulty-beginner {
+  background-color: #CCFBF1;
+  color: #134E4A;
+}
+
+.difficulty-intermediate {
+  background-color: #FCD34D;
+  color: #78350F;
+}
+
+.difficulty-advanced {
+  background-color: #FDBA74;
+  color: #7C2D12;
+}
+
+/* Domain icons */
+.domain-icon {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+/* Related concepts box */
+.related-concepts {
+  background-color: #F0F9FF;
+  border-left: 4px solid var(--md-primary-fg-color);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+.related-concepts h3 {
+  margin-top: 0;
+}
+
+/* Prerequisites section */
+.prerequisites {
+  background-color: #FEF3C7;
+  border-left: 4px solid #F59E0B;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
