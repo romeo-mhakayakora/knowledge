@@ -2,6 +2,28 @@
 
 A unified repository for lifelong learning across multiple domains.
 
+!!! important
+    Dear Learners,
+
+    The *Grand Assessment is now LIVE*.
+
+    Completion of the Grand Assessment is required to obtain the course certificate. Learners who do not take the assessment will not be considered for certification.
+
+    *Assessment Window:* 10:00 AM – 7:00 PM
+
+    Please complete the assessment at the earliest and avoid waiting until the last minute.
+
+    Assessment Guidelines:
+    https://ap.skilldzire.com/guidelines/quizzes.html
+
+    For Support:
+    https://wa.link/cs2973
+
+    Best Regards,
+    SkillDzire
+
+
+
 ## 🎯 Purpose
 
 This knowledge base is designed to:
