@@ -50,3 +50,5 @@ Strategy, finance, organization
 ---
 
 Start by selecting a domain from the navigation menu to explore the content.
+
+<!-- Trigger rebuild: Fri, Jun 19, 2026  3:38:17 PM -->
