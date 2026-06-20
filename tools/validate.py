@@ -84,7 +84,7 @@ def validate_filename(filepath):
     basename = os.path.basename(filepath)
     
     # Skip metadata files
-    if basename.startswith('_') or basename == 'README.md':
+    if basename.startswith('_') or basename == 'README.md' or basename == 'index.md':
         return []
     
     # Check kebab-case
@@ -110,14 +110,19 @@ def validate_structure(content_dir, strict=False):
     
     for filepath in files:
         rel_path = os.path.relpath(filepath, content_dir)
+        basename = os.path.basename(filepath)
         
-        # Validate frontmatter
-        frontmatter, fm_error = extract_frontmatter(filepath)
-        if fm_error:
-            errors[rel_path].append(f"Frontmatter error: {fm_error}")
-        else:
-            fm_errors = validate_frontmatter(filepath, frontmatter)
-            errors[rel_path].extend(fm_errors)
+        # Skip frontmatter validation for index.md, README.md, and _* files
+        is_meta = basename.startswith('_') or basename == 'README.md' or basename == 'index.md'
+        
+        if not is_meta:
+            # Validate frontmatter
+            frontmatter, fm_error = extract_frontmatter(filepath)
+            if fm_error:
+                errors[rel_path].append(f"Frontmatter error: {fm_error}")
+            else:
+                fm_errors = validate_frontmatter(filepath, frontmatter)
+                errors[rel_path].extend(fm_errors)
         
         # Validate filename
         name_errors = validate_filename(filepath)
@@ -127,14 +132,16 @@ def validate_structure(content_dir, strict=False):
     total_errors = sum(len(errs) for errs in errors.values())
     
     if total_errors > 0:
-        print(f"\n❌ Found {total_errors} errors:\n")
+        print(f"\n[Error] Found {total_errors} errors:\n")
         for filepath, errs in errors.items():
+            if not errs:
+                continue
             print(f"  {filepath}")
             for err in errs:
                 print(f"    - {err}")
         return 1
     else:
-        print(f"\n✅ All {len(files)} files valid!")
+        print(f"\n[Success] All {len(files)} files valid!")
         return 0
 
 if __name__ == '__main__':

@@ -1,85 +1,78 @@
-site_name: Knowledge Base
-site_author: Romeo Mhakayakora
+site_name: Knowledge
 site_url: https://romeo-mhakayakora.github.io/knowledge/
 repo_url: https://github.com/romeo-mhakayakora/knowledge
 repo_name: romeo-mhakayakora/knowledge
 docs_dir: content
 site_dir: site
+
 theme:
   name: material
-  locale: en
-  logo: images/logo.svg
-  favicon: images/favicon.ico
+  custom_dir: overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
   features:
-    - search.suggest
-    - search.highlight
-    - search.share
-    - content.code.copy
-    - content.code.annotate
     - navigation.indexes
     - navigation.top
-    - navigation.tabs
+    - navigation.tracking
+    - navigation.footer
     - toc.follow
-  palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
 
 plugins:
-  - search:
-      lang: en
-      separator: '[\s\-_.]+'
-      min_search_length: 3
-      prebuild_index: true
-      indexing: "full"
+  - search
   - tags
+  - awesome-pages
+  - macros:
+      j2_comment_start_string: "{%#"
+      j2_comment_end_string: "#%}"
+  - git-revision-date-localized:
+      type: date
+      enable_creation_date: true
+  - social
 
 markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.highlight:
-      use_pygments: true
       anchor_linenums: true
   - pymdownx.inlinehilite
-  - pymdownx.superfences
-  - pymdownx.details
-  - pymdownx.tabbed:
-      alternate_style: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:pymdownx.emoji.twemoji
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
-  - tables
+  - pymdownx.snippets
   - toc:
       permalink: true
-  - meta
-  - attr_list
-  - md_in_html
 
 extra_javascript:
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
-  - styles/custom.css
+  - stylesheets/extra.css
 
-nav:
-  - Home: index.md
-  - Mathematics: mathematics/README.md
-  - Computer Science: computer-science/README.md
-  - AI: ai/README.md
-  - Economics: economics/README.md
-  - Physics: physics/README.md
-  - Systems: systems/README.md
-  - Business: business/README.md
-  - Concepts: _concepts/README.md
-
-copyright: Copyright &copy; 2026 Romeo Mhakayakora
+hooks:
+  - tools/mkdocs_hooks/wikilinks_backlinks.py

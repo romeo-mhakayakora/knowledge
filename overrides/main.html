@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if page and page.meta and (page.meta.status or page.meta.difficulty) and page.file.src_path != "index.md" %}
+    <div class="meta-line">
+      {% if page.meta.status and page.meta.difficulty %}
+        {{ page.meta.status | upper }} &middot; {{ page.meta.difficulty | upper }}
+      {% elif page.meta.status %}
+        {{ page.meta.status | upper }}
+      {% elif page.meta.difficulty %}
+        {{ page.meta.difficulty | upper }}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {{ super() }}
+
+  {% if backlinks %}
+    <div class="backlinks-panel">
+      <div class="backlinks-title">Linked from {{ backlinks | length }} note{{ 's' if backlinks|length > 1 else '' }}</div>
+      <ul class="backlinks-list">
+        {% for backlink in backlinks %}
+          <li>
+            <a href="{{ backlink.url | url }}" class="backlink-item">{{ backlink.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock %}

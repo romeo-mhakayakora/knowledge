@@ -1,54 +1,40 @@
+---
+title: Welcome
+hide:
+  - navigation
+  - toc
+---
+
 # Knowledge Base
 
 Welcome to your centralized knowledge management system. Explore domains, subjects, and concepts organized hierarchically for continuous learning.
 
-!!! important
-    Dear Learners,
+{% set stats = total_stats() %}
+<div class="meta-line homepage-stats">
+  {{ stats.notes }} notes &middot; {{ stats.domains }} domains &middot; {{ stats.concepts }} concepts &middot; updated {{ stats.updated_this_week }} this week
+</div>
 
-    The *Grand Assessment is now LIVE*.
+<h2 class="homepage-section-label">Domains</h2>
 
-    Completion of the Grand Assessment is required to obtain the course certificate. Learners who do not take the assessment will not be considered for certification.
+<div class="domain-list">
+{% for dom in domain_summary() %}
+<div class="domain-row">
+  <a href="{{ dom.slug }}/" class="domain-link">{{ dom.name }}</a>
+  <span class="domain-count">{{ dom.note_count }} notes</span>
+</div>
+{% endfor %}
+</div>
 
-    *Assessment Window:* 10:00 AM – 7:00 PM
+<h2 class="homepage-section-label">Recently Updated</h2>
 
-    Please complete the assessment at the earliest and avoid waiting until the last minute.
-
-    Assessment Guidelines:
-    https://ap.skilldzire.com/guidelines/quizzes.html
-
-    For Support:
-    https://wa.link/cs2973
-
-    Best Regards,
-    SkillDzire
-
-## Domains
-
-Explore knowledge across these core domains:
-
-### 📐 Mathematics
-Probability, linear algebra, optimization, analysis, statistics
-
-### 💻 Computer Science
-Algorithms, operating systems, distributed systems, databases, networks
-
-### 🤖 AI
-Deep learning, NLP, computer vision, reinforcement learning, LLMs
-
-### 💰 Economics
-Microeconomics, macroeconomics, econometrics
-
-### ⚛️ Physics
-Classical mechanics, quantum mechanics, thermodynamics
-
-### 🌐 Systems
-Complex systems, network science
-
-### 📊 Business
-Strategy, finance, organization
-
----
-
-Start by selecting a domain from the navigation menu to explore the content.
-
-<!-- Trigger rebuild: Fri, Jun 19, 2026  3:38:17 PM -->
+<div class="recent-updates-list">
+{% for update in recent_updates(6) %}
+<div class="recent-update-row">
+  <div class="recent-update-left">
+    <a href="{{ update.url }}" class="recent-update-link">{{ update.title }}</a>
+    <span class="recent-update-meta">({{ update.status | upper }} &middot; {{ update.difficulty | upper }})</span>
+  </div>
+  <span class="recent-update-date">Updated {{ update.updated_date }}</span>
+</div>
+{% endfor %}
+</div>
