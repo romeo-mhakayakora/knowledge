@@ -4,6 +4,8 @@
 
 **Lecture source:** https://youtu.be/8AJPs3gvNlY?si=F0QJIo963_FGgz-m
 
+> **Notation note:** these notes use $Q$ (and $q_{ij}$) for the transition matrix, following the lecture. Some textbooks use $P$ (and $p_{ij}$) instead — it's the exact same object, just a different letter. If you see $P$ elsewhere, mentally swap it for $Q$.
+
 ---
 
 ## 1. What Is a Markov Chain?
@@ -249,6 +251,22 @@ $$
 **Conclusion:** starting in State 1, there's a **27% chance** of being in State 3 exactly two steps later. That $0.27$ is exactly the $(1,3)$ entry of $Q^2$.
 
 **How to use it generally:** to find the probability of being at $j$ exactly $m$ steps after starting at $i$, compute $Q^m$ and read off entry $(i,j)$ — no need to re-derive the conditioning argument each time.
+
+### 5.6 Why this is an "engineering superpower" at scale
+
+Section 5.3's "all roads" picture is great for intuition with $m=2$, but watch what happens as $m$ grows.
+
+Suppose you want to know where the system will be **50 steps** from now. Doing this the manual way — literally enumerating every possible 49-layover path between $i$ and $j$ and summing each one — means tracking an astronomically large branching tree of possibilities. For any reasonably sized state space, that's not just tedious, it's computationally hopeless by hand.
+
+**The payoff of Section 5.4's "zipper" result is that you never have to do this manually.** The general Chapman–Kolmogorov result,
+
+$$
+P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
+$$
+
+means the recursive conditioning argument only has to be done *once*, in the abstract (Sections 5–5.4). After that, computing 50 steps ahead is no different in kind from computing 2 steps ahead: hand $Q$ to a computer, ask for $Q^{50}$, and read off entry $(i,j)$.
+
+**The takeaway:** matrix exponentiation silently absorbs an impossibly complex branching tree of future possibilities and reduces it to a single, fast linear-algebra computation. A massive conditional-probability problem becomes a basic calculator (or one-line code) problem.
 
 ---
 
