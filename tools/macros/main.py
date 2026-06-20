@@ -15,6 +15,39 @@ DOMAIN_FOLDERS = {
     'systems',
 }
 
+# Default metadata for each domain — icon (emoji) and short description.
+# These are used as fallbacks when no _domain.yml exists.
+DOMAIN_META = {
+    'mathematics': {
+        'icon': '∑',
+        'description': 'Probability, statistics, linear algebra, calculus, and proof techniques.',
+    },
+    'computer-science': {
+        'icon': '⟨⟩',
+        'description': 'Algorithms, data structures, operating systems, distributed systems, and databases.',
+    },
+    'ai': {
+        'icon': '◎',
+        'description': 'Deep learning, NLP, computer vision, reinforcement learning, and LLMs.',
+    },
+    'economics': {
+        'icon': '↗',
+        'description': 'Microeconomics, macroeconomics, game theory, and econometrics.',
+    },
+    'physics': {
+        'icon': 'λ',
+        'description': 'Classical mechanics, quantum mechanics, thermodynamics, and electromagnetism.',
+    },
+    'systems': {
+        'icon': '⊞',
+        'description': 'Complex systems, network science, and systems thinking.',
+    },
+    'business': {
+        'icon': '◇',
+        'description': 'Strategy, finance, operations, and organizational design.',
+    },
+}
+
 def parse_frontmatter(filepath):
     """Safely parse YAML frontmatter from a markdown file."""
     try:
@@ -85,9 +118,11 @@ def define_env(env):
             if not os.path.isdir(dom_path):
                 continue
                 
-            # Default values
+            # Default values from DOMAIN_META
+            defaults = DOMAIN_META.get(item, {})
             name = item.replace('-', ' ').title()
-            description = ""
+            description = defaults.get('description', '')
+            icon = defaults.get('icon', '●')
             
             # Check for _domain.yml or _subject.yml metadata
             meta = {}
@@ -103,6 +138,7 @@ def define_env(env):
                         
             name = meta.get('name', name)
             description = meta.get('description', description)
+            icon = meta.get('icon', icon)
             
             # Walk files and calculate counts
             note_count = 0
@@ -127,6 +163,7 @@ def define_env(env):
             summary.append({
                 'name': name,
                 'slug': item,
+                'icon': icon,
                 'note_count': note_count,
                 'complete_pct': complete_pct,
                 'description': description.strip() if description else ""

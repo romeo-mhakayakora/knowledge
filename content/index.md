@@ -5,36 +5,58 @@ hide:
   - toc
 ---
 
-# Knowledge Base
-
-Welcome to your centralized knowledge management system. Explore domains, subjects, and concepts organized hierarchically for continuous learning.
-
 {% set stats = total_stats() %}
-<div class="meta-line homepage-stats">
-  {{ stats.notes }} notes &middot; {{ stats.domains }} domains &middot; {{ stats.concepts }} concepts &middot; updated {{ stats.updated_this_week }} this week
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Personal Knowledge System</div>
+    <h1 class="hero-title">Knowledge</h1>
+    <p class="hero-subtitle">A multi-domain learning repository spanning mathematics, computer science, AI, economics, physics, systems, and business — organized for deep, connected understanding.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-value">{{ stats.notes }}</span>
+        <span class="hero-stat-label">Notes</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">{{ stats.domains }}</span>
+        <span class="hero-stat-label">Domains</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-value">{{ stats.concepts }}</span>
+        <span class="hero-stat-label">Concepts</span>
+      </div>
+    </div>
+  </div>
 </div>
 
-<h2 class="homepage-section-label">Domains</h2>
+<h2 class="homepage-section-label">Explore Domains</h2>
 
-<div class="domain-list">
+<div class="domain-grid">
 {% for dom in domain_summary() %}
-<div class="domain-row">
-  <a href="{{ dom.slug }}/" class="domain-link">{{ dom.name }}</a>
-  <span class="domain-count">{{ dom.note_count }} notes</span>
-</div>
+<a href="{{ dom.slug }}/" class="domain-card">
+  <div class="domain-card-icon">{{ dom.icon }}</div>
+  <div class="domain-card-body">
+    <h3 class="domain-card-title">{{ dom.name }}</h3>
+    <p class="domain-card-desc">{{ dom.description }}</p>
+  </div>
+  <div class="domain-card-footer">
+    <span class="domain-card-count">{{ dom.note_count }} notes</span>
+    <span class="domain-card-pct">{{ dom.complete_pct }}% complete</span>
+  </div>
+</a>
 {% endfor %}
 </div>
 
-<h2 class="homepage-section-label">Recently Updated</h2>
+<h2 class="homepage-section-label">Recent Activity</h2>
 
-<div class="recent-updates-list">
+<div class="activity-feed">
 {% for update in recent_updates(6) %}
-<div class="recent-update-row">
-  <div class="recent-update-left">
-    <a href="{{ update.url }}" class="recent-update-link">{{ update.title }}</a>
-    <span class="recent-update-meta">({{ update.status | upper }} &middot; {{ update.difficulty | upper }})</span>
+<a href="{{ update.url }}" class="activity-item">
+  <div class="activity-dot"></div>
+  <div class="activity-content">
+    <span class="activity-title">{{ update.title }}</span>
+    <span class="activity-meta">{{ update.status | upper }} · {{ update.updated_date }}</span>
   </div>
-  <span class="recent-update-date">Updated {{ update.updated_date }}</span>
-</div>
+</a>
 {% endfor %}
 </div>
