@@ -1,0 +1,5189 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/04-random-variables/random-variables-notes/">
+      
+      
+        <link rel="prev" href="../lecture-8-binomial-hypergeometricandrandom-variables/">
+      
+      
+        <link rel="next" href="../../05-expectation/exercises/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Random Variables and Their Distributions - Knowledge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Random Variables and Their Distributions - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/04-random-variables/random-variables-notes.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/04-random-variables/random-variables-notes/" />
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:title" content="Random Variables and Their Distributions - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/04-random-variables/random-variables-notes.png" />
+</head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#table-of-contents" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Knowledge" class="md-header__button md-logo" aria-label="Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Knowledge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Random Variables and Their Distributions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/romeo-mhakayakora/knowledge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    romeo-mhakayakora/knowledge
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Knowledge" class="md-nav__button md-logo" aria-label="Knowledge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Knowledge
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/romeo-mhakayakora/knowledge" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    romeo-mhakayakora/knowledge
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../_concepts/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+     concepts
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+     concepts
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../_concepts/common-mistakes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common mistakes
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../_concepts/distributions-cheatsheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributions cheatsheet
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../_concepts/named-distributions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Named distributions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../_concepts/proof-techniques/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proof techniques
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../_concepts/r-functions-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R functions reference
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../ai/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ai
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ai
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../business/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Business
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Business
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../computer-science/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computer science
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computer science
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../economics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Economics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Economics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mathematics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mathematics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probability
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Probability
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../01-fundamentals/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7_2_2" id="__nav_7_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    01 fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-fundamentals/probability-axioms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probability Axioms
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-fundamentals/sample-spaces-and-events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sample Spaces and Events
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_3" id="__nav_7_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 probability counting
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    02 probability counting
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-probability-counting/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-probability-counting/probability-counting-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probability & Counting
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_3_3" id="__nav_7_2_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_7_2_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lectures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-probability-counting/lectures/l01-probability-and-counting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Probability and Counting
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-probability-counting/lectures/l02-story-proofs-axioms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Story Proofs & Axioms
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-probability-counting/lectures/l03-birthday-problem-properties/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Birthday Problem & Properties
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_4" id="__nav_7_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 conditional probability
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    03 conditional probability
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-conditional-probability/conditional-probability-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditional Probability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-conditional-probability/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_4_3" id="__nav_7_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_7_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lectures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-conditional-probability/lectures/l04-conditional-probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditional Probability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-conditional-probability/lectures/l05-conditioning-continued/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditioning Continued, Law of Total Probability
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_5" id="__nav_7_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 random variables
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    04 random variables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lecture-8-binomial-hypergeometricandrandom-variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lecture 8: Binomial, Hypergeometric & Random Variables
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Random Variables and Their Distributions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Random Variables and Their Distributions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Random Variables?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition-and-core-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition and Core Insight
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition and Core Insight">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-312-two-coin-tosses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3.1.2 — Two Coin Tosses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discrete-vs-continuous-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discrete vs Continuous Random Variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-support-of-a-random-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Support of a Random Variable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-probability-mass-function-pmf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Probability Mass Function (PMF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Probability Mass Function (PMF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valid-pmf-two-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid PMF — Two Conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-px-x-really-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What P(X = x) Really Means
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pmf-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The PMF Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The PMF Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-two-coin-tosses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example — Two Coin Tosses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Named Distributions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Named Distributions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bernoulli-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bernoulli Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binomial-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binomial Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypergeometric-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hypergeometric Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discrete-uniform-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discrete Uniform Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-slips-of-paper-dunif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Slips of Paper (DUnif)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example — Slips of Paper (DUnif)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sampling-with-replacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sampling With Replacement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sampling-without-replacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sampling Without Replacement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-random-walk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Random Walk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-distance-from-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Distance from Origin
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cumulative-distribution-functions-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cumulative Distribution Functions (CDF)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-of-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions of Random Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions of Random Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pmf-of-gx-the-master-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PMF of g(X) — The Master Formula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two Common Mistakes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#independence-of-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Independence of Random Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Independence of Random Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof-why-the-discrete-condition-is-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proof — Why the Discrete Condition is Equivalent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sum-of-independent-binomials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sum of Independent Binomials
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connections-between-binomial-and-hypergeometric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connections Between Binomial and Hypergeometric
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-cheatsheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Cheatsheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_6" id="__nav_7_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 expectation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    05 expectation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-expectation/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-expectation/expectation-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Expectation, LOTUS, Variance, the Poisson Distribution, and Connections Between Poisson and Binomial
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_7" id="__nav_7_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 continuous random variables
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    06 continuous random variables
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-continuous-random-variables/continuous-random-variables-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Discrete Uniform, CDF, and Functions of R.V.s
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-continuous-random-variables/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_8" id="__nav_7_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 moments
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    07 moments
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-moments/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../07-moments/moments-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moments
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_9" id="__nav_7_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 joint distributions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    08 joint distributions
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-joint-distributions/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../08-joint-distributions/joint-distributions-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Joint Distributions
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_10" id="__nav_7_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 transformations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    09 transformations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09-transformations/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../09-transformations/transformations-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transformations
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_11" id="__nav_7_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 conditional expectation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    10 conditional expectation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-conditional-expectation/conditional-expectation-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conditional Expectation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../10-conditional-expectation/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_12" id="__nav_7_2_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    11 inequalities limit theorems
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    11 inequalities limit theorems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11-inequalities-limit-theorems/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../11-inequalities-limit-theorems/inequalities-limit-theorems-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inequalities & Limit Theorems
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_13" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_13" id="__nav_7_2_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    12 markov chains
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    12 markov chains
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12-markov-chains/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../12-markov-chains/markov-chains-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markov Chains
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_14" id="__nav_7_2_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    13 markov chain monte carlo
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    13 markov chain monte carlo
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13-markov-chain-monte-carlo/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../13-markov-chain-monte-carlo/markov-chain-monte-carlo-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markov Chain Monte Carlo
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_15" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_15" id="__nav_7_2_15_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    14 poisson processes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_15">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    14 poisson processes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../14-poisson-processes/exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../14-poisson-processes/poisson-processes-notes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Poisson Processes
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_15_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_15_3" id="__nav_7_2_15_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lectures
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_7_2_15_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_15_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Lectures
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../14-poisson-processes/lectures/l34-goodbye-stats110/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Goodbye Stats 110
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2_16" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2_16" id="__nav_7_2_16_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problem sets
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_2_16_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2_16">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Problem sets
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../problem-sets/ps01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problem Set 01
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../problem-sets/ps02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Problem Set 02
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../physics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Physics
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Physics
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../../systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Systems
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Systems
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Random Variables?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition-and-core-insight" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition and Core Insight
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definition and Core Insight">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-312-two-coin-tosses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example 3.1.2 — Two Coin Tosses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#discrete-vs-continuous-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discrete vs Continuous Random Variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-support-of-a-random-variable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Support of a Random Variable
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-probability-mass-function-pmf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Probability Mass Function (PMF)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Probability Mass Function (PMF)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valid-pmf-two-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valid PMF — Two Conditions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-px-x-really-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What P(X = x) Really Means
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-pmf-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The PMF Pipeline
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The PMF Pipeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-two-coin-tosses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example — Two Coin Tosses
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-distributions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Named Distributions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Named Distributions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bernoulli-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bernoulli Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#binomial-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Binomial Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hypergeometric-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hypergeometric Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discrete-uniform-distribution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discrete Uniform Distribution
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-slips-of-paper-dunif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Slips of Paper (DUnif)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example — Slips of Paper (DUnif)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sampling-with-replacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sampling With Replacement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sampling-without-replacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sampling Without Replacement
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-random-walk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Random Walk
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-distance-from-origin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Distance from Origin
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cumulative-distribution-functions-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cumulative Distribution Functions (CDF)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-of-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functions of Random Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions of Random Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pmf-of-gx-the-master-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PMF of g(X) — The Master Formula
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#two-common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Two Common Mistakes
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#independence-of-random-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Independence of Random Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Independence of Random Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proof-why-the-discrete-condition-is-equivalent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proof — Why the Discrete Condition is Equivalent
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sum-of-independent-binomials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sum of Independent Binomials
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#connections-between-binomial-and-hypergeometric" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connections Between Binomial and Hypergeometric
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary-cheatsheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary Cheatsheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+    <div class="meta-line">
+      
+        COMPLETE &middot; INTERMEDIATE
+      
+    </div>
+  
+
+  
+                  
+
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">mathematics</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">probability</span>
+      
+    
+  </nav>
+
+
+  
+  
+
+
+<blockquote>
+<p>Notes from <em>Introduction to Probability</em> — Blitzstein &amp; Hwang | Full Chapter 3 + Lecture 8</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#why-random-variables">Why Random Variables?</a></li>
+<li><a href="#definition-and-core-insight">Definition and Core Insight</a></li>
+<li><a href="#discrete-vs-continuous-random-variables">Discrete vs Continuous Random Variables</a></li>
+<li><a href="#the-support-of-a-random-variable">The Support of a Random Variable</a></li>
+<li><a href="#the-probability-mass-function-pmf">The Probability Mass Function (PMF)</a></li>
+<li><a href="#the-pmf-pipeline">The PMF Pipeline</a></li>
+<li><a href="#named-distributions">Named Distributions</a></li>
+<li><a href="#bernoulli-distribution">Bernoulli</a></li>
+<li><a href="#binomial-distribution">Binomial</a></li>
+<li><a href="#hypergeometric-distribution">Hypergeometric</a></li>
+<li><a href="#discrete-uniform-distribution">Discrete Uniform</a></li>
+<li><a href="#cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)</a></li>
+<li><a href="#functions-of-random-variables">Functions of Random Variables</a></li>
+<li><a href="#independence-of-random-variables">Independence of Random Variables</a></li>
+<li><a href="#sum-of-independent-binomials">Sum of Independent Binomials — Three Proofs</a></li>
+<li><a href="#connections-between-binomial-and-hypergeometric">Connections Between Binomial and Hypergeometric</a></li>
+<li><a href="#summary-cheatsheet">Summary Cheatsheet</a></li>
+</ol>
+<hr />
+<h1 id="why-random-variables">Why Random Variables?<a class="headerlink" href="#why-random-variables" title="Permanent link">&para;</a></h1>
+<p>Standard probability notation gets unwieldy fast. For example, in the Gambler's Ruin problem, tracking exact amounts using event notation like <span class="arithmatex">\(A_{jk}\)</span> and <span class="arithmatex">\(B_{jk}\)</span> becomes a long, tangled string of unions and intersections.</p>
+<p>The fix: random variables let us work with <em>numbers</em> instead of raw events — unlocking clean algebra and compact notation.</p>
+<blockquote>
+<p>"Instead of having convoluted notation that obscures how the quantities of interest are related, wouldn't it be nice if we could say something like: Let <span class="arithmatex">\(X_k\)</span> be the wealth of gambler A after <span class="arithmatex">\(k\)</span> rounds..."</p>
+</blockquote>
+<p>Random variables also let us simplify a complex sample space. The sample space of an experiment is often incredibly complicated or high-dimensional, and the outcomes <span class="arithmatex">\(s \in S\)</span> may be non-numeric. A random variable maps those messy outcomes to numbers — so we can do mathematics on them.</p>
+<hr />
+<h1 id="definition-and-core-insight">Definition and Core Insight<a class="headerlink" href="#definition-and-core-insight" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Definition 3.1.1</strong> — A <em>random variable</em> (r.v.) is a <strong>function</strong> from the sample space <span class="arithmatex">\(S\)</span> to the real numbers <span class="arithmatex">\(\mathbb{R}\)</span>:
+$<span class="arithmatex">\(X : S \rightarrow \mathbb{R}, \quad s \mapsto X(s)\)</span>$</p>
+</blockquote>
+<p>A random variable assigns a fixed numerical value to every possible outcome. It is <strong>deterministic</strong> — for a given outcome <span class="arithmatex">\(s\)</span>, <span class="arithmatex">\(X(s)\)</span> is always the same fixed value. The randomness lives in <em>which outcome gets selected</em>, not in <span class="arithmatex">\(X\)</span> itself.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Random variable <span class="arithmatex">\(X\)</span></td>
+<td>Deterministic function — gives each outcome a fixed number</td>
+</tr>
+<tr>
+<td>Probability function <span class="arithmatex">\(P\)</span></td>
+<td>Source of randomness — assigns weights to outcomes</td>
+</tr>
+</tbody>
+</table>
+<p>Think of <span class="arithmatex">\(X\)</span> as a rating machine: it gives each outcome a fixed score. <span class="arithmatex">\(P\)</span> decides how often each score shows up.</p>
+<blockquote>
+<p><strong>The pipeline from your own reasoning:</strong> You have a school with students and bags. <span class="arithmatex">\(X\)</span> = number of bags is a fully known, deterministic function. The randomness comes from <em>which student gets picked</em> — that is where <span class="arithmatex">\(P\)</span> lives. <span class="arithmatex">\(X\)</span> just reads off the bag count once the student is selected.</p>
+</blockquote>
+<h3 id="example-312-two-coin-tosses">Example 3.1.2 — Two Coin Tosses<a class="headerlink" href="#example-312-two-coin-tosses" title="Permanent link">&para;</a></h3>
+<p>Sample space: <span class="arithmatex">\(S = \{HH, HT, TH, TT\}\)</span></p>
+<p>Three random variables defined on this experiment:</p>
+<table>
+<thead>
+<tr>
+<th>R.V.</th>
+<th>Formula</th>
+<th>What it measures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td><span class="arithmatex">\(s_1 + s_2\)</span></td>
+<td>Number of Heads</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(2 - s_1 - s_2\)</span></td>
+<td>Number of Tails (<span class="arithmatex">\(Y = 2 - X\)</span>)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I\)</span></td>
+<td><span class="arithmatex">\(s_1\)</span></td>
+<td>Result of the first flip only</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(I\)</span> is an <strong>indicator random variable</strong> — it equals 1 if the first toss is Heads, 0 otherwise.</p>
+<hr />
+<h1 id="discrete-vs-continuous-random-variables">Discrete vs Continuous Random Variables<a class="headerlink" href="#discrete-vs-continuous-random-variables" title="Permanent link">&para;</a></h1>
+<p><strong>Discrete:</strong> X can only take a countable list of values — finite or countably infinite. Most commonly integers.</p>
+<p><strong>Continuous:</strong> X can take any real value in an interval. Between any two values there are infinitely many more — you can never write a complete list.</p>
+<blockquote>
+<p><strong>Always ask this first before anything else.</strong> Everything that follows — which tools to use, how to compute probabilities — depends on this answer.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Discrete</th>
+<th>Continuous</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Values</td>
+<td>Countable list</td>
+<td>Any value in an interval</td>
+</tr>
+<tr>
+<td>Primary tool</td>
+<td>PMF</td>
+<td>PDF (later in course)</td>
+</tr>
+<tr>
+<td>Universal tool</td>
+<td>CDF</td>
+<td>CDF</td>
+</tr>
+<tr>
+<td>Example</td>
+<td>Number of bags</td>
+<td>Height of a student</td>
+</tr>
+<tr>
+<td>Gaps between values?</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Discrete = you can <strong>count</strong> the possibilities. Continuous = you can <strong>measure</strong> the possibilities.</p>
+</blockquote>
+<hr />
+<h1 id="the-support-of-a-random-variable">The Support of a Random Variable<a class="headerlink" href="#the-support-of-a-random-variable" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Definition:</strong> The <em>support</em> of a discrete r.v. <span class="arithmatex">\(X\)</span> is the set of all values <span class="arithmatex">\(x\)</span> such that <span class="arithmatex">\(P(X = x) &gt; 0\)</span>.</p>
+</blockquote>
+<p>Formally: <span class="arithmatex">\(\text{Support of } X = \{x : P(X = x) &gt; 0\}\)</span></p>
+<p>Only values where X can actually land with nonzero probability belong to the support. Values outside the support have probability exactly 0 — X can never land there.</p>
+<blockquote>
+<p><strong>Your lecturer analogy:</strong> The support is the set of chairs in the room. The lecturer (X) will always sit on one of the chairs. The probability of the lecturer sitting on the ceiling = 0 because the ceiling is not in the support.</p>
+</blockquote>
+<p>A random variable X is <strong>discrete</strong> if its support is a finite or countably infinite list <span class="arithmatex">\(\{a_1, a_2, \ldots\}\)</span> such that <span class="arithmatex">\(P(X = a_j \text{ for some } j) = 1\)</span>.</p>
+<hr />
+<h1 id="the-probability-mass-function-pmf">The Probability Mass Function (PMF)<a class="headerlink" href="#the-probability-mass-function-pmf" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Definition:</strong> The <em>probability mass function</em> (PMF) of a discrete r.v. <span class="arithmatex">\(X\)</span> is the function <span class="arithmatex">\(p_X\)</span> given by:
+$<span class="arithmatex">\(p_X(x) = P(X = x)\)</span>$
+This is positive if <span class="arithmatex">\(x\)</span> is in the support of <span class="arithmatex">\(X\)</span>, and 0 otherwise.</p>
+</blockquote>
+<p>The PMF is the complete blueprint of a discrete random variable. Once you know the PMF, you can answer any probability question about <span class="arithmatex">\(X\)</span> by summing:</p>
+<div class="arithmatex">\[P(X \in B) = \sum_{x \in B} p_X(x)\]</div>
+<h3 id="valid-pmf-two-conditions">Valid PMF — Two Conditions<a class="headerlink" href="#valid-pmf-two-conditions" title="Permanent link">&para;</a></h3>
+<p>Any PMF must satisfy:</p>
+<ol>
+<li><strong>Nonnegative:</strong> <span class="arithmatex">\(p_X(x) &gt; 0\)</span> for <span class="arithmatex">\(x\)</span> in the support, and <span class="arithmatex">\(p_X(x) = 0\)</span> otherwise</li>
+<li><strong>Sums to 1:</strong> <span class="arithmatex">\(\sum_j p_X(x_j) = 1\)</span></li>
+</ol>
+<p>These follow naturally: probability is always nonnegative, and X must take <em>some</em> value — certainty.</p>
+<h3 id="what-px-x-really-means">What P(X = x) Really Means<a class="headerlink" href="#what-px-x-really-means" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(\{X = x\}\)</span> is an <strong>event</strong> — the set of all outcomes <span class="arithmatex">\(s\)</span> in <span class="arithmatex">\(S\)</span> that X maps to <span class="arithmatex">\(x\)</span>:</p>
+<div class="arithmatex">\[\{X = x\} = \{s \in S : X(s) = x\}\]</div>
+<p>This set is a subset of <span class="arithmatex">\(S\)</span>, so it is a legitimate event, and we can take its probability. Multiple different outcomes can map to the same value of <span class="arithmatex">\(x\)</span> — the event <span class="arithmatex">\(\{X = x\}\)</span> collects all of them.</p>
+<blockquote>
+<p>Note: Writing <span class="arithmatex">\(P(X)\)</span> makes no sense — you can only take the probability of an <strong>event</strong>, not of a random variable itself.</p>
+</blockquote>
+<hr />
+<h1 id="the-pmf-pipeline">The PMF Pipeline<a class="headerlink" href="#the-pmf-pipeline" title="Permanent link">&para;</a></h1>
+<p>This is the core procedure for finding any PMF. Always follow it step by step.</p>
+<p><strong>Step 0 — Is X discrete or continuous?</strong>
+If discrete, continue. Identify what X counts or measures.</p>
+<p><strong>Step 1 — Find the support of X</strong>
+List all values x can actually take (where <span class="arithmatex">\(P(X = x) &gt; 0\)</span>).</p>
+<p><strong>Step 2 — For each value x, find the event <span class="arithmatex">\(\{X = x\}\)</span></strong>
+<span class="arithmatex">\(\{X = x\} = \{s \in S : X(s) = x\}\)</span> — the set of all outcomes mapping to x.</p>
+<p><strong>Step 3 — Calculate the probability of each individual outcome in that event</strong></p>
+<p><strong>Step 4 — Add them up</strong>
+<span class="arithmatex">\(p_X(x) = \sum_{s \in \{X=x\}} P(s)\)</span></p>
+<p><strong>Step 5 — Finish with:</strong>
+<span class="arithmatex">\(p_X(x) = 0\)</span> for all <span class="arithmatex">\(x\)</span> outside the support.</p>
+<h3 id="example-two-coin-tosses">Example — Two Coin Tosses<a class="headerlink" href="#example-two-coin-tosses" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X\)</span> = number of Heads, <span class="arithmatex">\(S = \{HH, HT, TH, TT\}\)</span>, each outcome probability <span class="arithmatex">\(1/4\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Outcomes</th>
+<th>Calculation</th>
+<th>PMF value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\{X = 0\}\)</span></td>
+<td><span class="arithmatex">\(\{TT\}\)</span></td>
+<td><span class="arithmatex">\(1/4\)</span></td>
+<td><span class="arithmatex">\(p_X(0) = 1/4\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{X = 1\}\)</span></td>
+<td><span class="arithmatex">\(\{HT, TH\}\)</span></td>
+<td><span class="arithmatex">\(1/4 + 1/4\)</span></td>
+<td><span class="arithmatex">\(p_X(1) = 1/2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{X = 2\}\)</span></td>
+<td><span class="arithmatex">\(\{HH\}\)</span></td>
+<td><span class="arithmatex">\(1/4\)</span></td>
+<td><span class="arithmatex">\(p_X(2) = 1/4\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="named-distributions">Named Distributions<a class="headerlink" href="#named-distributions" title="Permanent link">&para;</a></h1>
+<p>Named distributions are specific families with known PMFs and stories. They are not separate from the PMF concept — each one just has a name and parameters that completely determine its PMF.</p>
+<hr />
+<h2 id="bernoulli-distribution">Bernoulli Distribution<a class="headerlink" href="#bernoulli-distribution" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Story:</strong> An experiment that results in either success or failure (but not both) is called a Bernoulli trial. <span class="arithmatex">\(X\)</span> = 1 if success, 0 if failure.</p>
+</blockquote>
+<div class="arithmatex">\[X \sim \text{Bern}(p)\]</div>
+<div class="arithmatex">\[P(X = 1) = p, \qquad P(X = 0) = 1-p\]</div>
+<p><span class="arithmatex">\(p \in (0,1)\)</span> is the <strong>success probability</strong> — the single parameter that completely determines which Bernoulli distribution you have. There is a whole family indexed by <span class="arithmatex">\(p\)</span>.</p>
+<p><strong>Check — sums to 1:</strong> <span class="arithmatex">\(p + (1-p) = 1\)</span> ✓</p>
+<p><strong>Indicator random variables:</strong> Every event <span class="arithmatex">\(A\)</span> has a naturally associated indicator r.v. <span class="arithmatex">\(I_A\)</span> that equals 1 if <span class="arithmatex">\(A\)</span> occurs and 0 otherwise. This is always <span class="arithmatex">\(I_A \sim \text{Bern}(P(A))\)</span>. Any yes/no question in probability can be immediately turned into a Bernoulli random variable.</p>
+<p><strong>Special case:</strong> <span class="arithmatex">\(\text{Bern}(p) = \text{Bin}(1, p)\)</span> — Bernoulli is just Binomial with one trial.</p>
+<hr />
+<h2 id="binomial-distribution">Binomial Distribution<a class="headerlink" href="#binomial-distribution" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Story:</strong> Perform <span class="arithmatex">\(n\)</span> <strong>independent</strong> Bernoulli trials, each with the same success probability <span class="arithmatex">\(p\)</span>. <span class="arithmatex">\(X\)</span> = number of successes.</p>
+</blockquote>
+<div class="arithmatex">\[X \sim \text{Bin}(n, p)\]</div>
+<p><strong>Parameters:</strong> <span class="arithmatex">\(n\)</span> (positive integer — number of trials) and <span class="arithmatex">\(p \in (0,1)\)</span> (success probability per trial).</p>
+<p><strong>PMF:</strong>
+$<span class="arithmatex">\(P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}, \quad k \in \{0, 1, \ldots, n\}\)</span>$</p>
+<p><strong>Where the formula comes from — two parts:</strong></p>
+<ul>
+<li>
+<p><span class="arithmatex">\(p^k(1-p)^{n-k}\)</span>: probability of one <strong>specific sequence</strong> of <span class="arithmatex">\(k\)</span> successes and <span class="arithmatex">\(n-k\)</span> failures. Trials are independent so probabilities multiply. <span class="arithmatex">\(k\)</span> successes contribute <span class="arithmatex">\(p^k\)</span>, the <span class="arithmatex">\(n-k\)</span> failures contribute <span class="arithmatex">\((1-p)^{n-k}\)</span>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\binom{n}{k}\)</span>: number of ways to <strong>choose which <span class="arithmatex">\(k\)</span> trials</strong> are successes. Once successes are chosen, failures are automatically determined — so you only need <span class="arithmatex">\(\binom{n}{k}\)</span>, not <span class="arithmatex">\(\binom{n}{k} \times \binom{n-k}{n-k}\)</span>. (That second factor equals 1 always.)</p>
+</li>
+</ul>
+<p><strong>Check — sums to 1:</strong> <span class="arithmatex">\(\sum_{k=0}^n \binom{n}{k} p^k (1-p)^{n-k} = (p + (1-p))^n = 1\)</span> ✓ (Binomial Theorem)</p>
+<p><strong>Two non-negotiable conditions for Binomial:</strong>
+1. Trials are <strong>independent</strong> — constant <span class="arithmatex">\(p\)</span> across all trials
+2. Same <span class="arithmatex">\(p\)</span> every trial — <em>identically distributed</em></p>
+<p>If <span class="arithmatex">\(p\)</span> changes between trials (e.g., sampling without replacement from a finite pool), it is no longer Binomial.</p>
+<p><strong>Sum representation:</strong> <span class="arithmatex">\(X = X_1 + X_2 + \cdots + X_n\)</span> where <span class="arithmatex">\(X_i \overset{\text{i.i.d.}}{\sim} \text{Bern}(p)\)</span> — the Binomial is literally the sum of independent, identically distributed Bernoullis.</p>
+<p><strong>Symmetry:</strong> If <span class="arithmatex">\(X \sim \text{Bin}(n,p)\)</span> then <span class="arithmatex">\(n - X \sim \text{Bin}(n, 1-p)\)</span> — counting failures instead of successes. When <span class="arithmatex">\(p = 1/2\)</span> and <span class="arithmatex">\(n\)</span> is even, the distribution is symmetric about <span class="arithmatex">\(n/2\)</span>: <span class="arithmatex">\(P(X = n/2 + j) = P(X = n/2 - j)\)</span> for all nonneg. integers <span class="arithmatex">\(j\)</span>.</p>
+<hr />
+<h2 id="hypergeometric-distribution">Hypergeometric Distribution<a class="headerlink" href="#hypergeometric-distribution" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Story:</strong> A population of <span class="arithmatex">\(w + b\)</span> objects: <span class="arithmatex">\(w\)</span> white and <span class="arithmatex">\(b\)</span> black. Draw <span class="arithmatex">\(n\)</span> objects <strong>without replacement</strong>. <span class="arithmatex">\(X\)</span> = number of white objects in the sample.</p>
+</blockquote>
+<div class="arithmatex">\[X \sim \text{HGeom}(w, b, n)\]</div>
+<p><strong>PMF:</strong>
+$<span class="arithmatex">\(P(X = k) = \frac{\binom{w}{k}\binom{b}{n-k}}{\binom{w+b}{n}}\)</span>$</p>
+<p>for integers <span class="arithmatex">\(k\)</span> satisfying <span class="arithmatex">\(0 \leq k \leq w\)</span> and <span class="arithmatex">\(0 \leq n-k \leq b\)</span>, and <span class="arithmatex">\(P(X=k) = 0\)</span> otherwise.</p>
+<p><strong>Where the formula comes from:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\binom{w}{k}\)</span></td>
+<td>Ways to choose <span class="arithmatex">\(k\)</span> white objects from <span class="arithmatex">\(w\)</span> white objects</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\binom{b}{n-k}\)</span></td>
+<td>Ways to choose <span class="arithmatex">\(n-k\)</span> black objects from <span class="arithmatex">\(b\)</span> black objects</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\binom{w+b}{n}\)</span></td>
+<td>Total ways to choose <span class="arithmatex">\(n\)</span> objects from the full population</td>
+</tr>
+</tbody>
+</table>
+<p>Multiply numerator by multiplication rule (two independent choices). Divide by total equally likely outcomes. This uses the <strong>naive definition of probability</strong> — only valid because all samples are equally likely.</p>
+<p><strong>Why <span class="arithmatex">\(\binom{b}{n-k} \neq 1\)</span>:</strong> Unlike Binomial where failures are automatically determined once successes are chosen, here the black balls come from a <strong>separate pool</strong>. There are genuinely multiple ways to choose which black balls you get.</p>
+<p><strong>Check — sums to 1:</strong> <span class="arithmatex">\(\sum_k \binom{w}{k}\binom{b}{n-k} = \binom{w+b}{n}\)</span> by the <strong>Vandermonde Identity</strong> ✓</p>
+<p><strong>Two-tag interpretation:</strong> Every item in the population gets two labels simultaneously — first tag (white/black) and second tag (sampled/not sampled). <span class="arithmatex">\(X\)</span> counts items that are <strong>twice-tagged</strong>: white AND sampled. At least one set of tags is assigned completely at random (the sampling). This interpretation generalizes far beyond urns: tagged elk in a forest, aces in a card hand, defective items in batch inspection — all are the same story with different labels.</p>
+<p><strong>Key difference from Binomial:</strong> Sampling without replacement means <span class="arithmatex">\(p\)</span> changes after each draw — the pool shrinks and probabilities shift. The trials are <strong>dependent</strong>. This is why the formula looks different.</p>
+<p><strong>Symmetry:</strong> <span class="arithmatex">\(\text{HGeom}(w, b, n)\)</span> and <span class="arithmatex">\(\text{HGeom}(n, w+b-n, w)\)</span> are identical distributions — swapping which tag is "first" counts the same twice-tagged items.</p>
+<hr />
+<h2 id="discrete-uniform-distribution">Discrete Uniform Distribution<a class="headerlink" href="#discrete-uniform-distribution" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>Story:</strong> Let <span class="arithmatex">\(C\)</span> be a finite, nonempty set of numbers. Choose one uniformly at random — all values equally likely. Call the chosen number <span class="arithmatex">\(X\)</span>.</p>
+</blockquote>
+<div class="arithmatex">\[X \sim \text{DUnif}(C)\]</div>
+<p><strong>PMF:</strong>
+$<span class="arithmatex">\(P(X = x) = \frac{1}{|C|} \quad \text{for } x \in C \quad (0 \text{ otherwise})\)</span>$</p>
+<p><strong>Check — sums to 1:</strong> <span class="arithmatex">\(|C| \times \frac{1}{|C|} = 1\)</span> ✓</p>
+<p><strong>For any subset <span class="arithmatex">\(A \subseteq C\)</span>:</strong>
+$<span class="arithmatex">\(P(X \in A) = \frac{|A|}{|C|}\)</span>$</p>
+<p>This is exactly the naive definition of probability — DUnif questions always reduce to counting problems.</p>
+<p><strong>Special note on X:</strong> When the sample space <span class="arithmatex">\(C\)</span> is already numeric, <span class="arithmatex">\(X\)</span> is the <strong>identity function</strong> — <span class="arithmatex">\(X(s) = s\)</span> for all <span class="arithmatex">\(s \in C\)</span>. It just returns whatever value was picked. The sample space IS the support of <span class="arithmatex">\(X\)</span>, so naive probability applies directly without the full pipeline.</p>
+<hr />
+<h2 id="worked-example-slips-of-paper-dunif">Worked Example — Slips of Paper (DUnif)<a class="headerlink" href="#worked-example-slips-of-paper-dunif" title="Permanent link">&para;</a></h2>
+<p>There are 100 slips of paper numbered <span class="arithmatex">\(1, 2, \ldots, 100\)</span>, each number appearing once. Five slips are drawn one at a time.</p>
+<h3 id="sampling-with-replacement">Sampling With Replacement<a class="headerlink" href="#sampling-with-replacement" title="Permanent link">&para;</a></h3>
+<p><strong>(a) Distribution of how many drawn slips have value <span class="arithmatex">\(\geq 80\)</span>:</strong></p>
+<p>Each draw independently has probability <span class="arithmatex">\(\frac{21}{100}\)</span> of landing <span class="arithmatex">\(\geq 80\)</span> (the values 80 through 100). By the Binomial story, the count follows <span class="arithmatex">\(\text{Bin}(5, 21/100)\)</span>.</p>
+<p><strong>(b) Distribution of the value of the <span class="arithmatex">\(j\)</span>-th draw:</strong></p>
+<p>By symmetry, every slip is equally likely to be drawn at any position. So <span class="arithmatex">\(X_j \sim \text{DUnif}(\{1, 2, \ldots, 100\})\)</span> for any <span class="arithmatex">\(j\)</span>.</p>
+<p><strong>(c) <span class="arithmatex">\(P(\text{number 100 drawn at least once})\)</span>:</strong></p>
+<p>Use complements — easier to find the probability that 100 is <em>never</em> drawn:
+$<span class="arithmatex">\(1 - P(X_1 \neq 100, \ldots, X_5 \neq 100) = 1 - \left(\frac{99}{100}\right)^5 \approx 0.049\)</span>$</p>
+<h3 id="sampling-without-replacement">Sampling Without Replacement<a class="headerlink" href="#sampling-without-replacement" title="Permanent link">&para;</a></h3>
+<p><strong>(d) Distribution of how many drawn slips have value <span class="arithmatex">\(\geq 80\)</span>:</strong></p>
+<p>Now drawing without replacement — the count follows the <strong>Hypergeometric</strong> distribution. The pool shrinks after each draw, <span class="arithmatex">\(p\)</span> is no longer constant, trials are dependent.</p>
+<p><strong>(e) Distribution of the value of the <span class="arithmatex">\(j\)</span>-th draw:</strong></p>
+<p>Still <span class="arithmatex">\(Y_j \sim \text{DUnif}(\{1, 2, \ldots, 100\})\)</span> by symmetry — even without replacement, each slip is equally likely to end up in any particular position when viewed in isolation.</p>
+<p><strong>(f) <span class="arithmatex">\(P(\text{number 100 is in the sample})\)</span>:</strong></p>
+<div class="arithmatex">\[P(Y_1 = 100 \text{ or } \cdots \text{ or } Y_5 = 100) = \frac{5}{100} = \frac{1}{20} = 0.05\]</div>
+<p>By symmetry, the probability that slip 100 is among the 5 chosen is just <span class="arithmatex">\(\frac{5}{100}\)</span>.</p>
+<blockquote>
+<p><strong>Key insight:</strong> Sampling with and without replacement give the <strong>same marginal distribution</strong> for any single draw — <span class="arithmatex">\(\text{DUnif}\)</span> either way. The difference only shows up when looking at <em>multiple</em> draws together: without-replacement draws are dependent, with-replacement draws are independent.</p>
+</blockquote>
+<hr />
+<h2 id="worked-example-random-walk">Worked Example — Random Walk<a class="headerlink" href="#worked-example-random-walk" title="Permanent link">&para;</a></h2>
+<p>A particle starts at 0. At each step it moves <span class="arithmatex">\(+1\)</span> (right) or <span class="arithmatex">\(-1\)</span> (left), each with probability <span class="arithmatex">\(\frac{1}{2}\)</span>, independently. After <span class="arithmatex">\(n\)</span> steps, let <span class="arithmatex">\(Y\)</span> be the particle's position.</p>
+<p><strong>Setting up <span class="arithmatex">\(Y\)</span> as a function of a Binomial:</strong></p>
+<p>Think of each step as a Bernoulli trial — right is success, left is failure. Let <span class="arithmatex">\(X\)</span> = number of right steps, so <span class="arithmatex">\(X \sim \text{Bin}(n, 1/2)\)</span>.</p>
+<ul>
+<li>Number of right steps: <span class="arithmatex">\(X\)</span></li>
+<li>Number of left steps: <span class="arithmatex">\(n - X\)</span></li>
+<li>Net position: <span class="arithmatex">\(Y = X - (n - X) = 2X - n\)</span></li>
+</ul>
+<p>So <span class="arithmatex">\(Y = g(X)\)</span> where <span class="arithmatex">\(g(x) = 2x - n\)</span>. Since <span class="arithmatex">\(g\)</span> is one-to-one (linear with nonzero slope), probability passes down unchanged:</p>
+<div class="arithmatex">\[P(Y = k) = P(2X - n = k) = P\!\left(X = \frac{n+k}{2}\right) = \binom{n}{\frac{n+k}{2}} \left(\frac{1}{2}\right)^n\]</div>
+<p>Valid for <span class="arithmatex">\(k \in \{-n, -n+2, \ldots, n-2, n\}\)</span> — values where <span class="arithmatex">\(n+k\)</span> is even (otherwise <span class="arithmatex">\(\frac{n+k}{2}\)</span> is not an integer and the probability is 0). <span class="arithmatex">\(Y\)</span> can only take even-spaced values because each step changes position by 2 (either <span class="arithmatex">\(+1\)</span> or <span class="arithmatex">\(-1\)</span> from both sides).</p>
+<hr />
+<h2 id="worked-example-distance-from-origin">Worked Example — Distance from Origin<a class="headerlink" href="#worked-example-distance-from-origin" title="Permanent link">&para;</a></h2>
+<p>Continuing the random walk: let <span class="arithmatex">\(D = |Y|\)</span> = the particle's distance from the origin after <span class="arithmatex">\(n\)</span> steps.</p>
+<p><span class="arithmatex">\(D = |2X - n|\)</span> — this is <strong>not</strong> one-to-one since <span class="arithmatex">\(|k| = |-k|\)</span>. Both <span class="arithmatex">\(Y = k\)</span> and <span class="arithmatex">\(Y = -k\)</span> give <span class="arithmatex">\(D = k\)</span>. The event <span class="arithmatex">\(\{D = k\}\)</span> is the same as <span class="arithmatex">\(\{Y = k\} \cup \{Y = -k\}\)</span>, and these two events are disjoint for <span class="arithmatex">\(k \geq 1\)</span>.</p>
+<p>Using the master formula (many-to-one):</p>
+<div class="arithmatex">\[P(D = 0) = P(Y = 0) = \binom{n}{n/2} \left(\frac{1}{2}\right)^n \quad \text{(only possible if } n \text{ is even)}\]</div>
+<div class="arithmatex">\[P(D = k) = P(Y = k) + P(Y = -k) = 2\binom{n}{\frac{n+k}{2}}\left(\frac{1}{2}\right)^n \quad \text{for } k \geq 1\]</div>
+<p>Two <span class="arithmatex">\(y\)</span> values (<span class="arithmatex">\(+k\)</span> and <span class="arithmatex">\(-k\)</span>) collapse into one <span class="arithmatex">\(d\)</span> value (<span class="arithmatex">\(k\)</span>), so their probabilities add — a direct application of the many-to-one PMF formula.</p>
+<hr />
+<h1 id="cumulative-distribution-functions-cdf">Cumulative Distribution Functions (CDF)<a class="headerlink" href="#cumulative-distribution-functions-cdf" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Definition:</strong> The <em>cumulative distribution function</em> (CDF) of an r.v. <span class="arithmatex">\(X\)</span> is:
+$<span class="arithmatex">\(F_X(x) = P(X \leq x)\)</span>$</p>
+</blockquote>
+<p>Unlike the PMF (discrete only), the CDF is defined for <strong>all</strong> random variables — discrete and continuous. It is the universal tool for describing distributions.</p>
+<p>Think of the CDF as a running total — it accumulates all PMF values from <span class="arithmatex">\(-\infty\)</span> up to <span class="arithmatex">\(x\)</span>.</p>
+<p><strong>Three properties every valid CDF must satisfy:</strong></p>
+<p><strong>Property 1 — Increasing:</strong>
+$<span class="arithmatex">\(x_1 \leq x_2 \implies F(x_1) \leq F(x_2)\)</span>$
+<span class="arithmatex">\(P(X \leq x_2)\)</span> includes everything in <span class="arithmatex">\(P(X \leq x_1)\)</span> plus more. Probability can only accumulate, never decrease.</p>
+<p><strong>Property 2 — Right-continuous:</strong>
+$<span class="arithmatex">\(F(a) = \lim_{x \to a^+} F(x)\)</span>$
+For discrete r.v.s, the CDF is completely flat between support values and jumps <em>at</em> each support value. The jump size equals the PMF value there. For integer-valued X this is even stronger — <span class="arithmatex">\(F\)</span> is literally constant between integers, not just right-continuous.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>F(x)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>|              ___________
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>|         ____|
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>|    ____|
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>|___|
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>|_________________________ x
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   0    1    2    3    4
+</code></pre></div>
+<p><strong>Property 3 — Convergence to 0 and 1:</strong>
+$<span class="arithmatex">\(\lim_{x \to -\infty} F(x) = 0 \qquad \text{and} \qquad \lim_{x \to +\infty} F(x) = 1\)</span>$</p>
+<p>As <span class="arithmatex">\(x \to -\infty\)</span>: no values of <span class="arithmatex">\(X\)</span> are <span class="arithmatex">\(\leq x\)</span>, so probability = 0.
+As <span class="arithmatex">\(x \to +\infty\)</span>: all values of <span class="arithmatex">\(X\)</span> are <span class="arithmatex">\(\leq x\)</span>, so:
+$<span class="arithmatex">\(\lim_{x \to \infty} F(x) = \lim_{x \to \infty} \sum_{n=0}^{x} P(X=n) = \sum_{n=0}^{\infty} P(X=n) = 1\)</span>$</p>
+<p>The third property is just the PMF axiom expressed through the CDF — the boundary conditions are the PMF properties in disguise.</p>
+<p><strong>PMF vs CDF:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>PMF</th>
+<th>CDF</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formula</td>
+<td><span class="arithmatex">\(P(X = x)\)</span></td>
+<td><span class="arithmatex">\(P(X \leq x)\)</span></td>
+</tr>
+<tr>
+<td>What it gives</td>
+<td>Probability at one exact point</td>
+<td>Accumulated probability up to <span class="arithmatex">\(x\)</span></td>
+</tr>
+<tr>
+<td>Shape (discrete)</td>
+<td>Spikes at support values</td>
+<td>Staircase — flat then jump</td>
+</tr>
+<tr>
+<td>Jump size</td>
+<td>—</td>
+<td>Equals PMF value at that point</td>
+</tr>
+<tr>
+<td>Defined for</td>
+<td>Discrete r.v.s only</td>
+<td>All r.v.s</td>
+</tr>
+</tbody>
+</table>
+<p>The CDF and PMF carry the same information — you can always recover one from the other. The jump in the CDF at any point equals the PMF value there: <span class="arithmatex">\(P(X = x_0) = F(x_0) - F(x_0^-)\)</span>.</p>
+<hr />
+<h1 id="functions-of-random-variables">Functions of Random Variables<a class="headerlink" href="#functions-of-random-variables" title="Permanent link">&para;</a></h1>
+<p>If <span class="arithmatex">\(X\)</span> is a random variable, then any function of <span class="arithmatex">\(X\)</span> is also a random variable.</p>
+<p><span class="arithmatex">\(X^2\)</span>, <span class="arithmatex">\(e^X\)</span>, <span class="arithmatex">\(\sin(X)\)</span>, <span class="arithmatex">\(g(X)\)</span> for any <span class="arithmatex">\(g : \mathbb{R} \to \mathbb{R}\)</span> — all are random variables. Why? A random variable is a deterministic function on a random input. Applying another deterministic function on top still gives a deterministic function on a random input — still a random variable. Randomness flows from the original sample space through every transformation.</p>
+<blockquote>
+<p><strong>Definition 3.7.1:</strong> For an experiment with sample space <span class="arithmatex">\(S\)</span>, an r.v. <span class="arithmatex">\(X\)</span>, and a function <span class="arithmatex">\(g : \mathbb{R} \to \mathbb{R}\)</span>, <span class="arithmatex">\(g(X)\)</span> is the r.v. that maps <span class="arithmatex">\(s\)</span> to <span class="arithmatex">\(g(X(s))\)</span> for all <span class="arithmatex">\(s \in S\)</span>.</p>
+</blockquote>
+<div class="arithmatex">\[s \xrightarrow{X} X(s) \xrightarrow{g} g(X(s))\]</div>
+<p>This is function composition: <span class="arithmatex">\(g(X) = g \circ X\)</span>. <span class="arithmatex">\(g\)</span> uses <span class="arithmatex">\(X\)</span>'s output set as its own input — but the randomness always traces back to <span class="arithmatex">\(S\)</span>.</p>
+<h3 id="pmf-of-gx-the-master-formula">PMF of g(X) — The Master Formula<a class="headerlink" href="#pmf-of-gx-the-master-formula" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[P(g(X) = y) = \sum_{x \,:\, g(x) = y} P(X = x)\]</div>
+<p>Find every <span class="arithmatex">\(x\)</span> in the support of <span class="arithmatex">\(X\)</span> that maps to <span class="arithmatex">\(y\)</span> under <span class="arithmatex">\(g\)</span>, then add up their probabilities.</p>
+<p><strong>One-to-one g:</strong> Only one <span class="arithmatex">\(x\)</span> maps to each <span class="arithmatex">\(y\)</span> → probability passes down unchanged:
+$<span class="arithmatex">\(P(Y = g(x)) = P(X = x)\)</span>$
+The support just gets relabeled; probabilities are inherited directly.</p>
+<p><strong>Many-to-one g:</strong> Multiple <span class="arithmatex">\(x\)</span> values map to the same <span class="arithmatex">\(y\)</span> → probabilities merge and add up. This is the only interesting case requiring real work.</p>
+<p>The formula handles both cases with one expression — one-to-one is just a special case where every sum has exactly one term.</p>
+<blockquote>
+<p><strong>Key insight:</strong> Since random variables are deterministic, probability is born in <span class="arithmatex">\(S\)</span> and travels down through every function. One-to-one guarantees it arrives unchanged. Many-to-one is the only case where something interesting happens — probabilities of merging inputs add up.</p>
+</blockquote>
+<h3 id="two-common-mistakes">Two Common Mistakes<a class="headerlink" href="#two-common-mistakes" title="Permanent link">&para;</a></h3>
+<p><strong>Mistake 1 — Multiplying the PMF to get PMF of <span class="arithmatex">\(2X\)</span>:</strong></p>
+<p>Wrong: <span class="arithmatex">\(P(2X = y) = 2 \times P(X = x)\)</span>. This makes probabilities sum to 2, violating the axiom.</p>
+<p>Correct: <span class="arithmatex">\(P(2X = y) = P(X = y/2)\)</span>. Since <span class="arithmatex">\(g(x) = 2x\)</span> is one-to-one, probability passes down unchanged. The PMF of <span class="arithmatex">\(2X\)</span> is a <strong>horizontal stretch</strong> of the PMF of <span class="arithmatex">\(X\)</span> — same heights, doubled support values. Not a vertical stretch.</p>
+<p><strong>Mistake 2 — Same distribution means always equal:</strong></p>
+<p>Wrong: if <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> have the same distribution, then <span class="arithmatex">\(P(X = Y) = 1\)</span>.</p>
+<p>The PMF describes probability behaviour. Two r.v.s can have identical PMFs while mapping individual sample outcomes to completely different numbers.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th><span class="arithmatex">\(P(X = Y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y = 1-X\)</span> (coin)</td>
+<td>0 — never equal</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Z\)</span> (independent flip)</td>
+<td>1/2 — sometimes equal</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(X\)</span> and itself</td>
+<td>1 — always equal</td>
+</tr>
+</tbody>
+</table>
+<p>All three cases can share the same Bern<span class="arithmatex">\((1/2)\)</span> distribution. Same distribution <span class="arithmatex">\(\neq\)</span> same r.v.</p>
+<hr />
+<h1 id="independence-of-random-variables">Independence of Random Variables<a class="headerlink" href="#independence-of-random-variables" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Definition:</strong> Random variables <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are <em>independent</em> if:
+$<span class="arithmatex">\(P(X \leq x, Y \leq y) = P(X \leq x) P(Y \leq y) \quad \text{for all } x, y \in \mathbb{R}\)</span>$</p>
+</blockquote>
+<p>Knowing <span class="arithmatex">\(X\)</span>'s value gives no information about <span class="arithmatex">\(Y\)</span>, and vice versa.</p>
+<p><strong>Discrete equivalent condition:</strong>
+$<span class="arithmatex">\(P(X = x, Y = y) = P(X = x) P(Y = y)\)</span>$
+for all <span class="arithmatex">\(x, y\)</span> in the respective supports. Much easier to check in practice.</p>
+<h3 id="proof-why-the-discrete-condition-is-equivalent">Proof — Why the Discrete Condition is Equivalent<a class="headerlink" href="#proof-why-the-discrete-condition-is-equivalent" title="Permanent link">&para;</a></h3>
+<p>We need to show that for discrete r.v.s, the CDF factoring condition is equivalent to the PMF factoring condition.</p>
+<p><strong>PMF condition <span class="arithmatex">\(\implies\)</span> CDF condition:</strong></p>
+<p>If <span class="arithmatex">\(P(X = x, Y = y) = P(X = x)P(Y = y)\)</span> for all <span class="arithmatex">\(x, y\)</span> in the supports, then for any <span class="arithmatex">\(x, y\)</span>:</p>
+<div class="arithmatex">\[P(X \leq x, Y \leq y) = \sum_{x' \leq x} \sum_{y' \leq y} P(X = x', Y = y')\]</div>
+<div class="arithmatex">\[= \sum_{x' \leq x} \sum_{y' \leq y} P(X = x') P(Y = y')\]</div>
+<div class="arithmatex">\[= \left(\sum_{x' \leq x} P(X = x')\right)\left(\sum_{y' \leq y} P(Y = y')\right) = P(X \leq x) P(Y \leq y) \quad \checkmark\]</div>
+<p>The double sum factors because each term already factors — summing over products of separate quantities gives the product of the sums.</p>
+<p><strong>CDF condition <span class="arithmatex">\(\implies\)</span> PMF condition:</strong></p>
+<p>If <span class="arithmatex">\(P(X \leq x, Y \leq y) = P(X \leq x)P(Y \leq y)\)</span> for all <span class="arithmatex">\(x, y\)</span>, we recover the joint PMF by taking differences of the CDF at specific values <span class="arithmatex">\(x_0, y_0\)</span>:</p>
+<div class="arithmatex">\[P(X = x_0, Y = y_0) = P(X \leq x_0, Y \leq y_0) - P(X \leq x_0^-, Y \leq y_0) - P(X \leq x_0, Y \leq y_0^-) + P(X \leq x_0^-, Y \leq y_0^-)\]</div>
+<p>where <span class="arithmatex">\(x_0^-\)</span> means the largest support value strictly less than <span class="arithmatex">\(x_0\)</span>. Since each CDF term factors by assumption, the whole expression factors into <span class="arithmatex">\(P(X = x_0) \cdot P(Y = y_0)\)</span>. <span class="arithmatex">\(\blacksquare\)</span></p>
+<p><strong>Independence of many r.v.s:</strong>
+$<span class="arithmatex">\(P(X_1 \leq x_1, \ldots, X_n \leq x_n) = P(X_1 \leq x_1) \cdots P(X_n \leq x_n)\)</span>$</p>
+<p>For infinitely many r.v.s: every finite subset must be independent.</p>
+<p><strong>Pairwise vs mutual independence:</strong> Full independence implies pairwise independence (let all other variables go to <span class="arithmatex">\(\infty\)</span>), but pairwise independence does NOT imply full independence. Full independence is strictly stronger.</p>
+<p><strong>i.i.d.:</strong> Random variables that are <strong>independent</strong> and <strong>identically distributed</strong>. Two completely different concepts — each can hold or fail regardless of the other.</p>
+<p><strong>Four cases to fully understand the distinction:</strong></p>
+<p><strong>Case 1 — Independent AND identically distributed (i.i.d.):</strong>
+Let <span class="arithmatex">\(X\)</span> = result of a die roll, <span class="arithmatex">\(Y\)</span> = result of a second independent die roll. Both <span class="arithmatex">\(X, Y \sim \text{DUnif}(\{1,\ldots,6\})\)</span> and independent — one roll tells you nothing about the other. This is the i.i.d. case.</p>
+<p><strong>Case 2 — Independent but NOT identically distributed:</strong>
+Let <span class="arithmatex">\(X\)</span> = result of a die roll, <span class="arithmatex">\(Y\)</span> = closing price of the Dow Jones stock index a month from now. <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are independent (a die roll tells you nothing about the stock market), but they clearly do not have the same distribution.</p>
+<p><strong>Case 3 — Identically distributed but NOT independent:</strong>
+Let <span class="arithmatex">\(X\)</span> = number of Heads in <span class="arithmatex">\(n\)</span> coin tosses, <span class="arithmatex">\(Y\)</span> = number of Tails in those same <span class="arithmatex">\(n\)</span> tosses. Both <span class="arithmatex">\(X, Y \sim \text{Bin}(n, 1/2)\)</span> — same distribution — but <span class="arithmatex">\(Y = n - X\)</span> so knowing <span class="arithmatex">\(X\)</span> tells you <span class="arithmatex">\(Y\)</span> exactly. Completely dependent: <span class="arithmatex">\(P(Y = n - X) = 1\)</span>.</p>
+<p><strong>Case 4 — Dependent AND not identically distributed:</strong>
+Let <span class="arithmatex">\(X\)</span> = indicator of whether the majority party retains control of the House after the next election, <span class="arithmatex">\(Y\)</span> = average favorability rating of the majority party in polls taken within a month of the election. <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are dependent (poll ratings and election outcomes are related) and do not share the same distribution.</p>
+<blockquote>
+<p><strong>The core distinction:</strong> Same distribution describes how a single r.v. behaves in isolation — what values it takes and with what probabilities. Independence describes how two r.v.s relate to each other — whether one gives information about the other. These are completely orthogonal properties.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Independent</th>
+<th>Identically distributed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Meaning</td>
+<td>Knowing one tells you nothing about the others</td>
+<td>Same PMF / distribution</td>
+</tr>
+<tr>
+<td>Case 1 i.i.d.</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Case 2</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Case 3</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Case 4</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Functions of independent r.v.s:</strong> If <span class="arithmatex">\(X \perp Y\)</span>, then <span class="arithmatex">\(g(X) \perp h(Y)\)</span> for any functions <span class="arithmatex">\(g\)</span>, <span class="arithmatex">\(h\)</span>. Knowing <span class="arithmatex">\(g(X)\)</span> can only reveal information about <span class="arithmatex">\(X\)</span> — and since <span class="arithmatex">\(X\)</span> tells you nothing about <span class="arithmatex">\(Y\)</span>, it tells you nothing about <span class="arithmatex">\(h(Y)\)</span> either.</p>
+<hr />
+<h1 id="sum-of-independent-binomials">Sum of Independent Binomials<a class="headerlink" href="#sum-of-independent-binomials" title="Permanent link">&para;</a></h1>
+<p><strong>Theorem:</strong> If <span class="arithmatex">\(X \sim \text{Bin}(n,p)\)</span>, <span class="arithmatex">\(Y \sim \text{Bin}(m,p)\)</span>, and <span class="arithmatex">\(X \perp Y\)</span>, then:
+$<span class="arithmatex">\(X + Y \sim \text{Bin}(n+m, p)\)</span>$</p>
+<p>Requires the <strong>same <span class="arithmatex">\(p\)</span></strong> — if success probabilities differ, the sum is not Binomial.</p>
+<p>Three proofs, each using a different technique:</p>
+<p><strong>Proof 1 — Story (fastest):</strong>
+<span class="arithmatex">\(X\)</span> counts successes in <span class="arithmatex">\(n\)</span> trials, <span class="arithmatex">\(Y\)</span> in <span class="arithmatex">\(m\)</span> additional independent trials, all with the same <span class="arithmatex">\(p\)</span>. Together that is <span class="arithmatex">\(n+m\)</span> independent trials each with probability <span class="arithmatex">\(p\)</span> — exactly <span class="arithmatex">\(\text{Bin}(n+m,p)\)</span> by definition. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Proof 2 — Bernoulli indicators (elegant):</strong>
+Write <span class="arithmatex">\(X = X_1 + \cdots + X_n\)</span> and <span class="arithmatex">\(Y = Y_1 + \cdots + Y_m\)</span> where all <span class="arithmatex">\(X_i, Y_j \overset{\text{i.i.d.}}{\sim} \text{Bern}(p)\)</span>. Since <span class="arithmatex">\(X \perp Y\)</span>, all <span class="arithmatex">\(n+m\)</span> indicators are mutually independent with the same Bern<span class="arithmatex">\((p)\)</span> distribution. A sum of <span class="arithmatex">\(n+m\)</span> i.i.d. Bern<span class="arithmatex">\((p)\)</span> r.v.s is <span class="arithmatex">\(\text{Bin}(n+m,p)\)</span> by definition. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Proof 3 — PMF convolution (most algebraic, most instructive):</strong></p>
+<p>Condition on <span class="arithmatex">\(X\)</span> using LOTP:
+$<span class="arithmatex">\(P(X+Y=k) = \sum_{j=0}^{k} P(Y=k-j \mid X=j) P(X=j) = \sum_{j=0}^{k} P(Y=k-j) P(X=j)\)</span>$</p>
+<p>(Independence lets us drop the condition on <span class="arithmatex">\(X\)</span> when asking about <span class="arithmatex">\(Y\)</span>. We are not making <span class="arithmatex">\(P(Y=k-j \mid X=j)\)</span> become 1 — we are simply using independence to replace the conditional probability with the unconditional one.)</p>
+<p><strong>The dice analogy for LOTP — building intuition:</strong></p>
+<p>The same conditioning technique applies to a simpler question first: what is the probability two dice sum to 8?</p>
+<div class="arithmatex">\[P(\text{sum} = 8) = \sum_{j=1}^{6} P(\text{die 2} = 8 - j) \cdot P(\text{die 1} = j)\]</div>
+<p>For each value die 1 could take, figure out exactly what die 2 needs to be, then weight by how likely die 1 was. <span class="arithmatex">\(P(D_2 = 7) = 0\)</span> since a die cannot show 7, so the <span class="arithmatex">\(j=1\)</span> term vanishes. The valid terms give:</p>
+<div class="arithmatex">\[= \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} + \frac{1}{6} \cdot \frac{1}{6} = \frac{5}{36}\]</div>
+<p>You are just breaking the event <span class="arithmatex">\(\{\text{sum} = 8\}\)</span> into all the ways it could happen, finding the probability of each way, and adding them up. The Binomial proof uses exactly the same logic — just with Binomial PMFs instead of uniform ones.</p>
+<p>Substitute Binomial PMFs and collect powers of <span class="arithmatex">\(p\)</span> and <span class="arithmatex">\(q = 1-p\)</span>:
+$<span class="arithmatex">\(P(X+Y=k) = p^k q^{n+m-k} \sum_{j=0}^{k} \binom{n}{j}\binom{m}{k-j}\)</span>$</p>
+<p>The <span class="arithmatex">\(j\)</span>'s cancel in the exponents <strong>because <span class="arithmatex">\(p\)</span> is shared</strong> — with different <span class="arithmatex">\(p\)</span>'s they would not cancel and the sum could not be factored out. Apply Vandermonde's Identity:</p>
+<div class="arithmatex">\[\sum_{j=0}^{k} \binom{n}{j}\binom{m}{k-j} = \binom{n+m}{k}\]</div>
+<p>Result: <span class="arithmatex">\(P(X+Y=k) = \binom{n+m}{k} p^k q^{n+m-k}\)</span> — exactly <span class="arithmatex">\(\text{Bin}(n+m,p)\)</span> PMF. <span class="arithmatex">\(\square\)</span></p>
+<p><strong>Vandermonde's Identity</strong> — proved three ways across the course:
+1. Combinatorial story (choose <span class="arithmatex">\(k\)</span> from <span class="arithmatex">\(n\)</span> men and <span class="arithmatex">\(m\)</span> women, split by gender)
+2. Binomial convolution (the algebra above)
+3. Hypergeometric PMF summing to 1</p>
+<hr />
+<h1 id="connections-between-binomial-and-hypergeometric">Connections Between Binomial and Hypergeometric<a class="headerlink" href="#connections-between-binomial-and-hypergeometric" title="Permanent link">&para;</a></h1>
+<div class="arithmatex">\[\text{Binomial} \xrightarrow{\text{condition on total}} \text{Hypergeometric}$$
+$$\text{Hypergeometric} \xrightarrow{\text{population} \to \infty} \text{Binomial}\]</div>
+<p><strong>Binomial → Hypergeometric by conditioning:</strong></p>
+<p>Start with <span class="arithmatex">\(X \sim \text{Bin}(n,p)\)</span> and <span class="arithmatex">\(Y \sim \text{Bin}(m,p)\)</span> independent. Condition on the total <span class="arithmatex">\(X+Y = K\)</span>. Once the total is fixed, the trials are no longer independent — knowing the total constrains the counts. Asking for the distribution of <span class="arithmatex">\(X\)</span> given the total is exactly the Hypergeometric: draw <span class="arithmatex">\(n\)</span> from a population of <span class="arithmatex">\(n+m\)</span> objects (<span class="arithmatex">\(K\)</span> successes, <span class="arithmatex">\(n+m-K\)</span> failures) without replacement. Conditioning removes independence and produces the Hypergeometric.</p>
+<p><strong>Hypergeometric → Binomial by taking a limit:</strong></p>
+<p>Start with <span class="arithmatex">\(\text{HGeom}(w, b, n)\)</span>. Let the population <span class="arithmatex">\(w + b \to \infty\)</span> while keeping <span class="arithmatex">\(\frac{w}{w+b} = p\)</span> fixed. As the population grows infinitely large, removing one object barely changes the composition of what remains. Drawing without replacement from an effectively infinite population is the same as drawing with replacement — the dependence vanishes. In the limit, <span class="arithmatex">\(\text{HGeom}(w, b, n) \to \text{Bin}(n, p)\)</span>.</p>
+<blockquote>
+<p><strong>Practical implication:</strong> When sampling <span class="arithmatex">\(n\)</span> people from a large population <span class="arithmatex">\(N\)</span> where <span class="arithmatex">\(n \ll N\)</span>, the Hypergeometric can be safely approximated by the Binomial. The approximation improves as <span class="arithmatex">\(n/N \to 0\)</span>.</p>
+</blockquote>
+<hr />
+<h1 id="summary-cheatsheet">Summary Cheatsheet<a class="headerlink" href="#summary-cheatsheet" title="Permanent link">&para;</a></h1>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Key Formula / Fact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Random variable</td>
+<td>Deterministic function <span class="arithmatex">\(X: S \to \mathbb{R}\)</span>; randomness lives in <span class="arithmatex">\(P\)</span>, not <span class="arithmatex">\(X\)</span></td>
+</tr>
+<tr>
+<td>Support</td>
+<td><span class="arithmatex">\(\{x : P(X=x) &gt; 0\}\)</span> — where probability mass actually lives</td>
+</tr>
+<tr>
+<td>PMF</td>
+<td><span class="arithmatex">\(p_X(x) = P(X=x)\)</span>; nonneg + sums to 1</td>
+</tr>
+<tr>
+<td>PMF pipeline</td>
+<td>Support → event <span class="arithmatex">\(\{X=x\}\)</span> → add outcome probabilities → done</td>
+</tr>
+<tr>
+<td>Bernoulli</td>
+<td><span class="arithmatex">\(P(X=1)=p\)</span>, <span class="arithmatex">\(P(X=0)=1-p\)</span>; indicator r.v. of any event</td>
+</tr>
+<tr>
+<td>Binomial PMF</td>
+<td><span class="arithmatex">\(\binom{n}{k}p^k(1-p)^{n-k}\)</span>; requires independent trials, same <span class="arithmatex">\(p\)</span></td>
+</tr>
+<tr>
+<td>Binomial as sum</td>
+<td><span class="arithmatex">\(X = X_1 + \cdots + X_n\)</span>, <span class="arithmatex">\(X_i \overset{\text{i.i.d.}}{\sim} \text{Bern}(p)\)</span></td>
+</tr>
+<tr>
+<td>Binomial additivity</td>
+<td><span class="arithmatex">\(\text{Bin}(n,p) + \text{Bin}(m,p) = \text{Bin}(n+m,p)\)</span> (same <span class="arithmatex">\(p\)</span>, independent)</td>
+</tr>
+<tr>
+<td>Hypergeometric PMF</td>
+<td><span class="arithmatex">\(\frac{\binom{w}{k}\binom{b}{n-k}}{\binom{w+b}{n}}\)</span>; without replacement, equally likely</td>
+</tr>
+<tr>
+<td>Vandermonde Identity</td>
+<td><span class="arithmatex">\(\sum_{j=0}^k \binom{n}{j}\binom{m}{k-j} = \binom{n+m}{k}\)</span></td>
+</tr>
+<tr>
+<td>DUnif PMF</td>
+<td><span class="arithmatex">\(\frac{1}{\vert C \vert}\)</span> for <span class="arithmatex">\(x \in C\)</span>; reduces to counting problems</td>
+</tr>
+<tr>
+<td>CDF</td>
+<td><span class="arithmatex">\(F(x) = P(X \leq x)\)</span>; nondecreasing, right-continuous, <span class="arithmatex">\(0 \to 1\)</span></td>
+</tr>
+<tr>
+<td>PMF → CDF</td>
+<td><span class="arithmatex">\(F(x) = \sum_{x' \leq x} p_X(x')\)</span> (running total)</td>
+</tr>
+<tr>
+<td>CDF → PMF</td>
+<td><span class="arithmatex">\(P(X=x_0) = F(x_0) - F(x_0^-)\)</span> (size of jump)</td>
+</tr>
+<tr>
+<td>PMF of <span class="arithmatex">\(g(X)\)</span></td>
+<td><span class="arithmatex">\(P(g(X)=y) = \sum_{x: g(x)=y} P(X=x)\)</span></td>
+</tr>
+<tr>
+<td>One-to-one <span class="arithmatex">\(g\)</span></td>
+<td>Probability passes down unchanged</td>
+</tr>
+<tr>
+<td>Many-to-one <span class="arithmatex">\(g\)</span></td>
+<td>Probabilities of merging inputs add up</td>
+</tr>
+<tr>
+<td>Independence</td>
+<td><span class="arithmatex">\(P(X \leq x, Y \leq y) = P(X \leq x)P(Y \leq y)\)</span></td>
+</tr>
+<tr>
+<td>Discrete independence</td>
+<td><span class="arithmatex">\(P(X=x, Y=y) = P(X=x)P(Y=y)\)</span></td>
+</tr>
+<tr>
+<td>i.i.d.</td>
+<td>Independent AND identically distributed</td>
+</tr>
+<tr>
+<td>HGeom ≈ Binomial</td>
+<td>When population <span class="arithmatex">\(\gg\)</span> sample size</td>
+</tr>
+</tbody>
+</table>
+
+  
+    
+  
+  
+    
+  
+
+
+  <aside class="md-source-file">
+    
+      <span class="md-source-file__fact">
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 05:41:46 UTC">June 20, 2026</span>
+      </span>
+    
+  </aside>
+
+
+
+
+
+                
+
+  
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../lecture-8-binomial-hypergeometricandrandom-variables/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lecture 8: Binomial, Hypergeometric &amp; Random Variables">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Lecture 8: Binomial, Hypergeometric & Random Variables
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../05-expectation/exercises/" class="md-footer__link md-footer__link--next" aria-label="Next: Exercises">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Exercises
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.indexes", "navigation.top", "navigation.tracking", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
