@@ -278,7 +278,7 @@ $$
 \pi_n = \big(\, P(X_n = 1),\ P(X_n = 2),\ \dots,\ P(X_n = M)\,\big), \qquad \sum_j \pi_n(j) = 1,\ \ \pi_n \geq 0
 $$
 
-This is exactly **Case B** from Section 4.2: you're *not* certain which state you're in, only the odds. Same law-of-total-probability argument as Section 5 gives:
+This is exactly **Case B** from Section 4.2: you're *not* certain which state you're in, only the odds. (Case A — being certain you're in state $i$ — is the special case $\pi_n = (0,\dots,0,1,0,\dots,0)$ with the $1$ in position $i$: a **degenerate distribution**, all probability mass on one state.) Same law-of-total-probability argument as Section 5 gives:
 
 $$
 \pi_{n+1}(j) = \sum_{i=1}^{M} \pi_n(i)\, q_{ij}
@@ -300,6 +300,82 @@ $$
 
 **How to use it:** given a starting distribution $\pi_0$ and a target time $n$, compute one matrix power $Q^n$ and one vector–matrix product, rather than simulating step by step.
 
+### 6.1 Worked Example: Spreading Probability Mass
+
+Reuse the matrix from Section 5.5, $Q = \begin{bmatrix} 0.2 & 0.5 & 0.3 \\ 0.6 & 0.1 & 0.3 \\ 0.4 & 0.4 & 0.2 \end{bmatrix}$, but now start *uncertain* instead of certain:
+
+$$
+\pi_0 = (0.5,\ 0.5,\ 0.0) \quad \text{— "50\% chance I'm in State 1, 50\% chance State 2, 0\% chance State 3"}
+$$
+
+**A second way to see $\pi_0 Q$ — as a blend of rows, not just a zipper.** Section 5.4 viewed $(Q^m)_{ij}$ as zipping a row against a column. There's an equally useful complementary view for $\pi_n Q$: since each row of $Q$ *is itself* "the PMF of next-state, if I were certainly starting from that row's state" (Section 4.1), $\pi_0 Q$ is just a **weighted blend of those rows**, weighted by how likely you are to currently be in each one:
+
+$$
+\pi_1 = \pi_0 Q = 0.5 \cdot (\text{Row 1}) + 0.5 \cdot (\text{Row 2}) + 0.0 \cdot (\text{Row 3})
+$$
+
+Computing each coordinate of $\pi_1$ as that weighted sum:
+
+| Destination $j$ | $0.5 \times Q_{1j}$ | $0.5 \times Q_{2j}$ | $0.0 \times Q_{3j}$ | $\pi_1(j)$ |
+|---|---|---|---|---|
+| $j=1$ | $0.5\times 0.2 = 0.10$ | $0.5\times 0.6 = 0.30$ | $0.0\times 0.4 = 0.00$ | $\mathbf{0.40}$ |
+| $j=2$ | $0.5\times 0.5 = 0.25$ | $0.5\times 0.1 = 0.05$ | $0.0\times 0.4 = 0.00$ | $\mathbf{0.30}$ |
+| $j=3$ | $0.5\times 0.3 = 0.15$ | $0.5\times 0.3 = 0.15$ | $0.0\times 0.2 = 0.00$ | $\mathbf{0.30}$ |
+
+$$
+\pi_1 = (0.40,\ 0.30,\ 0.30)
+$$
+
+Check it sums to 1: $0.40+0.30+0.30=1.0$. ✓ **The initial uncertainty was fully "spread" through the matrix's rules to produce the new distribution $\pi_1$.**
+
+### 6.2 Worked Example: Forecasting $n$ Steps Ahead
+
+A narrative example for $\pi_n = \pi_0 Q^n$: predicting weather **10 days from now**.
+
+1. You're not sure what today's weather is, but you estimate 80% Sunny, 20% Cloudy, 0% Rainy: $\pi_0 = (0.8,\ 0.2,\ 0.0)$.
+2. Take the daily weather transition matrix $Q$ and raise it to the 10th power, $Q^{10}$ — this is the "10-day time machine" from Section 5.6, built once and reused for any starting distribution.
+3. Multiply: $\pi_{10} = \pi_0\, Q^{10}$.
+
+The result $\pi_{10}$ is a brand-new $1\times 3$ vector giving the exact probability of Sunny, Cloudy, or Rainy exactly 10 days out — fully accounting for both your initial uncertainty about today *and* every possible 10-day weather path (Section 5.3).
+
+### 6.3 The Dimensions of Markov Math
+
+It's worth tracking *shapes*, not just values, to see why this machinery is self-consistent. Let $M$ be the number of states.
+
+- **The distribution vector $\pi_n$** is a $1 \times M$ row vector — one slot per state:
+  $$\pi_n = \big[\, P(X_n{=}1)\ \ P(X_n{=}2)\ \ \cdots\ \ P(X_n{=}M) \,\big]$$
+- **The transition matrix $Q$** is $M \times M$ — a square grid, literally $M$ of the row-PMFs from Section 4.1 stacked on top of each other.
+- **Powers of $Q$ stay $M \times M$.** Multiplying a $3\times 3$ matrix by a $3\times 3$ matrix is still $3\times 3$ — even $Q^{50}$ from Section 5.6 doesn't grow.
+- **The product $\pi_n Q$ stays $1 \times M$.** Multiplying $(1\times M)$ by $(M \times M)$ cancels the inner matching dimension $M$, leaving $(1 \times M)$:
+  $$[\,1 \times M\,] \times [\,M \times M\,] = [\,1 \times M\,]$$
+
+**Why this matters:** it's *because* the shapes always collapse back to $1\times M$ that you can iterate $\pi_n = \pi_0 Q^n$ indefinitely — the output of one step is always a valid input (same shape) for the next. Input: one row of probabilities ($\pi_0$). Rules: one square grid ($Q^n$). Output: a brand-new row of probabilities ($\pi_n$) — same shape as what you started with.
+
+### 6.4 Doesn't an Evolving $\pi_n$ Contradict Homogeneity?
+
+A natural worry: if $\pi_n$ keeps changing every step, doesn't that mean the chain itself is changing over time — i.e. isn't time-homogeneous?
+
+**No** — this confuses **the rules of the game** with **the pieces on the board**.
+
+- **The rules ($Q$) are frozen.** Time-homogeneous (Section 3) means $Q$ itself never changes. If $p_{12}=0.3$, that's locked in at step 1, step 50, and step 1,000,000.
+- **The pieces ($\pi_n$) are *supposed* to move.** As time advances, probability mass legitimately shifts around the state space *according to* those frozen rules. $\pi_n$ evolving isn't a violation — it's the entire point of having fixed rules in the first place.
+
+**Monopoly analogy:** the board layout and dice probabilities never change — the system is time-homogeneous. But on Turn 1, 100% of players sit on "GO" ($\pi_0$); by Turn 5 they're spread across properties ($\pi_5$); by Turn 20 many are stuck in Jail ($\pi_{20}$). The *distribution of players* evolved; the *rules of the board* stayed perfectly static.
+
+**The proof is hiding in the notation itself.** Recall from above:
+
+$$
+\pi_n = \pi_0\, Q^n
+$$
+
+Being allowed to write a clean *exponent* $Q^n$ — instead of a chain of *different* matrices — is itself proof of homogeneity: it means the exact same matrix $Q$ was multiplied over and over. If the rules genuinely changed at every step, you couldn't collapse it to a power at all; you'd be stuck with:
+
+$$
+\pi_n = \pi_0 \times Q_{\text{step }1} \times Q_{\text{step }2} \times Q_{\text{step }3} \times \cdots
+$$
+
+**The division of labor:** $\pi_0$ only ever sets the *starting line* — where the probability mass is dropped at time zero. $Q$ is the *engine* driving everything forward; it doesn't care where the mass started, it only pushes whatever mass is currently there to the next step. $\pi_0$ answers "where do we begin?"; $Q$ answers "what happens next, no matter where we are?" — two genuinely separate jobs, and only one of them (the rules) needs to stay fixed for homogeneity to hold.
+
 ---
 
 ## 7. Stationary Distribution (preview)
@@ -318,6 +394,8 @@ $$
 
 **Eigenvector connection:** transposing both sides gives $Q^\top \pi^\top = \pi^\top$ — exactly an eigenvalue/eigenvector equation for $Q^\top$ with eigenvalue $1$.
 
+**Preview — why the "$Q$ vs. $\pi_0$" division of labor (Section 6.4) matters here:** because $Q$, not $\pi_0$, is what drives the dynamics forward, the influence of *where you started* can fade out over time. Under the mild conditions in question 3 below, two chains that start in completely different places — say $\pi_0$ entirely on State 1 versus $\pi_0$ entirely on State 3 — can end up converging to the *exact same* distribution $\pi$ after enough steps. The rules of motion are powerful enough to make the system forget where it started; only the long-run rules ($Q$), not the initial condition ($\pi_0$), determine the eventual destination.
+
 **Open questions flagged in lecture (resolved next time, under mild conditions):**
 
 1. **Existence:** does a solution $\pi$ to $\pi Q = \pi$ with $\pi \geq 0,\ \sum_j \pi(j)=1$ always exist?
@@ -334,7 +412,25 @@ $$
 
 ---
 
-## 9. Quick Reference Cheat Sheet
+## 9. Markov Chains vs. Markov Decision Processes (MDPs)
+
+Everything covered so far — $Q$, $\pi_n$, the stationary distribution — belongs strictly to the world of **Markov chains** (passive Markov processes). Nothing here involves actions or rewards; that's a related but distinct topic called **Markov Decision Processes (MDPs)**.
+
+**The clearest way to draw the boundary:**
+
+- **Markov chain — passive observation.** Picture a leaf floating down a river. The river has currents (the matrix $Q$), and the leaf drifts from state to state purely according to those currents. You're a scientist with a stopwatch, predicting where the leaf ends up. No choices, no scoring.
+- **MDP — active control.** Picture steering a motorboat on that same river. Two new ingredients get added:
+  - **Actions ($A$):** you have a steering wheel — a choice to make at each state.
+  - **Rewards ($R$):** e.g. $+100$ for reaching the dock, $-50$ for hitting a rock.
+  You're no longer just observing — you're choosing actions to fight the currents and maximize your score.
+
+**The mathematical jump from chain to MDP:** in a Markov chain there is one fixed matrix $Q$. In an MDP, there's a *separate* transition matrix for every available action — e.g. $Q_{\text{left}}$ if you steer left, $Q_{\text{right}}$ if you steer right. Because there are now multiple matrices to choose between at every state, you need an algorithm (e.g. value iteration) to determine which action — which matrix — to use in each state in order to maximize long-run reward.
+
+**Takeaway:** Markov chains describe the physics of an environment. MDPs are what you build *on top of* that physics once you add the ability to act, plus a reason to care about the outcome. Understanding the chain — how $Q$ pushes $\pi$ around — is the prerequisite for understanding how an agent could learn to steer it.
+
+---
+
+## 10. Quick Reference Cheat Sheet
 
 | Want | Formula |
 |---|---|
@@ -347,10 +443,15 @@ $$
 | Homogeneity condition | $q_{ij}$ independent of $n$ |
 | Certain state → single transition | read cell $Q_{ij}$ directly, no summing |
 | Uncertain state → marginal probability | sum over starting states (Law of Total Probability) |
+| Shape of $\pi_n$ | $1 \times M$ row vector |
+| Shape of $Q$ and $Q^n$ | $M \times M$ (stays square at any power) |
+| $\pi_n Q$, intuitively | a weighted blend of $Q$'s rows, weighted by $\pi_n$ |
+| Evolving $\pi_n$ vs. homogeneity | $\pi_n$ changes; $Q$ does not — no contradiction |
+| Markov chain vs. MDP | chain = one fixed $Q$, no actions/rewards; MDP = one $Q_a$ per action $a$, plus rewards |
 
 ---
 
-## 10. Open Threads for Next Lecture
+## 11. Open Threads for Next Lecture
 
 - Existence/uniqueness/convergence proofs for stationary distributions
 - Efficient computation tricks (some chains don't need matrix algebra at all)
