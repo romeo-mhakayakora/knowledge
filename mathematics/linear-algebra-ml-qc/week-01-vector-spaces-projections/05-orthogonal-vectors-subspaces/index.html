@@ -25,7 +25,7 @@
     
     
       
-        <title>05: Orthogonal Vectors and Subspaces - Knowledge</title>
+        <title>05 — Orthogonal Vectors and Subspaces - Knowledge</title>
       
     
     
@@ -61,14 +61,14 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="05: Orthogonal Vectors and Subspaces - Knowledge" />
+<meta property="og:title" content="05 — Orthogonal Vectors and Subspaces - Knowledge" />
 <meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="05: Orthogonal Vectors and Subspaces - Knowledge" />
+<meta property="twitter:title" content="05 — Orthogonal Vectors and Subspaces - Knowledge" />
 <meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces.png" />
 </head>
   
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              05: Orthogonal Vectors and Subspaces
+              05 — Orthogonal Vectors and Subspaces
             
           </span>
         </div>
@@ -1152,7 +1152,7 @@
   <span class="md-ellipsis">
     
   
-    05: Orthogonal Vectors and Subspaces
+    05 — Orthogonal Vectors and Subspaces
   
 
     
@@ -1170,7 +1170,7 @@
   <span class="md-ellipsis">
     
   
-    05: Orthogonal Vectors and Subspaces
+    05 — Orthogonal Vectors and Subspaces
   
 
     
@@ -1196,10 +1196,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#big-picture-first" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Big picture first
       
     </span>
   </a>
@@ -1207,10 +1207,188 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-when-are-two-vectors-orthogonal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. When are two vectors orthogonal?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. When are two vectors orthogonal?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-dot-product-is-the-right-test-the-how" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the dot product is the right test (the how)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-when-are-two-subspaces-orthogonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. When are two subspaces orthogonal?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. When are two subspaces orthogonal?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-doesnt-intersect-isnt-enough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why "doesn't intersect" isn't enough
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-check-in-mathbbr2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick check in \(\mathbb{R}^2\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-main-result-row-space-null-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The main result: row space ⊥ null space
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The main result: row space ⊥ null space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-proof-built-from-nothing-but-the-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why (the proof, built from nothing but the definition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-orthogonal-complements-all-not-just-some" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Orthogonal complements — "all," not just "some"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-where-this-is-heading-ata-and-least-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Where this is heading: \(A^TA\) and least squares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Where this is heading: \(A^TA\) and least squares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-full-column-rank-invertible-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — full column rank (invertible case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-dependent-columns-singular-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — dependent columns (singular case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-shows-up-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this shows up later
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-things-to-revisit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions / things to revisit
       
     </span>
   </a>
@@ -4217,10 +4395,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#big-picture-first" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Big picture first
       
     </span>
   </a>
@@ -4228,10 +4406,188 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-when-are-two-vectors-orthogonal" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. When are two vectors orthogonal?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. When are two vectors orthogonal?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-dot-product-is-the-right-test-the-how" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why the dot product is the right test (the how)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-when-are-two-subspaces-orthogonal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. When are two subspaces orthogonal?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. When are two subspaces orthogonal?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-doesnt-intersect-isnt-enough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why "doesn't intersect" isn't enough
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quick-check-in-mathbbr2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quick check in \(\mathbb{R}^2\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-the-main-result-row-space-null-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. The main result: row space ⊥ null space
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. The main result: row space ⊥ null space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-the-proof-built-from-nothing-but-the-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why (the proof, built from nothing but the definition)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-orthogonal-complements-all-not-just-some" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Orthogonal complements — "all," not just "some"
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-where-this-is-heading-ata-and-least-squares" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Where this is heading: \(A^TA\) and least squares
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Where this is heading: \(A^TA\) and least squares">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-full-column-rank-invertible-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — full column rank (invertible case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-dependent-columns-singular-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example — dependent columns (singular case)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-shows-up-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this shows up later
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-things-to-revisit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions / things to revisit
       
     </span>
   </a>
@@ -4261,15 +4617,177 @@
   
 
 
-<h1 id="05-orthogonal-vectors-and-subspaces">05: Orthogonal Vectors and Subspaces<a class="headerlink" href="#05-orthogonal-vectors-and-subspaces" title="Permanent link">&para;</a></h1>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<h1 id="05-orthogonal-vectors-and-subspaces">05 — Orthogonal Vectors and Subspaces<a class="headerlink" href="#05-orthogonal-vectors-and-subspaces" title="Permanent link">&para;</a></h1>
+<p><strong>MIT Lecture:</strong> 14 — Orthogonal Vectors and Subspaces
+<strong>Maps to:</strong> IIT Indore Week 1, Topic 4 — Inner products, norms, and orthogonality
+<strong>Sets up:</strong> Topic 5 — Projections and the least-squares problem</p>
+<hr />
+<h2 id="big-picture-first">Big picture first<a class="headerlink" href="#big-picture-first" title="Permanent link">&para;</a></h2>
+<p>Up to now we know the <em>sizes</em> of the four fundamental subspaces:</p>
 <ul>
-<li>Define orthogonal vectors using dot products.</li>
-<li>Understand orthogonal subspaces.</li>
-<li>Connect orthogonality to decompositions.</li>
+<li>Row space and null space both live in <span class="arithmatex">\(\mathbb{R}^n\)</span>, with dimensions <span class="arithmatex">\(r\)</span> and <span class="arithmatex">\(n-r\)</span>.</li>
+<li>Column space and left null space both live in <span class="arithmatex">\(\mathbb{R}^m\)</span>, with dimensions <span class="arithmatex">\(r\)</span> and <span class="arithmatex">\(m-r\)</span>.</li>
 </ul>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>Add lecture notes here.</p>
+<p>This lecture adds a second, geometric fact on top of the dimension count: each pair doesn't just split the space by dimension — it splits it <strong>at a right angle</strong>.</p>
+<div class="arithmatex">\[
+\text{row space} \perp \text{null space}, \qquad \text{column space} \perp \text{left null space}
+\]</div>
+<p>That single fact is the engine behind least squares later in the chapter, so it's worth understanding <em>why</em> it's true, not just memorizing it.</p>
+<hr />
+<h2 id="1-when-are-two-vectors-orthogonal">1. When are two vectors orthogonal?<a class="headerlink" href="#1-when-are-two-vectors-orthogonal" title="Permanent link">&para;</a></h2>
+<p><strong>Definition.</strong> Two vectors are orthogonal if the angle between them is <span class="arithmatex">\(90^\circ\)</span>.</p>
+<p><strong>Test.</strong> <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are orthogonal exactly when</p>
+<div class="arithmatex">\[
+x^Ty = 0
+\]</div>
+<h3 id="why-the-dot-product-is-the-right-test-the-how">Why the dot product is the right test (the <em>how</em>)<a class="headerlink" href="#why-the-dot-product-is-the-right-test-the-how" title="Permanent link">&para;</a></h3>
+<p>This isn't a coincidence — it falls straight out of the Pythagorean theorem. Picture a triangle with sides <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(x+y\)</span> as the hypotenuse. The triangle has a right angle (i.e. <span class="arithmatex">\(x \perp y\)</span>) exactly when:</p>
+<div class="arithmatex">\[
+\|x\|^2 + \|y\|^2 = \|x+y\|^2
+\]</div>
+<p>Now expand the right-hand side using <span class="arithmatex">\(\|v\|^2 = v^Tv\)</span>:</p>
+<div class="arithmatex">\[
+\|x+y\|^2 = (x+y)^T(x+y) = x^Tx + x^Ty + y^Tx + y^Ty
+\]</div>
+<p>Since we're working with real vectors, <span class="arithmatex">\(x^Ty = y^Tx\)</span> (same sum <span class="arithmatex">\(x_1y_1 + x_2y_2 + \dots\)</span> either way), so this becomes:</p>
+<div class="arithmatex">\[
+\|x+y\|^2 = \|x\|^2 + \|y\|^2 + 2x^Ty
+\]</div>
+<p>Plugging back into the Pythagorean equation:</p>
+<div class="arithmatex">\[
+\|x\|^2 + \|y\|^2 = \|x\|^2 + \|y\|^2 + 2x^Ty \;\;\Longrightarrow\;\; x^Ty = 0
+\]</div>
+<p>Everything cancels except the cross term. That's the whole proof — Pythagoras <em>is</em> the dot-product test, just multiplied out.</p>
+<p><strong>Edge case:</strong> the zero vector is orthogonal to every vector, since <span class="arithmatex">\(0^Ty = 0\)</span> always. Geometrically "angle" is meaningless for the zero vector, but algebraically the test still passes — and treating it as orthogonal to everything is what keeps the definitions downstream (orthogonal subspaces, orthogonal complements) consistent.</p>
+<h3 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(x = (3, 1, -2)\)</span> and <span class="arithmatex">\(y = (1, -1, 1)\)</span>.</p>
+<div class="arithmatex">\[
+x^Ty = (3)(1) + (1)(-1) + (-2)(1) = 3 - 1 - 2 = 0 \quad \checkmark \text{ orthogonal}
+\]</div>
+<p>Check Pythagoras directly:</p>
+<div class="arithmatex">\[
+\|x\|^2 = 9+1+4 = 14, \qquad \|y\|^2 = 1+1+1 = 3
+$$
+$$
+x+y = (4, 0, -1), \qquad \|x+y\|^2 = 16+0+1 = 17 = 14+3 \quad \checkmark
+\]</div>
+<hr />
+<h2 id="2-when-are-two-subspaces-orthogonal">2. When are two <em>subspaces</em> orthogonal?<a class="headerlink" href="#2-when-are-two-subspaces-orthogonal" title="Permanent link">&para;</a></h2>
+<p>This is where intuition needs correcting. The natural guess is "two subspaces are orthogonal if they only meet at the origin." That's <strong>necessary but not sufficient</strong>.</p>
+<p><strong>Definition.</strong> Subspace <span class="arithmatex">\(S\)</span> is orthogonal to subspace <span class="arithmatex">\(T\)</span> if <em>every</em> vector in <span class="arithmatex">\(S\)</span> is orthogonal to <em>every</em> vector in <span class="arithmatex">\(T\)</span>.</p>
+<h3 id="why-doesnt-intersect-isnt-enough">Why "doesn't intersect" isn't enough<a class="headerlink" href="#why-doesnt-intersect-isnt-enough" title="Permanent link">&para;</a></h3>
+<p>Think of a wall and the floor of a room, meeting at the origin (the corner). They only share the line where they meet — yet they are clearly <strong>not</strong> orthogonal subspaces, because a <span class="arithmatex">\(45^\circ\)</span> vector in the wall and a vector in the floor are not at <span class="arithmatex">\(90^\circ\)</span> to each other. Worse: any vector lying exactly on the wall–floor seam belongs to <em>both</em> planes, so it would have to be orthogonal to itself — impossible unless it's zero. Two genuine orthogonal subspaces can only share the zero vector, but sharing only the zero vector doesn't guarantee orthogonality.</p>
+<h3 id="quick-check-in-mathbbr2">Quick check in <span class="arithmatex">\(\mathbb{R}^2\)</span><a class="headerlink" href="#quick-check-in-mathbbr2" title="Permanent link">&para;</a></h3>
+<p>The only subspaces of the plane are <span class="arithmatex">\(\{0\}\)</span>, lines through the origin, and the whole plane.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(S\)</span></th>
+<th><span class="arithmatex">\(T\)</span></th>
+<th>Orthogonal?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line</td>
+<td><span class="arithmatex">\(\{0\}\)</span></td>
+<td>Always (vacuously)</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>Whole plane</td>
+<td>Never (the line is <em>inside</em> the plane)</td>
+</tr>
+<tr>
+<td>Line</td>
+<td>A different line</td>
+<td>Only if they're literally perpendicular</td>
+</tr>
+</tbody>
+</table>
+<p>So "orthogonal subspaces" is a much stricter condition than "different subspaces."</p>
+<hr />
+<h2 id="3-the-main-result-row-space-null-space">3. The main result: row space ⊥ null space<a class="headerlink" href="#3-the-main-result-row-space-null-space" title="Permanent link">&para;</a></h2>
+<p><strong>Claim:</strong> every vector in the null space of <span class="arithmatex">\(A\)</span> is orthogonal to every vector in the row space of <span class="arithmatex">\(A\)</span>.</p>
+<h3 id="why-the-proof-built-from-nothing-but-the-definition">Why (the proof, built from nothing but the definition)<a class="headerlink" href="#why-the-proof-built-from-nothing-but-the-definition" title="Permanent link">&para;</a></h3>
+<p>A vector <span class="arithmatex">\(x\)</span> in the null space satisfies <span class="arithmatex">\(Ax = 0\)</span>. Write that out row by row:</p>
+<div class="arithmatex">\[
+\begin{pmatrix} \text{row}_1 \\ \text{row}_2 \\ \vdots \\ \text{row}_m \end{pmatrix} x = \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}
+\]</div>
+<p>Each line of this is literally a dot product: <span class="arithmatex">\(\text{row}_i \cdot x = 0\)</span>. So <span class="arithmatex">\(x\)</span> is automatically orthogonal to <strong>every row</strong> of <span class="arithmatex">\(A\)</span> — that fact was hiding inside <span class="arithmatex">\(Ax=0\)</span> the whole time.</p>
+<p>But the row <em>space</em> is more than just the rows — it's every combination of them. So we need <span class="arithmatex">\(x\)</span> orthogonal to combinations too. That follows immediately from linearity of the dot product: if <span class="arithmatex">\(\text{row}_1 \cdot x = 0\)</span> and <span class="arithmatex">\(\text{row}_2 \cdot x = 0\)</span>, then for any scalars <span class="arithmatex">\(c_1, c_2\)</span>:</p>
+<div class="arithmatex">\[
+(c_1\,\text{row}_1 + c_2\,\text{row}_2) \cdot x = c_1(\text{row}_1 \cdot x) + c_2(\text{row}_2 \cdot x) = 0
+\]</div>
+<p>So <span class="arithmatex">\(x\)</span> is orthogonal to <em>any</em> linear combination of the rows — i.e. to the entire row space. The same argument applied to <span class="arithmatex">\(A^T\)</span> gives column space ⊥ left null space.</p>
+<h3 id="worked-example_1">Worked example<a class="headerlink" href="#worked-example_1" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; -1 &amp; 2 \\ 2 &amp; -2 &amp; 4 \end{pmatrix}\)</span>. Both rows are multiples of <span class="arithmatex">\((1,-1,2)\)</span>, so the row space is the line through <span class="arithmatex">\((1,-1,2)\)</span> — rank <span class="arithmatex">\(1\)</span>.</p>
+<p>Null space: solve <span class="arithmatex">\(x_1 - x_2 + 2x_3 = 0\)</span>. Pick <span class="arithmatex">\(x = (1, 1, 0)\)</span>:</p>
+<div class="arithmatex">\[
+1 - 1 + 2(0) = 0 \quad \checkmark \text{ in the null space}
+\]</div>
+<p>Check orthogonality to the row:</p>
+<div class="arithmatex">\[
+(1)(1) + (-1)(1) + (2)(0) = 0 \quad \checkmark
+\]</div>
+<p>Geometrically: the null space here is a whole <em>plane</em> in <span class="arithmatex">\(\mathbb{R}^3\)</span> (dimension <span class="arithmatex">\(n - r = 3 - 1 = 2\)</span>), and that plane is exactly the set of vectors perpendicular to <span class="arithmatex">\((1,-1,2)\)</span> — the same "normal vector" idea from calculus, now explained by linear algebra.</p>
+<hr />
+<h2 id="4-orthogonal-complements-all-not-just-some">4. Orthogonal complements — "all," not just "some"<a class="headerlink" href="#4-orthogonal-complements-all-not-just-some" title="Permanent link">&para;</a></h2>
+<p>This is the upgrade that makes the fact genuinely useful, not just true.</p>
+<p><strong>Definition.</strong> The orthogonal complement of a subspace <span class="arithmatex">\(S\)</span> in <span class="arithmatex">\(\mathbb{R}^n\)</span> contains <em>every</em> vector orthogonal to <span class="arithmatex">\(S\)</span> — not merely some perpendicular vectors sitting nearby.</p>
+<p>The null space isn't just <em>a</em> subspace that happens to be orthogonal to the row space — it is the <em>entire</em> orthogonal complement of the row space in <span class="arithmatex">\(\mathbb{R}^n\)</span>. That's a stronger statement, and the dimension count backs it up:</p>
+<div class="arithmatex">\[
+\dim(\text{row space}) + \dim(\text{null space}) = r + (n - r) = n
+\]</div>
+<p>There's no room left over. This is also why you can't have a line and a line be row-space/null-space partners in <span class="arithmatex">\(\mathbb{R}^3\)</span> — <span class="arithmatex">\(1 + 1 \ne 3\)</span>. A rank-1 matrix in <span class="arithmatex">\(\mathbb{R}^3\)</span> must pair a 1-D row space with a 2-D null space (a line and a plane), never two lines.</p>
+<blockquote>
+<p><strong>Fundamental Theorem of Linear Algebra — Part 2:</strong> the four subspaces aren't just sized correctly (Part 1, rank-nullity); they're also oriented at <span class="arithmatex">\(90^\circ\)</span> as orthogonal complements of each other.</p>
+</blockquote>
+<hr />
+<h2 id="5-where-this-is-heading-ata-and-least-squares">5. Where this is heading: <span class="arithmatex">\(A^TA\)</span> and least squares<a class="headerlink" href="#5-where-this-is-heading-ata-and-least-squares" title="Permanent link">&para;</a></h2>
+<p><strong>The real problem of this chapter:</strong> solve <span class="arithmatex">\(Ax = b\)</span> when <span class="arithmatex">\(b\)</span> is <em>not</em> in the column space — i.e., no exact solution exists. This is the normal situation when you have more equations than unknowns: many noisy measurements (sensor readings, repeated pulse measurements, satellite tracking) and few true parameters. You don't want to throw away "extra" equations — you want the solution that uses <em>all</em> of them best.</p>
+<p>The matrix that makes this solvable is <span class="arithmatex">\(A^TA\)</span>.</p>
+<p><strong>Why <span class="arithmatex">\(A^TA\)</span> is square and symmetric:</strong></p>
+<ul>
+<li><span class="arithmatex">\(A\)</span> is <span class="arithmatex">\(m \times n\)</span>, so <span class="arithmatex">\(A^T\)</span> is <span class="arithmatex">\(n \times m\)</span>, and <span class="arithmatex">\(A^TA\)</span> is <span class="arithmatex">\(n \times n\)</span> — square.</li>
+<li><span class="arithmatex">\((A^TA)^T = A^T(A^T)^T = A^TA\)</span> — symmetric, since transposing twice cancels.</li>
+</ul>
+<p><strong>Why we care whether <span class="arithmatex">\(A^TA\)</span> is invertible:</strong> the strategy for the noisy system is to multiply both sides of <span class="arithmatex">\(Ax=b\)</span> by <span class="arithmatex">\(A^T\)</span>, giving the <em>normal equation</em>:</p>
+<div class="arithmatex">\[
+A^TA\,\hat{x} = A^Tb
+\]</div>
+<p>This will have a clean, unique solution <span class="arithmatex">\(\hat{x}\)</span> exactly when <span class="arithmatex">\(A^TA\)</span> is invertible.</p>
+<p><strong>The key fact (tying straight back to Section 3):</strong></p>
+<div class="arithmatex">\[
+\text{null space of } A^TA = \text{null space of } A, \qquad \text{rank}(A^TA) = \text{rank}(A)
+\]</div>
+<p>So <span class="arithmatex">\(A^TA\)</span> is invertible <strong>exactly when <span class="arithmatex">\(A\)</span> has independent columns</strong> — i.e., when the only solution to <span class="arithmatex">\(Ax=0\)</span> is <span class="arithmatex">\(x=0\)</span>.</p>
+<h3 id="worked-example-full-column-rank-invertible-case">Worked example — full column rank (invertible case)<a class="headerlink" href="#worked-example-full-column-rank-invertible-case" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}, \qquad A^TA = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}
+\]</div>
+<p><span class="arithmatex">\(\det(A^TA) = 4 - 1 = 3 \ne 0\)</span> — invertible, because the two columns of <span class="arithmatex">\(A\)</span> are independent.</p>
+<h3 id="worked-example-dependent-columns-singular-case">Worked example — dependent columns (singular case)<a class="headerlink" href="#worked-example-dependent-columns-singular-case" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \\ 3 &amp; 6 \end{pmatrix} \quad (\text{column 2} = 2 \times \text{column 1})
+\]</div>
+<div class="arithmatex">\[
+A^TA = \begin{pmatrix} 14 &amp; 28 \\ 28 &amp; 56 \end{pmatrix}, \qquad \det(A^TA) = 14(56) - 28(28) = 784 - 784 = 0
+\]</div>
+<p>Singular — exactly as predicted, because <span class="arithmatex">\(A\)</span>'s columns are dependent (<span class="arithmatex">\(\text{rank}(A) = 1\)</span>).</p>
+<hr />
+<h2 id="where-this-shows-up-later">Where this shows up later<a class="headerlink" href="#where-this-shows-up-later" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Topic 5 (Projections, least squares):</strong> the orthogonality of row space and null space is <em>the</em> reason <span class="arithmatex">\(A^TA\hat{x} = A^Tb\)</span> works — the error vector <span class="arithmatex">\(b - A\hat{x}\)</span> ends up living in the left null space, perpendicular to the column space, which is precisely how you make an "unsolvable" system as solvable as possible.</li>
+<li><strong>Week 2, Gram-Schmidt/QR:</strong> building orthogonal <em>bases</em> (not just orthogonal subspaces) is the natural next step — this lecture is the geometric foundation that makes Gram-Schmidt meaningful rather than just a computational recipe.</li>
+<li><strong>Week 2, Symmetric matrices:</strong> <span class="arithmatex">\(A^TA\)</span> being symmetric here foreshadows why symmetric matrices get real eigenvalues and orthogonal eigenvectors later.</li>
+</ul>
+<h2 id="questions-things-to-revisit">Questions / things to revisit<a class="headerlink" href="#questions-things-to-revisit" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Re-derive the row space ⊥ null space proof from scratch without looking — the linearity step (orthogonal to each row ⟹ orthogonal to all combinations) is the part most worth being able to reproduce instantly.</li>
+<li>Make sure the "dimensions add to <span class="arithmatex">\(n\)</span>" fact feels obvious, not just memorized — it's what rules out impossible pairings (like two lines in <span class="arithmatex">\(\mathbb{R}^3\)</span>).</li>
+<li>Sit with <em>why</em> <span class="arithmatex">\(A^TA\)</span> inherits the same null space as <span class="arithmatex">\(A\)</span> — it isn't proven in full here, just used; worth re-deriving once Topic 5 introduces it formally.</li>
+</ul>
 
   
     
@@ -4282,7 +4800,10 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+        Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+      </span>
+      <span class="md-source-file__fact">
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 17:55:46 UTC">June 20, 2026</span>
       </span>
     
   </aside>
