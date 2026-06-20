@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/12-markov-chains/exercises/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/12-markov-chains/lecture/">
       
       
         <link rel="prev" href="../../11-inequalities-limit-theorems/inequalities-limit-theorems-notes/">
@@ -25,7 +25,7 @@
     
     
       
-        <title>Exercises - Knowledge</title>
+        <title>Markov Chains — Notes (Lecture + Worked Discussion) - Knowledge</title>
       
     
     
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Exercises - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/12-markov-chains/exercises.png" />
+<meta property="og:title" content="Markov Chains — Notes (Lecture + Worked Discussion) - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/12-markov-chains/lecture.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/12-markov-chains/exercises/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/12-markov-chains/lecture/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Exercises - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/12-markov-chains/exercises.png" />
+<meta property="twitter:title" content="Markov Chains — Notes (Lecture + Worked Discussion) - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/12-markov-chains/lecture.png" />
 </head>
   
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#solved" class="md-skip">
+        <a href="#markov-chains-notes-lecture-worked-discussion" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exercises
+              Markov Chains — Notes (Lecture + Worked Discussion)
             
           </span>
         </div>
@@ -2825,6 +2825,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -2833,19 +2835,12 @@
   <span class="md-ellipsis">
     
   
-    Exercises
+    Markov Chains — Notes (Lecture + Worked Discussion)
   
 
     
   </span>
   
-  
-    
-  
-  
-    <span class="md-status md-status--draft"></span>
-  
-
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -2858,19 +2853,12 @@
   <span class="md-ellipsis">
     
   
-    Exercises
+    Markov Chains — Notes (Lecture + Worked Discussion)
   
 
     
   </span>
   
-  
-    
-  
-  
-    <span class="md-status md-status--draft"></span>
-  
-
   
 
       </a>
@@ -2881,6 +2869,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2889,58 +2879,112 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#solved" class="md-nav__link">
+  <a href="#1-what-is-a-markov-chain" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Solved
+        1. What Is a Markov Chain?
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Solved">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exercise-11y" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exercise 11.Y
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attempted-unsolved" class="md-nav__link">
+  <a href="#2-the-markov-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Attempted (Unsolved)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Attempted (Unsolved)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exercise-11z" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exercise 11.Z
+        2. The Markov Property
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#3-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Homogeneity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-transition-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Transition Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-multi-step-transitions-why-powers-of-q-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Multi-Step Transitions: Why Powers of \(Q\) Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-evolving-a-distribution-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Evolving a Distribution Over Time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-stationary-distribution-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Stationary Distribution (preview)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-two-different-ways-markov-chains-get-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Two Different Ways Markov Chains Get Used
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-quick-reference-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Quick Reference Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-open-threads-for-next-lecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Open Threads for Next Lecture
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3645,6 +3689,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -3653,58 +3699,112 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#solved" class="md-nav__link">
+  <a href="#1-what-is-a-markov-chain" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Solved
+        1. What Is a Markov Chain?
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Solved">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exercise-11y" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exercise 11.Y
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attempted-unsolved" class="md-nav__link">
+  <a href="#2-the-markov-property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Attempted (Unsolved)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Attempted (Unsolved)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#exercise-11z" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Exercise 11.Z
+        2. The Markov Property
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#3-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Homogeneity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-the-transition-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. The Transition Matrix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-multi-step-transitions-why-powers-of-q-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Multi-Step Transitions: Why Powers of \(Q\) Work
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-evolving-a-distribution-over-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Evolving a Distribution Over Time
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-stationary-distribution-preview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Stationary Distribution (preview)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-two-different-ways-markov-chains-get-used" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Two Different Ways Markov Chains Get Used
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-quick-reference-cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Quick Reference Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-open-threads-for-next-lecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Open Threads for Next Lecture
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3722,50 +3822,181 @@
               <article class="md-content__inner md-typeset">
                 
   
-    <div class="meta-line">
-      
-        DRAFT &middot; INTERMEDIATE
-      
-    </div>
-  
 
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">exercises</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">probability</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-  <h1>Exercises</h1>
-
-<h2 id="solved">Solved<a class="headerlink" href="#solved" title="Permanent link">&para;</a></h2>
-<h3 id="exercise-11y">Exercise 11.Y<a class="headerlink" href="#exercise-11y" title="Permanent link">&para;</a></h3>
-<p><strong>Problem:</strong> ...
-<strong>Solution:</strong> ...</p>
-<h2 id="attempted-unsolved">Attempted (Unsolved)<a class="headerlink" href="#attempted-unsolved" title="Permanent link">&para;</a></h2>
-<h3 id="exercise-11z">Exercise 11.Z<a class="headerlink" href="#exercise-11z" title="Permanent link">&para;</a></h3>
-<p><strong>Problem:</strong> ...
-<strong>My attempt:</strong> ...
-<strong>Stuck at:</strong> ...</p>
+<h1 id="markov-chains-notes-lecture-worked-discussion">Markov Chains — Notes (Lecture + Worked Discussion)<a class="headerlink" href="#markov-chains-notes-lecture-worked-discussion" title="Permanent link">&para;</a></h1>
+<p><em>Stat 110-style notes, reorganized with extra "why" and "how" added where the lecture moved fast.</em></p>
+<p><strong>Lecture source:</strong> https://youtu.be/8AJPs3gvNlY?si=F0QJIo963_FGgz-m</p>
+<hr />
+<h2 id="1-what-is-a-markov-chain">1. What Is a Markov Chain?<a class="headerlink" href="#1-what-is-a-markov-chain" title="Permanent link">&para;</a></h2>
+<p>A <strong>stochastic process</strong> is a sequence of random variables evolving over an index (usually time): <span class="arithmatex">\(X_0, X_1, X_2, \dots\)</span></p>
+<ul>
+<li>If the <span class="arithmatex">\(X_i\)</span> are i.i.d., each step is a fresh independent draw — no memory at all.</li>
+<li>If we allow <em>arbitrary</em> dependence between all the <span class="arithmatex">\(X_i\)</span>, the math becomes intractable almost immediately.</li>
+<li>A <strong>Markov chain</strong> is the compromise: one step beyond i.i.d. The next state depends on the past, but <em>only through the current state</em>.</li>
+</ul>
+<p><strong>Why this matters:</strong> it's the simplest way to add "memory" to a process without losing the ability to compute anything. Every formula below depends on this restriction.</p>
+<p>We restrict to <strong>discrete time</strong> (<span class="arithmatex">\(n = 0, 1, 2, \dots\)</span>) and a <strong>discrete, finite state space</strong> <span class="arithmatex">\(\{1, 2, \dots, M\}\)</span>.</p>
+<hr />
+<h2 id="2-the-markov-property">2. The Markov Property<a class="headerlink" href="#2-the-markov-property" title="Permanent link">&para;</a></h2>
+<p>For any states <span class="arithmatex">\(i, j\)</span> and any history <span class="arithmatex">\(i_0, i_1, \dots, i_{n-1}\)</span>:</p>
+<div class="arithmatex">\[
+P(X_{n+1} = j \mid X_n = i,\ X_{n-1} = i_{n-1},\ \dots,\ X_0 = i_0) \;=\; P(X_{n+1} = j \mid X_n = i)
+\]</div>
+<p><strong>Intuition:</strong> <em>past and future are conditionally independent given the present.</em> If you know where you are right now, knowing how you got there gives you zero extra information about where you're going next.</p>
+<p><strong>Why this is so useful:</strong> without it, predicting the future requires conditioning on an entire growing history — a probability table that grows combinatorially with <span class="arithmatex">\(n\)</span>. The Markov property collapses that to a single lookup: "what state am I in right now?"</p>
+<p><strong>A subtlety:</strong> this is <em>conditional</em> independence — it does <strong>not</strong> mean the past and future are unconditionally independent. Drop the conditioning on <span class="arithmatex">\(X_n\)</span> and the past matters again.</p>
+<p><strong>Why it's less restrictive than it looks:</strong> "higher-order" chains (next state depends on the last <span class="arithmatex">\(k\)</span> states) can be built by redefining the state as a bundle of the last <span class="arithmatex">\(k\)</span> values, reducing back to the first-order case above.</p>
+<hr />
+<h2 id="3-homogeneity">3. Homogeneity<a class="headerlink" href="#3-homogeneity" title="Permanent link">&para;</a></h2>
+<p>A chain is <strong>time-homogeneous</strong> if the transition probability</p>
+<div class="arithmatex">\[
+p_{ij} \;=\; P(X_{n+1} = j \mid X_n = i)
+\]</div>
+<p>does <strong>not depend on <span class="arithmatex">\(n\)</span></strong>. The value is determined by which state you're in, not by what time step you're at.</p>
+<p><strong>Key subtlety:</strong> homogeneity does <em>not</em> mean every transition shares the same probability <span class="arithmatex">\(c\)</span>. Different pairs <span class="arithmatex">\((i,j)\)</span> can have different probabilities — e.g. <span class="arithmatex">\(p_{12} = 0.3\)</span>, <span class="arithmatex">\(p_{13} = 0.7\)</span>, <span class="arithmatex">\(p_{21} = 0.5\)</span>. Homogeneity just means whatever <span class="arithmatex">\(p_{ij}\)</span> is, it's <strong>constant in <span class="arithmatex">\(n\)</span></strong>:</p>
+<div class="arithmatex">\[
+P(X_{n+1} = j \mid X_n = i) = p_{ij} \quad \text{for all } n
+\]</div>
+<p><strong>Non-homogeneous contrast example:</strong> if <span class="arithmatex">\(P(X_2 = \text{rain} \mid X_1 = \text{rain}) = 0.6\)</span> but <span class="arithmatex">\(P(X_3 = \text{rain} \mid X_2 = \text{rain}) = 0.8\)</span>, the transition probability itself depends on <span class="arithmatex">\(n\)</span>, breaking homogeneity.</p>
+<p><strong>Why we restrict to homogeneous chains:</strong> it allows one fixed matrix <span class="arithmatex">\(Q\)</span> to describe the entire chain, instead of a different matrix <span class="arithmatex">\(Q_n\)</span> for every <span class="arithmatex">\(n\)</span>.</p>
+<hr />
+<h2 id="4-the-transition-matrix">4. The Transition Matrix<a class="headerlink" href="#4-the-transition-matrix" title="Permanent link">&para;</a></h2>
+<p>Collect all <span class="arithmatex">\(p_{ij}\)</span> into an <span class="arithmatex">\(M \times M\)</span> matrix <span class="arithmatex">\(Q\)</span>, where <span class="arithmatex">\(Q_{ij} = p_{ij}\)</span>. Example (4 states, from lecture):</p>
+<div class="arithmatex">\[
+Q =
+\begin{bmatrix}
+1/3 &amp; 2/3 &amp; 0 &amp; 0 \\
+1/2 &amp; 0 &amp; 1/2 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 \\
+1/2 &amp; 0 &amp; 1/4 &amp; 1/4
+\end{bmatrix}
+\]</div>
+<p><strong>Row <span class="arithmatex">\(i\)</span> of <span class="arithmatex">\(Q\)</span> is the PMF of <span class="arithmatex">\(X_{n+1}\)</span> given <span class="arithmatex">\(X_n = i\)</span>.</strong></p>
+<p><strong>Properties:</strong></p>
+<div class="arithmatex">\[
+Q_{ij} \geq 0 \quad \text{for all } i,j
+\qquad\qquad
+\sum_{j=1}^{M} Q_{ij} = 1 \quad \text{for all } i
+\]</div>
+<p><strong>Why rows sum to 1 but columns don't have to:</strong> row <span class="arithmatex">\(i\)</span> answers "if I'm at state <span class="arithmatex">\(i\)</span>, where could I end up, and with what probability?" — since you must go <em>somewhere</em>, this is a full PMF over <span class="arithmatex">\(j\)</span>, so it sums to 1. Column <span class="arithmatex">\(j\)</span> answers a different question — "who might arrive at <span class="arithmatex">\(j\)</span>, and from where?" — which has no such constraint; some states are easy to reach from many places, others nearly unreachable.</p>
+<p><strong>Reverse direction:</strong> any matrix satisfying <span class="arithmatex">\(Q_{ij} \geq 0\)</span> and <span class="arithmatex">\(\sum_j Q_{ij} = 1\)</span> is a valid transition matrix for some Markov chain.</p>
+<hr />
+<h2 id="5-multi-step-transitions-why-powers-of-q-work">5. Multi-Step Transitions: Why Powers of <span class="arithmatex">\(Q\)</span> Work<a class="headerlink" href="#5-multi-step-transitions-why-powers-of-q-work" title="Permanent link">&para;</a></h2>
+<p>Goal: find <span class="arithmatex">\(P(X_{n+2} = j \mid X_n = i)\)</span>.</p>
+<p><strong>Condition on the missing intermediate state</strong> <span class="arithmatex">\(X_{n+1} = k\)</span>, summing over all possible <span class="arithmatex">\(k\)</span> (law of total probability):</p>
+<div class="arithmatex">\[
+P(X_{n+2} = j \mid X_n = i) = \sum_{k=1}^{M} P(X_{n+2} = j \mid X_{n+1} = k,\, X_n = i) \cdot P(X_{n+1} = k \mid X_n = i)
+\]</div>
+<p>By the Markov property, the first factor drops its conditioning on <span class="arithmatex">\(X_n\)</span>:</p>
+<div class="arithmatex">\[
+= \sum_{k=1}^{M} P(X_{n+2} = j \mid X_{n+1} = k) \cdot P(X_{n+1} = k \mid X_n = i)
+= \sum_{k=1}^{M} q_{ik}\, q_{kj}
+\]</div>
+<p><strong>Why this is exactly matrix multiplication:</strong> a sum of products of matched indices, <span class="arithmatex">\(\sum_k q_{ik} q_{kj}\)</span>, is precisely the definition of the <span class="arithmatex">\((i,j)\)</span> entry of <span class="arithmatex">\(Q \times Q = Q^2\)</span>. The algebra of matrix multiplication performs the "sum over all intermediate paths" automatically.</p>
+<p><strong>General result (Chapman–Kolmogorov equation):</strong></p>
+<div class="arithmatex">\[
+P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij}
+\]</div>
+<p><strong>How to use it:</strong> to find the probability of being at <span class="arithmatex">\(j\)</span> exactly <span class="arithmatex">\(m\)</span> steps after starting at <span class="arithmatex">\(i\)</span>, compute <span class="arithmatex">\(Q^m\)</span> and read off entry <span class="arithmatex">\((i,j)\)</span> — no need to re-derive the conditioning argument each time.</p>
+<hr />
+<h2 id="6-evolving-a-distribution-over-time">6. Evolving a Distribution Over Time<a class="headerlink" href="#6-evolving-a-distribution-over-time" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(\pi_n\)</span> be the row vector of the distribution of <span class="arithmatex">\(X_n\)</span>:</p>
+<div class="arithmatex">\[
+\pi_n = \big(\, P(X_n = 1),\ P(X_n = 2),\ \dots,\ P(X_n = M)\,\big), \qquad \pi_n \mathbf{1}^\top = 1,\ \ \pi_n \geq 0
+\]</div>
+<p>Same law-of-total-probability argument as Section 5 gives:</p>
+<div class="arithmatex">\[
+\pi_{n+1}(j) = \sum_{i=1}^{M} \pi_n(i)\, q_{ij}
+\]</div>
+<p>which is exactly the vector–matrix product:</p>
+<div class="arithmatex">\[
+\pi_{n+1} = \pi_n Q
+\]</div>
+<p><strong>Why this is the same idea as Section 5:</strong> Section 5 fixed the starting state (a degenerate distribution with probability 1 on state <span class="arithmatex">\(i\)</span>); this generalizes to <em>any</em> starting distribution <span class="arithmatex">\(\pi_n\)</span>. The underlying computation — a sum of products of matched indices — is identical.</p>
+<p>Iterating:</p>
+<div class="arithmatex">\[
+\pi_n = \pi_0\, Q^n
+\]</div>
+<p><strong>How to use it:</strong> given a starting distribution <span class="arithmatex">\(\pi_0\)</span> and a target time <span class="arithmatex">\(n\)</span>, compute one matrix power <span class="arithmatex">\(Q^n\)</span> and one vector–matrix product, rather than simulating step by step.</p>
+<hr />
+<h2 id="7-stationary-distribution-preview">7. Stationary Distribution (preview)<a class="headerlink" href="#7-stationary-distribution-preview" title="Permanent link">&para;</a></h2>
+<p>A probability vector <span class="arithmatex">\(\pi\)</span> (i.e. <span class="arithmatex">\(\pi \geq 0\)</span>, <span class="arithmatex">\(\sum_j \pi(j) = 1\)</span>) is a <strong>stationary distribution</strong> of the chain if:</p>
+<div class="arithmatex">\[
+\pi Q = \pi
+\]</div>
+<p><strong>Why it's called "stationary":</strong> from Section 6, if the chain starts with distribution <span class="arithmatex">\(\pi\)</span>, then one step later the distribution is <span class="arithmatex">\(\pi Q = \pi\)</span> — unchanged. Apply <span class="arithmatex">\(Q\)</span> again: still <span class="arithmatex">\(\pi\)</span>. So once reached, the distribution is a fixed point of the chain's dynamics:</p>
+<div class="arithmatex">\[
+\pi Q^n = \pi \quad \text{for all } n \geq 0
+\]</div>
+<p><strong>Eigenvector connection:</strong> transposing both sides gives <span class="arithmatex">\(Q^\top \pi^\top = \pi^\top\)</span> — exactly an eigenvalue/eigenvector equation for <span class="arithmatex">\(Q^\top\)</span> with eigenvalue <span class="arithmatex">\(1\)</span>.</p>
+<p><strong>Open questions flagged in lecture (resolved next time, under mild conditions):</strong></p>
+<ol>
+<li><strong>Existence:</strong> does a solution <span class="arithmatex">\(\pi\)</span> to <span class="arithmatex">\(\pi Q = \pi\)</span> with <span class="arithmatex">\(\pi \geq 0,\ \sum_j \pi(j)=1\)</span> always exist?</li>
+<li><strong>Uniqueness:</strong> is it the only such solution?</li>
+<li><strong>Convergence:</strong> does <span class="arithmatex">\(\pi_n \to \pi\)</span> as <span class="arithmatex">\(n \to \infty\)</span>, regardless of <span class="arithmatex">\(\pi_0\)</span>?</li>
+<li><strong>Computability:</strong> can <span class="arithmatex">\(\pi\)</span> be found efficiently, without solving an <span class="arithmatex">\(M\)</span>-variable linear system by brute force?</li>
+</ol>
+<hr />
+<h2 id="8-two-different-ways-markov-chains-get-used">8. Two Different Ways Markov Chains Get Used<a class="headerlink" href="#8-two-different-ways-markov-chains-get-used" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>As a literal model</strong> of a real system (weather, stock prices, text generation) — whether the Markov assumption is reasonable is an empirical question.</li>
+<li><strong>Markov Chain Monte Carlo (MCMC):</strong> construct a synthetic chain on purpose, engineered so its stationary distribution <span class="arithmatex">\(\pi\)</span> equals some complicated target distribution of interest. Running the chain long enough on a computer lets you sample from (or approximate) <span class="arithmatex">\(\pi\)</span> — useful when direct computation is intractable.</li>
+</ul>
+<hr />
+<h2 id="9-quick-reference-cheat-sheet">9. Quick Reference Cheat Sheet<a class="headerlink" href="#9-quick-reference-cheat-sheet" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Want</th>
+<th>Formula</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-step transition probability</td>
+<td><span class="arithmatex">\(q_{ij} = P(X_{n+1}=j \mid X_n=i)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(m\)</span>-step transition probability</td>
+<td><span class="arithmatex">\(\left(Q^m\right)_{ij}\)</span></td>
+</tr>
+<tr>
+<td>Distribution one step later</td>
+<td><span class="arithmatex">\(\pi_{n+1} = \pi_n Q\)</span></td>
+</tr>
+<tr>
+<td>Distribution <span class="arithmatex">\(n\)</span> steps from start</td>
+<td><span class="arithmatex">\(\pi_n = \pi_0 Q^n\)</span></td>
+</tr>
+<tr>
+<td>Stationary distribution</td>
+<td><span class="arithmatex">\(\pi\)</span> such that <span class="arithmatex">\(\pi Q = \pi\)</span></td>
+</tr>
+<tr>
+<td>Row sum of <span class="arithmatex">\(Q\)</span></td>
+<td><span class="arithmatex">\(\sum_j Q_{ij} = 1\)</span></td>
+</tr>
+<tr>
+<td>Homogeneity condition</td>
+<td><span class="arithmatex">\(q_{ij}\)</span> independent of <span class="arithmatex">\(n\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-open-threads-for-next-lecture">10. Open Threads for Next Lecture<a class="headerlink" href="#10-open-threads-for-next-lecture" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Existence/uniqueness/convergence proofs for stationary distributions</li>
+<li>Efficient computation tricks (some chains don't need matrix algebra at all)</li>
+<li>Worked examples</li>
+</ul>
 
   
     
@@ -3778,7 +4009,7 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 05:41:46 UTC">June 20, 2026</span>
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 08:02:55 UTC">June 20, 2026</span>
       </span>
     
   </aside>
