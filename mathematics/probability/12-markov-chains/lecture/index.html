@@ -3062,6 +3062,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#56-why-this-is-an-engineering-superpower-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Why this is an "engineering superpower" at scale
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4016,6 +4027,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#56-why-this-is-an-engineering-superpower-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.6 Why this is an "engineering superpower" at scale
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4102,6 +4124,9 @@
 <h1 id="markov-chains-notes-lecture-worked-discussion">Markov Chains — Notes (Lecture + Worked Discussion)<a class="headerlink" href="#markov-chains-notes-lecture-worked-discussion" title="Permanent link">&para;</a></h1>
 <p><em>Stat 110-style notes, reorganized with extra "why" and "how" added where the lecture moved fast — now merged with follow-up clarifications.</em></p>
 <p><strong>Lecture source:</strong> https://youtu.be/8AJPs3gvNlY?si=F0QJIo963_FGgz-m</p>
+<blockquote>
+<p><strong>Notation note:</strong> these notes use <span class="arithmatex">\(Q\)</span> (and <span class="arithmatex">\(q_{ij}\)</span>) for the transition matrix, following the lecture. Some textbooks use <span class="arithmatex">\(P\)</span> (and <span class="arithmatex">\(p_{ij}\)</span>) instead — it's the exact same object, just a different letter. If you see <span class="arithmatex">\(P\)</span> elsewhere, mentally swap it for <span class="arithmatex">\(Q\)</span>.</p>
+</blockquote>
 <hr />
 <h2 id="1-what-is-a-markov-chain">1. What Is a Markov Chain?<a class="headerlink" href="#1-what-is-a-markov-chain" title="Permanent link">&para;</a></h2>
 <p>A <strong>stochastic process</strong> is a sequence of random variables evolving over an index (usually time): <span class="arithmatex">\(X_0, X_1, X_2, \dots\)</span></p>
@@ -4295,6 +4320,15 @@ P(X_{n+2}=3 \mid X_n=1) = 0.06 + 0.15 + 0.06 = \mathbf{0.27}
 \]</div>
 <p><strong>Conclusion:</strong> starting in State 1, there's a <strong>27% chance</strong> of being in State 3 exactly two steps later. That <span class="arithmatex">\(0.27\)</span> is exactly the <span class="arithmatex">\((1,3)\)</span> entry of <span class="arithmatex">\(Q^2\)</span>.</p>
 <p><strong>How to use it generally:</strong> to find the probability of being at <span class="arithmatex">\(j\)</span> exactly <span class="arithmatex">\(m\)</span> steps after starting at <span class="arithmatex">\(i\)</span>, compute <span class="arithmatex">\(Q^m\)</span> and read off entry <span class="arithmatex">\((i,j)\)</span> — no need to re-derive the conditioning argument each time.</p>
+<h3 id="56-why-this-is-an-engineering-superpower-at-scale">5.6 Why this is an "engineering superpower" at scale<a class="headerlink" href="#56-why-this-is-an-engineering-superpower-at-scale" title="Permanent link">&para;</a></h3>
+<p>Section 5.3's "all roads" picture is great for intuition with <span class="arithmatex">\(m=2\)</span>, but watch what happens as <span class="arithmatex">\(m\)</span> grows.</p>
+<p>Suppose you want to know where the system will be <strong>50 steps</strong> from now. Doing this the manual way — literally enumerating every possible 49-layover path between <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> and summing each one — means tracking an astronomically large branching tree of possibilities. For any reasonably sized state space, that's not just tedious, it's computationally hopeless by hand.</p>
+<p><strong>The payoff of Section 5.4's "zipper" result is that you never have to do this manually.</strong> The general Chapman–Kolmogorov result,</p>
+<div class="arithmatex">\[
+P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
+\]</div>
+<p>means the recursive conditioning argument only has to be done <em>once</em>, in the abstract (Sections 5–5.4). After that, computing 50 steps ahead is no different in kind from computing 2 steps ahead: hand <span class="arithmatex">\(Q\)</span> to a computer, ask for <span class="arithmatex">\(Q^{50}\)</span>, and read off entry <span class="arithmatex">\((i,j)\)</span>.</p>
+<p><strong>The takeaway:</strong> matrix exponentiation silently absorbs an impossibly complex branching tree of future possibilities and reduces it to a single, fast linear-algebra computation. A massive conditional-probability problem becomes a basic calculator (or one-line code) problem.</p>
 <hr />
 <h2 id="6-evolving-a-distribution-over-time">6. Evolving a Distribution Over Time<a class="headerlink" href="#6-evolving-a-distribution-over-time" title="Permanent link">&para;</a></h2>
 <p>Let <span class="arithmatex">\(\pi_n\)</span> be the row vector of the distribution of <span class="arithmatex">\(X_n\)</span>:</p>
@@ -4409,7 +4443,7 @@ P(X_{n+2}=3 \mid X_n=1) = 0.06 + 0.15 + 0.06 = \mathbf{0.27}
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 08:02:55 UTC">June 20, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 11:00:03 UTC">June 20, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 11:06:46 UTC">June 20, 2026</span>
       </span>
     
   </aside>
