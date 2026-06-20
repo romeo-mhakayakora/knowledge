@@ -3087,6 +3087,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="6. Evolving a Distribution Over Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-worked-example-spreading-probability-mass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Worked Example: Spreading Probability Mass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-worked-example-forecasting-n-steps-ahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Worked Example: Forecasting \(n\) Steps Ahead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-the-dimensions-of-markov-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 The Dimensions of Markov Math
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-doesnt-an-evolving-pi_n-contradict-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Doesn't an Evolving \(\pi_n\) Contradict Homogeneity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -3112,10 +3162,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-quick-reference-cheat-sheet" class="md-nav__link">
+  <a href="#9-markov-chains-vs-markov-decision-processes-mdps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Quick Reference Cheat Sheet
+        9. Markov Chains vs. Markov Decision Processes (MDPs)
       
     </span>
   </a>
@@ -3123,10 +3173,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-open-threads-for-next-lecture" class="md-nav__link">
+  <a href="#10-quick-reference-cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Open Threads for Next Lecture
+        10. Quick Reference Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-open-threads-for-next-lecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Open Threads for Next Lecture
       
     </span>
   </a>
@@ -4052,6 +4113,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="6. Evolving a Distribution Over Time">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-worked-example-spreading-probability-mass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Worked Example: Spreading Probability Mass
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-worked-example-forecasting-n-steps-ahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Worked Example: Forecasting \(n\) Steps Ahead
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-the-dimensions-of-markov-math" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 The Dimensions of Markov Math
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-doesnt-an-evolving-pi_n-contradict-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Doesn't an Evolving \(\pi_n\) Contradict Homogeneity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4077,10 +4188,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-quick-reference-cheat-sheet" class="md-nav__link">
+  <a href="#9-markov-chains-vs-markov-decision-processes-mdps" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Quick Reference Cheat Sheet
+        9. Markov Chains vs. Markov Decision Processes (MDPs)
       
     </span>
   </a>
@@ -4088,10 +4199,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-open-threads-for-next-lecture" class="md-nav__link">
+  <a href="#10-quick-reference-cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Open Threads for Next Lecture
+        10. Quick Reference Cheat Sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-open-threads-for-next-lecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Open Threads for Next Lecture
       
     </span>
   </a>
@@ -4335,7 +4457,7 @@ P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
 <div class="arithmatex">\[
 \pi_n = \big(\, P(X_n = 1),\ P(X_n = 2),\ \dots,\ P(X_n = M)\,\big), \qquad \sum_j \pi_n(j) = 1,\ \ \pi_n \geq 0
 \]</div>
-<p>This is exactly <strong>Case B</strong> from Section 4.2: you're <em>not</em> certain which state you're in, only the odds. Same law-of-total-probability argument as Section 5 gives:</p>
+<p>This is exactly <strong>Case B</strong> from Section 4.2: you're <em>not</em> certain which state you're in, only the odds. (Case A — being certain you're in state <span class="arithmatex">\(i\)</span> — is the special case <span class="arithmatex">\(\pi_n = (0,\dots,0,1,0,\dots,0)\)</span> with the <span class="arithmatex">\(1\)</span> in position <span class="arithmatex">\(i\)</span>: a <strong>degenerate distribution</strong>, all probability mass on one state.) Same law-of-total-probability argument as Section 5 gives:</p>
 <div class="arithmatex">\[
 \pi_{n+1}(j) = \sum_{i=1}^{M} \pi_n(i)\, q_{ij}
 \]</div>
@@ -4349,6 +4471,90 @@ P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
 \pi_n = \pi_0\, Q^n
 \]</div>
 <p><strong>How to use it:</strong> given a starting distribution <span class="arithmatex">\(\pi_0\)</span> and a target time <span class="arithmatex">\(n\)</span>, compute one matrix power <span class="arithmatex">\(Q^n\)</span> and one vector–matrix product, rather than simulating step by step.</p>
+<h3 id="61-worked-example-spreading-probability-mass">6.1 Worked Example: Spreading Probability Mass<a class="headerlink" href="#61-worked-example-spreading-probability-mass" title="Permanent link">&para;</a></h3>
+<p>Reuse the matrix from Section 5.5, <span class="arithmatex">\(Q = \begin{bmatrix} 0.2 &amp; 0.5 &amp; 0.3 \\ 0.6 &amp; 0.1 &amp; 0.3 \\ 0.4 &amp; 0.4 &amp; 0.2 \end{bmatrix}\)</span>, but now start <em>uncertain</em> instead of certain:</p>
+<div class="arithmatex">\[
+\pi_0 = (0.5,\ 0.5,\ 0.0) \quad \text{— "50\% chance I'm in State 1, 50\% chance State 2, 0\% chance State 3"}
+\]</div>
+<p><strong>A second way to see <span class="arithmatex">\(\pi_0 Q\)</span> — as a blend of rows, not just a zipper.</strong> Section 5.4 viewed <span class="arithmatex">\((Q^m)_{ij}\)</span> as zipping a row against a column. There's an equally useful complementary view for <span class="arithmatex">\(\pi_n Q\)</span>: since each row of <span class="arithmatex">\(Q\)</span> <em>is itself</em> "the PMF of next-state, if I were certainly starting from that row's state" (Section 4.1), <span class="arithmatex">\(\pi_0 Q\)</span> is just a <strong>weighted blend of those rows</strong>, weighted by how likely you are to currently be in each one:</p>
+<div class="arithmatex">\[
+\pi_1 = \pi_0 Q = 0.5 \cdot (\text{Row 1}) + 0.5 \cdot (\text{Row 2}) + 0.0 \cdot (\text{Row 3})
+\]</div>
+<p>Computing each coordinate of <span class="arithmatex">\(\pi_1\)</span> as that weighted sum:</p>
+<table>
+<thead>
+<tr>
+<th>Destination <span class="arithmatex">\(j\)</span></th>
+<th><span class="arithmatex">\(0.5 \times Q_{1j}\)</span></th>
+<th><span class="arithmatex">\(0.5 \times Q_{2j}\)</span></th>
+<th><span class="arithmatex">\(0.0 \times Q_{3j}\)</span></th>
+<th><span class="arithmatex">\(\pi_1(j)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(j=1\)</span></td>
+<td><span class="arithmatex">\(0.5\times 0.2 = 0.10\)</span></td>
+<td><span class="arithmatex">\(0.5\times 0.6 = 0.30\)</span></td>
+<td><span class="arithmatex">\(0.0\times 0.4 = 0.00\)</span></td>
+<td><span class="arithmatex">\(\mathbf{0.40}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(j=2\)</span></td>
+<td><span class="arithmatex">\(0.5\times 0.5 = 0.25\)</span></td>
+<td><span class="arithmatex">\(0.5\times 0.1 = 0.05\)</span></td>
+<td><span class="arithmatex">\(0.0\times 0.4 = 0.00\)</span></td>
+<td><span class="arithmatex">\(\mathbf{0.30}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(j=3\)</span></td>
+<td><span class="arithmatex">\(0.5\times 0.3 = 0.15\)</span></td>
+<td><span class="arithmatex">\(0.5\times 0.3 = 0.15\)</span></td>
+<td><span class="arithmatex">\(0.0\times 0.2 = 0.00\)</span></td>
+<td><span class="arithmatex">\(\mathbf{0.30}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+\pi_1 = (0.40,\ 0.30,\ 0.30)
+\]</div>
+<p>Check it sums to 1: <span class="arithmatex">\(0.40+0.30+0.30=1.0\)</span>. ✓ <strong>The initial uncertainty was fully "spread" through the matrix's rules to produce the new distribution <span class="arithmatex">\(\pi_1\)</span>.</strong></p>
+<h3 id="62-worked-example-forecasting-n-steps-ahead">6.2 Worked Example: Forecasting <span class="arithmatex">\(n\)</span> Steps Ahead<a class="headerlink" href="#62-worked-example-forecasting-n-steps-ahead" title="Permanent link">&para;</a></h3>
+<p>A narrative example for <span class="arithmatex">\(\pi_n = \pi_0 Q^n\)</span>: predicting weather <strong>10 days from now</strong>.</p>
+<ol>
+<li>You're not sure what today's weather is, but you estimate 80% Sunny, 20% Cloudy, 0% Rainy: <span class="arithmatex">\(\pi_0 = (0.8,\ 0.2,\ 0.0)\)</span>.</li>
+<li>Take the daily weather transition matrix <span class="arithmatex">\(Q\)</span> and raise it to the 10th power, <span class="arithmatex">\(Q^{10}\)</span> — this is the "10-day time machine" from Section 5.6, built once and reused for any starting distribution.</li>
+<li>Multiply: <span class="arithmatex">\(\pi_{10} = \pi_0\, Q^{10}\)</span>.</li>
+</ol>
+<p>The result <span class="arithmatex">\(\pi_{10}\)</span> is a brand-new <span class="arithmatex">\(1\times 3\)</span> vector giving the exact probability of Sunny, Cloudy, or Rainy exactly 10 days out — fully accounting for both your initial uncertainty about today <em>and</em> every possible 10-day weather path (Section 5.3).</p>
+<h3 id="63-the-dimensions-of-markov-math">6.3 The Dimensions of Markov Math<a class="headerlink" href="#63-the-dimensions-of-markov-math" title="Permanent link">&para;</a></h3>
+<p>It's worth tracking <em>shapes</em>, not just values, to see why this machinery is self-consistent. Let <span class="arithmatex">\(M\)</span> be the number of states.</p>
+<ul>
+<li><strong>The distribution vector <span class="arithmatex">\(\pi_n\)</span></strong> is a <span class="arithmatex">\(1 \times M\)</span> row vector — one slot per state:
+  $<span class="arithmatex">\(\pi_n = \big[\, P(X_n{=}1)\ \ P(X_n{=}2)\ \ \cdots\ \ P(X_n{=}M) \,\big]\)</span>$</li>
+<li><strong>The transition matrix <span class="arithmatex">\(Q\)</span></strong> is <span class="arithmatex">\(M \times M\)</span> — a square grid, literally <span class="arithmatex">\(M\)</span> of the row-PMFs from Section 4.1 stacked on top of each other.</li>
+<li><strong>Powers of <span class="arithmatex">\(Q\)</span> stay <span class="arithmatex">\(M \times M\)</span>.</strong> Multiplying a <span class="arithmatex">\(3\times 3\)</span> matrix by a <span class="arithmatex">\(3\times 3\)</span> matrix is still <span class="arithmatex">\(3\times 3\)</span> — even <span class="arithmatex">\(Q^{50}\)</span> from Section 5.6 doesn't grow.</li>
+<li><strong>The product <span class="arithmatex">\(\pi_n Q\)</span> stays <span class="arithmatex">\(1 \times M\)</span>.</strong> Multiplying <span class="arithmatex">\((1\times M)\)</span> by <span class="arithmatex">\((M \times M)\)</span> cancels the inner matching dimension <span class="arithmatex">\(M\)</span>, leaving <span class="arithmatex">\((1 \times M)\)</span>:
+  $<span class="arithmatex">\([\,1 \times M\,] \times [\,M \times M\,] = [\,1 \times M\,]\)</span>$</li>
+</ul>
+<p><strong>Why this matters:</strong> it's <em>because</em> the shapes always collapse back to <span class="arithmatex">\(1\times M\)</span> that you can iterate <span class="arithmatex">\(\pi_n = \pi_0 Q^n\)</span> indefinitely — the output of one step is always a valid input (same shape) for the next. Input: one row of probabilities (<span class="arithmatex">\(\pi_0\)</span>). Rules: one square grid (<span class="arithmatex">\(Q^n\)</span>). Output: a brand-new row of probabilities (<span class="arithmatex">\(\pi_n\)</span>) — same shape as what you started with.</p>
+<h3 id="64-doesnt-an-evolving-pi_n-contradict-homogeneity">6.4 Doesn't an Evolving <span class="arithmatex">\(\pi_n\)</span> Contradict Homogeneity?<a class="headerlink" href="#64-doesnt-an-evolving-pi_n-contradict-homogeneity" title="Permanent link">&para;</a></h3>
+<p>A natural worry: if <span class="arithmatex">\(\pi_n\)</span> keeps changing every step, doesn't that mean the chain itself is changing over time — i.e. isn't time-homogeneous?</p>
+<p><strong>No</strong> — this confuses <strong>the rules of the game</strong> with <strong>the pieces on the board</strong>.</p>
+<ul>
+<li><strong>The rules (<span class="arithmatex">\(Q\)</span>) are frozen.</strong> Time-homogeneous (Section 3) means <span class="arithmatex">\(Q\)</span> itself never changes. If <span class="arithmatex">\(p_{12}=0.3\)</span>, that's locked in at step 1, step 50, and step 1,000,000.</li>
+<li><strong>The pieces (<span class="arithmatex">\(\pi_n\)</span>) are <em>supposed</em> to move.</strong> As time advances, probability mass legitimately shifts around the state space <em>according to</em> those frozen rules. <span class="arithmatex">\(\pi_n\)</span> evolving isn't a violation — it's the entire point of having fixed rules in the first place.</li>
+</ul>
+<p><strong>Monopoly analogy:</strong> the board layout and dice probabilities never change — the system is time-homogeneous. But on Turn 1, 100% of players sit on "GO" (<span class="arithmatex">\(\pi_0\)</span>); by Turn 5 they're spread across properties (<span class="arithmatex">\(\pi_5\)</span>); by Turn 20 many are stuck in Jail (<span class="arithmatex">\(\pi_{20}\)</span>). The <em>distribution of players</em> evolved; the <em>rules of the board</em> stayed perfectly static.</p>
+<p><strong>The proof is hiding in the notation itself.</strong> Recall from above:</p>
+<div class="arithmatex">\[
+\pi_n = \pi_0\, Q^n
+\]</div>
+<p>Being allowed to write a clean <em>exponent</em> <span class="arithmatex">\(Q^n\)</span> — instead of a chain of <em>different</em> matrices — is itself proof of homogeneity: it means the exact same matrix <span class="arithmatex">\(Q\)</span> was multiplied over and over. If the rules genuinely changed at every step, you couldn't collapse it to a power at all; you'd be stuck with:</p>
+<div class="arithmatex">\[
+\pi_n = \pi_0 \times Q_{\text{step }1} \times Q_{\text{step }2} \times Q_{\text{step }3} \times \cdots
+\]</div>
+<p><strong>The division of labor:</strong> <span class="arithmatex">\(\pi_0\)</span> only ever sets the <em>starting line</em> — where the probability mass is dropped at time zero. <span class="arithmatex">\(Q\)</span> is the <em>engine</em> driving everything forward; it doesn't care where the mass started, it only pushes whatever mass is currently there to the next step. <span class="arithmatex">\(\pi_0\)</span> answers "where do we begin?"; <span class="arithmatex">\(Q\)</span> answers "what happens next, no matter where we are?" — two genuinely separate jobs, and only one of them (the rules) needs to stay fixed for homogeneity to hold.</p>
 <hr />
 <h2 id="7-stationary-distribution-preview">7. Stationary Distribution (preview)<a class="headerlink" href="#7-stationary-distribution-preview" title="Permanent link">&para;</a></h2>
 <p>A probability vector <span class="arithmatex">\(\pi\)</span> (i.e. <span class="arithmatex">\(\pi \geq 0\)</span>, <span class="arithmatex">\(\sum_j \pi(j) = 1\)</span>) is a <strong>stationary distribution</strong> of the chain if:</p>
@@ -4360,6 +4566,7 @@ P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
 \pi Q^n = \pi \quad \text{for all } n \geq 0
 \]</div>
 <p><strong>Eigenvector connection:</strong> transposing both sides gives <span class="arithmatex">\(Q^\top \pi^\top = \pi^\top\)</span> — exactly an eigenvalue/eigenvector equation for <span class="arithmatex">\(Q^\top\)</span> with eigenvalue <span class="arithmatex">\(1\)</span>.</p>
+<p><strong>Preview — why the "<span class="arithmatex">\(Q\)</span> vs. <span class="arithmatex">\(\pi_0\)</span>" division of labor (Section 6.4) matters here:</strong> because <span class="arithmatex">\(Q\)</span>, not <span class="arithmatex">\(\pi_0\)</span>, is what drives the dynamics forward, the influence of <em>where you started</em> can fade out over time. Under the mild conditions in question 3 below, two chains that start in completely different places — say <span class="arithmatex">\(\pi_0\)</span> entirely on State 1 versus <span class="arithmatex">\(\pi_0\)</span> entirely on State 3 — can end up converging to the <em>exact same</em> distribution <span class="arithmatex">\(\pi\)</span> after enough steps. The rules of motion are powerful enough to make the system forget where it started; only the long-run rules (<span class="arithmatex">\(Q\)</span>), not the initial condition (<span class="arithmatex">\(\pi_0\)</span>), determine the eventual destination.</p>
 <p><strong>Open questions flagged in lecture (resolved next time, under mild conditions):</strong></p>
 <ol>
 <li><strong>Existence:</strong> does a solution <span class="arithmatex">\(\pi\)</span> to <span class="arithmatex">\(\pi Q = \pi\)</span> with <span class="arithmatex">\(\pi \geq 0,\ \sum_j \pi(j)=1\)</span> always exist?</li>
@@ -4374,7 +4581,20 @@ P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
 <li><strong>Markov Chain Monte Carlo (MCMC):</strong> construct a synthetic chain on purpose, engineered so its stationary distribution <span class="arithmatex">\(\pi\)</span> equals some complicated target distribution of interest. Running the chain long enough on a computer lets you sample from (or approximate) <span class="arithmatex">\(\pi\)</span> — useful when direct computation is intractable.</li>
 </ul>
 <hr />
-<h2 id="9-quick-reference-cheat-sheet">9. Quick Reference Cheat Sheet<a class="headerlink" href="#9-quick-reference-cheat-sheet" title="Permanent link">&para;</a></h2>
+<h2 id="9-markov-chains-vs-markov-decision-processes-mdps">9. Markov Chains vs. Markov Decision Processes (MDPs)<a class="headerlink" href="#9-markov-chains-vs-markov-decision-processes-mdps" title="Permanent link">&para;</a></h2>
+<p>Everything covered so far — <span class="arithmatex">\(Q\)</span>, <span class="arithmatex">\(\pi_n\)</span>, the stationary distribution — belongs strictly to the world of <strong>Markov chains</strong> (passive Markov processes). Nothing here involves actions or rewards; that's a related but distinct topic called <strong>Markov Decision Processes (MDPs)</strong>.</p>
+<p><strong>The clearest way to draw the boundary:</strong></p>
+<ul>
+<li><strong>Markov chain — passive observation.</strong> Picture a leaf floating down a river. The river has currents (the matrix <span class="arithmatex">\(Q\)</span>), and the leaf drifts from state to state purely according to those currents. You're a scientist with a stopwatch, predicting where the leaf ends up. No choices, no scoring.</li>
+<li><strong>MDP — active control.</strong> Picture steering a motorboat on that same river. Two new ingredients get added:</li>
+<li><strong>Actions (<span class="arithmatex">\(A\)</span>):</strong> you have a steering wheel — a choice to make at each state.</li>
+<li><strong>Rewards (<span class="arithmatex">\(R\)</span>):</strong> e.g. <span class="arithmatex">\(+100\)</span> for reaching the dock, <span class="arithmatex">\(-50\)</span> for hitting a rock.
+  You're no longer just observing — you're choosing actions to fight the currents and maximize your score.</li>
+</ul>
+<p><strong>The mathematical jump from chain to MDP:</strong> in a Markov chain there is one fixed matrix <span class="arithmatex">\(Q\)</span>. In an MDP, there's a <em>separate</em> transition matrix for every available action — e.g. <span class="arithmatex">\(Q_{\text{left}}\)</span> if you steer left, <span class="arithmatex">\(Q_{\text{right}}\)</span> if you steer right. Because there are now multiple matrices to choose between at every state, you need an algorithm (e.g. value iteration) to determine which action — which matrix — to use in each state in order to maximize long-run reward.</p>
+<p><strong>Takeaway:</strong> Markov chains describe the physics of an environment. MDPs are what you build <em>on top of</em> that physics once you add the ability to act, plus a reason to care about the outcome. Understanding the chain — how <span class="arithmatex">\(Q\)</span> pushes <span class="arithmatex">\(\pi\)</span> around — is the prerequisite for understanding how an agent could learn to steer it.</p>
+<hr />
+<h2 id="10-quick-reference-cheat-sheet">10. Quick Reference Cheat Sheet<a class="headerlink" href="#10-quick-reference-cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -4419,10 +4639,30 @@ P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
 <td>Uncertain state → marginal probability</td>
 <td>sum over starting states (Law of Total Probability)</td>
 </tr>
+<tr>
+<td>Shape of <span class="arithmatex">\(\pi_n\)</span></td>
+<td><span class="arithmatex">\(1 \times M\)</span> row vector</td>
+</tr>
+<tr>
+<td>Shape of <span class="arithmatex">\(Q\)</span> and <span class="arithmatex">\(Q^n\)</span></td>
+<td><span class="arithmatex">\(M \times M\)</span> (stays square at any power)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi_n Q\)</span>, intuitively</td>
+<td>a weighted blend of <span class="arithmatex">\(Q\)</span>'s rows, weighted by <span class="arithmatex">\(\pi_n\)</span></td>
+</tr>
+<tr>
+<td>Evolving <span class="arithmatex">\(\pi_n\)</span> vs. homogeneity</td>
+<td><span class="arithmatex">\(\pi_n\)</span> changes; <span class="arithmatex">\(Q\)</span> does not — no contradiction</td>
+</tr>
+<tr>
+<td>Markov chain vs. MDP</td>
+<td>chain = one fixed <span class="arithmatex">\(Q\)</span>, no actions/rewards; MDP = one <span class="arithmatex">\(Q_a\)</span> per action <span class="arithmatex">\(a\)</span>, plus rewards</td>
+</tr>
 </tbody>
 </table>
 <hr />
-<h2 id="10-open-threads-for-next-lecture">10. Open Threads for Next Lecture<a class="headerlink" href="#10-open-threads-for-next-lecture" title="Permanent link">&para;</a></h2>
+<h2 id="11-open-threads-for-next-lecture">11. Open Threads for Next Lecture<a class="headerlink" href="#11-open-threads-for-next-lecture" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Existence/uniqueness/convergence proofs for stationary distributions</li>
 <li>Efficient computation tricks (some chains don't need matrix algebra at all)</li>
@@ -4443,7 +4683,7 @@ P(X_{n+m} = j \mid X_n = i) \;=\; \left(Q^m\right)_{ij},
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 08:02:55 UTC">June 20, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 11:06:46 UTC">June 20, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 12:02:37 UTC">June 20, 2026</span>
       </span>
     
   </aside>
