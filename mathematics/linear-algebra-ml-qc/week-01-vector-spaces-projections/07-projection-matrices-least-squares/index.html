@@ -25,7 +25,7 @@
     
     
       
-        <title>07: Projection Matrices and Least Squares - Knowledge</title>
+        <title>07 — Projection Matrices and Least Squares - Knowledge</title>
       
     
     
@@ -61,14 +61,14 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="07: Projection Matrices and Least Squares - Knowledge" />
+<meta property="og:title" content="07 — Projection Matrices and Least Squares - Knowledge" />
 <meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="07: Projection Matrices and Least Squares - Knowledge" />
+<meta property="twitter:title" content="07 — Projection Matrices and Least Squares - Knowledge" />
 <meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares.png" />
 </head>
   
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              07: Projection Matrices and Least Squares
+              07 — Projection Matrices and Least Squares
             
           </span>
         </div>
@@ -1208,7 +1208,7 @@
   <span class="md-ellipsis">
     
   
-    07: Projection Matrices and Least Squares
+    07 — Projection Matrices and Least Squares
   
 
     
@@ -1226,7 +1226,7 @@
   <span class="md-ellipsis">
     
   
-    07: Projection Matrices and Least Squares
+    07 — Projection Matrices and Least Squares
   
 
     
@@ -1252,10 +1252,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#big-picture-first" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Big picture first
       
     </span>
   </a>
@@ -1263,10 +1263,132 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-sanity-checking-the-projection-formula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Sanity-checking the projection formula
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Sanity-checking the projection formula">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p-and-i-p-are-a-matched-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(P\) and \(I-P\) are a matched pair
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-finishing-the-line-fitting-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Finishing the line-fitting example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Finishing the line-fitting example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-best-means-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What "best" means here
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-two-pictures-both-checked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The two pictures, both checked
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-why-is-ata-invertible-the-proof-finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Why is \(A^TA\) invertible? (The proof, finally)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-preview-orthonormal-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Preview: orthonormal vectors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-shows-up-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this shows up later
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-things-to-revisit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions / things to revisit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-what-week-1-has-actually-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion: what Week 1 has actually built
       
     </span>
   </a>
@@ -4217,10 +4339,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#big-picture-first" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Big picture first
       
     </span>
   </a>
@@ -4228,10 +4350,132 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-sanity-checking-the-projection-formula" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Sanity-checking the projection formula
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Sanity-checking the projection formula">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#p-and-i-p-are-a-matched-pair" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(P\) and \(I-P\) are a matched pair
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-finishing-the-line-fitting-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Finishing the line-fitting example
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Finishing the line-fitting example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-best-means-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What "best" means here
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-two-pictures-both-checked" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The two pictures, both checked
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-why-is-ata-invertible-the-proof-finally" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Why is \(A^TA\) invertible? (The proof, finally)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-preview-orthonormal-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Preview: orthonormal vectors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-shows-up-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this shows up later
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-things-to-revisit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions / things to revisit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion-what-week-1-has-actually-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conclusion: what Week 1 has actually built
       
     </span>
   </a>
@@ -4261,15 +4505,124 @@
   
 
 
-<h1 id="07-projection-matrices-and-least-squares">07: Projection Matrices and Least Squares<a class="headerlink" href="#07-projection-matrices-and-least-squares" title="Permanent link">&para;</a></h1>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<h1 id="07-projection-matrices-and-least-squares">07 — Projection Matrices and Least Squares<a class="headerlink" href="#07-projection-matrices-and-least-squares" title="Permanent link">&para;</a></h1>
+<p><strong>MIT Lecture:</strong> 16 — Projection Matrices and Least Squares
+<strong>Maps to:</strong> IIT Indore Week 1, Topic 5 — Projections and the linear least-squares problem (completes this topic)
+<strong>Builds on:</strong> Note 06 (derives the projection matrix formula and sets up the line-fitting problem this note finishes)
+<strong>Sets up:</strong> Week 2 — orthonormal bases and Gram-Schmidt (previewed at the end)</p>
+<hr />
+<h2 id="big-picture-first">Big picture first<a class="headerlink" href="#big-picture-first" title="Permanent link">&para;</a></h2>
+<p>Note 06 ended with a formula, <span class="arithmatex">\(P = A(A^TA)^{-1}A^T\)</span>, derived symbolically. This lecture does three things with it: sanity-checks that the formula actually behaves like a projection should, finishes the numeric line-fitting example note 06 only set up, and proves the one fact every previous note has <em>used</em> but never <em>proved</em> — that <span class="arithmatex">\(A^TA\)</span> is invertible whenever <span class="arithmatex">\(A\)</span> has independent columns.</p>
+<hr />
+<h2 id="1-sanity-checking-the-projection-formula">1. Sanity-checking the projection formula<a class="headerlink" href="#1-sanity-checking-the-projection-formula" title="Permanent link">&para;</a></h2>
+<p>A projection has to behave correctly at two extremes. Checking both confirms the formula isn't just algebra that happens to work — it's forced to match the geometry everywhere.</p>
+<p><strong>Extreme 1 — <span class="arithmatex">\(b\)</span> is perpendicular to the column space.</strong> Geometrically, the closest point in the column space to a vector sticking straight out of it should be <span class="arithmatex">\(0\)</span> — there's no "shadow" to speak of. A vector perpendicular to the entire column space is, by definition, in the left null space of <span class="arithmatex">\(A\)</span> (note 04), meaning <span class="arithmatex">\(A^Tb=0\)</span>. Plug into the formula:</p>
+<div class="arithmatex">\[
+Pb = A(A^TA)^{-1}\underbrace{A^Tb}_{=0} = 0
+\]</div>
+<p>It vanishes immediately, with no cancellation tricks needed — the formula respects this case automatically.</p>
+<p><strong>Extreme 2 — <span class="arithmatex">\(b\)</span> is already in the column space.</strong> Then <span class="arithmatex">\(b\)</span> has the form <span class="arithmatex">\(Ax\)</span> for some <span class="arithmatex">\(x\)</span> — every vector in the column space is, by definition, some combination of <span class="arithmatex">\(A\)</span>'s columns. The projection of something already reachable should just be itself:</p>
+<div class="arithmatex">\[
+Pb = A(A^TA)^{-1}A^T(Ax) = A(A^TA)^{-1}(A^TA)x = Ax = b
+\]</div>
+<p>The <span class="arithmatex">\((A^TA)^{-1}\)</span> cancels cleanly against the <span class="arithmatex">\(A^TA\)</span> sitting next to it, leaving exactly <span class="arithmatex">\(Ax=b\)</span>.</p>
+<p>A general vector <span class="arithmatex">\(b\)</span> is some mix of both extremes — part of it in the column space, part perpendicular to it — and the formula handles that general case by linearity, since it handled both pure cases correctly.</p>
+<h3 id="p-and-i-p-are-a-matched-pair"><span class="arithmatex">\(P\)</span> and <span class="arithmatex">\(I-P\)</span> are a matched pair<a class="headerlink" href="#p-and-i-p-are-a-matched-pair" title="Permanent link">&para;</a></h3>
+<p>If <span class="arithmatex">\(P\)</span> projects onto the column space, then <span class="arithmatex">\(I-P\)</span> projects onto its orthogonal complement — the left null space. Every vector splits as <span class="arithmatex">\(b = Pb + (I-P)b\)</span>, with the two pieces living in perpendicular subspaces.</p>
+<p><span class="arithmatex">\(I-P\)</span> inherits both projection properties from <span class="arithmatex">\(P\)</span>:</p>
 <ul>
-<li>Build projection matrices.</li>
-<li>Derive the normal equations.</li>
-<li>Explain least squares as the best projection of <code>b</code> onto <code>Col(A)</code>.</li>
+<li><strong>Symmetric:</strong> <span class="arithmatex">\((I-P)^T = I^T - P^T = I - P\)</span>.</li>
+<li><strong>Idempotent:</strong> <span class="arithmatex">\((I-P)^2 = I - 2P + P^2 = I - 2P + P = I-P\)</span> (using <span class="arithmatex">\(P^2=P\)</span> from note 06).</li>
 </ul>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>Add lecture notes here.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    B[&quot;b ∈ ℝᵐ&quot;] --&gt; P1[&quot;P b&lt;br/&gt;(in column space)&quot;]
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; P2[&quot;(I−P) b&lt;br/&gt;(in left null space)&quot;]
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    P1 -. &quot;⊥&quot; .- P2
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    P1 --&gt; SUM[&quot;Pb + (I−P)b = b&quot;]
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    P2 --&gt; SUM
+</code></pre></div>
+<hr />
+<h2 id="2-finishing-the-line-fitting-example">2. Finishing the line-fitting example<a class="headerlink" href="#2-finishing-the-line-fitting-example" title="Permanent link">&para;</a></h2>
+<p>Note 06 set up — but didn't solve — fitting a line <span class="arithmatex">\(y = C + Dt\)</span> through three points: <span class="arithmatex">\((1,2)\)</span>, <span class="arithmatex">\((2,3)\)</span>, <span class="arithmatex">\((3,5)\)</span>. The unsolvable system was <span class="arithmatex">\(Ax=b\)</span> with</p>
+<div class="arithmatex">\[
+A = \begin{pmatrix}1&amp;1\\1&amp;2\\1&amp;3\end{pmatrix}, \quad x = \begin{pmatrix}C\\D\end{pmatrix}, \quad b=\begin{pmatrix}2\\3\\5\end{pmatrix}
+\]</div>
+<h3 id="what-best-means-here">What "best" means here<a class="headerlink" href="#what-best-means-here" title="Permanent link">&para;</a></h3>
+<p>The error vector is <span class="arithmatex">\(e = b - Ax\)</span>, with one entry per data point — the vertical gap between the actual point and wherever the line lands at that <span class="arithmatex">\(t\)</span>. "Best line" means minimizing <span class="arithmatex">\(\|e\|^2 = e_1^2+e_2^2+e_3^2\)</span>, the sum of squared vertical errors — hence <strong>least squares</strong>, and the same idea behind statistical <em>regression</em>. Squaring is convenient (it's what turns the problem into a clean linear system instead of something involving absolute values), but it's worth knowing the trade-off: squaring punishes large errors disproportionately, so a single wildly off data point (an outlier) can drag the "best" line further than its single vote should really earn. Least squares is the default tool, not the only one, for exactly this reason.</p>
+<h3 id="solving">Solving<a class="headerlink" href="#solving" title="Permanent link">&para;</a></h3>
+<p>The normal equations from note 06 are <span class="arithmatex">\(A^TA\hat{x} = A^Tb\)</span>. Compute both sides:</p>
+<div class="arithmatex">\[
+A^TA = \begin{pmatrix}3&amp;6\\6&amp;14\end{pmatrix}, \qquad A^Tb = \begin{pmatrix}10\\23\end{pmatrix}
+\]</div>
+<p>(<span class="arithmatex">\(A^TA\)</span>'s entries: 3 points, <span class="arithmatex">\(\sum t = 1+2+3=6\)</span>, <span class="arithmatex">\(\sum t^2 = 1+4+9=14\)</span>. <span class="arithmatex">\(A^Tb\)</span>'s entries: <span class="arithmatex">\(\sum b = 2+3+5=10\)</span>, <span class="arithmatex">\(\sum tb = 1(2)+2(3)+3(5)=23\)</span>.)</p>
+<p>Solve <span class="arithmatex">\(3C+6D=10\)</span> and <span class="arithmatex">\(6C+14D=23\)</span>: doubling the first equation gives <span class="arithmatex">\(6C+12D=20\)</span>; subtracting from the second leaves <span class="arithmatex">\(2D=3\)</span>, so <span class="arithmatex">\(D=\tfrac{3}{2}\)</span>. Back-substitute: <span class="arithmatex">\(3C+9=10 \Rightarrow C=\tfrac{1}{3}\)</span>.</p>
+<p><strong>Best line:</strong> <span class="arithmatex">\(y = \tfrac{1}{3} + \tfrac{3}{2}t\)</span>.</p>
+<h3 id="the-two-pictures-both-checked">The two pictures, both checked<a class="headerlink" href="#the-two-pictures-both-checked" title="Permanent link">&para;</a></h3>
+<p><strong>Picture 1 — points and the line.</strong> Evaluate the fitted line at each <span class="arithmatex">\(t\)</span>:</p>
+<div class="arithmatex">\[
+p_1 = \tfrac13+\tfrac32 = \tfrac{11}{6}, \qquad p_2 = \tfrac13+3 = \tfrac{10}{3}, \qquad p_3 = \tfrac13+\tfrac92 = \tfrac{29}{6}
+\]</div>
+<p>Errors (actual minus fitted):</p>
+<div class="arithmatex">\[
+e_1 = 2-\tfrac{11}{6}=\tfrac16, \qquad e_2 = 3-\tfrac{10}{3}=-\tfrac13, \qquad e_3 = 5-\tfrac{29}{6}=\tfrac16
+\]</div>
+<p><strong>Picture 2 — vectors in <span class="arithmatex">\(\mathbb{R}^3\)</span>.</strong> <span class="arithmatex">\(p=(\tfrac{11}{6},\tfrac{10}{3},\tfrac{29}{6})\)</span> is the projection of <span class="arithmatex">\(b\)</span> onto the column space; <span class="arithmatex">\(e=(\tfrac16,-\tfrac13,\tfrac16)\)</span> is the perpendicular leftover. Two checks confirm everything's consistent:</p>
+<ul>
+<li><span class="arithmatex">\(p+e = (\tfrac{11}{6}+\tfrac16,\; \tfrac{10}{3}-\tfrac13,\; \tfrac{29}{6}+\tfrac16) = (2,3,5) = b\)</span> ✓</li>
+<li><span class="arithmatex">\(e\)</span> is orthogonal to <em>both</em> columns of <span class="arithmatex">\(A\)</span> (not just to <span class="arithmatex">\(p\)</span>): <span class="arithmatex">\(e\cdot(1,1,1) = \tfrac16-\tfrac13+\tfrac16=0\)</span>, and <span class="arithmatex">\(e\cdot(1,2,3) = \tfrac16-\tfrac23+\tfrac12=0\)</span> ✓.</li>
+</ul>
+<p>These are the same problem, described two ways — the "points and best-fit line" picture never mentions <span class="arithmatex">\(C\)</span> or <span class="arithmatex">\(D\)</span> explicitly, and the "vectors in <span class="arithmatex">\(\mathbb{R}^3\)</span>" picture never draws a line at all, but they're describing the identical projection.</p>
+<hr />
+<h2 id="3-why-is-ata-invertible-the-proof-finally">3. Why is <span class="arithmatex">\(A^TA\)</span> invertible? (The proof, finally)<a class="headerlink" href="#3-why-is-ata-invertible-the-proof-finally" title="Permanent link">&para;</a></h2>
+<p>Every note since 05 has used this fact: <em>if <span class="arithmatex">\(A\)</span> has independent columns, <span class="arithmatex">\(A^TA\)</span> is invertible.</em> Time to actually prove it.</p>
+<p><strong>Goal:</strong> show that <span class="arithmatex">\(A^TAx=0\)</span> forces <span class="arithmatex">\(x=0\)</span> — a square matrix with a trivial null space is invertible (note 04), so this is exactly what's needed.</p>
+<p><strong>Proof.</strong> Suppose <span class="arithmatex">\(A^TAx=0\)</span>. Multiply both sides on the left by <span class="arithmatex">\(x^T\)</span>:</p>
+<div class="arithmatex">\[
+x^TA^TAx = 0
+\]</div>
+<p>Regroup the parentheses: <span class="arithmatex">\(x^TA^T\)</span> is <span class="arithmatex">\((Ax)^T\)</span>, so this reads</p>
+<div class="arithmatex">\[
+(Ax)^T(Ax) = 0
+\]</div>
+<p>But <span class="arithmatex">\((Ax)^T(Ax) = \|Ax\|^2\)</span> — the squared length of the vector <span class="arithmatex">\(Ax\)</span>. A squared length is zero only when the vector itself is the zero vector (note 05, the same fact behind the dot-product test for orthogonality). So:</p>
+<div class="arithmatex">\[
+\|Ax\|^2 = 0 \;\;\Longrightarrow\;\; Ax = 0
+\]</div>
+<p>This is the one place the hypothesis actually gets used: since <span class="arithmatex">\(A\)</span> has independent columns, the <em>only</em> solution to <span class="arithmatex">\(Ax=0\)</span> is <span class="arithmatex">\(x=0\)</span> (note 04's full-column-rank fact). So <span class="arithmatex">\(x=0\)</span> — exactly what needed proving.</p>
+<p><strong>Why this matters beyond just "it's invertible":</strong> the proof shows precisely <em>where</em> independence is doing the work — everything up to <span class="arithmatex">\(Ax=0\)</span> holds for <em>any</em> matrix <span class="arithmatex">\(A\)</span>; independence is only needed for the very last step. This is also the proof behind the "key fact" used without derivation in note 05 — <span class="arithmatex">\(\text{null space}(A^TA) = \text{null space}(A)\)</span> — since the argument shows any <span class="arithmatex">\(x\)</span> solving <span class="arithmatex">\(A^TAx=0\)</span> must also solve <span class="arithmatex">\(Ax=0\)</span>, and the reverse direction (anything in null space of <span class="arithmatex">\(A\)</span> trivially solves <span class="arithmatex">\(A^TAx=0\)</span> too) is immediate.</p>
+<hr />
+<h2 id="4-preview-orthonormal-vectors">4. Preview: orthonormal vectors<a class="headerlink" href="#4-preview-orthonormal-vectors" title="Permanent link">&para;</a></h2>
+<p>One case makes everything in this note close to effortless: columns of <span class="arithmatex">\(A\)</span> that are mutually perpendicular <em>and</em> unit length — <strong>orthonormal</strong>. If <span class="arithmatex">\(a_1, a_2, \dots\)</span> are orthonormal, then <span class="arithmatex">\(A^TA\)</span> collapses straight to the identity matrix (every <span class="arithmatex">\(a_i^Ta_i=1\)</span>, every <span class="arithmatex">\(a_i^Ta_j=0\)</span> for <span class="arithmatex">\(i\ne j\)</span>), and the normal equation simplifies to:</p>
+<div class="arithmatex">\[
+\hat{x} = A^Tb
+\]</div>
+<p>— no matrix inversion at all. Every formula built across notes 05–07 still applies; it just stops requiring any real computation. That's the entire motivation for the next lecture: given any independent basis (not necessarily orthonormal), how do you systematically convert it into one that is? That's Gram-Schmidt, and it's where Week 2 picks up.</p>
+<hr />
+<h2 id="where-this-shows-up-later">Where this shows up later<a class="headerlink" href="#where-this-shows-up-later" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Week 2, Gram-Schmidt/QR:</strong> directly motivated by Section 4 — converts any basis into the orthonormal one that makes every formula here trivial.</li>
+<li><strong>Week 2, symmetric &amp; positive definite matrices:</strong> <span class="arithmatex">\(A^TA\)</span> being symmetric (note 05) and, as flagged in the lecture, eventually shown to be positive definite, is the bridge into that topic.</li>
+<li><strong>Week 2, SVD:</strong> handles exactly the case this note's proof excludes — when <span class="arithmatex">\(A\)</span>'s columns <em>aren't</em> independent, so this proof's conclusion fails and a different tool (pseudoinverse) is needed (note 05, §6.2).</li>
+</ul>
+<h2 id="questions-things-to-revisit">Questions / things to revisit<a class="headerlink" href="#questions-things-to-revisit" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Reproduce the <span class="arithmatex">\(A^TA\)</span> invertibility proof from memory — it's short, but it chains together independence, length-squared-equals-zero, and the null-space definition of invertibility, so it's a good test of whether those pieces actually connect in your head.</li>
+<li>Re-derive why <span class="arithmatex">\(I-P\)</span> is a projection matrix without looking — it's two lines of algebra, but the geometric reason ("the leftover part") should come first, not the algebra.</li>
+<li>Practice moving between the "points and line" picture and the "vectors in <span class="arithmatex">\(\mathbb{R}^3\)</span>" picture for the worked example — translating fluently between them is the real skill, not the arithmetic.</li>
+</ul>
+<hr />
+<h2 id="conclusion-what-week-1-has-actually-built">Conclusion: what Week 1 has actually built<a class="headerlink" href="#conclusion-what-week-1-has-actually-built" title="Permanent link">&para;</a></h2>
+<p>It's worth stepping back here, because this lecture closes Topic 5 — the last topic of Week 1 — and the five topics weren't five unrelated facts. Each one was <em>forced</em> by the one before it.</p>
+<p><strong>The throughline:</strong></p>
+<ol>
+<li><strong>Topic 1</strong> started with the simplest possible idea — <span class="arithmatex">\(Ax\)</span> is just a combination of <span class="arithmatex">\(A\)</span>'s columns — and that one reframing is what made everything afterward a <em>geometry</em> problem instead of a bookkeeping problem.</li>
+<li><strong>Topics 2–3</strong> (note 04) asked "how big are the spaces hiding inside a matrix?" and answered it completely: row space and null space split <span class="arithmatex">\(\mathbb{R}^n\)</span>, column space and left null space split <span class="arithmatex">\(\mathbb{R}^m\)</span>, every dimension accounted for by rank-nullity.</li>
+<li><strong>Topic 4</strong> (note 05) asked the question Topic 3 left open — these subspaces are correctly <em>sized</em>, but how are they <em>arranged</em>? — and proved they're not just side by side, they're at exact right angles. That single fact (row space ⊥ null space, column space ⊥ left null space) is what every later computation quietly leans on.</li>
+<li><strong>Topic 5</strong> (notes 06–07) took that one geometric fact and asked the practical question it makes answerable: when <span class="arithmatex">\(Ax=b\)</span> has no solution — the everyday case with noisy, overdetermined data — what's the <em>best</em> answer? The orthogonality from Topic 4 is exactly what pins down what "best" has to mean (closest point, perpendicular error) and exactly what makes the resulting system, <span class="arithmatex">\(A^TA\hat{x}=A^Tb\)</span>, solvable in the first place.</li>
+</ol>
+<p><strong>What you can now actually do, from first principles, not from a memorized formula:</strong> given any matrix, find its rank and describe all four fundamental subspaces and their dimensions; test whether two vectors or subspaces are orthogonal and explain why "doesn't intersect" isn't enough; derive the normal equations two independent ways (left-null-space reasoning in note 05, perpendicular-projection reasoning in note 06) and watch them land on the same equation; and fit a least-squares line to real data by hand, while being able to explain — not just compute — why <span class="arithmatex">\(A^TA\)</span> is guaranteed invertible when the columns are independent.</p>
+<p><strong>What's deliberately left undone, on purpose:</strong> everything this week assumed you already <em>have</em> a basis for the column space — the columns of <span class="arithmatex">\(A\)</span>, whatever they happen to be. Nothing here says those columns are a <em>good</em> basis to compute with. <span class="arithmatex">\(A^TA\)</span> is invertible whenever columns are independent, but if those columns are nearly parallel, <span class="arithmatex">\(A^TA\)</span> is still a nightmare to invert by hand or numerically stable on a computer. That gap — and the rank-deficient case flagged back in note 05's left/right-inverse table, where columns <em>aren't</em> independent at all — is exactly where Week 2 starts: Gram-Schmidt builds the orthonormal basis that makes every formula here collapse to its simplest form, eigenvalues and diagonalization describe what a matrix does to space more deeply than rank alone can, and SVD generalizes everything built this week to matrices that are rank-deficient from the start.</p>
+<p>Compressed to one sentence: <strong>Week 1 turned "this system has no solution" into a fully derived, fully justified, by-hand-computable best answer — using nothing but the sizes of four subspaces and one right angle.</strong></p>
 
   
     
@@ -4282,7 +4635,10 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+        Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+      </span>
+      <span class="md-source-file__fact">
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 21, 2026 12:25:24 UTC">June 21, 2026</span>
       </span>
     
   </aside>
