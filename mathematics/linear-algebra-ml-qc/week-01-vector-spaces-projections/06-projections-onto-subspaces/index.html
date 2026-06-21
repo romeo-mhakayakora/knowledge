@@ -25,7 +25,7 @@
     
     
       
-        <title>06: Projections onto Subspaces - Knowledge</title>
+        <title>06 — Projections onto Subspaces - Knowledge</title>
       
     
     
@@ -61,14 +61,14 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="06: Projections onto Subspaces - Knowledge" />
+<meta property="og:title" content="06 — Projections onto Subspaces - Knowledge" />
 <meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="06: Projections onto Subspaces - Knowledge" />
+<meta property="twitter:title" content="06 — Projections onto Subspaces - Knowledge" />
 <meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces.png" />
 </head>
   
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              06: Projections onto Subspaces
+              06 — Projections onto Subspaces
             
           </span>
         </div>
@@ -1180,7 +1180,7 @@
   <span class="md-ellipsis">
     
   
-    06: Projections onto Subspaces
+    06 — Projections onto Subspaces
   
 
     
@@ -1198,7 +1198,7 @@
   <span class="md-ellipsis">
     
   
-    06: Projections onto Subspaces
+    06 — Projections onto Subspaces
   
 
     
@@ -1224,10 +1224,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#big-picture-first" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Big picture first
       
     </span>
   </a>
@@ -1235,10 +1235,198 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-projecting-onto-a-line" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Projecting onto a line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Projecting onto a line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-orthogonality-has-to-be-the-key-fact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why orthogonality has to be the key fact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solving-for-hatx-p-and-the-projection-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solving for \(\hat{x}\), \(p\), and the projection matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanity-checks-the-why-behind-the-formula-not-just-the-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanity checks (the why behind the formula, not just the formula)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-projection-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The projection matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-why-bother-projecting-the-motivation-restated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Why bother projecting? (The motivation, restated)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-projecting-onto-a-subspace-the-general-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Projecting onto a subspace (the general case)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Projecting onto a subspace (the general case)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up the equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-tie-back-to-notes-04-and-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tie back to notes 04 and 05
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-you-cant-simplify-p-down-to-the-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why you can't simplify \(P\) down to the identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-p-in-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties of \(P\) in general
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-is-heading-line-fitting-completed-in-note-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this is heading: line-fitting (completed in note 07)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-shows-up-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this shows up later
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-things-to-revisit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions / things to revisit
       
     </span>
   </a>
@@ -4217,10 +4405,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#big-picture-first" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Big picture first
       
     </span>
   </a>
@@ -4228,10 +4416,198 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-projecting-onto-a-line" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Projecting onto a line
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Projecting onto a line">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-orthogonality-has-to-be-the-key-fact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why orthogonality has to be the key fact
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solving-for-hatx-p-and-the-projection-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solving for \(\hat{x}\), \(p\), and the projection matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sanity-checks-the-why-behind-the-formula-not-just-the-formula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sanity checks (the why behind the formula, not just the formula)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-projection-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The projection matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-why-bother-projecting-the-motivation-restated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Why bother projecting? (The motivation, restated)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-projecting-onto-a-subspace-the-general-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Projecting onto a subspace (the general case)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Projecting onto a subspace (the general case)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up the equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-tie-back-to-notes-04-and-05" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The tie back to notes 04 and 05
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solving" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solving
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-you-cant-simplify-p-down-to-the-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why you can't simplify \(P\) down to the identity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-p-in-general" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties of \(P\) in general
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked examples
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-is-heading-line-fitting-completed-in-note-07" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this is heading: line-fitting (completed in note 07)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-this-shows-up-later" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Where this shows up later
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-things-to-revisit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questions / things to revisit
       
     </span>
   </a>
@@ -4261,15 +4637,135 @@
   
 
 
-<h1 id="06-projections-onto-subspaces">06: Projections onto Subspaces<a class="headerlink" href="#06-projections-onto-subspaces" title="Permanent link">&para;</a></h1>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<h1 id="06-projections-onto-subspaces">06 — Projections onto Subspaces<a class="headerlink" href="#06-projections-onto-subspaces" title="Permanent link">&para;</a></h1>
+<p><strong>MIT Lecture:</strong> 15 — Projections onto Subspaces
+<strong>Maps to:</strong> IIT Indore Week 1, Topic 5 — Projections and the linear least-squares problem
+<strong>Builds on:</strong> Note 05 (orthogonality, left null space, the normal equation <span class="arithmatex">\(A^TA\hat{x}=A^Tb\)</span>) — this lecture <em>re-derives</em> that same equation from a completely different starting point: pure geometry instead of "closest point in the left null space"
+<strong>Sets up:</strong> Note 07 — the numerical least-squares example (line-fitting), which this lecture sets up but doesn't finish</p>
+<hr />
+<h2 id="big-picture-first">Big picture first<a class="headerlink" href="#big-picture-first" title="Permanent link">&para;</a></h2>
+<p>Note 05 already derived <span class="arithmatex">\(A^TA\hat{x}=A^Tb\)</span> by reasoning about the left null space. This lecture arrives at the <em>exact same equation</em> a second way — by literally asking "what's the closest point in a subspace to a given vector?" and turning that geometry into algebra. Seeing the same destination reached from two different starting points is the best confirmation that the formula isn't a trick — it's forced by the geometry no matter which door you walk in through.</p>
+<p>The plan: solve the simplest possible version first (projecting onto a <em>line</em>), get clean formulas, then generalize to projecting onto any subspace.</p>
+<hr />
+<h2 id="1-projecting-onto-a-line">1. Projecting onto a line<a class="headerlink" href="#1-projecting-onto-a-line" title="Permanent link">&para;</a></h2>
+<p><strong>Setup:</strong> a line through the origin, spanned by a single vector <span class="arithmatex">\(a\)</span>. Given some vector <span class="arithmatex">\(b\)</span> not on that line, find the point <span class="arithmatex">\(p\)</span> <em>on the line</em> closest to <span class="arithmatex">\(b\)</span>.</p>
+<h3 id="why-orthogonality-has-to-be-the-key-fact">Why orthogonality has to be the key fact<a class="headerlink" href="#why-orthogonality-has-to-be-the-key-fact" title="Permanent link">&para;</a></h3>
+<p>Because <span class="arithmatex">\(p\)</span> is on the line, it's some multiple of <span class="arithmatex">\(a\)</span>: <span class="arithmatex">\(p = \hat{x}a\)</span> for a scalar <span class="arithmatex">\(\hat{x}\)</span> we need to find. The error is <span class="arithmatex">\(e = b - \hat{x}a\)</span>. The one geometric fact that pins down "closest point on a line" is that the shortest distance from <span class="arithmatex">\(b\)</span> to the line is along the <em>perpendicular</em> — so <span class="arithmatex">\(e\)</span> must be orthogonal to <span class="arithmatex">\(a\)</span>:</p>
+<div class="arithmatex">\[
+a^T(b - \hat{x}a) = 0
+\]</div>
+<h3 id="solving-for-hatx-p-and-the-projection-matrix">Solving for <span class="arithmatex">\(\hat{x}\)</span>, <span class="arithmatex">\(p\)</span>, and the projection matrix<a class="headerlink" href="#solving-for-hatx-p-and-the-projection-matrix" title="Permanent link">&para;</a></h3>
+<p>Expand and isolate <span class="arithmatex">\(\hat{x}\)</span>:</p>
+<div class="arithmatex">\[
+a^Tb - \hat{x}\,a^Ta = 0 \;\;\Longrightarrow\;\; \hat{x} = \frac{a^Tb}{a^Ta}
+\]</div>
+<p>So the projection point is:</p>
+<div class="arithmatex">\[
+p = \hat{x}a = \frac{a^Tb}{a^Ta}\,a
+\]</div>
+<h3 id="sanity-checks-the-why-behind-the-formula-not-just-the-formula">Sanity checks (the <em>why</em> behind the formula, not just the formula)<a class="headerlink" href="#sanity-checks-the-why-behind-the-formula-not-just-the-formula" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Project a vector onto a line or subspace.</li>
-<li>Interpret projection error as orthogonal to the target subspace.</li>
-<li>Connect projections to approximation.</li>
+<li><strong>Double <span class="arithmatex">\(b\)</span>:</strong> <span class="arithmatex">\(\hat{x}\)</span> doubles, so <span class="arithmatex">\(p\)</span> doubles. Makes sense — push the target twice as far out, the shadow it casts on the line moves twice as far too.</li>
+<li><strong>Double <span class="arithmatex">\(a\)</span> (or flip its sign):</strong> <span class="arithmatex">\(\hat{x}\)</span> gets cut in half (<span class="arithmatex">\(a^Ta\)</span> in the denominator quadruples while <span class="arithmatex">\(a^Tb\)</span> only doubles), and <span class="arithmatex">\(p = \hat{x}a\)</span> ends up exactly the same as before. This makes sense too — doubling <span class="arithmatex">\(a\)</span> doesn't change the <em>line</em>, just how it's labeled, so the projection point shouldn't move at all.</li>
 </ul>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>Add lecture notes here.</p>
+<h3 id="the-projection-matrix">The projection matrix<a class="headerlink" href="#the-projection-matrix" title="Permanent link">&para;</a></h3>
+<p>Rewrite <span class="arithmatex">\(p\)</span> as a matrix acting on <span class="arithmatex">\(b\)</span>:</p>
+<div class="arithmatex">\[
+p = \underbrace{\frac{aa^T}{a^Ta}}_{P}\,b
+\]</div>
+<p><span class="arithmatex">\(P\)</span> is a genuine <span class="arithmatex">\(n\times n\)</span> matrix (a column <span class="arithmatex">\(a\)</span> times a row <span class="arithmatex">\(a^T\)</span> divided by a number), not just a leftover scalar — and it has three properties worth checking <em>because they'll define what a projection matrix has to look like</em> in any dimension:</p>
+<ul>
+<li><strong>Rank 1.</strong> <span class="arithmatex">\(aa^T\)</span> is a column times a row — the column space of <span class="arithmatex">\(P\)</span> is just the line through <span class="arithmatex">\(a\)</span> itself, dimension 1. Multiplying any <span class="arithmatex">\(b\)</span> by <span class="arithmatex">\(P\)</span> always lands you back on that line, by construction.</li>
+<li><strong>Symmetric.</strong> <span class="arithmatex">\(P^T = \left(\frac{aa^T}{a^Ta}\right)^T = \frac{aa^T}{a^Ta} = P\)</span>, since transposing a column-times-row swaps it with itself and the denominator is just a number.</li>
+<li><strong>Idempotent: <span class="arithmatex">\(P^2 = P\)</span>.</strong> Projecting a point that's <em>already on the line</em> doesn't move it — so applying <span class="arithmatex">\(P\)</span> a second time has to give back the same answer as the first time. This is true of any projection onto any subspace, not just a line — it's the algebraic signature of "closest point" being a stable, settled answer.</li>
+</ul>
+<h3 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(a = (1, 2)\)</span>, <span class="arithmatex">\(b = (4, 3)\)</span>.</p>
+<div class="arithmatex">\[
+\hat{x} = \frac{a^Tb}{a^Ta} = \frac{(1)(4)+(2)(3)}{1^2+2^2} = \frac{10}{5} = 2
+$$
+$$
+p = \hat{x}a = (2, 4)
+\]</div>
+<p>Check orthogonality: <span class="arithmatex">\(e = b - p = (2, -1)\)</span>, and <span class="arithmatex">\(e^Ta = (2)(1)+(-1)(2) = 0\)</span> ✓.</p>
+<p>Projection matrix: <span class="arithmatex">\(P = \dfrac{aa^T}{a^Ta} = \dfrac{1}{5}\begin{pmatrix}1&amp;2\\2&amp;4\end{pmatrix} = \begin{pmatrix}0.2&amp;0.4\\0.4&amp;0.8\end{pmatrix}\)</span>.</p>
+<p>Check: <span class="arithmatex">\(Pb = (0.2(4)+0.4(3),\; 0.4(4)+0.8(3)) = (2,4) = p\)</span> ✓. And <span class="arithmatex">\(P^2 = P\)</span> — multiply it out and every entry matches.</p>
+<hr />
+<h2 id="2-why-bother-projecting-the-motivation-restated">2. Why bother projecting? (The motivation, restated)<a class="headerlink" href="#2-why-bother-projecting-the-motivation-restated" title="Permanent link">&para;</a></h2>
+<p>Same problem as note 05: <span class="arithmatex">\(Ax=b\)</span> has no exact solution whenever <span class="arithmatex">\(b\)</span> isn't in the column space of <span class="arithmatex">\(A\)</span> — the typical case once there are more equations (rows) than unknowns (columns), with any real-world noise. The fix is to stop demanding <span class="arithmatex">\(Ax=b\)</span> exactly, and instead solve <span class="arithmatex">\(A\hat{x} = p\)</span>, where <span class="arithmatex">\(p\)</span> is the closest point to <span class="arithmatex">\(b\)</span> that <em>is</em> reachable — the projection of <span class="arithmatex">\(b\)</span> onto the column space of <span class="arithmatex">\(A\)</span>. This lecture is entirely about finding <span class="arithmatex">\(p\)</span> in general, not just for a single line.</p>
+<hr />
+<h2 id="3-projecting-onto-a-subspace-the-general-case">3. Projecting onto a subspace (the general case)<a class="headerlink" href="#3-projecting-onto-a-subspace-the-general-case" title="Permanent link">&para;</a></h2>
+<p><strong>Setup:</strong> a subspace described by a matrix <span class="arithmatex">\(A\)</span> whose columns <span class="arithmatex">\(a_1, \dots, a_n\)</span> form a basis for it (they don't need to be perpendicular to each other — just independent). Given <span class="arithmatex">\(b\)</span>, find the closest point <span class="arithmatex">\(p\)</span> in that subspace.</p>
+<h3 id="setting-up-the-equation">Setting up the equation<a class="headerlink" href="#setting-up-the-equation" title="Permanent link">&para;</a></h3>
+<p>Since <span class="arithmatex">\(p\)</span> is in the column space, it's some combination of the columns: <span class="arithmatex">\(p = A\hat{x}\)</span> for a vector <span class="arithmatex">\(\hat{x}\)</span> to be found. The error is <span class="arithmatex">\(e = b - A\hat{x}\)</span>, and the geometric requirement is that <span class="arithmatex">\(e\)</span> is perpendicular to the <em>entire</em> subspace — which means perpendicular to every column that spans it:</p>
+<div class="arithmatex">\[
+a_1^T(b - A\hat{x}) = 0, \qquad a_2^T(b-A\hat{x}) = 0, \qquad \dots
+\]</div>
+<p>Stack these into one matrix equation — the rows of <span class="arithmatex">\(A^T\)</span> are exactly <span class="arithmatex">\(a_1^T, a_2^T, \dots\)</span> — and the whole system collapses to:</p>
+<div class="arithmatex">\[
+A^T(b - A\hat{x}) = 0
+\]</div>
+<h3 id="the-tie-back-to-notes-04-and-05">The tie back to notes 04 and 05<a class="headerlink" href="#the-tie-back-to-notes-04-and-05" title="Permanent link">&para;</a></h3>
+<p>This is worth pausing on. The equation says <span class="arithmatex">\(A^Te = 0\)</span> — by definition, that means <span class="arithmatex">\(e\)</span> is in the <strong>left null space</strong> of <span class="arithmatex">\(A\)</span> (note 04). And note 05 already proved that the left null space is the orthogonal complement of the column space. So this single line of algebra is silently re-confirming the exact geometric fact we just used to set the problem up: <span class="arithmatex">\(e\)</span> is perpendicular to the column space precisely because it's in the left null space, and those are the same statement viewed from two different definitions. The theory built in notes 04–05 and the fresh geometric derivation here land on identical ground.</p>
+<h3 id="solving">Solving<a class="headerlink" href="#solving" title="Permanent link">&para;</a></h3>
+<p>Expand:</p>
+<div class="arithmatex">\[
+A^Tb - A^TA\hat{x} = 0 \;\;\Longrightarrow\;\; A^TA\,\hat{x} = A^Tb
+\]</div>
+<p>The normal equation, again — this time arrived at by "drop a perpendicular onto a subspace" rather than "the error has to live in the left null space." Solve for <span class="arithmatex">\(\hat{x}\)</span>:</p>
+<div class="arithmatex">\[
+\hat{x} = (A^TA)^{-1}A^Tb
+\]</div>
+<p>And since <span class="arithmatex">\(p = A\hat{x}\)</span>:</p>
+<div class="arithmatex">\[
+p = A(A^TA)^{-1}A^Tb
+\]</div>
+<p>so the <strong>projection matrix</strong> for a general subspace is:</p>
+<div class="arithmatex">\[
+P = A(A^TA)^{-1}A^T
+\]</div>
+<p>Compare this to the line case: <span class="arithmatex">\(P = \dfrac{aa^T}{a^Ta}\)</span> is <em>exactly</em> this formula with <span class="arithmatex">\(A\)</span> replaced by the single column <span class="arithmatex">\(a\)</span> — the general formula isn't a different idea, it's the same one written so it survives more than one column.</p>
+<h3 id="why-you-cant-simplify-p-down-to-the-identity">Why you can't simplify <span class="arithmatex">\(P\)</span> down to the identity<a class="headerlink" href="#why-you-cant-simplify-p-down-to-the-identity" title="Permanent link">&para;</a></h3>
+<p>It's tempting to use <span class="arithmatex">\((AB)^{-1} = B^{-1}A^{-1}\)</span> and write <span class="arithmatex">\((A^TA)^{-1} = A^{-1}(A^T)^{-1}\)</span>, which would make <span class="arithmatex">\(P = AA^{-1}(A^T)^{-1}A^T = I\)</span>. <strong>This is only legal when <span class="arithmatex">\(A\)</span> itself is square and invertible</strong> — and in the normal use case here, <span class="arithmatex">\(A\)</span> is tall (<span class="arithmatex">\(m&gt;n\)</span>) with no inverse at all, so that splitting step doesn't exist. The formula has to stay in its "messier" combined form <span class="arithmatex">\(A(A^TA)^{-1}A^T\)</span> precisely because <span class="arithmatex">\(A\)</span> alone can't be inverted.</p>
+<p>That said, the degenerate case is a useful sanity check: if <span class="arithmatex">\(A\)</span> <em>is</em> square and invertible, its column space is all of <span class="arithmatex">\(\mathbb{R}^n\)</span> — every vector is already reachable, so the "best approximation" should just be <span class="arithmatex">\(b\)</span> itself, i.e. <span class="arithmatex">\(P\)</span> should be the identity. And indeed, in that one special case the splitting trick is legal, and it correctly produces <span class="arithmatex">\(P=I\)</span> — confirming the general formula behaves exactly the way the geometry demands at the boundary case.</p>
+<h3 id="properties-of-p-in-general">Properties of <span class="arithmatex">\(P\)</span> in general<a class="headerlink" href="#properties-of-p-in-general" title="Permanent link">&para;</a></h3>
+<p>Both properties from the 1-D case carry over, by essentially the same algebra:</p>
+<ul>
+<li><strong>Symmetric:</strong> <span class="arithmatex">\(P^T = (A(A^TA)^{-1}A^T)^T = A((A^TA)^{-1})^TA^T = A(A^TA)^{-1}A^T = P\)</span>, since <span class="arithmatex">\((A^TA)\)</span> is already symmetric (note 05) and the inverse of a symmetric matrix is symmetric.</li>
+<li><strong>Idempotent (<span class="arithmatex">\(P^2=P\)</span>):</strong> geometrically forced — the first projection lands you on the subspace, and projecting a point that's already there can't move it. Algebraically, <span class="arithmatex">\(P^2 = A(A^TA)^{-1}\underbrace{A^TA}_{\text{cancels with its inverse}}(A^TA)^{-1}A^T = A(A^TA)^{-1}A^T = P\)</span>.</li>
+</ul>
+<h3 id="worked-examples">Worked examples<a class="headerlink" href="#worked-examples" title="Permanent link">&para;</a></h3>
+<p><strong>Easy case — orthonormal basis.</strong> Let <span class="arithmatex">\(a_1=(1,0,0)\)</span>, <span class="arithmatex">\(a_2=(0,1,0)\)</span> (the <span class="arithmatex">\(xy\)</span>-plane in <span class="arithmatex">\(\mathbb{R}^3\)</span>), and <span class="arithmatex">\(b=(2,3,5)\)</span>.</p>
+<p>Because the basis is already orthonormal, <span class="arithmatex">\(A^TA = I\)</span>, and the formula collapses to <span class="arithmatex">\(\hat{x}=A^Tb = (2,3)\)</span>, so <span class="arithmatex">\(p = (2,3,0)\)</span> and <span class="arithmatex">\(e=(0,0,5)\)</span>. This matches pure intuition — projecting onto the <span class="arithmatex">\(xy\)</span>-plane just zeroes out the <span class="arithmatex">\(z\)</span>-component, and the error is exactly the part that stuck out of the plane. <em>(This is also a preview of why building an orthonormal basis — Gram-Schmidt, Week 2 — is worth the effort: it turns the messy <span class="arithmatex">\((A^TA)^{-1}\)</span> into a free identity matrix.)</em></p>
+<p><strong>General case — non-orthogonal basis.</strong> Let <span class="arithmatex">\(a_1=(1,0,1)\)</span>, <span class="arithmatex">\(a_2=(0,1,1)\)</span>, <span class="arithmatex">\(b=(1,2,4)\)</span>.</p>
+<div class="arithmatex">\[
+A^TA = \begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}, \qquad A^Tb = \begin{pmatrix}5\\6\end{pmatrix}
+\]</div>
+<p>Solving <span class="arithmatex">\(\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}\hat{x} = \begin{pmatrix}5\\6\end{pmatrix}\)</span> gives <span class="arithmatex">\(\hat{x} = \left(\frac{4}{3}, \frac{7}{3}\right)\)</span>, so:</p>
+<div class="arithmatex">\[
+p = \tfrac{4}{3}(1,0,1) + \tfrac{7}{3}(0,1,1) = \left(\tfrac{4}{3}, \tfrac{7}{3}, \tfrac{11}{3}\right), \qquad e = b-p = \left(-\tfrac{1}{3},-\tfrac{1}{3},\tfrac{1}{3}\right)
+\]</div>
+<p>Check: <span class="arithmatex">\(e \cdot a_1 = -\tfrac13(1) + 0 + \tfrac13(1) = 0\)</span>, and <span class="arithmatex">\(e\cdot a_2 = 0 -\tfrac13(1)+\tfrac13(1)=0\)</span> — perpendicular to both columns, exactly as required.</p>
+<hr />
+<h2 id="where-this-is-heading-line-fitting-completed-in-note-07">Where this is heading: line-fitting (completed in note 07)<a class="headerlink" href="#where-this-is-heading-line-fitting-completed-in-note-07" title="Permanent link">&para;</a></h2>
+<p>The whole point of building this machinery is data that's <em>almost</em> linear but not quite. Suppose you have three data points and want the best straight line <span class="arithmatex">\(b = C + Dt\)</span> through them — say <span class="arithmatex">\((t,b) = (1,2), (2,3), (3,5)\)</span>. Plugging each point into <span class="arithmatex">\(C+Dt=b\)</span> gives three equations in only two unknowns:</p>
+<div class="arithmatex">\[
+C + D = 2, \qquad C+2D = 3, \qquad C+3D = 5
+\]</div>
+<p>In matrix form, <span class="arithmatex">\(Ax=b\)</span> with <span class="arithmatex">\(A=\begin{pmatrix}1&amp;1\\1&amp;2\\1&amp;3\end{pmatrix}\)</span>, <span class="arithmatex">\(x=\begin{pmatrix}C\\D\end{pmatrix}\)</span>, <span class="arithmatex">\(b=\begin{pmatrix}2\\3\\5\end{pmatrix}\)</span> — and since the three points clearly aren't collinear (the jumps are <span class="arithmatex">\(+1\)</span> then <span class="arithmatex">\(+2\)</span>, not equal steps), there's no exact solution. This is precisely the unsolvable system Section 2 described, and it gets resolved exactly the way Section 3 lays out: solve <span class="arithmatex">\(A^TA\hat{x}=A^Tb\)</span> instead, and out comes the best-fit line. The full numeric solve — actually computing <span class="arithmatex">\(C\)</span> and <span class="arithmatex">\(D\)</span> — is note 07's job.</p>
+<hr />
+<h2 id="where-this-shows-up-later">Where this shows up later<a class="headerlink" href="#where-this-shows-up-later" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Note 07 (Lecture 16):</strong> finishes the numeric line-fitting example above and generalizes to fitting any number of data points with any polynomial degree.</li>
+<li><strong>Week 2, Gram-Schmidt/QR:</strong> the "easy case" worked example above is the entire motivation for Gram-Schmidt — building a basis where <span class="arithmatex">\(A^TA\)</span> collapses to <span class="arithmatex">\(I\)</span> turns every projection formula in this note into trivial matrix-vector multiplication.</li>
+<li><strong>Week 2, symmetric matrices:</strong> the proof that <span class="arithmatex">\(P\)</span> is symmetric here is a direct preview of why <span class="arithmatex">\(A^TA\)</span> (and projection matrices generally) always have real eigenvalues and orthogonal eigenvectors.</li>
+</ul>
+<h2 id="questions-things-to-revisit">Questions / things to revisit<a class="headerlink" href="#questions-things-to-revisit" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Re-derive <span class="arithmatex">\(P=A(A^TA)^{-1}A^T\)</span> from scratch starting only from "<span class="arithmatex">\(p=A\hat{x}\)</span> and <span class="arithmatex">\(e\perp\)</span> every column" — this is the cleanest single derivation to have memorized cold.</li>
+<li>Make sure the "<span class="arithmatex">\(e\)</span> is in the left null space" connection (Section 3) feels obvious, not just noted in passing — it's the single clearest link between notes 04, 05, and this one.</li>
+<li>Practice explaining out loud <em>why</em> you can't simplify <span class="arithmatex">\(A(A^TA)^{-1}A^T\)</span> to <span class="arithmatex">\(I\)</span> in general, and <em>why</em> it's allowed in the one special case where <span class="arithmatex">\(A\)</span> is square and invertible.</li>
+</ul>
 
   
     
@@ -4282,7 +4778,10 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+        Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+      </span>
+      <span class="md-source-file__fact">
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 21, 2026 09:02:26 UTC">June 21, 2026</span>
       </span>
     
   </aside>
