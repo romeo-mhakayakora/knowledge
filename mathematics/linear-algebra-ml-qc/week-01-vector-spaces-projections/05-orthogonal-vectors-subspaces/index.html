@@ -25,7 +25,7 @@
     
     
       
-        <title>05 — Orthogonal Vectors and Subspaces - Knowledge</title>
+        <title>05 — Orthogonal Vectors and Subspaces (Complete) - Knowledge</title>
       
     
     
@@ -61,14 +61,14 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="05 — Orthogonal Vectors and Subspaces - Knowledge" />
+<meta property="og:title" content="05 — Orthogonal Vectors and Subspaces (Complete) - Knowledge" />
 <meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="05 — Orthogonal Vectors and Subspaces - Knowledge" />
+<meta property="twitter:title" content="05 — Orthogonal Vectors and Subspaces (Complete) - Knowledge" />
 <meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces.png" />
 </head>
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#05-orthogonal-vectors-and-subspaces" class="md-skip">
+        <a href="#05-orthogonal-vectors-and-subspaces-complete" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              05 — Orthogonal Vectors and Subspaces
+              05 — Orthogonal Vectors and Subspaces (Complete)
             
           </span>
         </div>
@@ -1152,7 +1152,7 @@
   <span class="md-ellipsis">
     
   
-    05 — Orthogonal Vectors and Subspaces
+    05 — Orthogonal Vectors and Subspaces (Complete)
   
 
     
@@ -1170,7 +1170,7 @@
   <span class="md-ellipsis">
     
   
-    05 — Orthogonal Vectors and Subspaces
+    05 — Orthogonal Vectors and Subspaces (Complete)
   
 
     
@@ -1196,33 +1196,61 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#big-picture-first" class="md-nav__link">
+  <a href="#0-quick-recap-the-four-fundamental-subspaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Big picture first
+        0. Quick recap: the four fundamental subspaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Quick recap: the four fundamental subspaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-completeness-property-b-p-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The completeness property: \(b = p + e\)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#1-when-are-two-vectors-orthogonal" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#the-dimensional-real-estate-picture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. When are two vectors orthogonal?
+        The "dimensional real estate" picture
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. When are two vectors orthogonal?">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-orthogonal-vectors-proving-the-dot-product-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Orthogonal vectors — proving the dot-product test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Orthogonal vectors — proving the dot-product test">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-the-dot-product-is-the-right-test-the-how" class="md-nav__link">
+  <a href="#why-the-dot-product-is-the-right-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the dot product is the right test (the how)
+        Why the dot product is the right test
       
     </span>
   </a>
@@ -1246,27 +1274,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-when-are-two-subspaces-orthogonal" class="md-nav__link">
+  <a href="#2-orthogonal-subspaces-why-doesnt-intersect-isnt-enough" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. When are two subspaces orthogonal?
+        2. Orthogonal subspaces — why "doesn't intersect" isn't enough
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. When are two subspaces orthogonal?">
+    <nav class="md-nav" aria-label="2. Orthogonal subspaces — why &#34;doesn&#39;t intersect&#34; isn&#39;t enough">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-doesnt-intersect-isnt-enough" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why "doesn't intersect" isn't enough
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#quick-check-in-mathbbr2" class="md-nav__link">
@@ -1297,10 +1314,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-the-proof-built-from-nothing-but-the-definition" class="md-nav__link">
+  <a href="#why" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why (the proof, built from nothing but the definition)
+        Why
       
     </span>
   </a>
@@ -1312,6 +1329,17 @@
     <span class="md-ellipsis">
       
         Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3a-what-happens-to-the-null-space-piece-when-it-passes-through-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3a. What happens to the null-space piece when it passes through \(A\)?
       
     </span>
   </a>
@@ -1335,22 +1363,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-where-this-is-heading-ata-and-least-squares" class="md-nav__link">
+  <a href="#5-ata-and-least-squares-the-geometric-derivation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Where this is heading: \(A^TA\) and least squares
+        5. \(A^TA\) and least squares — the geometric derivation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Where this is heading: \(A^TA\) and least squares">
+    <nav class="md-nav" aria-label="5. \(A^TA\) and least squares — the geometric derivation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#worked-example-full-column-rank-invertible-case" class="md-nav__link">
+  <a href="#the-derivation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Worked example — full column rank (invertible case)
+        The derivation
       
     </span>
   </a>
@@ -1358,10 +1386,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#worked-example-dependent-columns-singular-case" class="md-nav__link">
+  <a href="#worked-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Worked example — dependent columns (singular case)
+        Worked examples
       
     </span>
   </a>
@@ -1370,6 +1398,67 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-full-picture-left-inverse-right-inverse-pseudoinverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The full picture: left inverse, right inverse, pseudoinverse
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. The full picture: left inverse, right inverse, pseudoinverse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-right-inverse-the-minimum-norm-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Right inverse — the minimum-norm case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-rank-deficient-neither-inverse-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Rank-deficient — neither inverse works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-applied-walkthroughs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Applied walkthroughs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-quick-self-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Quick self-test
+      
+    </span>
+  </a>
   
 </li>
       
@@ -4395,33 +4484,61 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#big-picture-first" class="md-nav__link">
+  <a href="#0-quick-recap-the-four-fundamental-subspaces" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Big picture first
+        0. Quick recap: the four fundamental subspaces
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Quick recap: the four fundamental subspaces">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-completeness-property-b-p-e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The completeness property: \(b = p + e\)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#1-when-are-two-vectors-orthogonal" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#the-dimensional-real-estate-picture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. When are two vectors orthogonal?
+        The "dimensional real estate" picture
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. When are two vectors orthogonal?">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-orthogonal-vectors-proving-the-dot-product-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Orthogonal vectors — proving the dot-product test
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Orthogonal vectors — proving the dot-product test">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-the-dot-product-is-the-right-test-the-how" class="md-nav__link">
+  <a href="#why-the-dot-product-is-the-right-test" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why the dot product is the right test (the how)
+        Why the dot product is the right test
       
     </span>
   </a>
@@ -4445,27 +4562,16 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-when-are-two-subspaces-orthogonal" class="md-nav__link">
+  <a href="#2-orthogonal-subspaces-why-doesnt-intersect-isnt-enough" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. When are two subspaces orthogonal?
+        2. Orthogonal subspaces — why "doesn't intersect" isn't enough
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. When are two subspaces orthogonal?">
+    <nav class="md-nav" aria-label="2. Orthogonal subspaces — why &#34;doesn&#39;t intersect&#34; isn&#39;t enough">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#why-doesnt-intersect-isnt-enough" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Why "doesn't intersect" isn't enough
-      
-    </span>
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#quick-check-in-mathbbr2" class="md-nav__link">
@@ -4496,10 +4602,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#why-the-proof-built-from-nothing-but-the-definition" class="md-nav__link">
+  <a href="#why" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why (the proof, built from nothing but the definition)
+        Why
       
     </span>
   </a>
@@ -4511,6 +4617,17 @@
     <span class="md-ellipsis">
       
         Worked example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3a-what-happens-to-the-null-space-piece-when-it-passes-through-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3a. What happens to the null-space piece when it passes through \(A\)?
       
     </span>
   </a>
@@ -4534,22 +4651,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-where-this-is-heading-ata-and-least-squares" class="md-nav__link">
+  <a href="#5-ata-and-least-squares-the-geometric-derivation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Where this is heading: \(A^TA\) and least squares
+        5. \(A^TA\) and least squares — the geometric derivation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5. Where this is heading: \(A^TA\) and least squares">
+    <nav class="md-nav" aria-label="5. \(A^TA\) and least squares — the geometric derivation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#worked-example-full-column-rank-invertible-case" class="md-nav__link">
+  <a href="#the-derivation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Worked example — full column rank (invertible case)
+        The derivation
       
     </span>
   </a>
@@ -4557,10 +4674,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#worked-example-dependent-columns-singular-case" class="md-nav__link">
+  <a href="#worked-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Worked example — dependent columns (singular case)
+        Worked examples
       
     </span>
   </a>
@@ -4569,6 +4686,67 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-the-full-picture-left-inverse-right-inverse-pseudoinverse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. The full picture: left inverse, right inverse, pseudoinverse
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. The full picture: left inverse, right inverse, pseudoinverse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-right-inverse-the-minimum-norm-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Right inverse — the minimum-norm case
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-rank-deficient-neither-inverse-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Rank-deficient — neither inverse works
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-applied-walkthroughs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Applied walkthroughs
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-quick-self-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Quick self-test
+      
+    </span>
+  </a>
   
 </li>
       
@@ -4617,68 +4795,156 @@
   
 
 
-<h1 id="05-orthogonal-vectors-and-subspaces">05 — Orthogonal Vectors and Subspaces<a class="headerlink" href="#05-orthogonal-vectors-and-subspaces" title="Permanent link">&para;</a></h1>
+<h1 id="05-orthogonal-vectors-and-subspaces-complete">05 — Orthogonal Vectors and Subspaces (Complete)<a class="headerlink" href="#05-orthogonal-vectors-and-subspaces-complete" title="Permanent link">&para;</a></h1>
 <p><strong>MIT Lecture:</strong> 14 — Orthogonal Vectors and Subspaces
-<strong>Maps to:</strong> IIT Indore Week 1, Topic 4 — Inner products, norms, and orthogonality
-<strong>Sets up:</strong> Topic 5 — Projections and the least-squares problem</p>
+<strong>Builds on:</strong> Lecture 10 — Four Fundamental Subspaces (recapped below so this note is self-contained; full depth in note 04)
+<strong>Maps to:</strong> IIT Indore Week 1, Topic 4 — Inner products, norms, and orthogonality (extends into Topic 3 and Topic 5)
+<strong>Also covers:</strong> Left inverse, right inverse, pseudoinverse — foreshadows SVD (Week 2)</p>
 <hr />
-<h2 id="big-picture-first">Big picture first<a class="headerlink" href="#big-picture-first" title="Permanent link">&para;</a></h2>
-<p>Up to now we know the <em>sizes</em> of the four fundamental subspaces:</p>
+<h2 id="0-quick-recap-the-four-fundamental-subspaces">0. Quick recap: the four fundamental subspaces<a class="headerlink" href="#0-quick-recap-the-four-fundamental-subspaces" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(A\)</span> be <span class="arithmatex">\(m \times n\)</span> with rank <span class="arithmatex">\(r\)</span> — the number of genuinely independent directions among its rows or columns.</p>
+<p><strong>Input domain <span class="arithmatex">\(\mathbb{R}^n\)</span>:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Subspace</th>
+<th>Definition</th>
+<th>Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Row space</td>
+<td>span of <span class="arithmatex">\(A\)</span>'s rows</td>
+<td><span class="arithmatex">\(r\)</span></td>
+</tr>
+<tr>
+<td>Null space</td>
+<td>all <span class="arithmatex">\(x\)</span> with <span class="arithmatex">\(Ax=0\)</span></td>
+<td><span class="arithmatex">\(n-r\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[r + (n-r) = n \quad \text{(Rank-Nullity Theorem)}\]</div>
+<p><strong>Output domain <span class="arithmatex">\(\mathbb{R}^m\)</span>:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Subspace</th>
+<th>Definition</th>
+<th>Dimension</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Column space</td>
+<td>span of <span class="arithmatex">\(A\)</span>'s columns</td>
+<td><span class="arithmatex">\(r\)</span></td>
+</tr>
+<tr>
+<td>Left null space</td>
+<td>all <span class="arithmatex">\(y\)</span> with <span class="arithmatex">\(A^Ty=0\)</span></td>
+<td><span class="arithmatex">\(m-r\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[r + (m-r) = m\]</div>
+<p><strong>Why "left"?</strong> Transpose <span class="arithmatex">\(A^Ty=0\)</span> to get <span class="arithmatex">\(y^TA = 0^T\)</span> — <span class="arithmatex">\(y^T\)</span> multiplies <span class="arithmatex">\(A\)</span> from the left. There are two equivalent ways to read that equation, and both are worth holding onto:</p>
 <ul>
-<li>Row space and null space both live in <span class="arithmatex">\(\mathbb{R}^n\)</span>, with dimensions <span class="arithmatex">\(r\)</span> and <span class="arithmatex">\(n-r\)</span>.</li>
-<li>Column space and left null space both live in <span class="arithmatex">\(\mathbb{R}^m\)</span>, with dimensions <span class="arithmatex">\(r\)</span> and <span class="arithmatex">\(m-r\)</span>.</li>
+<li><strong>By columns:</strong> each entry of <span class="arithmatex">\(y^TA\)</span> is <span class="arithmatex">\(y\)</span> dotted with one column of <span class="arithmatex">\(A\)</span>, so the whole product is zero exactly when <span class="arithmatex">\(y\)</span> is orthogonal to <em>every column</em> — i.e. orthogonal to the entire column space.</li>
+<li><strong>By rows:</strong> <span class="arithmatex">\(y^TA=0^T\)</span> is literally asking, "what combination of the rows of <span class="arithmatex">\(A\)</span>, weighted by <span class="arithmatex">\(y\)</span>, adds up to a row of all zeros?" — the same question the ordinary null space asks of columns, just mirrored.</li>
 </ul>
-<p>This lecture adds a second, geometric fact on top of the dimension count: each pair doesn't just split the space by dimension — it splits it <strong>at a right angle</strong>.</p>
+<p>If the column space is everywhere <span class="arithmatex">\(A\)</span> <em>can</em> reach in the output space, the left null space is exactly the set of directions in the output space that <span class="arithmatex">\(A\)</span> <em>cannot</em> reach.</p>
+<h3 id="the-completeness-property-b-p-e">The completeness property: <span class="arithmatex">\(b = p + e\)</span><a class="headerlink" href="#the-completeness-property-b-p-e" title="Permanent link">&para;</a></h3>
+<p>This is the output-space mirror of the <span class="arithmatex">\(x = x_{\text{row}} + x_{\text{null}}\)</span> decomposition from Section 3a. Because the column space and left null space are orthogonal complements (proved in Section 4, but stated here since it belongs with the setup), <em>any</em> vector <span class="arithmatex">\(b\)</span> in <span class="arithmatex">\(\mathbb{R}^m\)</span> — reachable by <span class="arithmatex">\(A\)</span> or not — splits cleanly and uniquely into</p>
 <div class="arithmatex">\[
-\text{row space} \perp \text{null space}, \qquad \text{column space} \perp \text{left null space}
+b = p + e, \qquad p \in \text{column space}, \;\; e \in \text{left null space}
 \]</div>
-<p>That single fact is the engine behind least squares later in the chapter, so it's worth understanding <em>why</em> it's true, not just memorizing it.</p>
+<p><span class="arithmatex">\(p\)</span> is the part of <span class="arithmatex">\(b\)</span> that <span class="arithmatex">\(A\)</span> can actually produce; <span class="arithmatex">\(e\)</span> is the part it fundamentally can't. This single decomposition is what makes least squares possible at all (Section 5) — without it, "the closest reachable point to <span class="arithmatex">\(b\)</span>" wouldn't even be a well-defined idea.</p>
+<h3 id="the-dimensional-real-estate-picture">The "dimensional real estate" picture<a class="headerlink" href="#the-dimensional-real-estate-picture" title="Permanent link">&para;</a></h3>
+<p>Treat <span class="arithmatex">\(\mathbb{R}^n\)</span> as having exactly <span class="arithmatex">\(n\)</span> dimensions of usable space, which the row space and null space must divide between them completely — no more, no less. This framing makes two special cases fall out immediately, without recomputing anything:</p>
+<p><strong>Full column rank (<span class="arithmatex">\(r=n\)</span>, matrix is tall or square):</strong>
+- The row space claims all <span class="arithmatex">\(n\)</span> dimensions, so the null space gets <span class="arithmatex">\(n-n=0\)</span> — it shrinks to <span class="arithmatex">\(\{0\}\)</span>.
+- <em>Physical meaning:</em> the null space measures redundancy — it's literally the size of the set of distinct inputs that all get crushed down onto the same output. If it has dimension zero, no two different inputs ever collide on the same output: every column pulls the result in a genuinely new, necessary direction, none of them can combine to cancel each other to zero, and no information from the input is ever lost or compressed away. The map is <strong>injective</strong>.
+- <em>Solving <span class="arithmatex">\(Ax=b\)</span>:</em> there are no free variables left to scale, so you never get infinitely many solutions. For any target <span class="arithmatex">\(b\)</span>, there's either <strong>exactly one</strong> solution (if <span class="arithmatex">\(b\)</span> happens to land inside the column space) or <strong>zero</strong> exact solutions (if it doesn't — the everyday case once there's any noise, which is exactly what Section 5 is built to handle).</p>
+<p><strong>Full row rank (<span class="arithmatex">\(r=m\)</span>, matrix is wide or square):</strong>
+- The column space claims all <span class="arithmatex">\(m\)</span> dimensions of the output, so the left null space gets <span class="arithmatex">\(m-m=0\)</span>.
+- <em>Physical meaning:</em> if a zero null space means "no information lost," a zero left null space means "no unreachable space." The columns span the <em>entire</em> output space, so some combination of them can hit absolutely any target <span class="arithmatex">\(b\)</span> — the map is <strong>surjective</strong>.
+- <em>Solving <span class="arithmatex">\(Ax=b\)</span>:</em> because there's no unreachable space, you're guaranteed at least one exact solution for <em>any</em> <span class="arithmatex">\(b\)</span> you could name — you never even need least squares here, since <span class="arithmatex">\(b\)</span> is already inside the column space by construction. But the input-space null space is non-trivial whenever <span class="arithmatex">\(n&gt;m\)</span>, so that one solution is never alone — you get <strong>1 or infinitely many</strong> solutions, never zero.</p>
+<p><strong>Full rank, square (<span class="arithmatex">\(r=m=n\)</span>):</strong> both shrink to <span class="arithmatex">\(\{0\}\)</span> at once — bijective, invertible, <strong>exactly one</strong> solution, always.</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Null space</th>
+<th>Left null space</th>
+<th>Behavior</th>
+<th>Solutions to <span class="arithmatex">\(Ax=b\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full column rank</td>
+<td><span class="arithmatex">\(\{0\}\)</span></td>
+<td><span class="arithmatex">\(\dim = m-n\)</span></td>
+<td>Injective</td>
+<td>0 or 1</td>
+</tr>
+<tr>
+<td>Full row rank</td>
+<td><span class="arithmatex">\(\dim = n-m\)</span></td>
+<td><span class="arithmatex">\(\{0\}\)</span></td>
+<td>Surjective</td>
+<td>1 or ∞</td>
+</tr>
+<tr>
+<td>Full rank, square</td>
+<td><span class="arithmatex">\(\{0\}\)</span></td>
+<td><span class="arithmatex">\(\{0\}\)</span></td>
+<td>Bijective</td>
+<td>exactly 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Why a tall, full-column-rank matrix is forced to have dependent rows:</strong> this feels like a contradiction the first time you see it — "independent columns" sounds like it should mean "independent everything." It doesn't, for a purely dimensional reason. Each row has <span class="arithmatex">\(n\)</span> entries, so every row lives in <span class="arithmatex">\(\mathbb{R}^n\)</span> — and you can't fit more than <span class="arithmatex">\(n\)</span> linearly independent vectors into an <span class="arithmatex">\(n\)</span>-dimensional space (you can't have 5 independent directions crammed into 3-D space, for instance). If <span class="arithmatex">\(A\)</span> is tall (<span class="arithmatex">\(m&gt;n\)</span>) with full column rank, it has <span class="arithmatex">\(m\)</span> rows squeezed into that <span class="arithmatex">\(n\)</span>-dimensional space with <span class="arithmatex">\(m&gt;n\)</span>, so <strong>at least <span class="arithmatex">\(m-n\)</span> of those rows are guaranteed to be combinations of the others</strong> — not approximately, not usually, but as a matter of dimension-counting necessity. This isn't a flaw; it's the literal structural reason least squares exists — see Section 5.</p>
+<p><em>(This section is a compressed recap. Full derivations and more worked dimension examples live in note 04 — read that first if any of the above feels unfamiliar.)</em></p>
 <hr />
-<h2 id="1-when-are-two-vectors-orthogonal">1. When are two vectors orthogonal?<a class="headerlink" href="#1-when-are-two-vectors-orthogonal" title="Permanent link">&para;</a></h2>
+<h2 id="1-orthogonal-vectors-proving-the-dot-product-test">1. Orthogonal vectors — proving the dot-product test<a class="headerlink" href="#1-orthogonal-vectors-proving-the-dot-product-test" title="Permanent link">&para;</a></h2>
 <p><strong>Definition.</strong> Two vectors are orthogonal if the angle between them is <span class="arithmatex">\(90^\circ\)</span>.</p>
-<p><strong>Test.</strong> <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are orthogonal exactly when</p>
-<div class="arithmatex">\[
-x^Ty = 0
-\]</div>
-<h3 id="why-the-dot-product-is-the-right-test-the-how">Why the dot product is the right test (the <em>how</em>)<a class="headerlink" href="#why-the-dot-product-is-the-right-test-the-how" title="Permanent link">&para;</a></h3>
-<p>This isn't a coincidence — it falls straight out of the Pythagorean theorem. Picture a triangle with sides <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and <span class="arithmatex">\(x+y\)</span> as the hypotenuse. The triangle has a right angle (i.e. <span class="arithmatex">\(x \perp y\)</span>) exactly when:</p>
+<p><strong>Test.</strong> <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are orthogonal exactly when <span class="arithmatex">\(x^Ty = 0\)</span>.</p>
+<h3 id="why-the-dot-product-is-the-right-test">Why the dot product is the right test<a class="headerlink" href="#why-the-dot-product-is-the-right-test" title="Permanent link">&para;</a></h3>
+<p>In one line, without algebra: a right angle means the two short sides squared add up to <em>exactly</em> the long side squared (Pythagoras) — nothing more. When you expand the long side <span class="arithmatex">\(\|x+y\|^2\)</span> algebraically, it naturally splits into <span class="arithmatex">\(\|x\|^2 + \|y\|^2\)</span> plus one extra leftover piece, <span class="arithmatex">\(2x^Ty\)</span>. For the Pythagorean equality to hold <em>exactly</em>, that leftover piece has nowhere to go but zero. So <span class="arithmatex">\(x^Ty=0\)</span> isn't a separate rule — it's the only way the geometry can balance.</p>
+<p>In full algebra: picture a triangle with sides <span class="arithmatex">\(x\)</span>, <span class="arithmatex">\(y\)</span>, and hypotenuse <span class="arithmatex">\(x+y\)</span>. The triangle has a right angle exactly when</p>
 <div class="arithmatex">\[
 \|x\|^2 + \|y\|^2 = \|x+y\|^2
 \]</div>
-<p>Now expand the right-hand side using <span class="arithmatex">\(\|v\|^2 = v^Tv\)</span>:</p>
+<p>Expand the right side using <span class="arithmatex">\(\|v\|^2 = v^Tv\)</span>:</p>
 <div class="arithmatex">\[
 \|x+y\|^2 = (x+y)^T(x+y) = x^Tx + x^Ty + y^Tx + y^Ty
 \]</div>
-<p>Since we're working with real vectors, <span class="arithmatex">\(x^Ty = y^Tx\)</span> (same sum <span class="arithmatex">\(x_1y_1 + x_2y_2 + \dots\)</span> either way), so this becomes:</p>
-<div class="arithmatex">\[
-\|x+y\|^2 = \|x\|^2 + \|y\|^2 + 2x^Ty
-\]</div>
-<p>Plugging back into the Pythagorean equation:</p>
+<p>Since <span class="arithmatex">\(x^Ty = y^Tx\)</span> for real vectors, this becomes <span class="arithmatex">\(\|x\|^2 + \|y\|^2 + 2x^Ty\)</span>. Plug back into the Pythagorean equation:</p>
 <div class="arithmatex">\[
 \|x\|^2 + \|y\|^2 = \|x\|^2 + \|y\|^2 + 2x^Ty \;\;\Longrightarrow\;\; x^Ty = 0
 \]</div>
-<p>Everything cancels except the cross term. That's the whole proof — Pythagoras <em>is</em> the dot-product test, just multiplied out.</p>
-<p><strong>Edge case:</strong> the zero vector is orthogonal to every vector, since <span class="arithmatex">\(0^Ty = 0\)</span> always. Geometrically "angle" is meaningless for the zero vector, but algebraically the test still passes — and treating it as orthogonal to everything is what keeps the definitions downstream (orthogonal subspaces, orthogonal complements) consistent.</p>
+<p>Everything cancels except the cross term — Pythagoras <em>is</em> the dot-product test, just multiplied out.</p>
+<p><strong>Edge case:</strong> the zero vector is orthogonal to everything, since <span class="arithmatex">\(0^Ty=0\)</span> always. "Angle" is meaningless for the zero vector, but the algebra still passes, which keeps later definitions (orthogonal subspaces, complements) consistent.</p>
 <h3 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h3>
-<p>Let <span class="arithmatex">\(x = (3, 1, -2)\)</span> and <span class="arithmatex">\(y = (1, -1, 1)\)</span>.</p>
+<p><span class="arithmatex">\(x = (3, 1, -2)\)</span>, <span class="arithmatex">\(y = (1, -1, 1)\)</span>:</p>
 <div class="arithmatex">\[
-x^Ty = (3)(1) + (1)(-1) + (-2)(1) = 3 - 1 - 2 = 0 \quad \checkmark \text{ orthogonal}
-\]</div>
-<p>Check Pythagoras directly:</p>
-<div class="arithmatex">\[
-\|x\|^2 = 9+1+4 = 14, \qquad \|y\|^2 = 1+1+1 = 3
+x^Ty = 3 - 1 - 2 = 0 \quad \checkmark
 $$
 $$
-x+y = (4, 0, -1), \qquad \|x+y\|^2 = 16+0+1 = 17 = 14+3 \quad \checkmark
+\|x\|^2 = 14, \;\; \|y\|^2 = 3, \;\; x+y=(4,0,-1), \;\; \|x+y\|^2 = 17 = 14+3 \quad \checkmark
 \]</div>
 <hr />
-<h2 id="2-when-are-two-subspaces-orthogonal">2. When are two <em>subspaces</em> orthogonal?<a class="headerlink" href="#2-when-are-two-subspaces-orthogonal" title="Permanent link">&para;</a></h2>
-<p>This is where intuition needs correcting. The natural guess is "two subspaces are orthogonal if they only meet at the origin." That's <strong>necessary but not sufficient</strong>.</p>
-<p><strong>Definition.</strong> Subspace <span class="arithmatex">\(S\)</span> is orthogonal to subspace <span class="arithmatex">\(T\)</span> if <em>every</em> vector in <span class="arithmatex">\(S\)</span> is orthogonal to <em>every</em> vector in <span class="arithmatex">\(T\)</span>.</p>
-<h3 id="why-doesnt-intersect-isnt-enough">Why "doesn't intersect" isn't enough<a class="headerlink" href="#why-doesnt-intersect-isnt-enough" title="Permanent link">&para;</a></h3>
-<p>Think of a wall and the floor of a room, meeting at the origin (the corner). They only share the line where they meet — yet they are clearly <strong>not</strong> orthogonal subspaces, because a <span class="arithmatex">\(45^\circ\)</span> vector in the wall and a vector in the floor are not at <span class="arithmatex">\(90^\circ\)</span> to each other. Worse: any vector lying exactly on the wall–floor seam belongs to <em>both</em> planes, so it would have to be orthogonal to itself — impossible unless it's zero. Two genuine orthogonal subspaces can only share the zero vector, but sharing only the zero vector doesn't guarantee orthogonality.</p>
+<h2 id="2-orthogonal-subspaces-why-doesnt-intersect-isnt-enough">2. Orthogonal subspaces — why "doesn't intersect" isn't enough<a class="headerlink" href="#2-orthogonal-subspaces-why-doesnt-intersect-isnt-enough" title="Permanent link">&para;</a></h2>
+<p><strong>Definition.</strong> <span class="arithmatex">\(S\)</span> is orthogonal to <span class="arithmatex">\(T\)</span> if <em>every</em> vector in <span class="arithmatex">\(S\)</span> is orthogonal to <em>every</em> vector in <span class="arithmatex">\(T\)</span>.</p>
+<p>The natural guess — "two subspaces are orthogonal if they only meet at the origin" — is <strong>necessary but not sufficient</strong>. Two examples make this concrete:</p>
+<ul>
+<li><strong>In the plane:</strong> draw two lines crossing at a shallow <span class="arithmatex">\(15^\circ\)</span> angle. They're both 1-D subspaces, and they only intersect at the origin — yet they're obviously nowhere near <span class="arithmatex">\(90^\circ\)</span>. No shared "seam," and the test still fails.</li>
+<li><strong>In 3-D, the wall and floor of a room:</strong> these intersect along a whole line (the corner seam), so they fail even more directly — any vector on that seam belongs to both planes, so it would have to be orthogonal to itself, which is impossible unless it's zero. And even ignoring the seam, a <span class="arithmatex">\(45^\circ\)</span> vector on the wall and a vector along the floor aren't at <span class="arithmatex">\(90^\circ\)</span> to each other anyway.</li>
+</ul>
 <h3 id="quick-check-in-mathbbr2">Quick check in <span class="arithmatex">\(\mathbb{R}^2\)</span><a class="headerlink" href="#quick-check-in-mathbbr2" title="Permanent link">&para;</a></h3>
-<p>The only subspaces of the plane are <span class="arithmatex">\(\{0\}\)</span>, lines through the origin, and the whole plane.</p>
 <table>
 <thead>
 <tr>
@@ -4696,12 +4962,12 @@ x+y = (4, 0, -1), \qquad \|x+y\|^2 = 16+0+1 = 17 = 14+3 \quad \checkmark
 <tr>
 <td>Line</td>
 <td>Whole plane</td>
-<td>Never (the line is <em>inside</em> the plane)</td>
+<td>Never (line is <em>inside</em> the plane)</td>
 </tr>
 <tr>
 <td>Line</td>
 <td>A different line</td>
-<td>Only if they're literally perpendicular</td>
+<td>Only if literally perpendicular</td>
 </tr>
 </tbody>
 </table>
@@ -4709,84 +4975,151 @@ x+y = (4, 0, -1), \qquad \|x+y\|^2 = 16+0+1 = 17 = 14+3 \quad \checkmark
 <hr />
 <h2 id="3-the-main-result-row-space-null-space">3. The main result: row space ⊥ null space<a class="headerlink" href="#3-the-main-result-row-space-null-space" title="Permanent link">&para;</a></h2>
 <p><strong>Claim:</strong> every vector in the null space of <span class="arithmatex">\(A\)</span> is orthogonal to every vector in the row space of <span class="arithmatex">\(A\)</span>.</p>
-<h3 id="why-the-proof-built-from-nothing-but-the-definition">Why (the proof, built from nothing but the definition)<a class="headerlink" href="#why-the-proof-built-from-nothing-but-the-definition" title="Permanent link">&para;</a></h3>
-<p>A vector <span class="arithmatex">\(x\)</span> in the null space satisfies <span class="arithmatex">\(Ax = 0\)</span>. Write that out row by row:</p>
+<h3 id="why">Why<a class="headerlink" href="#why" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(x\)</span> in the null space means <span class="arithmatex">\(Ax=0\)</span>. Written row by row, each entry of that equation is literally a dot product: <span class="arithmatex">\(\text{row}_i \cdot x = 0\)</span> for every row. So <span class="arithmatex">\(x\)</span> is automatically orthogonal to every individual row — that fact was hiding inside <span class="arithmatex">\(Ax=0\)</span> the whole time.</p>
+<p>But the row <em>space</em> is more than the rows themselves — it's every combination of them. That extends for free, by linearity of the dot product: if <span class="arithmatex">\(\text{row}_1 \cdot x = 0\)</span> and <span class="arithmatex">\(\text{row}_2 \cdot x = 0\)</span>, then for any scalars,</p>
 <div class="arithmatex">\[
-\begin{pmatrix} \text{row}_1 \\ \text{row}_2 \\ \vdots \\ \text{row}_m \end{pmatrix} x = \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{pmatrix}
+(c_1\,\text{row}_1 + c_2\,\text{row}_2)\cdot x = c_1(\text{row}_1\cdot x) + c_2(\text{row}_2\cdot x) = 0
 \]</div>
-<p>Each line of this is literally a dot product: <span class="arithmatex">\(\text{row}_i \cdot x = 0\)</span>. So <span class="arithmatex">\(x\)</span> is automatically orthogonal to <strong>every row</strong> of <span class="arithmatex">\(A\)</span> — that fact was hiding inside <span class="arithmatex">\(Ax=0\)</span> the whole time.</p>
-<p>But the row <em>space</em> is more than just the rows — it's every combination of them. So we need <span class="arithmatex">\(x\)</span> orthogonal to combinations too. That follows immediately from linearity of the dot product: if <span class="arithmatex">\(\text{row}_1 \cdot x = 0\)</span> and <span class="arithmatex">\(\text{row}_2 \cdot x = 0\)</span>, then for any scalars <span class="arithmatex">\(c_1, c_2\)</span>:</p>
-<div class="arithmatex">\[
-(c_1\,\text{row}_1 + c_2\,\text{row}_2) \cdot x = c_1(\text{row}_1 \cdot x) + c_2(\text{row}_2 \cdot x) = 0
-\]</div>
-<p>So <span class="arithmatex">\(x\)</span> is orthogonal to <em>any</em> linear combination of the rows — i.e. to the entire row space. The same argument applied to <span class="arithmatex">\(A^T\)</span> gives column space ⊥ left null space.</p>
+<p>So <span class="arithmatex">\(x\)</span> is orthogonal to <em>any</em> combination of the rows — the entire row space. The same argument on <span class="arithmatex">\(A^T\)</span> gives column space ⊥ left null space.</p>
 <h3 id="worked-example_1">Worked example<a class="headerlink" href="#worked-example_1" title="Permanent link">&para;</a></h3>
-<p>Let <span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; -1 &amp; 2 \\ 2 &amp; -2 &amp; 4 \end{pmatrix}\)</span>. Both rows are multiples of <span class="arithmatex">\((1,-1,2)\)</span>, so the row space is the line through <span class="arithmatex">\((1,-1,2)\)</span> — rank <span class="arithmatex">\(1\)</span>.</p>
-<p>Null space: solve <span class="arithmatex">\(x_1 - x_2 + 2x_3 = 0\)</span>. Pick <span class="arithmatex">\(x = (1, 1, 0)\)</span>:</p>
+<p><span class="arithmatex">\(A = \begin{pmatrix} 1 &amp; -1 &amp; 2 \\ 2 &amp; -2 &amp; 4 \end{pmatrix}\)</span> — both rows are multiples of <span class="arithmatex">\((1,-1,2)\)</span>, rank 1.</p>
+<p>Null space: solve <span class="arithmatex">\(x_1-x_2+2x_3=0\)</span>. Take <span class="arithmatex">\(x=(1,1,0)\)</span>: checks out, and <span class="arithmatex">\((1)(1)+(-1)(1)+(2)(0)=0\)</span> — orthogonal to the row, as required. Geometrically, this null space is the entire plane perpendicular to <span class="arithmatex">\((1,-1,2)\)</span> — the same "normal vector" idea from calculus.</p>
+<h3 id="3a-what-happens-to-the-null-space-piece-when-it-passes-through-a">3a. What happens to the null-space piece when it passes through <span class="arithmatex">\(A\)</span>?<a class="headerlink" href="#3a-what-happens-to-the-null-space-piece-when-it-passes-through-a" title="Permanent link">&para;</a></h3>
+<p>Since row space and null space split all of <span class="arithmatex">\(\mathbb{R}^n\)</span> between them (Section 4), any <span class="arithmatex">\(x\)</span> decomposes uniquely as <span class="arithmatex">\(x = x_{\text{row}} + x_{\text{null}}\)</span>. Applying <span class="arithmatex">\(A\)</span>:</p>
 <div class="arithmatex">\[
-1 - 1 + 2(0) = 0 \quad \checkmark \text{ in the null space}
+Ax = Ax_{\text{row}} + Ax_{\text{null}} = Ax_{\text{row}} + 0
 \]</div>
-<p>Check orthogonality to the row:</p>
-<div class="arithmatex">\[
-(1)(1) + (-1)(1) + (2)(0) = 0 \quad \checkmark
-\]</div>
-<p>Geometrically: the null space here is a whole <em>plane</em> in <span class="arithmatex">\(\mathbb{R}^3\)</span> (dimension <span class="arithmatex">\(n - r = 3 - 1 = 2\)</span>), and that plane is exactly the set of vectors perpendicular to <span class="arithmatex">\((1,-1,2)\)</span> — the same "normal vector" idea from calculus, now explained by linear algebra.</p>
+<p>The null-space piece doesn't shrink or distort — it's <strong>completely erased</strong> the instant <span class="arithmatex">\(A\)</span> acts, by definition. <span class="arithmatex">\(A\)</span> never "sees" that component at all; only <span class="arithmatex">\(x_{\text{row}}\)</span> survives. The row space carries all the real information; the null space is the part <span class="arithmatex">\(A\)</span> is structurally blind to.</p>
 <hr />
 <h2 id="4-orthogonal-complements-all-not-just-some">4. Orthogonal complements — "all," not just "some"<a class="headerlink" href="#4-orthogonal-complements-all-not-just-some" title="Permanent link">&para;</a></h2>
-<p>This is the upgrade that makes the fact genuinely useful, not just true.</p>
-<p><strong>Definition.</strong> The orthogonal complement of a subspace <span class="arithmatex">\(S\)</span> in <span class="arithmatex">\(\mathbb{R}^n\)</span> contains <em>every</em> vector orthogonal to <span class="arithmatex">\(S\)</span> — not merely some perpendicular vectors sitting nearby.</p>
-<p>The null space isn't just <em>a</em> subspace that happens to be orthogonal to the row space — it is the <em>entire</em> orthogonal complement of the row space in <span class="arithmatex">\(\mathbb{R}^n\)</span>. That's a stronger statement, and the dimension count backs it up:</p>
+<p><strong>Definition.</strong> The orthogonal complement of <span class="arithmatex">\(S\)</span> contains <em>every</em> vector orthogonal to <span class="arithmatex">\(S\)</span> — not merely some.</p>
+<p>Two illustrations of why "some" isn't enough:</p>
+<ul>
+<li>In <span class="arithmatex">\(\mathbb{R}^3\)</span>, let <span class="arithmatex">\(S\)</span> be the vertical <span class="arithmatex">\(z\)</span>-axis. The <span class="arithmatex">\(x\)</span>-axis alone is orthogonal to <span class="arithmatex">\(S\)</span> — but it's not the complement, since it leaves out the <span class="arithmatex">\(y\)</span>-axis and every diagonal line in the floor that's also at <span class="arithmatex">\(90^\circ\)</span> to <span class="arithmatex">\(S\)</span>. The actual orthogonal complement is the <em>entire</em> floor (the <span class="arithmatex">\(xy\)</span>-plane) — the full, exhaustive set.</li>
+<li>The null space isn't just <em>a</em> subspace that happens to be orthogonal to the row space — by the proof in Section 3, it gathers up <em>every</em> vector orthogonal to the row space. It's the complete complement, not a sample of one.</li>
+</ul>
+<p>The dimension count confirms it:</p>
 <div class="arithmatex">\[
-\dim(\text{row space}) + \dim(\text{null space}) = r + (n - r) = n
+\dim(\text{row space}) + \dim(\text{null space}) = r + (n-r) = n
 \]</div>
-<p>There's no room left over. This is also why you can't have a line and a line be row-space/null-space partners in <span class="arithmatex">\(\mathbb{R}^3\)</span> — <span class="arithmatex">\(1 + 1 \ne 3\)</span>. A rank-1 matrix in <span class="arithmatex">\(\mathbb{R}^3\)</span> must pair a 1-D row space with a 2-D null space (a line and a plane), never two lines.</p>
+<p>No room left over — which is why you can never have a 1-D line as both the row space and the null space in <span class="arithmatex">\(\mathbb{R}^3\)</span> (<span class="arithmatex">\(1+1\ne3\)</span>). A rank-1 matrix in <span class="arithmatex">\(\mathbb{R}^3\)</span> must pair a 1-D row space with a 2-D null space.</p>
 <blockquote>
-<p><strong>Fundamental Theorem of Linear Algebra — Part 2:</strong> the four subspaces aren't just sized correctly (Part 1, rank-nullity); they're also oriented at <span class="arithmatex">\(90^\circ\)</span> as orthogonal complements of each other.</p>
+<p><strong>Fundamental Theorem of Linear Algebra — Part 2:</strong> the four subspaces aren't just correctly sized (Part 1, rank-nullity); they're oriented at <span class="arithmatex">\(90^\circ\)</span> as orthogonal complements.</p>
 </blockquote>
 <hr />
-<h2 id="5-where-this-is-heading-ata-and-least-squares">5. Where this is heading: <span class="arithmatex">\(A^TA\)</span> and least squares<a class="headerlink" href="#5-where-this-is-heading-ata-and-least-squares" title="Permanent link">&para;</a></h2>
-<p><strong>The real problem of this chapter:</strong> solve <span class="arithmatex">\(Ax = b\)</span> when <span class="arithmatex">\(b\)</span> is <em>not</em> in the column space — i.e., no exact solution exists. This is the normal situation when you have more equations than unknowns: many noisy measurements (sensor readings, repeated pulse measurements, satellite tracking) and few true parameters. You don't want to throw away "extra" equations — you want the solution that uses <em>all</em> of them best.</p>
-<p>The matrix that makes this solvable is <span class="arithmatex">\(A^TA\)</span>.</p>
-<p><strong>Why <span class="arithmatex">\(A^TA\)</span> is square and symmetric:</strong></p>
-<ul>
-<li><span class="arithmatex">\(A\)</span> is <span class="arithmatex">\(m \times n\)</span>, so <span class="arithmatex">\(A^T\)</span> is <span class="arithmatex">\(n \times m\)</span>, and <span class="arithmatex">\(A^TA\)</span> is <span class="arithmatex">\(n \times n\)</span> — square.</li>
-<li><span class="arithmatex">\((A^TA)^T = A^T(A^T)^T = A^TA\)</span> — symmetric, since transposing twice cancels.</li>
-</ul>
-<p><strong>Why we care whether <span class="arithmatex">\(A^TA\)</span> is invertible:</strong> the strategy for the noisy system is to multiply both sides of <span class="arithmatex">\(Ax=b\)</span> by <span class="arithmatex">\(A^T\)</span>, giving the <em>normal equation</em>:</p>
+<h2 id="5-ata-and-least-squares-the-geometric-derivation">5. <span class="arithmatex">\(A^TA\)</span> and least squares — the geometric derivation<a class="headerlink" href="#5-ata-and-least-squares-the-geometric-derivation" title="Permanent link">&para;</a></h2>
+<p><strong>The real problem:</strong> solve <span class="arithmatex">\(Ax=b\)</span> when <span class="arithmatex">\(b\)</span> isn't in the column space — the everyday case with more equations (rows) than unknowns (columns) and any measurement noise.</p>
+<p><strong>Why <span class="arithmatex">\(A^TA\)</span> is square and symmetric:</strong> <span class="arithmatex">\(A\)</span> is <span class="arithmatex">\(m\times n\)</span>, so <span class="arithmatex">\(A^TA\)</span> is <span class="arithmatex">\(n\times n\)</span>; and <span class="arithmatex">\((A^TA)^T = A^T(A^T)^T = A^TA\)</span>.</p>
+<h3 id="the-derivation">The derivation<a class="headerlink" href="#the-derivation" title="Permanent link">&para;</a></h3>
+<p>Since <span class="arithmatex">\(b\)</span> is unreachable, find the closest reachable point instead. "Closest" inside a subspace always means dropping a perpendicular — Section 1's idea, applied to a whole subspace. Call that point <span class="arithmatex">\(p\)</span>, the <strong>projection</strong> of <span class="arithmatex">\(b\)</span> onto the column space, with <span class="arithmatex">\(A\hat{x}=p\)</span> for some <span class="arithmatex">\(\hat{x}\)</span>.</p>
+<p>The gap is the <strong>error vector</strong> <span class="arithmatex">\(e = b - A\hat{x}\)</span>. Because <span class="arithmatex">\(p\)</span> is the <em>closest</em> point, <span class="arithmatex">\(e\)</span> must be perpendicular to the entire column space — any other direction would mean <span class="arithmatex">\(p\)</span> wasn't actually closest. "Perpendicular to the entire column space" is exactly the left null space (Section 0), whose defining property is <span class="arithmatex">\(A^Ty=0\)</span>. Apply <span class="arithmatex">\(A^T\)</span> to the error vector:</p>
 <div class="arithmatex">\[
-A^TA\,\hat{x} = A^Tb
+A^T(b - A\hat{x}) = 0 \;\;\Longrightarrow\;\; A^TA\,\hat{x} = A^Tb
 \]</div>
-<p>This will have a clean, unique solution <span class="arithmatex">\(\hat{x}\)</span> exactly when <span class="arithmatex">\(A^TA\)</span> is invertible.</p>
-<p><strong>The key fact (tying straight back to Section 3):</strong></p>
+<p>That's the normal equation, derived from nothing but "closest point ⟹ perpendicular error ⟹ error lives in the left null space."</p>
+<p><strong>Key fact:</strong> <span class="arithmatex">\(\text{null space}(A^TA) = \text{null space}(A)\)</span> and <span class="arithmatex">\(\text{rank}(A^TA)=\text{rank}(A)\)</span>, so <span class="arithmatex">\(A^TA\)</span> is invertible exactly when <span class="arithmatex">\(A\)</span> has independent columns. This gives the <strong>left inverse</strong>:</p>
 <div class="arithmatex">\[
-\text{null space of } A^TA = \text{null space of } A, \qquad \text{rank}(A^TA) = \text{rank}(A)
+\hat{x} = (A^TA)^{-1}A^Tb
 \]</div>
-<p>So <span class="arithmatex">\(A^TA\)</span> is invertible <strong>exactly when <span class="arithmatex">\(A\)</span> has independent columns</strong> — i.e., when the only solution to <span class="arithmatex">\(Ax=0\)</span> is <span class="arithmatex">\(x=0\)</span>.</p>
-<h3 id="worked-example-full-column-rank-invertible-case">Worked example — full column rank (invertible case)<a class="headerlink" href="#worked-example-full-column-rank-invertible-case" title="Permanent link">&para;</a></h3>
+<h3 id="worked-examples">Worked examples<a class="headerlink" href="#worked-examples" title="Permanent link">&para;</a></h3>
+<p>Full column rank: <span class="arithmatex">\(A=\begin{pmatrix}1&amp;0\\0&amp;1\\1&amp;1\end{pmatrix}\)</span>, <span class="arithmatex">\(A^TA=\begin{pmatrix}2&amp;1\\1&amp;2\end{pmatrix}\)</span>, <span class="arithmatex">\(\det=3\ne0\)</span> — invertible.</p>
+<p>Dependent columns: <span class="arithmatex">\(A=\begin{pmatrix}1&amp;2\\2&amp;4\\3&amp;6\end{pmatrix}\)</span> (col 2 = 2×col 1), <span class="arithmatex">\(A^TA=\begin{pmatrix}14&amp;28\\28&amp;56\end{pmatrix}\)</span>, <span class="arithmatex">\(\det=0\)</span> — singular, exactly as predicted.</p>
+<p><strong>Why row dependence never threatens this:</strong> <span class="arithmatex">\((A^TA)\)</span> only depends on column rank. A tall matrix with independent columns is <em>guaranteed</em> to have dependent rows (Section 0) — harmless here, since <span class="arithmatex">\((A^TA)\)</span> never references row rank. Physically: consistent dependent rows (row 2 exactly double row 1, target doubled too) add no new information; conflicting dependent rows (the realistic case with noise) are exactly what pushes <span class="arithmatex">\(b\)</span> outside the column space in the first place — and the left inverse is the mediator that minimizes the total squared disagreement.</p>
+<hr />
+<h2 id="6-the-full-picture-left-inverse-right-inverse-pseudoinverse">6. The full picture: left inverse, right inverse, pseudoinverse<a class="headerlink" href="#6-the-full-picture-left-inverse-right-inverse-pseudoinverse" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Matrix shape</th>
+<th>Rank condition</th>
+<th>What's trivial</th>
+<th>Tool</th>
+<th>Formula</th>
+<th>What it optimizes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tall (<span class="arithmatex">\(m&gt;n\)</span>)</td>
+<td>Full column rank</td>
+<td>Null space</td>
+<td><strong>Left inverse</strong></td>
+<td><span class="arithmatex">\((A^TA)^{-1}A^T\)</span></td>
+<td><span class="arithmatex">\(\min\lVert b-Ax\rVert\)</span> (Section 5)</td>
+</tr>
+<tr>
+<td>Wide (<span class="arithmatex">\(n&gt;m\)</span>)</td>
+<td>Full row rank</td>
+<td>Left null space</td>
+<td><strong>Right inverse</strong></td>
+<td><span class="arithmatex">\(A^T(AA^T)^{-1}\)</span></td>
+<td><span class="arithmatex">\(\min\lVert x\rVert\)</span> among exact solutions</td>
+</tr>
+<tr>
+<td>Square</td>
+<td>Full rank</td>
+<td>Both</td>
+<td><strong>True inverse</strong></td>
+<td><span class="arithmatex">\(A^{-1}\)</span></td>
+<td>Exact, unique — nothing to optimize</td>
+</tr>
+<tr>
+<td>Any</td>
+<td>Rank-deficient</td>
+<td>Neither</td>
+<td><strong>Pseudoinverse</strong></td>
+<td><span class="arithmatex">\(A^+\)</span> (via SVD)</td>
+<td>Both simultaneously</td>
+</tr>
+</tbody>
+</table>
+<h3 id="61-right-inverse-the-minimum-norm-case">6.1 Right inverse — the minimum-norm case<a class="headerlink" href="#61-right-inverse-the-minimum-norm-case" title="Permanent link">&para;</a></h3>
+<p>Flip the shape: <span class="arithmatex">\(n&gt;m\)</span> (underdetermined), rows independent (<span class="arithmatex">\(r=m\)</span>). The left null space vanishes, so every <span class="arithmatex">\(b\)</span> is reachable — but the input-space null space is now non-trivial (<span class="arithmatex">\(n-m&gt;0\)</span>), so there are <strong>infinitely many exact solutions</strong>. The question flips from "what's closest?" to "which exact solution is best?"</p>
+<p>Forcing the normal-equation approach fails: <span class="arithmatex">\(A^TA\)</span> is <span class="arithmatex">\(n\times n\)</span> but only rank <span class="arithmatex">\(m&lt;n\)</span>, so it's singular. Use <span class="arithmatex">\(AA^T\)</span> instead — <span class="arithmatex">\(m\times m\)</span>, full rank (rows independent), giving the <strong>right inverse</strong>:</p>
 <div class="arithmatex">\[
-A = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}, \qquad A^TA = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2 \end{pmatrix}
+x^* = A^T(AA^T)^{-1}b
 \]</div>
-<p><span class="arithmatex">\(\det(A^TA) = 4 - 1 = 3 \ne 0\)</span> — invertible, because the two columns of <span class="arithmatex">\(A\)</span> are independent.</p>
-<h3 id="worked-example-dependent-columns-singular-case">Worked example — dependent columns (singular case)<a class="headerlink" href="#worked-example-dependent-columns-singular-case" title="Permanent link">&para;</a></h3>
-<div class="arithmatex">\[
-A = \begin{pmatrix} 1 &amp; 2 \\ 2 &amp; 4 \\ 3 &amp; 6 \end{pmatrix} \quad (\text{column 2} = 2 \times \text{column 1})
-\]</div>
-<div class="arithmatex">\[
-A^TA = \begin{pmatrix} 14 &amp; 28 \\ 28 &amp; 56 \end{pmatrix}, \qquad \det(A^TA) = 14(56) - 28(28) = 784 - 784 = 0
-\]</div>
-<p>Singular — exactly as predicted, because <span class="arithmatex">\(A\)</span>'s columns are dependent (<span class="arithmatex">\(\text{rank}(A) = 1\)</span>).</p>
+<p>Geometrically, <span class="arithmatex">\(x^*\)</span> is the exact solution with smallest length — it lives entirely in the row space, contributing nothing from the null space (recall Section 3a: <span class="arithmatex">\(A\)</span> can't even see that component anyway).</p>
+<h3 id="62-rank-deficient-neither-inverse-works">6.2 Rank-deficient — neither inverse works<a class="headerlink" href="#62-rank-deficient-neither-inverse-works" title="Permanent link">&para;</a></h3>
+<p>If both rows and columns are dependent (<span class="arithmatex">\(r&lt;m\)</span> and <span class="arithmatex">\(r&lt;n\)</span>), <span class="arithmatex">\((A^TA)\)</span> and <span class="arithmatex">\((AA^T)\)</span> are both singular. Neither inverse exists. The fix is the <strong>Singular Value Decomposition</strong>, isolating exactly the <span class="arithmatex">\(r\)</span> informative directions and building the <strong>Moore–Penrose pseudoinverse</strong> <span class="arithmatex">\(A^+\)</span> — which reduces to the left inverse, right inverse, or true inverse in their respective special cases. See Week 2, Topic 4.</p>
+<hr />
+<h2 id="7-applied-walkthroughs">7. Applied walkthroughs<a class="headerlink" href="#7-applied-walkthroughs" title="Permanent link">&para;</a></h2>
+<p>Short, worked-through scenarios to ground the theory in something concrete.</p>
+<p><strong>A neural net layer, <span class="arithmatex">\(100\times80\)</span>, full column rank.</strong> Row space: dim 80 (= all of <span class="arithmatex">\(\mathbb{R}^{80}\)</span>). Null space: dim 0. Column space: dim 80, sitting inside the 100-dimensional output. Left null space: dim 20 — twenty output directions this layer's weights simply cannot reach.</p>
+<p><strong>A square <span class="arithmatex">\(50\times50\)</span> matrix with a null space of dimension 5.</strong> By rank-nullity, <span class="arithmatex">\(r + 5 = 50\)</span>, so <span class="arithmatex">\(r=45\)</span> — this matrix is rank-deficient, not full rank, even though it's square. Can it reach every point in <span class="arithmatex">\(\mathbb{R}^{50}\)</span>? No: since <span class="arithmatex">\(m=n=50\)</span> here, row rank = column rank = <span class="arithmatex">\(r=45\)</span> too, so the left null space has dimension <span class="arithmatex">\(m-r = 50-45=5\)</span> as well — five full dimensions of the output are unreachable. A non-trivial null space and a non-trivial left null space <em>both</em> show up together here precisely because the matrix is square: for a square matrix, <span class="arithmatex">\(r&lt;n\)</span> always forces <span class="arithmatex">\(r&lt;m\)</span> in lockstep, so injectivity and surjectivity fail or hold together, never just one of them (this is Section 0's "impossible matrix" fact, Q4 below, working in reverse).</p>
+<p><strong>A robot at a kinematic singularity.</strong> The Jacobian <span class="arithmatex">\(J\)</span> normally maps joint velocities to 3-D foot velocity. At full leg extension, the column space of <span class="arithmatex">\(J\)</span> momentarily <em>loses a dimension</em> — the robot can no longer push its foot directly along the leg's axis. By Section 0's "real estate" logic, that lost dimension has to go <em>somewhere</em>: it shows up as the left null space gaining exactly that dimension. Physically, the expanded left null space is the literal direction of motion the robot has lost control over in that instant.</p>
+<p><strong>A trading pipeline: 1,000 indicator columns, 50,000 timestamp rows, <span class="arithmatex">\(A^TA\)</span> still won't invert.</strong> With <span class="arithmatex">\(m \gg n\)</span>, you'd expect a clean left-inverse setup — row dependence here is expected and harmless (Section 5). A singular <span class="arithmatex">\(A^TA\)</span> despite the huge row count means the <em>columns themselves</em> aren't actually independent: some indicators are exact or near-exact combinations of others (duplicated or derived features). That shows up as a non-trivial null space tied directly to those columns — no number of additional rows can fix column dependence, since <span class="arithmatex">\((A^TA)\)</span> never looks at row count at all.</p>
+<p><strong>A Markov/RL transition matrix where every state is reachable, but several actions land on the same state.</strong> "Every state reachable" means the column space spans the whole output — full row rank, left null space <span class="arithmatex">\(=\{0\}\)</span>. "Multiple actions, same state" means the map isn't injective — the null space is non-trivial. To trace an optimal action sequence backward through this many-to-one-but-fully-reachable system, you want the <strong>right inverse</strong>: it picks the minimum-effort action sequence among the many that land exactly on target, rather than approximating something unreachable.</p>
+<p><strong>A wide recommender system: 1,000 user features mapped to 5 behavior categories, rows independent.</strong> Left null space vanishes — every category combination is reachable. Use <span class="arithmatex">\((AA^T)^{-1}\)</span>, the right inverse, which finds the smallest-magnitude feature-weight vector that exactly reproduces the target category mix — minimizing redundant, unnecessary weight rather than minimizing error (there is none to minimize here).</p>
+<hr />
+<h2 id="8-quick-self-test">8. Quick self-test<a class="headerlink" href="#8-quick-self-test" title="Permanent link">&para;</a></h2>
+<p>Answer from memory before checking the section reference.</p>
+<ol>
+<li><strong>The proof, in words only:</strong> how does Pythagoras force the dot product of perpendicular vectors to be exactly zero? <em>(→ §1)</em></li>
+<li><strong>The "all vs. some" trap:</strong> in <span class="arithmatex">\(\mathbb{R}^4\)</span>, you find a 2-D plane <span class="arithmatex">\(S\)</span> and a 1-D line <span class="arithmatex">\(T\)</span> where every vector in <span class="arithmatex">\(S\)</span> is orthogonal to every vector in <span class="arithmatex">\(T\)</span>. Are they necessarily orthogonal complements? <em>(→ §4)</em></li>
+<li><strong>The error vector:</strong> why is <span class="arithmatex">\(e=b-A\hat{x}\)</span> forced specifically into the left null space, not just "some" perpendicular subspace? <em>(→ §5)</em></li>
+<li><strong>The impossible matrix:</strong> why can a matrix never have both its null space and left null space equal to <span class="arithmatex">\(\{0\}\)</span> unless it's square? <em>(→ §0)</em></li>
+<li><strong>The orthogonal paradox:</strong> <span class="arithmatex">\(A\)</span> is square, <span class="arithmatex">\(n\times n\)</span>. You find a non-zero <span class="arithmatex">\(v\)</span> in the row space with <span class="arithmatex">\(Av=0\)</span>. Why is this impossible? <em>(→ §3 + §4 together)</em></li>
+<li><strong>No free variables:</strong> explain in your own words why full column rank rules out "infinitely many solutions" as an outcome for <span class="arithmatex">\(Ax=b\)</span> — what specifically would have to exist for that outcome to be possible, and why does full column rank kill it? <em>(→ §0, full column rank bullet)</em></li>
+<li><strong>Diagnosing a crash, generalized:</strong> an optimization script throws a singular-matrix error inverting <span class="arithmatex">\(A^TA\)</span>, on a matrix where <span class="arithmatex">\(m \gg n\)</span>. Walk through, from first principles, why row count alone can never rescue this — what's the one and only thing that determines whether <span class="arithmatex">\(A^TA\)</span> is invertible? <em>(→ §5, "why row dependence never threatens this," then invert the logic to find what </em>would<em> threaten it)</em></li>
+<li><strong>The recommender system:</strong> <span class="arithmatex">\(n=1000\)</span> user features map to <span class="arithmatex">\(m=5\)</span> behavior categories, rows independent. Which subspace vanishes completely, and do you reach for <span class="arithmatex">\((A^TA)^{-1}\)</span> or <span class="arithmatex">\((AA^T)^{-1}\)</span> to find the optimal weights — and what are you actually minimizing when you do? <em>(→ §6.1, then the worked walkthrough in §7)</em></li>
+<li><strong>Mixed case:</strong> suppose <span class="arithmatex">\(A\)</span> is tall (<span class="arithmatex">\(m&gt;n\)</span>) but rank-deficient — the columns are <em>also</em> dependent, not just the rows. Which of the four tools in §6's table applies, and why do both the left and right inverse fail here even though the matrix is tall like the "normal" least-squares case? <em>(→ §6.2)</em></li>
+</ol>
 <hr />
 <h2 id="where-this-shows-up-later">Where this shows up later<a class="headerlink" href="#where-this-shows-up-later" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Topic 5 (Projections, least squares):</strong> the orthogonality of row space and null space is <em>the</em> reason <span class="arithmatex">\(A^TA\hat{x} = A^Tb\)</span> works — the error vector <span class="arithmatex">\(b - A\hat{x}\)</span> ends up living in the left null space, perpendicular to the column space, which is precisely how you make an "unsolvable" system as solvable as possible.</li>
-<li><strong>Week 2, Gram-Schmidt/QR:</strong> building orthogonal <em>bases</em> (not just orthogonal subspaces) is the natural next step — this lecture is the geometric foundation that makes Gram-Schmidt meaningful rather than just a computational recipe.</li>
-<li><strong>Week 2, Symmetric matrices:</strong> <span class="arithmatex">\(A^TA\)</span> being symmetric here foreshadows why symmetric matrices get real eigenvalues and orthogonal eigenvectors later.</li>
+<li><strong>Topic 5 (Projections, least squares):</strong> Section 5 <em>is</em> the theory behind <span class="arithmatex">\(A^TA\hat{x}=A^Tb\)</span> — the rest of that topic builds the computational machinery on top of it.</li>
+<li><strong>Week 2, Gram-Schmidt/QR:</strong> building orthogonal <em>bases</em>, not just orthogonal subspaces, is the natural next step.</li>
+<li><strong>Week 2, Symmetric matrices:</strong> <span class="arithmatex">\(A^TA\)</span> being symmetric foreshadows why symmetric matrices get real eigenvalues and orthogonal eigenvectors.</li>
+<li><strong>Week 2, SVD:</strong> Section 6.2's rank-deficient case is exactly what the SVD and pseudoinverse are built to handle.</li>
 </ul>
 <h2 id="questions-things-to-revisit">Questions / things to revisit<a class="headerlink" href="#questions-things-to-revisit" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Re-derive the row space ⊥ null space proof from scratch without looking — the linearity step (orthogonal to each row ⟹ orthogonal to all combinations) is the part most worth being able to reproduce instantly.</li>
-<li>Make sure the "dimensions add to <span class="arithmatex">\(n\)</span>" fact feels obvious, not just memorized — it's what rules out impossible pairings (like two lines in <span class="arithmatex">\(\mathbb{R}^3\)</span>).</li>
-<li>Sit with <em>why</em> <span class="arithmatex">\(A^TA\)</span> inherits the same null space as <span class="arithmatex">\(A\)</span> — it isn't proven in full here, just used; worth re-deriving once Topic 5 introduces it formally.</li>
+<li>Re-derive row space ⊥ null space from scratch — the linearity step is the part most worth being able to reproduce instantly.</li>
+<li>Make the "dimensions add to <span class="arithmatex">\(n\)</span>" fact feel obvious, not memorized.</li>
+<li>Re-derive why <span class="arithmatex">\(A^TA\)</span> inherits <span class="arithmatex">\(A\)</span>'s null space once Topic 5 formalizes it.</li>
+<li>Make sure §5 (left inverse) and §6.1 (right inverse) feel like mirror-image derivations, not two separate things to memorize.</li>
 </ul>
 
   
@@ -4803,7 +5136,7 @@ A^TA = \begin{pmatrix} 14 &amp; 28 \\ 28 &amp; 56 \end{pmatrix}, \qquad \det(A^T
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 17:55:46 UTC">June 20, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 21, 2026 05:51:14 UTC">June 21, 2026</span>
       </span>
     
   </aside>
