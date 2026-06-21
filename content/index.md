@@ -29,30 +29,22 @@ hide:
   </div>
 </div>
 
-<h2 class="homepage-section-label">Explore Domains</h2>
+<h2 class="homepage-section-label">Domains</h2>
 
-<div class="domain-grid">
+<div class="domain-list">
 {% for dom in domain_summary() %}
-<a href="{{ dom.slug }}/" class="domain-card">
-  <div class="domain-card-icon">{{ dom.icon }}</div>
-  <div class="domain-card-body">
-    <h3 class="domain-card-title">{{ dom.name }}</h3>
-    <p class="domain-card-desc">{{ dom.description }}</p>
-  </div>
-  <div class="domain-card-footer">
-    <span class="domain-card-count">{{ dom.note_count }} notes</span>
-    <span class="domain-card-pct">{{ dom.complete_pct }}% complete</span>
-  </div>
-</a>
+<div class="domain-row">
+  <a href="{{ dom.slug }}/" class="domain-link">{{ dom.name }}</a>
+  <span class="domain-count">{{ dom.note_count }} notes</span>
+</div>
 {% endfor %}
 </div>
 
-<h2 class="homepage-section-label">Recent Activity</h2>
+<h2 class="homepage-section-label">Recently Updated</h2>
 
 <div class="activity-feed">
 {% for update in recent_updates(6) %}
 <a href="{{ update.url }}" class="activity-item">
-  <div class="activity-dot"></div>
   <div class="activity-content">
     <span class="activity-title">{{ update.title }}</span>
     <span class="activity-meta">{{ update.status | upper }} · {{ update.updated_date }}</span>

@@ -193,9 +193,15 @@ def define_env(env):
                     
                     if updated_date:
                         rel_path = os.path.relpath(filepath, content_dir).replace(os.sep, '/')
+                        # Convert .md path to clean directory URL (use_directory_urls behavior)
+                        # e.g. "math/prob/notes.md" → "math/prob/notes/"
+                        if rel_path.endswith('.md'):
+                            clean_url = rel_path[:-3] + '/'
+                        else:
+                            clean_url = rel_path
                         notes.append({
                             'title': fm.get('title', file[:-3].replace('-', ' ').title()),
-                            'url': rel_path,
+                            'url': clean_url,
                             'status': fm.get('status', 'draft'),
                             'difficulty': fm.get('difficulty', 'beginner'),
                             'updated_date': updated_date.strftime('%Y-%m-%d'),
