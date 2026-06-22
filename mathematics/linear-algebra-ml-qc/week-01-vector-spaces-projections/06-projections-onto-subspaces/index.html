@@ -4642,11 +4642,22 @@
 <hr />
 <h2 id="1-projecting-onto-a-line">1. Projecting onto a line<a class="headerlink" href="#1-projecting-onto-a-line" title="Permanent link">&para;</a></h2>
 <p><strong>Setup:</strong> a line through the origin, spanned by a single vector <span class="arithmatex">\(a\)</span>. Given some vector <span class="arithmatex">\(b\)</span> not on that line, find the point <span class="arithmatex">\(p\)</span> <em>on the line</em> closest to <span class="arithmatex">\(b\)</span>.</p>
+<blockquote>
+<p><strong>💡 Clarification: What do we mean by "shortest distance"?</strong>
+When dealing with vectors, "distance" can mean a few things. Here is how the geometry breaks down:
+1. <strong>Point to a Line (Orthogonal Projection):</strong> This is what we are doing here. The shortest distance from vector <span class="arithmatex">\(b\)</span> to the line spanned by <span class="arithmatex">\(a\)</span> is the straight perpendicular drop (the error vector <span class="arithmatex">\(e\)</span>).
+2. <strong>Between Two Lines (Skew Lines in 3D):</strong> The shortest path connecting two non-intersecting lines is a segment parallel to their cross product (<span class="arithmatex">\(n = d_1 \times d_2\)</span>), making it mutually perpendicular to both.
+3. <strong>Tip to Tip (Euclidean Distance):</strong> This is just <span class="arithmatex">\(\|b - a\|\)</span>, the straight line connecting the vector tips, which is not necessarily perpendicular to anything unless it forms a right triangle.</p>
+</blockquote>
 <h3 id="why-orthogonality-has-to-be-the-key-fact">Why orthogonality has to be the key fact<a class="headerlink" href="#why-orthogonality-has-to-be-the-key-fact" title="Permanent link">&para;</a></h3>
 <p>Because <span class="arithmatex">\(p\)</span> is on the line, it's some multiple of <span class="arithmatex">\(a\)</span>: <span class="arithmatex">\(p = \hat{x}a\)</span> for a scalar <span class="arithmatex">\(\hat{x}\)</span> we need to find. The error is <span class="arithmatex">\(e = b - \hat{x}a\)</span>. The one geometric fact that pins down "closest point on a line" is that the shortest distance from <span class="arithmatex">\(b\)</span> to the line is along the <em>perpendicular</em> — so <span class="arithmatex">\(e\)</span> must be orthogonal to <span class="arithmatex">\(a\)</span>:</p>
 <div class="arithmatex">\[
 a^T(b - \hat{x}a) = 0
 \]</div>
+<blockquote>
+<p><strong>🔍 Deep Dive: The Machine Learning Connection</strong>
+This geometric truth is the fundamental engine driving optimization algorithms. When building Ordinary Least Squares (OLS) regression or designing loss functions for neural networks, minimizing the error means finding the shortest "distance" between the model's predictions and the actual data. The mathematical guarantee that you have hit the absolute lowest point in your loss is achieved precisely when the error vector is perfectly orthogonal to the subspace spanned by your data features. The math is literally just finding that perpendicular drop.</p>
+</blockquote>
 <h3 id="solving-for-hatx-p-and-the-projection-matrix">Solving for <span class="arithmatex">\(\hat{x}\)</span>, <span class="arithmatex">\(p\)</span>, and the projection matrix<a class="headerlink" href="#solving-for-hatx-p-and-the-projection-matrix" title="Permanent link">&para;</a></h3>
 <p>Expand and isolate <span class="arithmatex">\(\hat{x}\)</span>:</p>
 <div class="arithmatex">\[
@@ -4659,18 +4670,46 @@ p = \hat{x}a = \frac{a^Tb}{a^Ta}\,a
 <h3 id="sanity-checks-the-why-behind-the-formula-not-just-the-formula">Sanity checks (the <em>why</em> behind the formula, not just the formula)<a class="headerlink" href="#sanity-checks-the-why-behind-the-formula-not-just-the-formula" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Double <span class="arithmatex">\(b\)</span>:</strong> <span class="arithmatex">\(\hat{x}\)</span> doubles, so <span class="arithmatex">\(p\)</span> doubles. Makes sense — push the target twice as far out, the shadow it casts on the line moves twice as far too.</li>
+</ul>
+<blockquote>
+<p><strong>🔍 Proof for Doubling <span class="arithmatex">\(b\)</span>:</strong>
+$<span class="arithmatex">\(\hat{x}_{\text{new}} = \frac{a^T(2b)}{a^Ta} = 2\left(\frac{a^Tb}{a^Ta}\right) = 2\hat{x}\)</span>$
+$<span class="arithmatex">\(p_{\text{new}} = (2\hat{x})a = 2(\hat{x}a) = 2p\)</span>$</p>
+</blockquote>
+<ul>
 <li><strong>Double <span class="arithmatex">\(a\)</span> (or flip its sign):</strong> <span class="arithmatex">\(\hat{x}\)</span> gets cut in half (<span class="arithmatex">\(a^Ta\)</span> in the denominator quadruples while <span class="arithmatex">\(a^Tb\)</span> only doubles), and <span class="arithmatex">\(p = \hat{x}a\)</span> ends up exactly the same as before. This makes sense too — doubling <span class="arithmatex">\(a\)</span> doesn't change the <em>line</em>, just how it's labeled, so the projection point shouldn't move at all.</li>
 </ul>
+<blockquote>
+<p><strong>🔍 Proof for Doubling <span class="arithmatex">\(a\)</span>:</strong>
+$<span class="arithmatex">\(\hat{x}_{\text{new}} = \frac{(2a)^Tb}{(2a)^T(2a)} = \frac{2(a^Tb)}{4(a^Ta)} = \frac{1}{2}\hat{x}\)</span>$
+$<span class="arithmatex">\(p_{\text{new}} = \left(\frac{1}{2}\hat{x}\right)(2a) = 1 \cdot (\hat{x}a) = p\)</span>$</p>
+<p><strong>🔍 Proof for Flipping the sign of <span class="arithmatex">\(a\)</span> (<span class="arithmatex">\(-a\)</span>):</strong>
+$<span class="arithmatex">\(\hat{x}_{\text{new}} = \frac{(-a)^Tb}{(-a)^T(-a)} = \frac{-(a^Tb)}{(-1)^2(a^Ta)} = -\hat{x}\)</span>$
+$<span class="arithmatex">\(p_{\text{new}} = (-\hat{x})(-a) = \hat{x}a = p\)</span>$</p>
+</blockquote>
 <h3 id="the-projection-matrix">The projection matrix<a class="headerlink" href="#the-projection-matrix" title="Permanent link">&para;</a></h3>
 <p>Rewrite <span class="arithmatex">\(p\)</span> as a matrix acting on <span class="arithmatex">\(b\)</span>:</p>
 <div class="arithmatex">\[
 p = \underbrace{\frac{aa^T}{a^Ta}}_{P}\,b
 \]</div>
+<blockquote>
+<p><strong>🔍 Deep Dive: Dimensional Analysis (Why <span class="arithmatex">\(P\)</span> is an <span class="arithmatex">\(n \times n\)</span> matrix)</strong>
+We start with <span class="arithmatex">\(p = a\hat{x}\)</span>. Substitute the formula for the scalar <span class="arithmatex">\(\hat{x}\)</span>: 
+$<span class="arithmatex">\(p = a \left( \frac{a^Tb}{a^Ta} \right)\)</span>$
+Slide the scalar denominator out: <span class="arithmatex">\(p = \frac{1}{a^Ta} a(a^Tb)\)</span>. Because matrix multiplication is associative, we can regroup the numerator: <span class="arithmatex">\(p = \frac{1}{a^Ta} (aa^T)b\)</span>. </p>
+<p>Look at the dimensions if <span class="arithmatex">\(a\)</span> is an <span class="arithmatex">\(n \times 1\)</span> column vector:
+* <strong>Denominator (<span class="arithmatex">\(a^Ta\)</span>):</strong> Dot product <span class="arithmatex">\((1 \times n) \times (n \times 1) \rightarrow \mathbf{1 \times 1}\)</span> (Scalar).
+* <strong>Numerator (<span class="arithmatex">\(aa^T\)</span>):</strong> Outer product <span class="arithmatex">\((n \times 1) \times (1 \times n) \rightarrow \mathbf{n \times n}\)</span> (Matrix).
+Because the numerator is an <span class="arithmatex">\(n \times n\)</span> matrix and the denominator is a scalar, <span class="arithmatex">\(P\)</span> expands into a full <span class="arithmatex">\(n \times n\)</span> square matrix.</p>
+</blockquote>
 <p><span class="arithmatex">\(P\)</span> is a genuine <span class="arithmatex">\(n\times n\)</span> matrix (a column <span class="arithmatex">\(a\)</span> times a row <span class="arithmatex">\(a^T\)</span> divided by a number), not just a leftover scalar — and it has three properties worth checking <em>because they'll define what a projection matrix has to look like</em> in any dimension:</p>
 <ul>
 <li><strong>Rank 1.</strong> <span class="arithmatex">\(aa^T\)</span> is a column times a row — the column space of <span class="arithmatex">\(P\)</span> is just the line through <span class="arithmatex">\(a\)</span> itself, dimension 1. Multiplying any <span class="arithmatex">\(b\)</span> by <span class="arithmatex">\(P\)</span> always lands you back on that line, by construction.</li>
+<li><em>Geometric meaning:</em> No matter what wild, high-dimensional vector <span class="arithmatex">\(b\)</span> you multiply by <span class="arithmatex">\(P\)</span>, the matrix strips away all other dimensions and forces the output to land exactly on the 1D line defined by <span class="arithmatex">\(a\)</span>. It acts as a rigid dimensional bottleneck.</li>
 <li><strong>Symmetric.</strong> <span class="arithmatex">\(P^T = \left(\frac{aa^T}{a^Ta}\right)^T = \frac{aa^T}{a^Ta} = P\)</span>, since transposing a column-times-row swaps it with itself and the denominator is just a number.</li>
+<li><em>Geometric meaning:</em> If <span class="arithmatex">\(P\)</span> were not symmetric, projecting <span class="arithmatex">\(b\)</span> onto <span class="arithmatex">\(a\)</span> would cast a "shadow" at a skewed angle (an oblique projection). The symmetry mathematically locks in that perfectly perpendicular 90° shortest-distance drop.</li>
 <li><strong>Idempotent: <span class="arithmatex">\(P^2 = P\)</span>.</strong> Projecting a point that's <em>already on the line</em> doesn't move it — so applying <span class="arithmatex">\(P\)</span> a second time has to give back the same answer as the first time. This is true of any projection onto any subspace, not just a line — it's the algebraic signature of "closest point" being a stable, settled answer.</li>
+<li><em>Algebraic Proof:</em> <span class="arithmatex">\(P^2 = \left(\frac{aa^T}{a^Ta}\right)\left(\frac{aa^T}{a^Ta}\right) = \frac{a(a^Ta)a^T}{(a^Ta)(a^Ta)}\)</span>. The inner <span class="arithmatex">\((a^Ta)\)</span> in the numerator is a scalar dot product, which perfectly cancels with one <span class="arithmatex">\((a^Ta)\)</span> in the denominator, leaving <span class="arithmatex">\(\frac{aa^T}{a^Ta} = P\)</span>.</li>
 </ul>
 <h3 id="worked-example">Worked example<a class="headerlink" href="#worked-example" title="Permanent link">&para;</a></h3>
 <p>Let <span class="arithmatex">\(a = (1, 2)\)</span>, <span class="arithmatex">\(b = (4, 3)\)</span>.</p>
@@ -4689,6 +4728,10 @@ p = \hat{x}a = (2, 4)
 <hr />
 <h2 id="3-projecting-onto-a-subspace-the-general-case">3. Projecting onto a subspace (the general case)<a class="headerlink" href="#3-projecting-onto-a-subspace-the-general-case" title="Permanent link">&para;</a></h2>
 <p><strong>Setup:</strong> a subspace described by a matrix <span class="arithmatex">\(A\)</span> whose columns <span class="arithmatex">\(a_1, \dots, a_n\)</span> form a basis for it (they don't need to be perpendicular to each other — just independent). Given <span class="arithmatex">\(b\)</span>, find the closest point <span class="arithmatex">\(p\)</span> in that subspace.</p>
+<blockquote>
+<p><strong>💡 Clarification: The 1D vs nD Shift</strong>
+In the 1D case, we stretched a single vector <span class="arithmatex">\(a\)</span> by a single scalar multiplier <span class="arithmatex">\(\hat{x}\)</span>. Now, because our surface is built from multiple columns (basis vectors <span class="arithmatex">\(a_1, a_2, \dots, a_n\)</span>), <span class="arithmatex">\(\hat{x}\)</span> upgrades from a scalar to a full vector <span class="arithmatex">\(\hat{x}\)</span>. It contains the individual weights applied to each column of <span class="arithmatex">\(A\)</span> to reach the exact projection point (<span class="arithmatex">\(p = A\hat{x}\)</span>).</p>
+</blockquote>
 <h3 id="setting-up-the-equation">Setting up the equation<a class="headerlink" href="#setting-up-the-equation" title="Permanent link">&para;</a></h3>
 <p>Since <span class="arithmatex">\(p\)</span> is in the column space, it's some combination of the columns: <span class="arithmatex">\(p = A\hat{x}\)</span> for a vector <span class="arithmatex">\(\hat{x}\)</span> to be found. The error is <span class="arithmatex">\(e = b - A\hat{x}\)</span>, and the geometric requirement is that <span class="arithmatex">\(e\)</span> is perpendicular to the <em>entire</em> subspace — which means perpendicular to every column that spans it:</p>
 <div class="arithmatex">\[
@@ -4718,15 +4761,35 @@ p = A(A^TA)^{-1}A^Tb
 P = A(A^TA)^{-1}A^T
 \]</div>
 <p>Compare this to the line case: <span class="arithmatex">\(P = \dfrac{aa^T}{a^Ta}\)</span> is <em>exactly</em> this formula with <span class="arithmatex">\(A\)</span> replaced by the single column <span class="arithmatex">\(a\)</span> — the general formula isn't a different idea, it's the same one written so it survives more than one column.</p>
+<blockquote>
+<p><strong>🔍 Deep Dive: Why does <span class="arithmatex">\((A^TA)^{-1}\)</span> replace division by <span class="arithmatex">\(a^Ta\)</span>?</strong>
+In the vector case, the denominator <span class="arithmatex">\(a^Ta\)</span> is a scalar, so it sits neatly underneath the fraction. But for a matrix, <span class="arithmatex">\(A^TA\)</span> is a full matrix containing all the dot products between the columns of <span class="arithmatex">\(A\)</span>. Because matrix division is undefined, we "divide" by bringing its inverse into the product. </p>
+<p>Furthermore, <span class="arithmatex">\(AA^T\)</span> alone does not project correctly unless the columns of <span class="arithmatex">\(A\)</span> are orthonormal. <span class="arithmatex">\((A^TA)^{-1}\)</span> acts as the crucial correction factor that accounts for the columns of <span class="arithmatex">\(A\)</span> possibly having different lengths and not being perpendicular. It "undoes" those interactions so the projection lands correctly.</p>
+</blockquote>
 <h3 id="why-you-cant-simplify-p-down-to-the-identity">Why you can't simplify <span class="arithmatex">\(P\)</span> down to the identity<a class="headerlink" href="#why-you-cant-simplify-p-down-to-the-identity" title="Permanent link">&para;</a></h3>
 <p>It's tempting to use <span class="arithmatex">\((AB)^{-1} = B^{-1}A^{-1}\)</span> and write <span class="arithmatex">\((A^TA)^{-1} = A^{-1}(A^T)^{-1}\)</span>, which would make <span class="arithmatex">\(P = AA^{-1}(A^T)^{-1}A^T = I\)</span>. <strong>This is only legal when <span class="arithmatex">\(A\)</span> itself is square and invertible</strong> — and in the normal use case here, <span class="arithmatex">\(A\)</span> is tall (<span class="arithmatex">\(m&gt;n\)</span>) with no inverse at all, so that splitting step doesn't exist. The formula has to stay in its "messier" combined form <span class="arithmatex">\(A(A^TA)^{-1}A^T\)</span> precisely because <span class="arithmatex">\(A\)</span> alone can't be inverted.</p>
+<blockquote>
+<p><strong>🔍 Deep Dive: The Algebraic Trap of Tall Matrices</strong>
+The algebraic order swap rule <span class="arithmatex">\((AB)^{-1} = B^{-1}A^{-1}\)</span> is mathematically correct, but applying it here is a "crime" of dimensions. In optimization and projection problems, <span class="arithmatex">\(A\)</span> is typically a "tall" matrix (e.g., 1000 rows for data points, 3 columns for features). A rectangular matrix does not have an inverse. The symbols <span class="arithmatex">\(A^{-1}\)</span> and <span class="arithmatex">\((A^T)^{-1}\)</span> <em>literally do not exist</em>. </p>
+<p>However, multiplying a tall matrix by its transpose (<span class="arithmatex">\(A^TA\)</span>) results in a neat, small <span class="arithmatex">\(n \times n\)</span> square matrix (e.g., <span class="arithmatex">\(3 \times 3\)</span>). As long as the columns are independent, this new square matrix <em>does</em> have an inverse. You cannot shatter the valid <span class="arithmatex">\((A^TA)^{-1}\)</span> into invalid rectangular pieces.</p>
+</blockquote>
 <p>That said, the degenerate case is a useful sanity check: if <span class="arithmatex">\(A\)</span> <em>is</em> square and invertible, its column space is all of <span class="arithmatex">\(\mathbb{R}^n\)</span> — every vector is already reachable, so the "best approximation" should just be <span class="arithmatex">\(b\)</span> itself, i.e. <span class="arithmatex">\(P\)</span> should be the identity. And indeed, in that one special case the splitting trick is legal, and it correctly produces <span class="arithmatex">\(P=I\)</span> — confirming the general formula behaves exactly the way the geometry demands at the boundary case.</p>
+<blockquote>
+<p><strong>💡 Clarification: When <span class="arithmatex">\(P=I\)</span>, Projection is Pointless</strong>
+If <span class="arithmatex">\(A\)</span> is square and invertible, its independent columns form a basis that spans the entire <span class="arithmatex">\(n\)</span>-dimensional space. Since the column space is the entire universe, any vector <span class="arithmatex">\(b\)</span> you can imagine already lives perfectly inside it. The error is zero. You don't need a projection formula because the standard algebra <span class="arithmatex">\(Ax = b\)</span> already has a perfect, exact solution (<span class="arithmatex">\(x = A^{-1}b\)</span>).</p>
+</blockquote>
 <h3 id="properties-of-p-in-general">Properties of <span class="arithmatex">\(P\)</span> in general<a class="headerlink" href="#properties-of-p-in-general" title="Permanent link">&para;</a></h3>
 <p>Both properties from the 1-D case carry over, by essentially the same algebra:</p>
 <ul>
 <li><strong>Symmetric:</strong> <span class="arithmatex">\(P^T = (A(A^TA)^{-1}A^T)^T = A((A^TA)^{-1})^TA^T = A(A^TA)^{-1}A^T = P\)</span>, since <span class="arithmatex">\((A^TA)\)</span> is already symmetric (note 05) and the inverse of a symmetric matrix is symmetric.</li>
 <li><strong>Idempotent (<span class="arithmatex">\(P^2=P\)</span>):</strong> geometrically forced — the first projection lands you on the subspace, and projecting a point that's already there can't move it. Algebraically, <span class="arithmatex">\(P^2 = A(A^TA)^{-1}\underbrace{A^TA}_{\text{cancels with its inverse}}(A^TA)^{-1}A^T = A(A^TA)^{-1}A^T = P\)</span>.</li>
 </ul>
+<blockquote>
+<p><strong>🔍 Deep Dive: Outer Products and Rank</strong>
+In the 1D case, the numerator of <span class="arithmatex">\(P\)</span> is an outer product <span class="arithmatex">\(uv^T\)</span>. A single outer product of two non-zero vectors ALWAYS produces a matrix of Rank 1. </p>
+<p>However, in the <span class="arithmatex">\(n\)</span>D case, the numerator <span class="arithmatex">\(AA^T\)</span> is a perfectly calculable matrix, but it is <em>not</em> a single outer product. It is a <strong>sum</strong> of outer products: <span class="arithmatex">\(AA^T = a_1a_1^T + a_2a_2^T + \dots + a_na_n^T\)</span>. </p>
+<p>This is a crucial distinction: while a single outer product is Rank 1, a sum of <span class="arithmatex">\(r\)</span> independent outer products can have Rank <span class="arithmatex">\(r\)</span>. This is why the general projection matrix can project onto a multi-dimensional subspace rather than collapsing everything down to a 1D line.</p>
+</blockquote>
 <h3 id="worked-examples">Worked examples<a class="headerlink" href="#worked-examples" title="Permanent link">&para;</a></h3>
 <p><strong>Easy case — orthonormal basis.</strong> Let <span class="arithmatex">\(a_1=(1,0,0)\)</span>, <span class="arithmatex">\(a_2=(0,1,0)\)</span> (the <span class="arithmatex">\(xy\)</span>-plane in <span class="arithmatex">\(\mathbb{R}^3\)</span>), and <span class="arithmatex">\(b=(2,3,5)\)</span>.</p>
 <p>Because the basis is already orthonormal, <span class="arithmatex">\(A^TA = I\)</span>, and the formula collapses to <span class="arithmatex">\(\hat{x}=A^Tb = (2,3)\)</span>, so <span class="arithmatex">\(p = (2,3,0)\)</span> and <span class="arithmatex">\(e=(0,0,5)\)</span>. This matches pure intuition — projecting onto the <span class="arithmatex">\(xy\)</span>-plane just zeroes out the <span class="arithmatex">\(z\)</span>-component, and the error is exactly the part that stuck out of the plane. <em>(This is also a preview of why building an orthonormal basis — Gram-Schmidt, Week 2 — is worth the effort: it turns the messy <span class="arithmatex">\((A^TA)^{-1}\)</span> into a free identity matrix.)</em></p>
@@ -4774,7 +4837,7 @@ C + D = 2, \qquad C+2D = 3, \qquad C+3D = 5
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 21, 2026 09:02:26 UTC">June 21, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 22, 2026 10:36:05 UTC">June 22, 2026</span>
       </span>
     
   </aside>
