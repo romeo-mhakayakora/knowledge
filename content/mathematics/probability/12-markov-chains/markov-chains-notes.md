@@ -40,6 +40,51 @@
   - [The Coupon Collector as a Markov Chain](#the-coupon-collector-as-a-markov-chain)
   - [Queueing Theory](#queueing-theory)
   - [Connection to Reinforcement Learning](#connection-to-reinforcement-learning)
+- [The Bridge — From Topology to Long-Run Behavior](#the-bridge--from-topology-to-long-run-behavior)
+  - [Phase 1 — The Burn-Off Period](#phase-1--the-burn-off-period)
+  - [Phase 2 — The Infinite Rhythm](#phase-2--the-infinite-rhythm)
+- [11.3.1 Definition of Stationary Distribution](#1131-definition-of-stationary-distribution)
+  - [The Two Reality Checks](#the-two-reality-checks)
+  - [The Magic Equation — Plain English](#the-magic-equation--plain-english)
+  - [What sQ = s Actually Says in One Sentence](#what-sq--s-actually-says-in-one-sentence)
+  - [Reading the Equation Out Loud](#reading-the-equation-out-loud)
+- [Ground Zero — What "Stationary" Actually Means](#ground-zero--what-stationary-actually-means)
+  - [Stationary Does NOT Mean Frozen](#stationary-does-not-mean-frozen)
+  - [The Water Fountain Analogy](#the-water-fountain-analogy)
+  - [The Three Variables Defined](#the-three-variables-defined)
+  - [Why We Multiply by Q Even Though s Is Stationary](#why-we-multiply-by-q-even-though-s-is-stationary)
+- [The City Apartment Analogy](#the-city-apartment-analogy)
+  - [What s Represents](#what-s-represents)
+  - [What Q Represents](#what-q-represents)
+  - [The Equation in Action](#the-equation-in-action)
+  - [The Key Insight — Q Does Not Change, Its Transitions Cancel Out](#the-key-insight--q-does-not-change-its-transitions-cancel-out)
+- [What Each Dimension of s Means](#what-each-dimension-of-s-means)
+- [The Relationship Between s and Q^n](#the-relationship-between-s-and-qn)
+  - [The n-Step Distribution vs The Stationary Distribution](#the-n-step-distribution-vs-the-stationary-distribution)
+  - [s Is a Row of Q Raised to a Very Large n](#s-is-a-row-of-q-raised-to-a-very-large-n)
+  - [Why Every Row of Q^∞ Becomes the Same s](#why-every-row-of-q-becomes-the-same-s)
+  - [Why Rows Cannot All Be Same If Chain Is Reducible](#why-rows-cannot-all-be-same-if-chain-is-reducible)
+  - [The Two Ways to Reach s](#the-two-ways-to-reach-s)
+- [11.3.2 — Stationary Is Marginal, Not Conditional](#1132--stationary-is-marginal-not-conditional)
+  - [Unconditional PMF = s (Zoomed Out)](#unconditional-pmf--s-zoomed-out)
+  - [Conditional PMF = Q (Zoomed In)](#conditional-pmf--q-zoomed-in)
+  - [The "Since" — Why They Are Different](#the-since--why-they-are-different)
+  - [Is Marginal Short-Sighted?](#is-marginal-short-sighted)
+- [11.3.3 — Sympathetic Magic Warning](#1133--sympathetic-magic-warning)
+- [Example 11.3.4 — Solving for s by Hand](#example-1134--solving-for-s-by-hand)
+  - [Setup and the Blank Placeholder](#setup-and-the-blank-placeholder)
+  - [The Algebra — Step by Step](#the-algebra--step-by-step)
+  - [The Universal 2-State Formula](#the-universal-2-state-formula)
+  - [Why as₁ = bs₂ Is the Only Equation You Need](#why-as1--bs2-is-the-only-equation-you-need)
+  - [The Proportionality Shortcut](#the-proportionality-shortcut)
+  - [The Left Eigenvector Jargon](#the-left-eigenvector-jargon)
+- [What s Tells You Physically](#what-s-tells-you-physically)
+- [Applications](#applications)
+  - [The Gambler's Ruin Topology](#the-gamblers-ruin-topology)
+  - [The Coupon Collector](#the-coupon-collector)
+  - [Connection to Reinforcement Learning](#connection-to-reinforcement-learning)
+
+---
 
 ---
 
@@ -745,6 +790,686 @@ graph TD
 
 **The stationary distribution and convergence:**
 
-Understanding that transient states are eventually escaped and recurrent states are visited infinitely is the theoretical guarantee that **RL algorithms converge**. As long as the agent operates in a fully communicating recurrent environment, infinite time guarantees it will explore every state and update every value function.
+Understanding that transient states are eventually escaped and recurrent states are visited infinitely is the theoretical guarantee that **RL algorithms converge**. As long as the agent operates in a fully communicating recurrent environment, infinite time guarantees it will explore every state and update every value function
+> **The relentless grinding of infinite time** — the same principle that guarantees a transient state is eventually escaped forever — is the exact reason why Q-Learning and Monte Carlo methods eventually converge to optimal policie
 
-> **The relentless grinding of infinite time** — the same principle that guarantees a transient state is eventually escaped forever — is the exact reason why Q-Learning and Monte Carlo methods eventually converge to optimal policies.
+# Chapter 11 — Markov Chains: Stationary Distribution
+> *Introduction to Probability* — Blitzstein & Hwang | Section 11.3
+
+---
+
+
+# The Bridge — From Topology to Long-Run Behavior
+
+The textbook says:
+
+> *"At first, the chain may spend time in transient states. Eventually though, the chain will spend all its time in recurrent states. But what fraction of the time will it spend in each of the recurrent states? This question is answered by the stationary distribution."*
+
+This paragraph divides the life of a Markov chain into two phases.
+
+---
+
+## Phase 1 — The Burn-Off Period
+
+*"At first, the chain may spend time in transient states."*
+
+When a simulation first starts, there is chaos. The chain spawns in transient states and bounces around. But as we proved with the Geometric distribution, transient states have a ticking clock. Eventually the chain falls through the final trapdoor into a recurrent class.
+
+**The mathematical law:** In the true stationary distribution $s$, every single transient state has a value of **exactly 0**. The math deletes them from existence — across infinite time, the fraction of time spent there rounds down to zero.
+
+---
+
+## Phase 2 — The Infinite Rhythm
+
+*"What fraction of the time will it spend in each of the recurrent states?"*
+
+Now the chain is trapped in recurrent rooms. It bounces between them forever. But it will not visit them all equally — some rooms have many doors leading in but few leading out. The chain gets "stuck" there more often.
+
+The stationary distribution vector $s$ is a list of percentages answering exactly this:
+
+$$s = [0.70, 0.20, 0.10]$$
+
+means the chain spends 70% of eternity in State 1, 20% in State 2, and 10% in State 3.
+
+```mermaid
+graph LR
+    Start([Chain starts]) --> Transient["Phase 1:\nTransient states\nChaos, burning off\nGeometric distribution\nfinite visits"]
+    Transient -- "Eventually falls\nthrough trapdoor" --> Recurrent["Phase 2:\nRecurrent states\nInfinite rhythm\nStationary distribution s\ntakes over"]
+    Recurrent --> Equilibrium["s = [s₁, s₂, s₃]\nFraction of eternity\nspent in each state\nLocked forever"]
+```
+
+---
+
+# 11.3.1 Definition of Stationary Distribution
+
+**Definition:** A row vector $s = (s_1, \ldots, s_M)$ such that $s_i \geq 0$ and $\sum_i s_i = 1$ is a **stationary distribution** for a Markov chain with transition matrix $Q$ if:
+
+$$\sum_i s_i q_{ij} = s_j \quad \text{for all } j$$
+
+This system of linear equations can be written as one matrix equation:
+
+$$sQ = s$$
+
+---
+
+## The Two Reality Checks
+
+*"$s_i \geq 0$ and $\sum_i s_i = 1$"*
+
+These are just the math police making sure your vector represents physical reality:
+
+- **$s_i \geq 0$:** You cannot have a negative percentage of people in a room
+- **$\sum_i s_i = 1$:** All fractions across every state must add to exactly 1.0 (100% of the crowd)
+
+---
+
+## The Magic Equation — Plain English
+
+$$\sum_i s_i q_{ij} = s_j$$
+
+Breaking this down piece by piece using a museum crowd:
+
+| Symbol | Plain meaning |
+|---|---|
+| $s_i$ | The number of people currently in Room $i$ |
+| $q_{ij}$ | The fraction of people in Room $i$ who walk to Room $j$ |
+| $s_i \times q_{ij}$ | The actual number of people walking from Room $i$ into Room $j$ right now |
+| $\sum_i s_i q_{ij}$ | Add up everyone walking into Room $j$ from every room in the museum |
+| $= s_j$ | That total equals exactly the crowd that was already in Room $j$ |
+
+**What this physically means:**
+
+Flow In = Flow Out. If Room 2 holds 30% of the crowd ($s_2 = 0.30$), then after all the chaotic shuffling through doors, exactly 30% of the crowd is still in Room 2. The room is in perfect, permanent balance.
+
+Because this is true for "all $j$" — every single room — the entire map has stopped fluctuating. The system is completely frozen in equilibrium, even though individuals inside it are still moving.
+
+---
+
+## What sQ = s Actually Says in One Sentence
+
+> **For any single room: add up all the people who just walked into it from everywhere else — that incoming group perfectly replaces the group that just walked out. The room's crowd size never changes.**
+
+The amount of people walking in exactly matches the amount of people walking out. The total in the room never changes. The room is in permanent balance.
+
+---
+
+## Reading the Equation Out Loud
+
+$\sum_i s_i q_{ij} = s_j$
+
+**Read as:** "The sum over all $i$ of $s$ sub $i$ times $q$ sub $i$-$j$ equals $s$ sub $j$."
+
+**Translation:** "Take the fraction of the crowd in each room $i$, multiply by the probability they walk to room $j$, add all those flows together — and that total equals the original fraction of the crowd that was already in room $j$."
+
+As one matrix equation, $sQ = s$ reads: "The vector $s$ times the transition matrix $Q$ equals $s$ again." — Pressing "Play" on time returns the exact same distribution you started with.
+
+---
+
+# Ground Zero — What "Stationary" Actually Means
+
+## Stationary Does NOT Mean Frozen
+
+The biggest trap in probability is confusing "stationary" with "stopped."
+
+**A parked car is frozen.** Nothing moves. That is not what a Markov Chain is.
+
+**A water fountain is stationary.** Water is constantly shooting up, constantly falling down, individual molecules are moving at high speed — BUT the water level in each pool never goes up or down. Because water leaving a pool is instantly replaced by water entering, the overall shape of the fountain never changes.
+
+This is **Dynamic Equilibrium** — the micro-level is chaotic, the macro-level is stationary.
+
+---
+
+## The Water Fountain Analogy
+
+Imagine a fountain with two pools:
+
+- **Pool 1** holds 60 gallons
+- **Pool 2** holds 40 gallons
+- Water constantly flows between them according to fixed pipe sizes
+
+Every second: some water drains from Pool 1 into Pool 2, and some water drains from Pool 2 into Pool 1.
+
+If the pipe sizes are tuned so that the exact amount draining out of Pool 1 is replenished by what flows in from Pool 2 — and vice versa — then the water levels **never change**. The motion is constant, but the levels are permanently frozen.
+
+That frozen state is the stationary distribution.
+
+---
+
+## The Three Variables Defined
+
+| Variable | Name | What it is |
+|---|---|---|
+| $Q$ | The Pipes | The transition matrix. The physical plumbing of the fountain. Tells you what percentage of water flows from each pool to each other pool every second. **$Q$ never changes.** |
+| $s$ | The Water Levels | The row vector. A list of the exact amount of water sitting in each pool right now. |
+| $s \times Q$ | The Play Button | Take the water currently in the pools ($s$) and push it through the pipes ($Q$) for exactly one second. |
+
+---
+
+## Why We Multiply by Q Even Though s Is Stationary
+
+You asked a perfect question: *"If $s$ is not changing, why are we multiplying it by transition probabilities?"*
+
+**Multiplying by $Q$ is the mathematical equivalent of pressing the "Play" button on time.** We have to press Play to *prove* that the system is immune to it.
+
+Watch what happens:
+
+- **Random water levels** $[90, 10]$: Press Play → result is $[85, 15]$. The levels changed. **Not stationary.**
+- **The magic levels** $[60, 40]$: Press Play → result is $[60, 40]$. The levels did not change. **This is $s$.**
+
+There is only one specific combination of water levels where the plumbing perfectly replaces what it drains. When you find that combination, you have found the stationary distribution.
+
+$sQ = s$ is the mathematical way of saying: "When this specific distribution survives being pushed through the transition rules unchanged, we have reached equilibrium."
+
+```mermaid
+graph LR
+    Random["[90, 10]\nRandom guess"] -- "×Q" --> Changed["[85, 15]\nChanged!\nNot stationary"]
+    Magic["[60, 40]\nThe magic s"] -- "×Q" --> Same["[60, 40]\nIdentical!\nThis is s"]
+    Same -.->|"sQ = s\nEquilibrium!" | Same
+```
+
+---
+
+# The City Apartment Analogy
+
+Imagine a city with 10,000 apartments. Every apartment is either **Occupied (State 1)** or **Vacant (State 2)**.
+
+## What s Represents
+
+$s$ is the **City Vacancy Report** on the Mayor's desk — the steady fraction of apartments in each state:
+
+$$s = [0.95, \; 0.05]$$
+
+- $s_1 = 0.95$: 95% of the city's apartments are Occupied
+- $s_2 = 0.05$: 5% of the city's apartments are Vacant
+
+---
+
+## What Q Represents
+
+$Q$ is the **Leasing and Eviction Rates** — the actual moving trucks. The rules of motion:
+
+| From \ To | Occupied | Vacant |
+|---|---|---|
+| **Occupied** | $q_{11} = 0.99$ (tenant renews) | $q_{12} = 0.01$ (tenant moves out) |
+| **Vacant** | $q_{21} = 0.19$ (new tenant signs) | $q_{22} = 0.81$ (sits empty) |
+
+---
+
+## The Equation in Action
+
+To check that $s = [0.95, 0.05]$ is the stationary distribution, verify that flow in = flow out for each state:
+
+**Flow into Occupied (State 1):**
+
+$$s_1 \times q_{11} + s_2 \times q_{21} = 0.95 \times 0.99 + 0.05 \times 0.19 = 0.9405 + 0.0095 = 0.95 = s_1 \checkmark$$
+
+**Flow into Vacant (State 2):**
+
+$$s_1 \times q_{12} + s_2 \times q_{22} = 0.95 \times 0.01 + 0.05 \times 0.81 = 0.0095 + 0.0405 = 0.05 = s_2 \checkmark$$
+
+```mermaid
+graph LR
+    Occ("Occupied\ns₁ = 0.95\n9500 apts") -- "0.01 move out\n95 apts leaving" --> Vac("Vacant\ns₂ = 0.05\n500 apts")
+    Vac -- "0.19 sign lease\n95 apts arriving" --> Occ
+    Occ -- "0.99 renew" --> Occ
+    Vac -- "0.81 sit empty" --> Vac
+    Note["95 leaving = 95 arriving\nPerfect balance\nVacancy rate frozen at 5%"]
+```
+
+---
+
+## The Key Insight — Q Does Not Change, Its Transitions Cancel Out
+
+*"Q doesn't change"* — The leasing rate stays at 19%, the eviction rate stays at 1%. These are the fixed rules of the system.
+
+*"The transitions in Q happen"* — Moving trucks are physically driving around. Thousands of families are packing boxes every single month.
+
+*"And cancel each other out"* — Because the city is sitting at the perfect $s$ ratio (95% Occupied, 5% Vacant), the number of people triggered by the 1% move-out rule exactly matches the number triggered by the 19% move-in rule.
+
+> The micro-level is total chaos (motion), but the macro-level net change is exactly zero. **There is motion, but the observed phenomenon is not changing.**
+
+---
+
+# What Each Dimension of s Means
+
+If your stationary distribution is:
+
+$$s = [s_1, s_2, s_3, \ldots, s_M]$$
+
+Then each $s_j$ tells you **two physically identical things**:
+
+**1 — The Time Average (The Journey):**
+Over an infinite lifetime, $s_j$ is the exact percentage of total time the chain spends in state $j$.
+
+**2 — The Snapshot Probability (The Freeze Frame):**
+If you walk away, let the simulation run for a billion steps, then randomly pause it — $s_j$ is the exact probability that the chain is standing in state $j$ when you pause.
+
+**Concrete example:** $s = [0.20, 0.50, 0.30]$
+
+| State | $s_j$ | Journey meaning | Snapshot meaning |
+|---|---|---|---|
+| State A | 0.20 | 200,000 out of 1,000,000 steps spent here | 20% chance I am here if you pause randomly |
+| State B | 0.50 | 500,000 steps spent here | 50% chance |
+| State C | 0.30 | 300,000 steps spent here | 30% chance |
+
+> **The Ergodic Theorem** (the math term) is just saying these two meanings are identical. Textbooks give it a scary name but it is just this observation.
+
+---
+
+# The Relationship Between s and Q^n
+
+## The n-Step Distribution vs The Stationary Distribution
+
+You asked: *"Is the row vector $s$ the distribution after $n$ steps?"*
+
+**No — $s$ is the distribution after INFINITE steps.**
+
+| Concept | Formula | What it gives you |
+|---|---|---|
+| $n$-step distribution | $tQ^n$ | Given your starting vector $t$, the exact probability distribution of where you are at step $n$. Changes with $n$. |
+| Stationary distribution $s$ | $sQ = s$ | The final, locked-in row that the $n$-step distribution converges to as $n \to \infty$. Never changes once reached. |
+
+**The journey:** If you compute $tQ^n$ for $n = 1, 2, 3, 10, 100, 1000$ — the resulting row vector keeps changing. The probabilities swing around as the system finds its balance.
+
+**The destination:** As $n \to \infty$, the swinging completely stops. The row vector locks into $s$.
+
+---
+
+## s Is a Row of Q Raised to a Very Large n
+
+**You nailed this.** $s$ is exactly a row of $Q$ raised to a very large $n$ ($Q^\infty$). When you fast-forward time by raising $Q$ to a massive power, every single row in that matrix turns into $s$:
+
+$$Q^\infty = \begin{pmatrix} s_1 & s_2 & s_3 \\ s_1 & s_2 & s_3 \\ s_1 & s_2 & s_3 \end{pmatrix}$$
+
+The matrix collapses into a giant copy-paste machine. Every row is identical.
+
+---
+
+## Why Every Row of Q^∞ Becomes the Same s
+
+You asked: *"Why doesn't each starting state get its own $s$?"*
+
+**In the short term** ($Q^2$ or $Q^{10}$), rows are different — your starting point matters.
+
+**At infinity**, the system develops **total mathematical amnesia**. The chain has been shuffling around for so long that the starting point is completely erased.
+
+Doesn't matter if you started in State 1, 2, or 3. The infinite-future probabilities are identical for everyone.
+
+> **Why this matters:** If every starting state had its own different stationary distribution, the macro-level statistics would still depend on where the first agent started. The magic of $s$ is that it is a **universal gravitational pull** — no matter which row you start in, $Q^\infty$ drags every single one to the exact same destination.
+
+```mermaid
+graph LR
+    Row1["Row 1 of Q^n\n(started in State 1)"] -- "n → ∞" --> s["s = [s₁, s₂, s₃]\nUniversal destination"]
+    Row2["Row 2 of Q^n\n(started in State 2)"] -- "n → ∞" --> s
+    Row3["Row 3 of Q^n\n(started in State 3)"] -- "n → ∞" --> s
+    s -.->|"Every starting point\nconverges to the same s\nComplete amnesia" | s
+```
+
+---
+
+## Why Rows Cannot All Be Same If Chain Is Reducible
+
+You deduced this perfectly: *"If there was no path I can't simply put a 3 in that slot."*
+
+If State 3 is an isolated island with no connection to States 1 and 2:
+
+- Row 1 (started in State 1): $[\ldots, \ldots, 0.00]$ — the 3rd entry is permanently 0, no path to State 3
+- Row 3 (started on Island): $[0.00, 0.00, 1.00]$ — permanently stuck on island
+
+These rows are **physically incapable of being identical**. Those zeros are permanently locked in by the lack of highways. You cannot put any probability in a slot if there is no path to carry it there.
+
+Because the rows do not converge to the same $s$, there is **no single universal stationary distribution**. The final statistics depend on whether you were born on the mainland or the island.
+
+> When a textbook demands **Irreducibility** before finding the stationary distribution, it is just saying: *"Check the map first — make sure every pool is physically connected to the same plumbing system."*
+
+---
+
+## The Two Ways to Reach s
+
+You asked: *"Do we evolve the row vector step by step, or evolve Q first?"*
+
+**Both give the same result — here's why:**
+
+**Option 1 — Evolve the row (real-time):**
+
+$$t \times Q = \text{Day 1 row}$$
+$$\text{Day 1 row} \times Q = \text{Day 2 row}$$
+$$\text{Day 2 row} \times Q = \text{Day 3 row}$$
+$$\vdots$$
+$$\text{Eventually} \to s$$
+
+You keep updating the row vector every step. Eventually it hits $s$ and stops changing.
+
+**Option 2 — Evolve the matrix (fast-forward):**
+
+$$Q^n \quad \text{for very large } n$$
+
+Leave your starting row completely alone. Fast-forward $Q$ to $Q^\infty$. Because $Q^\infty$ is a stack of identical $s$ rows, any starting vector multiplied by it just returns $s$.
+
+**Why they are identical:** Matrix multiplication is **associative**. $(t \times Q) \times Q = t \times (Q \times Q)$. The parentheses can move anywhere. Option 1 is $((tQ)Q)Q\ldots$ and Option 2 is $t(QQ\ldots Q)$. Same computation, different order of operations.
+
+> You can either walk the path one day at a time, or build a time machine ($Q^n$) and teleport to the end. Same destination.
+
+---
+
+# 11.3.2 — Stationary Is Marginal, Not Conditional
+
+The textbook says:
+
+> *"When a Markov chain is at the stationary distribution, the unconditional PMF of $X_n$ equals $s$ for all $n$, but the conditional PMF of $X_n$ given $X_{n-1} = i$ is still encoded by the $i$-th row of the transition matrix $Q$."*
+
+---
+
+## Unconditional PMF = s (Zoomed Out)
+
+**"Unconditional"** means you have zero information about the past.
+
+**City Apartment analogy:** A tourist walks in blindfolded and points at a random apartment. What are the odds someone lives there? With zero conditions, they rely on the macro-level statistic: $s_1 = 0.95$. The answer is 95% — because that is the long-run fraction of occupied apartments.
+
+**Weather analogy:** You look at a 100-year climate report. You see that 30% of days are rainy. That 30% is your unconditional, marginal probability. You are not conditioning on what yesterday's weather was.
+
+---
+
+## Conditional PMF = Q (Zoomed In)
+
+**"Conditional"** means you have one specific piece of inside information: exactly what happened one step ago.
+
+**City Apartment analogy:** The landlord tells you "this specific apartment was Vacant last month." Suddenly the 95% macro-statistic is useless — you have inside information. Because of the Markov Property, you throw away $s$ and look directly at Row 2 of $Q$: $q_{21} = 0.19$. The odds of this apartment being occupied now are only 19%.
+
+**Weather analogy:** You look out the window and see it is raining today ($X_{n-1} = \text{Rain}$). The long-term average of 30% no longer helps you. You look at Row "Rain" in $Q$ and see there is an 80% chance of rain tomorrow.
+
+---
+
+## The "Since" — Why They Are Different
+
+The textbook says *"since the conditional distribution of $X_n$ given $X_{n-1} = i$ is, in general, different from the marginal distribution of $X_n$."*
+
+This "since" is just pointing out a mathematical inequality: $q_{ij}$ is usually **not equal** to $s_j$.
+
+| | Value | Meaning |
+|---|---|---|
+| $s_j$ (marginal) | 30% | The city averages 30% rainy days a year |
+| $q_{\text{Rain},\text{Rain}}$ (conditional) | 80% | If it rains today, 80% chance it rains tomorrow |
+
+Since $80\% \neq 30\%$, knowing yesterday's state dramatically changes your math. The variables are **not independent** — yesterday's state still matters for tomorrow, even though the long-run average is stable.
+
+---
+
+## Is Marginal Short-Sighted?
+
+You asked: *"Is marginal short-sighted?"*
+
+**Actually the exact opposite:**
+
+| | What it looks at | Scope |
+|---|---|---|
+| **Conditional ($Q$)** | Exactly what happened one step ago — the immediate next move | Short-sighted, zoomed in |
+| **Marginal ($s$)** | The infinite, long-run average of the entire system | Far-sighted, zoomed out |
+
+**Conditional** is looking out your window to predict tomorrow's weather.
+
+**Marginal** is looking at a 100-year climate report.
+
+---
+
+# 11.3.3 — Sympathetic Magic Warning
+
+The textbook says:
+
+> *"If a Markov chain starts at the stationary distribution, then all of the $X_n$ are identically distributed (since they have the same marginal distribution $s$), but they are not necessarily independent, since the conditional distribution of $X_n$ given $X_{n-1} = i$ is, in general, different from the marginal distribution of $X_n$. Confusing the random variables $X_n$ with their distributions is an example of sympathetic magic."*
+
+**"Identically distributed" (The Blueprint):**
+
+The statistical forecast for Day 1, Day 50, and Day 1,000 is identically frozen at 30% Rain, 70% Sun. The marginal probability is the same every day.
+
+**"Not independent" (The Actual Building):**
+
+$X_n$ is the **physical weather that actually happens** on a specific day. Day 1 might be Rain, Day 2 might be Sun. The specific realizations are constantly changing and depend on each other through $Q$.
+
+**"Sympathetic magic":**
+
+"Sympathetic magic" is an anthropology term — like believing a voodoo doll shares the physical reality of the person it represents. The textbook is warning: do not confuse the statistical probability (the distribution $s$) with the actual physical event ($X_n$).
+
+Just because the forecast is 30% rain every day does not mean every day must be the same weather. The macro-statistics are frozen, but the micro-reality is still chaotically bouncing around.
+
+> *"The $X_n$ themselves are not all equal"* — the values the random variables actually take on different days are different. Only their probability distributions are identical.
+
+Also: you observed that the unconditional distribution only looks stationary from the outside because the $X_{n-1} \to X_n$ transitions have been incorporated into $s$ and are no longer visibly impacting $Q$. The micro-conditions are still happening every second — they have just reached a point where they perfectly cancel each other out at the macro scale.
+
+---
+
+# Example 11.3.4 — Solving for s by Hand
+
+$$Q = \begin{pmatrix} 1/3 & 2/3 \\ 1/2 & 1/2 \end{pmatrix}$$
+
+---
+
+## Setup and the Blank Placeholder
+
+The textbook is showing the **algebra cheat code** — deliberately avoiding computing $Q^\infty$ entirely.
+
+Instead, treat $s$ as an unknown row: since there are only two states and probabilities sum to 1, if the probability of State 1 is $s$, then State 2 must be $1 - s$:
+
+$$s = (s, \; 1-s) \quad \text{(our blank unknown)}$$
+
+This blank row represents $X_n$ right now — the distribution at whatever step we are currently on. Because the system is stationary, the distribution for $X_n$ must be identical to $X_{n+1}$. So we force the equation:
+
+$$\text{(row for } X_n\text{)} \times Q = \text{(row for } X_{n+1}\text{)} = \text{same row}$$
+
+$$\begin{pmatrix} s & 1-s \end{pmatrix} \begin{pmatrix} 1/3 & 2/3 \\ 1/2 & 1/2 \end{pmatrix} = \begin{pmatrix} s & 1-s \end{pmatrix}$$
+
+---
+
+## The Algebra — Step by Step
+
+**Multiplying out the left side for State 1 (first column):**
+
+$$s \cdot \frac{1}{3} + (1-s) \cdot \frac{1}{2} = s$$
+
+$$\frac{s}{3} + \frac{1-s}{2} = s$$
+
+Multiply everything by 6:
+
+$$2s + 3(1-s) = 6s$$
+
+$$2s + 3 - 3s = 6s$$
+
+$$3 = 7s$$
+
+$$s = \frac{3}{7}$$
+
+Therefore $1 - s = \frac{4}{7}$.
+
+**The unique stationary distribution:**
+
+$$\boxed{s = \left(\frac{3}{7}, \; \frac{4}{7}\right)}$$
+
+---
+
+## The Universal 2-State Formula
+
+More generally, suppose $q_{12} = a$ and $q_{21} = b$ where $0 < a < 1$ and $0 < b < 1$:
+
+$$Q = \begin{pmatrix} 1-a & a \\ b & 1-b \end{pmatrix}$$
+
+The transition matrix for any 2-state system always has this shape — the diagonal entries are "stay" probabilities ($1-a$ and $1-b$), and the off-diagonal entries are "leave" probabilities ($a$ and $b$).
+
+---
+
+## Why as₁ = bs₂ Is the Only Equation You Need
+
+When you multiply out $sQ = s$ for this general 2-state system, **both** equations simplify to the same single rule:
+
+$$as_1 = bs_2$$
+
+**How this arrives — full algebra:**
+
+For State 1 (first column): $s_1(1-a) + s_2 b = s_1$
+
+Expand: $s_1 - as_1 + bs_2 = s_1$
+
+Cancel $s_1$ from both sides: $-as_1 + bs_2 = 0$
+
+Rearrange: $\boxed{as_1 = bs_2}$
+
+For State 2 (second column): $s_1 a + s_2(1-b) = s_2$
+
+Expand: $as_1 + s_2 - bs_2 = s_2$
+
+Cancel $s_2$: $as_1 - bs_2 = 0$
+
+Rearrange: $\boxed{as_1 = bs_2}$ ← same equation again
+
+**The beautiful physical meaning:**
+
+$a s_1$ = the amount of the crowd flowing **out of State 1** per step
+
+$b s_2$ = the amount of the crowd flowing **out of State 2** per step
+
+$as_1 = bs_2$ simply says: **the flow leaving State 1 perfectly equals the flow leaving State 2**. The pipes are perfectly balanced. This is Dynamic Equilibrium expressed in one equation.
+
+---
+
+## The Proportionality Shortcut
+
+Since $as_1 = bs_2$, the proportions simply flip:
+
+$$s_1 \propto b \quad \text{and} \quad s_2 \propto a$$
+
+**The logic:** If $b$ (the chance of leaving State 2) is large, State 2 empties out quickly — so most of the crowd piles up in State 1. The time you spend in a state is proportional to how hard it is to leave the *other* state.
+
+To convert proportions into actual probabilities summing to 1, divide by the total:
+
+$$\boxed{s = \left(\frac{b}{a+b}, \; \frac{a}{a+b}\right)}$$
+
+**Verification with our specific numbers** ($a = 2/3$, $b = 1/2$):
+
+$s$ should be proportional to $(b, a) = (1/2, 2/3)$. Multiply by 6: proportional to $(3, 4)$.
+
+Our answer was $(3/7, 4/7)$ — which is indeed proportional to $(3, 4)$. ✓
+
+---
+
+## The Left Eigenvector Jargon
+
+The textbook ends by translating everything into linear algebra terminology.
+
+The equation $sQ = s$ can be rewritten as $sQ = 1 \cdot s$. This is the definition of an **eigenvector equation**:
+
+$$\text{Vector} \times \text{Matrix} = \text{Scalar} \times \text{Vector}$$
+
+- Since $s$ is on the **left** side of $Q$ → $s$ is a **left eigenvector**
+- Since $s$ comes out multiplied by **1** (unchanged) → the **eigenvalue is 1**
+
+> If you ever talk to a pure math professor, just say: "$s$ is the left eigenvector of $Q$ with eigenvalue 1." That is the formal name for everything we just computed.
+
+The "right eigenvector" version is $Q^T s^T = s^T$ (transpose of everything). Same math, different convention.
+
+---
+
+# What s Tells You Physically
+
+Once you solve for $s$, here is what you can read off directly:
+
+> **$s_j$ = the fraction of eternity the chain spends in state $j$ = the probability of finding the chain in state $j$ if you pause it at a random time after it has run long enough**
+
+These are two descriptions of the same number.
+
+**Why not equal time in all states?**
+
+You observed: *"The amount of time spent in each is expected to be the same."*
+
+Precise correction: The proportion locks in and stops changing — but it is usually **not equal** across all states. States with many doors leading into them but few leading out attract more "crowd." A state that is easy to enter but hard to leave will have a high $s_j$. Equal time across all states would only happen if the transition matrix were perfectly symmetric.
+
+---
+
+# Applications
+
+## The Gambler's Ruin Topology
+
+A casino betting game is **NOT irreducible** — it is **Reducible**.
+
+**State 0 (Bankruptcy):** $P(0 \to 0) = 1.0$ — you cannot bet with no money. Once entered, you can never travel back to State 1. → **Absorbing Recurrent State**. The map is permanently broken.
+
+**States 1 through N-1 (All money states):** Because State 0 is an inescapable black hole, every money state has a pathway leading there. There is a positive probability of leaving forever. → **All Transient States**.
+
+Because all money states are transient, the chain must eventually fall into the only recurrent trap. With no winning goal and an opponent with infinite bankroll: $P(\text{eventual bankruptcy}) = 1.0$.
+
+> **Why is the map reducible?** Once at State 0, you cannot travel back to any money state. The "every state reachable from every other state" condition is permanently broken. → Reducible.
+
+```mermaid
+graph LR
+    S0(("$0\nBANKRUPTCY\nAbsorbing Recurrent\nP = 1 forever")) 
+    S1(("$1\nTransient"))
+    S2(("$2\nTransient"))
+    SN(("$N\nGoal\nAbsorbing Recurrent"))
+    S1 -- "p win" --> S2
+    S2 -- "1-p lose" --> S1
+    S1 -- "1-p lose" --> S0
+    S0 -- "1.0" --> S0
+    SN -- "1.0" --> SN
+    Note["All money states = Transient\nMust eventually fall into\nthe only recurrent trap: $0"]
+```
+
+---
+
+## The Coupon Collector
+
+$C = 10$ different toys. State $X_n$ = number of distinct toys after $n$ meals. State space $\{0, 1, \ldots, C\}$.
+
+**Markov property check:** In State 4 (own 4 toys), odds of getting a new toy = $6/10$. Doesn't matter if you bought 4 meals or 500 meals to get here. History deleted. ✓
+
+**Transition probabilities:**
+
+$$P(\text{stay at } k) = \frac{k}{C} \quad \text{(duplicate)}$$
+$$P(k \to k+1) = \frac{C-k}{C} \quad \text{(new toy)}$$
+
+```mermaid
+graph LR
+    S0((0)) -- "10/10" --> S1((1))
+    S1 -- "9/10" --> S2((2))
+    S2 -- "8/10" --> S3((3))
+    S3 -. "..." .-> S9((9))
+    S9 -- "1/10" --> S10(("10\nAbsorbing"))
+    S1 -- "1/10" --> S1
+    S2 -- "2/10" --> S2
+    S9 -- "9/10" --> S9
+    S10 -- "1.0" --> S10
+```
+
+**Topology:**
+- **States 0–9:** Transient — always a positive probability of moving forward
+- **State 10:** Absorbing Recurrent — $P(10 \to 10) = 1.0$
+
+---
+
+## Connection to Reinforcement Learning
+
+The stationary distribution maps directly to the RL objective function.
+
+**Your insight:** *"In RL if you look at the Policy Gradient we always start with the probability of starting in that state then multiply by the summation of rewards we will get in the episode."*
+
+This is exactly the RL objective $J(\theta)$:
+
+$$J(\theta) = \sum_{s_0} p(s_0) \cdot V^{\pi_\theta}(s_0)$$
+
+| RL symbol | Plain meaning | Markov chain equivalent |
+|---|---|---|
+| $p(s_0)$ | Probability the episode starts in state $s_0$ | $t_i = P(X_0 = i)$ — the spawn vector |
+| $V^{\pi_\theta}(s_0)$ | Expected total reward from $s_0$ under policy $\pi$ | The "summation of rewards we will get" |
+| $\sum_{s_0}$ | Sum over all possible starting states | $\sum_{i=1}^{M}$ in LOTP |
+
+The multiplication (spawn probability × value) is the same AND rule from Chapman-Kolmogorov. The summation is the same OR rule. The formula is structurally identical to $tQ^n$.
+
+**The stationary distribution under a policy** is the distribution of states the agent visits when following that policy forever. It is the $s$ vector for the MDP transition matrix induced by the policy.
+
+**Why RL algorithms converge:** The Geometric distribution proof guarantees transient states are eventually escaped. Proposition 11.2.4 guarantees all states in an irreducible chain are visited infinitely often. Given sufficient exploration (every state-action pair visited infinitely), Q-values converge to optimal. The theoretical guarantee is the same relentless grinding of infinite time.
+
+```mermaid
+graph TD
+    MC["Markov Chain\ntQ^n = marginal distribution\nsQ = s stationary distribution"] --> MDP["MDP\n+ Actions + Rewards\n+ Policy π"]
+    MDP --> J["J(θ) = Σ p(s₀) × V^π(s₀)\n= LOTP with rewards attached\nSame structure as tQ^n"]
+    MDP --> BE["Bellman Equation\nV(s) = E[r + γV(s')]\nRecursive Chapman-Kolmogorov"]
+    J --> PG["Policy Gradient ∇J(θ)\nloss.backward() in PyTorch\nAdjust transition probs\nto maximize J"]
+    BE --> QL["Q-Learning\nConverges by recurrence guarantee\n+ infinite exploration"]
+```
