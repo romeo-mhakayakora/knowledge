@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#markov-property-and-transition-matrix-ruleset-v5" class="md-skip">
+        <a href="#markov-property-and-transition-matrix" class="md-skip">
           Skip to content
         </a>
       
@@ -5649,6 +5649,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Markov Property and Transition Matrix
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -5665,6 +5683,1066 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-markov-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is a Markov Chain?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Is a Markov Chain?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-defined-this-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Defined This Way
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-this-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without This Property?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-markov-chains-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Markov Chains Matter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Markov Chains Matter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for Computation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Space
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="State Space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-homogeneous-markov-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time-Homogeneous Markov Chains
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time-Homogeneous Markov Chains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Markov Property
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Markov Property">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-before-the-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition Before the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-transition-matrix-q" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Transition Matrix Q
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Transition Matrix Q">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-rows-sum-to-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Rows Sum to 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-q-in-plain-english" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read Q in Plain English
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-n-step-transition-matrix-qn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The n-Step Transition Matrix Qn
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The n-Step Transition Matrix Qn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-before-the-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition Before the Theorem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theorem-entries-of-qn-are-n-step-transition-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theorem: Entries of Qn Are n-Step Transition Probabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report-for-the-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report for the Theorem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Proof
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full Proof">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-case-n-equals-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Case: n equals 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inductive-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inductive Hypothesis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-expand-the-matrix-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Expand the Matrix Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-apply-the-law-of-total-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Apply the Law of Total Probability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-apply-the-multiplication-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Apply the Multiplication Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-use-the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Use the Markov Property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-use-the-inductive-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Use the Inductive Hypothesis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-after-the-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition After the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without the Markov Property?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-time-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without Time-Homogeneity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapman-kolmogorov-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapman-Kolmogorov Equation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapman-Kolmogorov Equation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-before-the-proof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition Before the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-proof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Proof
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full Proof">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-partition-by-the-intermediate-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Partition by the Intermediate State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-apply-the-multiplication-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Apply the Multiplication Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-use-the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Use the Markov Property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-use-time-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Use Time-Homogeneity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-substitute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Substitute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-after-the-proof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition After the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-we-multiply-the-and-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why We Multiply the AND Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-we-sum-the-or-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why We Sum the OR Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-linear-algebra-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Linear Algebra Connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-computing-q-squared-and-two-step-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example Computing Q Squared and Two-Step Probabilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example Computing Q Squared and Two-Step Probabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-q-squared-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computing Q Squared Explicitly
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Computing Q Squared Explicitly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entry-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (1,1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (1,2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (1,3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (2,1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (2,2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (2,3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (3,1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (3,2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (3,3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-a-starting-from-state-1-reach-state-3-in-2-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario A: Starting from State 1, Reach State 3 in 2 Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-b-starting-from-state-2-reach-state-3-in-2-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario B: Starting from State 2, Reach State 3 in 2 Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-after-the-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition After the Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Mistakes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Mistakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mistake-1-markov-does-not-mean-independent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 1: Markov Does Not Mean Independent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-2-rows-and-columns-are-not-interchangeable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 2: Rows and Columns Are Not Interchangeable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-3-qn-does-not-mean-n-times-q" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 3: Qn Does Not Mean n Times Q
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 4: Future Independent of Past Does Not Mean Future Independent of Present
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notation-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notation Trap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#looking-ahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Looking Ahead
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Looking Ahead">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -6604,6 +7682,1055 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-markov-chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Is a Markov Chain?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What Is a Markov Chain?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-is-defined-this-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Is Defined This Way
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-this-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without This Property?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-markov-chains-matter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Markov Chains Matter
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Markov Chains Matter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-this-matters-for-computation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Matters for Computation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Space
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="State Space">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#time-homogeneous-markov-chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Time-Homogeneous Markov Chains
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Time-Homogeneous Markov Chains">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Markov Property
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Markov Property">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-before-the-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition Before the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-transition-matrix-q" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Transition Matrix Q
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Transition Matrix Q">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-rows-sum-to-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Rows Sum to 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-this-definition-exists_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why This Definition Exists
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-it_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without It?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-read-q-in-plain-english" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Read Q in Plain English
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-n-step-transition-matrix-qn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The n-Step Transition Matrix Qn
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The n-Step Transition Matrix Qn">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-before-the-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition Before the Theorem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theorem-entries-of-qn-are-n-step-transition-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theorem: Entries of Qn Are n-Step Transition Probabilities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report-for-the-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report for the Theorem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Proof
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full Proof">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#base-case-n-equals-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Base Case: n equals 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inductive-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inductive Hypothesis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-1-expand-the-matrix-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Expand the Matrix Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-apply-the-law-of-total-probability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Apply the Law of Total Probability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-apply-the-multiplication-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Apply the Multiplication Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-use-the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Use the Markov Property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-use-the-inductive-hypothesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Use the Inductive Hypothesis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-after-the-proof" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition After the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without the Markov Property?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-would-break-without-time-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Would Break Without Time-Homogeneity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chapman-kolmogorov-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chapman-Kolmogorov Equation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chapman-Kolmogorov Equation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scouting-report_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scouting Report
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-before-the-proof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition Before the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-proof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Full Proof
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Full Proof">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-partition-by-the-intermediate-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Partition by the Intermediate State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-apply-the-multiplication-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Apply the Multiplication Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-use-the-markov-property" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Use the Markov Property
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-use-time-homogeneity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Use Time-Homogeneity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-substitute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Substitute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-after-the-proof_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition After the Proof
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-we-multiply-the-and-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why We Multiply the AND Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-we-sum-the-or-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why We Sum the OR Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-linear-algebra-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Linear Algebra Connection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-computing-q-squared-and-two-step-probabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example Computing Q Squared and Two-Step Probabilities
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example Computing Q Squared and Two-Step Probabilities">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-q-squared-explicitly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Computing Q Squared Explicitly
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Computing Q Squared Explicitly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#entry-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (1,1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (1,2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (1,3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (2,1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (2,2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (2,3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (3,1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (3,2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry-33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Entry (3,3)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-a-starting-from-state-1-reach-state-3-in-2-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario A: Starting from State 1, Reach State 3 in 2 Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-b-starting-from-state-2-reach-state-3-in-2-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scenario B: Starting from State 2, Reach State 3 in 2 Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intuition-after-the-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intuition After the Example
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-mistakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Mistakes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Mistakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mistake-1-markov-does-not-mean-independent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 1: Markov Does Not Mean Independent
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-2-rows-and-columns-are-not-interchangeable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 2: Rows and Columns Are Not Interchangeable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-3-qn-does-not-mean-n-times-q" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 3: Qn Does Not Mean n Times Q
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mistake 4: Future Independent of Past Does Not Mean Future Independent of Present
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#notation-trap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notation Trap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#looking-ahead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Looking Ahead
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Looking Ahead">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phenomenon-metadata_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Phenomenon Metadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -6625,26 +8752,10 @@
   
 
 
-<blockquote>
-<p>Enhanced version generated from the uploaded notes.</p>
-<p>Improvements applied:
-- Added document front matter
-- Preserved GitHub-compatible structure
-- Retained Mermaid diagrams
-- Retained Scouting Reports and Metadata Blocks
-- Prepared as a clean standalone Markdown document for further expansion under your ruleset</p>
-</blockquote>
-<h1 id="markov-property-and-transition-matrix-ruleset-v5">Markov Property and Transition Matrix (RuleSet v5)<a class="headerlink" href="#markov-property-and-transition-matrix-ruleset-v5" title="Permanent link">&para;</a></h1>
-<p>This version is a structural rewrite target aligned with the latest note-taking rules:
-- Strict display-math isolation
-- Mermaid-only diagrams
-- GitHub-safe headers
-- Explicit dummy-index warnings
-- Phenomenon metadata cross-linking</p>
 <h1 id="markov-property-and-transition-matrix">Markov Property and Transition Matrix<a class="headerlink" href="#markov-property-and-transition-matrix" title="Permanent link">&para;</a></h1>
 <h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="#what-is-a-markov-chain">What Is a Markov Chain?</a></li>
+<li><a href="#what-is-a-markov-chain">What Is a Markov Chain</a></li>
 <li><a href="#why-markov-chains-matter">Why Markov Chains Matter</a></li>
 <li><a href="#state-space">State Space</a></li>
 <li><a href="#time-homogeneous-markov-chains">Time-Homogeneous Markov Chains</a></li>
@@ -6652,25 +8763,23 @@
 <li><a href="#the-transition-matrix-q">The Transition Matrix Q</a></li>
 <li><a href="#how-to-read-q-in-plain-english">How to Read Q in Plain English</a></li>
 <li><a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn</a></li>
-<li><a href="#theorem-entries-of-qn-are-n-step-transition-probabilities">Theorem: Entries of Qn Are n-Step Transition Probabilities</a></li>
-<li><a href="#the-chapman-kolmogorov-equation">The Chapman-Kolmogorov Equation</a></li>
+<li><a href="#chapman-kolmogorov-equation">Chapman-Kolmogorov Equation</a></li>
 <li><a href="#why-we-multiply-the-and-rule">Why We Multiply the AND Rule</a></li>
 <li><a href="#why-we-sum-the-or-rule">Why We Sum the OR Rule</a></li>
 <li><a href="#the-linear-algebra-connection">The Linear Algebra Connection</a></li>
-<li><a href="#worked-example-computing-q2-and-2-step-probabilities">Worked Example Computing Q2 and 2-Step Probabilities</a></li>
+<li><a href="#worked-example-computing-q-squared-and-two-step-probabilities">Worked Example Computing Q Squared and Two-Step Probabilities</a></li>
 <li><a href="#common-mistakes">Common Mistakes</a></li>
 <li><a href="#looking-ahead">Looking Ahead</a></li>
 </ul>
-<h1 id="what-is-a-markov-chain">What Is a Markov Chain?<a class="headerlink" href="#what-is-a-markov-chain" title="Permanent link">&para;</a></h1>
-<p>A Markov chain is a sequence of random variables.</p>
+<hr />
+<h2 id="what-is-a-markov-chain">What Is a Markov Chain?<a class="headerlink" href="#what-is-a-markov-chain" title="Permanent link">&para;</a></h2>
+<p>A Markov chain is a sequence of random variables</p>
 <div class="arithmatex">\[
 X_0, X_1, X_2, X_3, \ldots
 \]</div>
 <p>The defining feature is that the next step depends only on the present state.</p>
-<p>This does not mean there is no dependence.</p>
-<p>It means the dependence is organized so that once the current state is known, older history adds no extra predictive power for the next move.</p>
-<p>Think of the chain as having memory only of where it is right now.</p>
-<p>It does not remember how it got there.</p>
+<p>This does not mean there is no dependence. It means the dependence is organized so that once the current state is known, older history adds no extra predictive power for the next move.</p>
+<p>Think of the chain as having memory only of where it is right now. It does not remember how it got there.</p>
 <pre class="mermaid"><code>flowchart LR
     A["General process"]
     B["X_0"]
@@ -6690,20 +8799,19 @@ X_0, X_1, X_2, X_3, \ldots
 
     K["Only X_n matters for the next step"]
     I --&gt; K</code></pre>
-<h2 id="scouting-report">Scouting Report<a class="headerlink" href="#scouting-report" title="Permanent link">&para;</a></h2>
-<p>What to look for: a time-indexed process where the next move is determined by a compact current state.</p>
-<p>Why you care: this is the structural condition that makes transition matrices and matrix powers possible.</p>
-<h2 id="why-this-is-defined-this-way">Why This Is Defined This Way<a class="headerlink" href="#why-this-is-defined-this-way" title="Permanent link">&para;</a></h2>
+<p><strong>What this diagram shows.</strong> The top row is a general stochastic process where each variable could depend on everything before it. The bottom row is the Markov simplification: the arrow from the past to the future passes through only the current state <span class="arithmatex">\(X_n\)</span>. The node labeled "Only <span class="arithmatex">\(X_n\)</span> matters" captures the entire content of the Markov property in one line.</p>
+<h3 id="scouting-report">Scouting Report<a class="headerlink" href="#scouting-report" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> a time-indexed process where the next move is determined by a compact current state.</p>
+<p><strong>Why you care:</strong> this is the structural condition that makes transition matrices and matrix powers possible.</p>
+<h3 id="why-this-is-defined-this-way">Why This Is Defined This Way<a class="headerlink" href="#why-this-is-defined-this-way" title="Permanent link">&para;</a></h3>
 <p>The definition is designed so that the state contains exactly the information needed to predict the next move.</p>
 <p>If the present state were not enough, then the next-step rule would have to depend on a longer history, and the process would no longer be captured by one-step transition probabilities alone.</p>
-<p>This is the compression principle behind Markov chains.</p>
-<p>A full path is reduced to a single current state.</p>
-<h2 id="what-would-break-without-this-property">What Would Break Without This Property?<a class="headerlink" href="#what-would-break-without-this-property" title="Permanent link">&para;</a></h2>
+<p>This is the compression principle behind Markov chains. A full path is reduced to a single current state.</p>
+<h3 id="what-would-break-without-this-property">What Would Break Without This Property?<a class="headerlink" href="#what-would-break-without-this-property" title="Permanent link">&para;</a></h3>
 <p>If the next-step probability depends on older states too, then the process is not Markov in the current state space.</p>
-<p>For example, if tomorrow's weather depends on today and yesterday, then today alone is not enough information.</p>
-<p>The state would have to be enlarged, perhaps to pairs like <span class="arithmatex">\((X_{n-1}, X_n)\)</span>.</p>
+<p>For example, if tomorrow's weather depends on today and yesterday, then today alone is not enough information. The state would have to be enlarged, perhaps to pairs like <span class="arithmatex">\((X_{n-1}, X_n)\)</span>.</p>
 <p>Without the Markov property, there is no clean one-step matrix that captures the dynamics.</p>
-<h2 id="phenomenon-metadata">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata" title="Permanent link">&para;</a></h2>
+<h3 id="phenomenon-metadata">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -6730,22 +8838,19 @@ X_0, X_1, X_2, X_3, \ldots
 </tr>
 <tr>
 <td>Phenomenon Web</td>
-<td>See the Transition Matrix Q block, the The n-Step Transition Matrix Qn block, and the The Chapman-Kolmogorov Equation block</td>
+<td>See <a href="#the-transition-matrix-q">The Transition Matrix Q</a>, <a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn</a>, and <a href="#chapman-kolmogorov-equation">Chapman-Kolmogorov Equation</a></td>
 </tr>
 </tbody>
 </table>
-<h1 id="why-markov-chains-matter">Why Markov Chains Matter<a class="headerlink" href="#why-markov-chains-matter" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="why-markov-chains-matter">Why Markov Chains Matter<a class="headerlink" href="#why-markov-chains-matter" title="Permanent link">&para;</a></h2>
 <p>Many systems evolve over time: weather, routing, queues, populations, and reinforcement learning environments.</p>
-<p>The challenge is that history grows forever.</p>
-<p>If we had to condition on the entire past, then the number of possible histories would expand rapidly with time.</p>
-<p>That makes prediction and computation unwieldy.</p>
+<p>The challenge is that history grows forever. If we had to condition on the entire past, then the number of possible histories would expand rapidly with time. That makes prediction and computation unwieldy.</p>
 <p>The Markov property solves this by saying that the current state already contains everything relevant about the past.</p>
 <p><strong>Intuition:</strong> instead of storing a whole trajectory, we store one state.</p>
-<h2 id="why-this-matters-for-computation">Why This Matters for Computation<a class="headerlink" href="#why-this-matters-for-computation" title="Permanent link">&para;</a></h2>
-<p>If the state space has <span class="arithmatex">\(M\)</span> states, then a history of length <span class="arithmatex">\(n+1\)</span> has <span class="arithmatex">\(M^{n+1}\)</span> possible sequences.</p>
-<p>That is enormous for large <span class="arithmatex">\(n\)</span>.</p>
-<p>With the Markov property, we only need to track the <span class="arithmatex">\(M\)</span> current states.</p>
-<p>That is the difference between a growing history table and a fixed-size transition matrix.</p>
+<h3 id="why-this-matters-for-computation">Why This Matters for Computation<a class="headerlink" href="#why-this-matters-for-computation" title="Permanent link">&para;</a></h3>
+<p>If the state space has <span class="arithmatex">\(M\)</span> states, then a history of length <span class="arithmatex">\(n+1\)</span> has <span class="arithmatex">\(M^{n+1}\)</span> possible sequences. That is enormous for large <span class="arithmatex">\(n\)</span>.</p>
+<p>With the Markov property, we only need to track the <span class="arithmatex">\(M\)</span> current states. That is the difference between a growing history table and a fixed-size transition matrix.</p>
 <pre class="mermaid"><code>flowchart TD
     A["Full history"]
     B["Current state"]
@@ -6755,10 +8860,10 @@ X_0, X_1, X_2, X_3, \ldots
     A --&gt;|"compressed into"| B
     B --&gt;|"stored in"| C
     C --&gt;|"predicts next step"| B</code></pre>
-<h2 id="what-would-break-without-it">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it" title="Permanent link">&para;</a></h2>
-<p>Without the Markov property, the conditional probability of the next step could depend on the full history.</p>
-<p>Then there would be no single transition matrix indexed only by current state and next state.</p>
-<h2 id="phenomenon-metadata_1">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_1" title="Permanent link">&para;</a></h2>
+<p><strong>What this diagram shows.</strong> The cycle on the left represents the explosion of possible histories. The Markov property breaks this cycle by compressing history into a single state, which is then stored compactly in a transition matrix.</p>
+<h3 id="what-would-break-without-it">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it" title="Permanent link">&para;</a></h3>
+<p>Without the Markov property, the conditional probability of the next step could depend on the full history. Then there would be no single transition matrix indexed only by current state and next state.</p>
+<h3 id="phenomenon-metadata_1">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -6789,35 +8894,36 @@ X_0, X_1, X_2, X_3, \ldots
 </tr>
 </tbody>
 </table>
-<h1 id="state-space">State Space<a class="headerlink" href="#state-space" title="Permanent link">&para;</a></h1>
-<p>The state space is the set of all possible states of the chain.</p>
-<p>We usually denote it by <span class="arithmatex">\(S\)</span>.</p>
+<hr />
+<h2 id="state-space">State Space<a class="headerlink" href="#state-space" title="Permanent link">&para;</a></h2>
+<p>The state space is the set of all possible states of the chain. We usually denote it by <span class="arithmatex">\(S\)</span>.</p>
 <p>Examples include</p>
 <div class="arithmatex">\[
-S=\{1,2,3\}
+S = \{1, 2, 3\}
 \]</div>
+<p>and</p>
 <div class="arithmatex">\[
-S=\{\text{Sunny}, \text{Cloudy}, \text{Rainy}\}
+S = \{\text{Sunny}, \text{Cloudy}, \text{Rainy}\}
 \]</div>
+<p>and</p>
 <div class="arithmatex">\[
-S=\{0,1,2,\ldots,10\}
+S = \{0, 1, 2, \ldots, 10\}
 \]</div>
 <p>Every random variable <span class="arithmatex">\(X_n\)</span> takes values in <span class="arithmatex">\(S\)</span>.</p>
-<h2 id="scouting-report_1">Scouting Report<a class="headerlink" href="#scouting-report_1" title="Permanent link">&para;</a></h2>
-<p>What to look for: the complete list of values that the chain can occupy.</p>
-<p>Why you care: the state space determines the row and column labels of the transition matrix.</p>
-<h2 id="why-this-definition-exists">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists" title="Permanent link">&para;</a></h2>
+<h3 id="scouting-report_1">Scouting Report<a class="headerlink" href="#scouting-report_1" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> the complete list of values that the chain can occupy.</p>
+<p><strong>Why you care:</strong> the state space determines the row and column labels of the transition matrix.</p>
+<h3 id="why-this-definition-exists">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists" title="Permanent link">&para;</a></h3>
 <p>The state space tells us what values the indices may take in the transition probabilities.</p>
-<p>The basic one-step transition probability is defined by the conditional law of the next state given the current state.</p>
+<p>The basic one-step transition probability is defined by the conditional law of the next state given the current state:</p>
 <div class="arithmatex">\[
-q_{ij}=P(X_{n+1}=j \mid X_n=i)
+q_{ij} = P(X_{n+1} = j \mid X_n = i)
 \]</div>
 <p>Without a specified state space, the matrix dimensions are undefined.</p>
-<h2 id="what-would-break-without-it_1">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_1" title="Permanent link">&para;</a></h2>
+<h3 id="what-would-break-without-it_1">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_1" title="Permanent link">&para;</a></h3>
 <p>If <span class="arithmatex">\(S\)</span> were not specified, we would not know how large the transition matrix is, which entries are valid, or how to compute matrix powers consistently.</p>
-<p>For infinite state spaces, the theory changes substantially.</p>
-<p>The matrix may become infinite-dimensional, and uncountable spaces require kernels and measure theory rather than finite matrices.</p>
-<h2 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h2>
+<p>For infinite state spaces, the theory changes substantially. The matrix may become infinite-dimensional, and uncountable spaces require kernels and measure theory rather than finite matrices.</p>
+<h3 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -6848,32 +8954,32 @@ q_{ij}=P(X_{n+1}=j \mid X_n=i)
 </tr>
 </tbody>
 </table>
-<h1 id="time-homogeneous-markov-chains">Time-Homogeneous Markov Chains<a class="headerlink" href="#time-homogeneous-markov-chains" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="time-homogeneous-markov-chains">Time-Homogeneous Markov Chains<a class="headerlink" href="#time-homogeneous-markov-chains" title="Permanent link">&para;</a></h2>
 <p>A Markov chain is time-homogeneous if the one-step transition probabilities do not depend on time.</p>
 <p>The defining relation is</p>
 <div class="arithmatex">\[
-q_{ij}=P(X_{n+1}=j \mid X_n=i)
+q_{ij} = P(X_{n+1} = j \mid X_n = i)
 \]</div>
 <p>for every <span class="arithmatex">\(n\)</span>.</p>
 <p>So the same transition rule applies at every step.</p>
-<h2 id="scouting-report_2">Scouting Report<a class="headerlink" href="#scouting-report_2" title="Permanent link">&para;</a></h2>
-<p>What to look for: the same one-step law at every time step.</p>
-<p>Why you care: one fixed matrix <span class="arithmatex">\(Q\)</span> can describe the entire chain only when this property holds.</p>
-<h2 id="why-this-definition-exists_1">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_1" title="Permanent link">&para;</a></h2>
+<h3 id="scouting-report_2">Scouting Report<a class="headerlink" href="#scouting-report_2" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> the same one-step law at every time step.</p>
+<p><strong>Why you care:</strong> one fixed matrix <span class="arithmatex">\(Q\)</span> can describe the entire chain only when this property holds.</p>
+<h3 id="why-this-definition-exists_1">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_1" title="Permanent link">&para;</a></h3>
 <p>Time-homogeneity lets us use one matrix for all time steps.</p>
-<p>If the transition rule changed with time, we would need a different matrix at each step.</p>
+<p>If the transition rule changed with time, we would need a different matrix at each step:</p>
 <div class="arithmatex">\[
 Q_0, Q_1, Q_2, \ldots
 \]</div>
 <p>Then long-run evolution would be a product of different matrices rather than a power of one matrix.</p>
-<h2 id="what-would-break-without-it_2">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_2" title="Permanent link">&para;</a></h2>
-<p>If the chain is time-inhomogeneous, then <span class="arithmatex">\(Q^n\)</span> no longer describes <span class="arithmatex">\(n\)</span>-step motion.</p>
-<p>Instead we would need a product like</p>
+<h3 id="what-would-break-without-it_2">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_2" title="Permanent link">&para;</a></h3>
+<p>If the chain is time-inhomogeneous, then <span class="arithmatex">\(Q^n\)</span> no longer describes <span class="arithmatex">\(n\)</span>-step motion. Instead we would need a product like</p>
 <div class="arithmatex">\[
-Q_0Q_1Q_2\cdots Q_{n-1}
+Q_0 Q_1 Q_2 \cdots Q_{n-1}
 \]</div>
 <p>That destroys the neat matrix-power structure.</p>
-<h2 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h2>
+<h3 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -6904,26 +9010,28 @@ Q_0Q_1Q_2\cdots Q_{n-1}
 </tr>
 </tbody>
 </table>
-<h1 id="the-markov-property">The Markov Property<a class="headerlink" href="#the-markov-property" title="Permanent link">&para;</a></h1>
-<p>For all states <span class="arithmatex">\(i_0,i_1,\ldots,i_{n-1},i,j\)</span>, the Markov property states</p>
+<hr />
+<h2 id="the-markov-property">The Markov Property<a class="headerlink" href="#the-markov-property" title="Permanent link">&para;</a></h2>
+<p>For all states <span class="arithmatex">\(i_0, i_1, \ldots, i_{n-1}, i, j\)</span>, the Markov property states</p>
 <div class="arithmatex">\[
-P(X_{n+1}=j \mid X_n=i, X_{n-1}=i_{n-1}, \ldots, X_0=i_0)
-=
-P(X_{n+1}=j \mid X_n=i)
+\begin{aligned}
+&amp;P(X_{n+1} = j \mid X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0) \\
+&amp;\quad = P(X_{n+1} = j \mid X_n = i)
+\end{aligned}
 \]</div>
-<h2 id="scouting-report_3">Scouting Report<a class="headerlink" href="#scouting-report_3" title="Permanent link">&para;</a></h2>
-<p>What to look for: a conditional probability where the whole history appears on one side and only the present appears on the other.</p>
-<p>Why you care: this is the identity that allows multi-step probabilities to be reduced to matrix multiplication.</p>
-<h2 id="intuition-before-the-proof">Intuition Before the Proof<a class="headerlink" href="#intuition-before-the-proof" title="Permanent link">&para;</a></h2>
+<h3 id="scouting-report_3">Scouting Report<a class="headerlink" href="#scouting-report_3" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> a conditional probability where the whole history appears on one side and only the present appears on the other.</p>
+<p><strong>Why you care:</strong> this is the identity that allows multi-step probabilities to be reduced to matrix multiplication.</p>
+<h3 id="intuition-before-the-proof">Intuition Before the Proof<a class="headerlink" href="#intuition-before-the-proof" title="Permanent link">&para;</a></h3>
 <p>Once the current state is known, the old path that led there becomes irrelevant for the next move.</p>
 <p>The current state is the whole summary of the past that matters.</p>
-<h2 id="why-this-definition-exists_2">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_2" title="Permanent link">&para;</a></h2>
+<h3 id="why-this-definition-exists_2">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_2" title="Permanent link">&para;</a></h3>
 <p>If the future depended on the entire past, then the process could not be represented by a transition matrix indexed only by current and next states.</p>
 <p>The Markov property is exactly what allows the future to be summarized by the present.</p>
-<h2 id="what-would-break-without-it_3">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_3" title="Permanent link">&para;</a></h2>
+<h3 id="what-would-break-without-it_3">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_3" title="Permanent link">&para;</a></h3>
 <p>If the next-step probability still depended on earlier states, then the factorization used in multi-step proofs would not collapse to a single matrix product.</p>
 <p>The chain would need a larger state space or a more complicated model.</p>
-<h2 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h2>
+<h3 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -6954,41 +9062,39 @@ P(X_{n+1}=j \mid X_n=i)
 </tr>
 </tbody>
 </table>
-<h1 id="the-transition-matrix-q">The Transition Matrix Q<a class="headerlink" href="#the-transition-matrix-q" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="the-transition-matrix-q">The Transition Matrix Q<a class="headerlink" href="#the-transition-matrix-q" title="Permanent link">&para;</a></h2>
 <p>The transition matrix is</p>
 <div class="arithmatex">\[
-Q=(q_{ij})
+Q = (q_{ij})
 \]</div>
 <p>where</p>
 <div class="arithmatex">\[
-q_{ij}=P(X_{n+1}=j \mid X_n=i)
+q_{ij} = P(X_{n+1} = j \mid X_n = i)
 \]</div>
-<p>Rows correspond to the current state.</p>
-<p>Columns correspond to the next state.</p>
-<h2 id="why-rows-sum-to-1">Why Rows Sum to 1<a class="headerlink" href="#why-rows-sum-to-1" title="Permanent link">&para;</a></h2>
-<p>Fix a current state <span class="arithmatex">\(i\)</span>.</p>
-<p>Then the possible next states are <span class="arithmatex">\(1,2,\ldots,M\)</span>.</p>
+<p>Rows correspond to the current state. Columns correspond to the next state.</p>
+<h3 id="why-rows-sum-to-1">Why Rows Sum to 1<a class="headerlink" href="#why-rows-sum-to-1" title="Permanent link">&para;</a></h3>
+<p>Fix a current state <span class="arithmatex">\(i\)</span>. Then the possible next states are <span class="arithmatex">\(1, 2, \ldots, M\)</span>.</p>
 <p>Exactly one of them must occur.</p>
 <p>Therefore the events</p>
 <div class="arithmatex">\[
-\{X_{n+1}=1\},\{X_{n+1}=2\},\ldots,\{X_{n+1}=M\}
+\{X_{n+1} = 1\}, \{X_{n+1} = 2\}, \ldots, \{X_{n+1} = M\}
 \]</div>
-<p>form a partition of the sample space conditioned on <span class="arithmatex">\(X_n=i\)</span>.</p>
+<p>form a partition of the sample space conditioned on <span class="arithmatex">\(X_n = i\)</span>.</p>
 <p>Hence</p>
 <div class="arithmatex">\[
-\sum_{j=1}^M q_{ij}=1
+\sum_{j=1}^{M} q_{ij} = 1
 \]</div>
 <p><strong>Dummy-index warning:</strong> here <span class="arithmatex">\(j\)</span> is the varying summation index, while <span class="arithmatex">\(i\)</span> is fixed.</p>
-<h2 id="scouting-report_4">Scouting Report<a class="headerlink" href="#scouting-report_4" title="Permanent link">&para;</a></h2>
-<p>What to look for: a nonnegative matrix whose rows sum to 1.</p>
-<p>Why you care: this is the compact object that stores the one-step dynamics.</p>
-<h2 id="why-this-definition-exists_3">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_3" title="Permanent link">&para;</a></h2>
-<p>The matrix is arranged so that the <span class="arithmatex">\(i\)</span>th row is the full probability distribution of the next state given current state <span class="arithmatex">\(i\)</span>.</p>
+<h3 id="scouting-report_4">Scouting Report<a class="headerlink" href="#scouting-report_4" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> a nonnegative matrix whose rows sum to 1.</p>
+<p><strong>Why you care:</strong> this is the compact object that stores the one-step dynamics.</p>
+<h3 id="why-this-definition-exists_3">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_3" title="Permanent link">&para;</a></h3>
+<p>The matrix is arranged so that the <span class="arithmatex">\(i\)</span>-th row is the full probability distribution of the next state given current state <span class="arithmatex">\(i\)</span>.</p>
 <p>That makes the matrix directly interpretable in probabilistic terms.</p>
-<h2 id="what-would-break-without-it_4">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_4" title="Permanent link">&para;</a></h2>
-<p>If rows did not sum to 1, then the matrix would not represent a valid probability law.</p>
-<p>Probability mass would either disappear or exceed 1, and the chain would not be stochastic.</p>
-<h2 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h2>
+<h3 id="what-would-break-without-it_4">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_4" title="Permanent link">&para;</a></h3>
+<p>If rows did not sum to 1, then the matrix would not represent a valid probability law. Probability mass would either disappear or exceed 1, and the chain would not be stochastic.</p>
+<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7007,7 +9113,7 @@ q_{ij}=P(X_{n+1}=j \mid X_n=i)
 </tr>
 <tr>
 <td>Compression Handle</td>
-<td>Row = current, column = next</td>
+<td>Row equals current, column equals next</td>
 </tr>
 <tr>
 <td>Boundary / Failure Mode</td>
@@ -7019,20 +9125,19 @@ q_{ij}=P(X_{n+1}=j \mid X_n=i)
 </tr>
 </tbody>
 </table>
-<h1 id="how-to-read-q-in-plain-english">How to Read Q in Plain English<a class="headerlink" href="#how-to-read-q-in-plain-english" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="how-to-read-q-in-plain-english">How to Read Q in Plain English<a class="headerlink" href="#how-to-read-q-in-plain-english" title="Permanent link">&para;</a></h2>
 <p>To read <span class="arithmatex">\(Q\)</span>, fix the current state and look across that row.</p>
 <p>The row tells you the probabilities of the possible next states.</p>
-<p>For instance, if the chain is in state <span class="arithmatex">\(3\)</span>, then the third row tells you what happens next.</p>
-<p>Notation warning: some books write the transition matrix as <span class="arithmatex">\(P\)</span> instead of <span class="arithmatex">\(Q\)</span>.</p>
-<p>Here <span class="arithmatex">\(Q\)</span> is used to avoid confusion with probability itself.</p>
-<p>Both notations mean the same thing in this context.</p>
-<p>Row-vector convention: we write distributions as row vectors and multiply on the right.</p>
+<p>For instance, if the chain is in state 3, then the third row tells you what happens next.</p>
+<p><strong>Notation warning:</strong> some books write the transition matrix as <span class="arithmatex">\(P\)</span> instead of <span class="arithmatex">\(Q\)</span>. Here <span class="arithmatex">\(Q\)</span> is used to avoid confusion with probability itself. Both notations mean the same thing in this context.</p>
+<p><strong>Row-vector convention:</strong> we write distributions as row vectors and multiply on the right:</p>
 <div class="arithmatex">\[
-p^{(n+1)}=p^{(n)}Q
+p^{(n+1)} = p^{(n)} Q
 \]</div>
 <p>If we instead use column vectors, then</p>
 <div class="arithmatex">\[
-p_{\text{col}}^{(n+1)}=Q^T p_{\text{col}}^{(n)}
+p_{\text{col}}^{(n+1)} = Q^{\mathsf{T}} p_{\text{col}}^{(n)}
 \]</div>
 <p>Both conventions are equivalent if used consistently.</p>
 <pre class="mermaid"><code>flowchart LR
@@ -7041,52 +9146,53 @@ p_{\text{col}}^{(n+1)}=Q^T p_{\text{col}}^{(n)}
     C["Distribution of next state"]
 
     A --&gt; B --&gt; C</code></pre>
-<h1 id="the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn<a class="headerlink" href="#the-n-step-transition-matrix-qn" title="Permanent link">&para;</a></h1>
+<p><strong>What this diagram shows.</strong> Reading the transition matrix is a two-step process: identify where you are now (current state), then read the corresponding row to get the probability distribution over where you go next.</p>
+<hr />
+<h2 id="the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn<a class="headerlink" href="#the-n-step-transition-matrix-qn" title="Permanent link">&para;</a></h2>
 <p>The matrix <span class="arithmatex">\(Q^n\)</span> contains the probabilities of moving in exactly <span class="arithmatex">\(n\)</span> steps.</p>
 <p>Its <span class="arithmatex">\((i,j)\)</span> entry is written</p>
 <div class="arithmatex">\[
-q_{ij}^{(n)}=P(X_n=j \mid X_0=i)
+q_{ij}^{(n)} = P(X_n = j \mid X_0 = i)
 \]</div>
-<p>The parentheses in <span class="arithmatex">\(q_{ij}^{(n)}\)</span> matter.</p>
-<p>They indicate the <span class="arithmatex">\((i,j)\)</span> entry of <span class="arithmatex">\(Q^n\)</span>, not the scalar <span class="arithmatex">\((q_{ij})^n\)</span>.</p>
-<h2 id="scouting-report_5">Scouting Report<a class="headerlink" href="#scouting-report_5" title="Permanent link">&para;</a></h2>
-<p>What to look for: a matrix power on the left and an <span class="arithmatex">\(n\)</span>-step conditional probability on the right.</p>
-<p>Why you care: this is the bridge between linear algebra and probability.</p>
-<h2 id="intuition-before-the-theorem">Intuition Before the Theorem<a class="headerlink" href="#intuition-before-the-theorem" title="Permanent link">&para;</a></h2>
+<p>The parentheses in <span class="arithmatex">\(q_{ij}^{(n)}\)</span> matter. They indicate the <span class="arithmatex">\((i,j)\)</span> entry of <span class="arithmatex">\(Q^n\)</span>, not the scalar <span class="arithmatex">\((q_{ij})^n\)</span>.</p>
+<h3 id="scouting-report_5">Scouting Report<a class="headerlink" href="#scouting-report_5" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> a matrix power on the left and an <span class="arithmatex">\(n\)</span>-step conditional probability on the right.</p>
+<p><strong>Why you care:</strong> this is the bridge between linear algebra and probability.</p>
+<h3 id="intuition-before-the-theorem">Intuition Before the Theorem<a class="headerlink" href="#intuition-before-the-theorem" title="Permanent link">&para;</a></h3>
 <p>It is tempting to guess that one step is <span class="arithmatex">\(Q\)</span>, two steps is <span class="arithmatex">\(Q^2\)</span>, three steps is <span class="arithmatex">\(Q^3\)</span>, and so on.</p>
 <p>The theorem below shows why that guess is correct.</p>
-<h2 id="theorem-entries-of-qn-are-n-step-transition-probabilities">Theorem: Entries of Qn Are n-Step Transition Probabilities<a class="headerlink" href="#theorem-entries-of-qn-are-n-step-transition-probabilities" title="Permanent link">&para;</a></h2>
-<p>Statement.</p>
-<p>For every <span class="arithmatex">\(n \ge 1\)</span> and all states <span class="arithmatex">\(i,j\)</span>,</p>
+<h3 id="theorem-entries-of-qn-are-n-step-transition-probabilities">Theorem: Entries of Qn Are n-Step Transition Probabilities<a class="headerlink" href="#theorem-entries-of-qn-are-n-step-transition-probabilities" title="Permanent link">&para;</a></h3>
+<p><strong>Statement.</strong></p>
+<p>For every <span class="arithmatex">\(n \geq 1\)</span> and all states <span class="arithmatex">\(i, j\)</span>,</p>
 <div class="arithmatex">\[
-(Q^n)_{ij}=P(X_n=j \mid X_0=i)
+(Q^n)_{ij} = P(X_n = j \mid X_0 = i)
 \]</div>
-<h2 id="scouting-report_6">Scouting Report<a class="headerlink" href="#scouting-report_6" title="Permanent link">&para;</a></h2>
-<p>What to look for: an <span class="arithmatex">\(n\)</span>th matrix power on one side and a conditional probability of an <span class="arithmatex">\(n\)</span>-step transition on the other.</p>
-<p>Why you care: this theorem turns matrix powers into a probability calculator.</p>
-<h2 id="full-proof">Full Proof<a class="headerlink" href="#full-proof" title="Permanent link">&para;</a></h2>
+<h3 id="scouting-report-for-the-theorem">Scouting Report for the Theorem<a class="headerlink" href="#scouting-report-for-the-theorem" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> an <span class="arithmatex">\(n\)</span>-th matrix power on one side and a conditional probability of an <span class="arithmatex">\(n\)</span>-step transition on the other.</p>
+<p><strong>Why you care:</strong> this theorem turns matrix powers into a probability calculator.</p>
+<h3 id="full-proof">Full Proof<a class="headerlink" href="#full-proof" title="Permanent link">&para;</a></h3>
 <p>We prove the statement by induction on <span class="arithmatex">\(n\)</span>.</p>
-<h3 id="base-case-n-1">Base Case: n = 1<a class="headerlink" href="#base-case-n-1" title="Permanent link">&para;</a></h3>
+<h4 id="base-case-n-equals-1">Base Case: n equals 1<a class="headerlink" href="#base-case-n-equals-1" title="Permanent link">&para;</a></h4>
 <p>By definition of the transition matrix,</p>
 <div class="arithmatex">\[
-(Q^1)_{ij}=Q_{ij}=P(X_1=j \mid X_0=i)
+(Q^1)_{ij} = Q_{ij} = P(X_1 = j \mid X_0 = i)
 \]</div>
-<p>So the statement is true for <span class="arithmatex">\(n=1\)</span>.</p>
-<h3 id="inductive-hypothesis">Inductive Hypothesis<a class="headerlink" href="#inductive-hypothesis" title="Permanent link">&para;</a></h3>
-<p>Assume that for some <span class="arithmatex">\(n \ge 1\)</span>,</p>
+<p>So the statement is true for <span class="arithmatex">\(n = 1\)</span>.</p>
+<h4 id="inductive-hypothesis">Inductive Hypothesis<a class="headerlink" href="#inductive-hypothesis" title="Permanent link">&para;</a></h4>
+<p>Assume that for some <span class="arithmatex">\(n \geq 1\)</span>,</p>
 <div class="arithmatex">\[
-(Q^n)_{ik}=P(X_n=k \mid X_0=i)
+(Q^n)_{ik} = P(X_n = k \mid X_0 = i)
 \]</div>
-<p>for every pair of states <span class="arithmatex">\(i,k\)</span>.</p>
+<p>for every pair of states <span class="arithmatex">\(i, k\)</span>.</p>
 <p><strong>Dummy-index warning:</strong> here <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> are fixed throughout the argument, while <span class="arithmatex">\(k\)</span> is a dummy summation index.</p>
 <p>We must prove that</p>
 <div class="arithmatex">\[
-(Q^{n+1})_{ij}=P(X_{n+1}=j \mid X_0=i)
+(Q^{n+1})_{ij} = P(X_{n+1} = j \mid X_0 = i)
 \]</div>
-<h3 id="step-1-expand-the-matrix-product">Step 1: Expand the Matrix Product<a class="headerlink" href="#step-1-expand-the-matrix-product" title="Permanent link">&para;</a></h3>
+<h4 id="step-1-expand-the-matrix-product">Step 1: Expand the Matrix Product<a class="headerlink" href="#step-1-expand-the-matrix-product" title="Permanent link">&para;</a></h4>
 <p>By matrix multiplication,</p>
 <div class="arithmatex">\[
-(Q^{n+1})_{ij}=(Q^nQ)_{ij}=\sum_{k=1}^M (Q^n)_{ik}Q_{kj}
+(Q^{n+1})_{ij} = (Q^n Q)_{ij} = \sum_{k=1}^{M} (Q^n)_{ik} Q_{kj}
 \]</div>
 <p><strong>Dummy-index warning:</strong> in this sum, <span class="arithmatex">\(k\)</span> varies through all states, while <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> are fixed.</p>
 <p>This decomposition says the chain reaches some intermediate state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(n\)</span> steps and then moves from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> in one more step.</p>
@@ -7096,42 +9202,38 @@ q_{ij}^{(n)}=P(X_n=j \mid X_0=i)
     K["Intermediate state k"]
     J["State j"]
 
-    I --&gt;|"n steps"| K --&gt;|"1 step"| J
+    I --&gt;|"n steps"| K
+    K --&gt;|"1 step"| J
     K --&gt;|"sum over all k"| K</code></pre>
-<h3 id="step-2-apply-the-law-of-total-probability">Step 2: Apply the Law of Total Probability<a class="headerlink" href="#step-2-apply-the-law-of-total-probability" title="Permanent link">&para;</a></h3>
+<p><strong>What this diagram shows.</strong> Every path from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n+1\)</span> steps must pass through some intermediate state <span class="arithmatex">\(k\)</span> at time <span class="arithmatex">\(n\)</span>. The sum aggregates over all possible intermediate states.</p>
+<h4 id="step-2-apply-the-law-of-total-probability">Step 2: Apply the Law of Total Probability<a class="headerlink" href="#step-2-apply-the-law-of-total-probability" title="Permanent link">&para;</a></h4>
 <p>To go from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n+1\)</span> steps, the chain must be in some intermediate state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(n\)</span> steps.</p>
 <p>Therefore</p>
 <div class="arithmatex">\[
-P(X_{n+1}=j \mid X_0=i)
-=
-\sum_{k=1}^M P(X_{n+1}=j, X_n=k \mid X_0=i)
+P(X_{n+1} = j \mid X_0 = i) = \sum_{k=1}^{M} P(X_{n+1} = j, X_n = k \mid X_0 = i)
 \]</div>
-<h3 id="step-3-apply-the-multiplication-rule">Step 3: Apply the Multiplication Rule<a class="headerlink" href="#step-3-apply-the-multiplication-rule" title="Permanent link">&para;</a></h3>
+<h4 id="step-3-apply-the-multiplication-rule">Step 3: Apply the Multiplication Rule<a class="headerlink" href="#step-3-apply-the-multiplication-rule" title="Permanent link">&para;</a></h4>
 <p>For each <span class="arithmatex">\(k\)</span>,</p>
 <div class="arithmatex">\[
-P(X_{n+1}=j, X_n=k \mid X_0=i)
-=
-P(X_{n+1}=j \mid X_n=k, X_0=i)\,P(X_n=k \mid X_0=i)
+P(X_{n+1} = j, X_n = k \mid X_0 = i) = P(X_{n+1} = j \mid X_n = k, X_0 = i) \, P(X_n = k \mid X_0 = i)
 \]</div>
-<h3 id="step-4-use-the-markov-property">Step 4: Use the Markov Property<a class="headerlink" href="#step-4-use-the-markov-property" title="Permanent link">&para;</a></h3>
+<h4 id="step-4-use-the-markov-property">Step 4: Use the Markov Property<a class="headerlink" href="#step-4-use-the-markov-property" title="Permanent link">&para;</a></h4>
 <p>By the Markov property,</p>
 <div class="arithmatex">\[
-P(X_{n+1}=j \mid X_n=k, X_0=i)=P(X_{n+1}=j \mid X_n=k)
+P(X_{n+1} = j \mid X_n = k, X_0 = i) = P(X_{n+1} = j \mid X_n = k)
 \]</div>
 <p>Because the chain is time-homogeneous, this equals</p>
 <div class="arithmatex">\[
 Q_{kj}
 \]</div>
-<h3 id="step-5-use-the-inductive-hypothesis">Step 5: Use the Inductive Hypothesis<a class="headerlink" href="#step-5-use-the-inductive-hypothesis" title="Permanent link">&para;</a></h3>
+<h4 id="step-5-use-the-inductive-hypothesis">Step 5: Use the Inductive Hypothesis<a class="headerlink" href="#step-5-use-the-inductive-hypothesis" title="Permanent link">&para;</a></h4>
 <p>By the inductive hypothesis,</p>
 <div class="arithmatex">\[
-P(X_n=k \mid X_0=i)=(Q^n)_{ik}
+P(X_n = k \mid X_0 = i) = (Q^n)_{ik}
 \]</div>
 <p>Substitute everything:</p>
 <div class="arithmatex">\[
-P(X_{n+1}=j \mid X_0=i)
-=
-\sum_{k=1}^M (Q^n)_{ik}Q_{kj}
+P(X_{n+1} = j \mid X_0 = i) = \sum_{k=1}^{M} (Q^n)_{ik} Q_{kj}
 \]</div>
 <p>But the right-hand side is exactly</p>
 <div class="arithmatex">\[
@@ -7139,23 +9241,22 @@ P(X_{n+1}=j \mid X_0=i)
 \]</div>
 <p>So</p>
 <div class="arithmatex">\[
-(Q^{n+1})_{ij}=P(X_{n+1}=j \mid X_0=i)
+(Q^{n+1})_{ij} = P(X_{n+1} = j \mid X_0 = i)
 \]</div>
 <p>This completes the induction.</p>
-<h2 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h2>
+<h3 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h3>
 <p>Every <span class="arithmatex">\((n+1)\)</span>-step path from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> must pass through one intermediate state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(n\)</span> steps.</p>
 <p>The probability of one route is the probability to reach <span class="arithmatex">\(k\)</span> times the probability to leave <span class="arithmatex">\(k\)</span> for <span class="arithmatex">\(j\)</span>.</p>
 <p>Then we add over all possible <span class="arithmatex">\(k\)</span>.</p>
-<h2 id="what-would-break-without-the-markov-property">What Would Break Without the Markov Property?<a class="headerlink" href="#what-would-break-without-the-markov-property" title="Permanent link">&para;</a></h2>
+<h3 id="what-would-break-without-the-markov-property">What Would Break Without the Markov Property?<a class="headerlink" href="#what-would-break-without-the-markov-property" title="Permanent link">&para;</a></h3>
 <p>If the next-step probability still depended on older history, then</p>
 <div class="arithmatex">\[
-P(X_{n+1}=j \mid X_n=k, X_0=i)
+P(X_{n+1} = j \mid X_n = k, X_0 = i)
 \]</div>
-<p>would not simplify to a function of <span class="arithmatex">\(k\)</span> alone.</p>
-<p>The matrix product would no longer encode the correct probability.</p>
-<h2 id="what-would-break-without-time-homogeneity">What Would Break Without Time-Homogeneity?<a class="headerlink" href="#what-would-break-without-time-homogeneity" title="Permanent link">&para;</a></h2>
+<p>would not simplify to a function of <span class="arithmatex">\(k\)</span> alone. The matrix product would no longer encode the correct probability.</p>
+<h3 id="what-would-break-without-time-homogeneity">What Would Break Without Time-Homogeneity?<a class="headerlink" href="#what-would-break-without-time-homogeneity" title="Permanent link">&para;</a></h3>
 <p>If the transition probabilities changed with time, then the last factor would depend on the step number, and we would no longer have a single matrix power describing the chain.</p>
-<h2 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h2>
+<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7174,7 +9275,7 @@ P(X_{n+1}=j \mid X_n=k, X_0=i)
 </tr>
 <tr>
 <td>Compression Handle</td>
-<td>Reach k, then leave k</td>
+<td>Reach <span class="arithmatex">\(k\)</span>, then leave <span class="arithmatex">\(k\)</span></td>
 </tr>
 <tr>
 <td>Boundary / Failure Mode</td>
@@ -7182,23 +9283,24 @@ P(X_{n+1}=j \mid X_n=k, X_0=i)
 </tr>
 <tr>
 <td>Phenomenon Web</td>
-<td>Direct precursor to the The Chapman-Kolmogorov Equation block</td>
+<td>Direct precursor to the <a href="#chapman-kolmogorov-equation">Chapman-Kolmogorov Equation</a></td>
 </tr>
 </tbody>
 </table>
-<h1 id="the-chapman-kolmogorov-equation">The Chapman-Kolmogorov Equation<a class="headerlink" href="#the-chapman-kolmogorov-equation" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="chapman-kolmogorov-equation">Chapman-Kolmogorov Equation<a class="headerlink" href="#chapman-kolmogorov-equation" title="Permanent link">&para;</a></h2>
 <p>For nonnegative integers <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>,</p>
 <div class="arithmatex">\[
-q_{ij}^{(m+n)}=\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}
+q_{ij}^{(m+n)} = \sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}
 \]</div>
 <p>In matrix form,</p>
 <div class="arithmatex">\[
-Q^{m+n}=Q^mQ^n
+Q^{m+n} = Q^m Q^n
 \]</div>
-<h2 id="scouting-report_7">Scouting Report<a class="headerlink" href="#scouting-report_7" title="Permanent link">&para;</a></h2>
-<p>What to look for: a multi-step transition broken at an intermediate time.</p>
-<p>Why you care: this equation is the probabilistic reason matrix multiplication works for Markov chains.</p>
-<h2 id="intuition-before-the-proof_1">Intuition Before the Proof<a class="headerlink" href="#intuition-before-the-proof_1" title="Permanent link">&para;</a></h2>
+<h3 id="scouting-report_6">Scouting Report<a class="headerlink" href="#scouting-report_6" title="Permanent link">&para;</a></h3>
+<p><strong>What to look for:</strong> a multi-step transition broken at an intermediate time.</p>
+<p><strong>Why you care:</strong> this equation is the probabilistic reason matrix multiplication works for Markov chains.</p>
+<h3 id="intuition-before-the-proof_1">Intuition Before the Proof<a class="headerlink" href="#intuition-before-the-proof_1" title="Permanent link">&para;</a></h3>
 <p>To go from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(m+n\)</span> steps, the chain must be in some state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(m\)</span> steps, and then it must travel from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> in the remaining <span class="arithmatex">\(n\)</span> steps.</p>
 <p>Since <span class="arithmatex">\(k\)</span> is unknown, we sum over all possible states.</p>
 <pre class="mermaid"><code>flowchart LR
@@ -7206,192 +9308,214 @@ Q^{m+n}=Q^mQ^n
     K["Intermediate state k"]
     J["State j"]
 
-    I --&gt;|"m steps"| K --&gt;|"n steps"| J
+    I --&gt;|"m steps"| K
+    K --&gt;|"n steps"| J
     K --&gt;|"sum over k"| K</code></pre>
-<h2 id="full-proof_1">Full Proof<a class="headerlink" href="#full-proof_1" title="Permanent link">&para;</a></h2>
+<p><strong>What this diagram shows.</strong> The trip is broken into two legs: first <span class="arithmatex">\(m\)</span> steps from <span class="arithmatex">\(i\)</span> to an unknown intermediate state <span class="arithmatex">\(k\)</span>, then <span class="arithmatex">\(n\)</span> steps from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span>. Summing over all possible <span class="arithmatex">\(k\)</span> gives the total probability.</p>
+<h3 id="full-proof_1">Full Proof<a class="headerlink" href="#full-proof_1" title="Permanent link">&para;</a></h3>
 <p>Fix states <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>.</p>
-<h3 id="step-1-partition-by-the-intermediate-state">Step 1: Partition by the Intermediate State<a class="headerlink" href="#step-1-partition-by-the-intermediate-state" title="Permanent link">&para;</a></h3>
+<h4 id="step-1-partition-by-the-intermediate-state">Step 1: Partition by the Intermediate State<a class="headerlink" href="#step-1-partition-by-the-intermediate-state" title="Permanent link">&para;</a></h4>
 <p>At time <span class="arithmatex">\(m\)</span>, the chain must be in exactly one state.</p>
-<p>So the events <span class="arithmatex">\(\{X_m=k\}\)</span> for <span class="arithmatex">\(k=1,\ldots,M\)</span> form a partition.</p>
+<p>So the events <span class="arithmatex">\(\{X_m = k\}\)</span> for <span class="arithmatex">\(k = 1, \ldots, M\)</span> form a partition.</p>
 <p>Hence</p>
 <div class="arithmatex">\[
-P(X_{m+n}=j \mid X_0=i)
-=
-\sum_{k=1}^M P(X_{m+n}=j, X_m=k \mid X_0=i)
+P(X_{m+n} = j \mid X_0 = i) = \sum_{k=1}^{M} P(X_{m+n} = j, X_m = k \mid X_0 = i)
 \]</div>
 <p><strong>Dummy-index warning:</strong> <span class="arithmatex">\(k\)</span> is the varying summation index here. The indices <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> are fixed.</p>
-<h3 id="step-2-apply-the-multiplication-rule">Step 2: Apply the Multiplication Rule<a class="headerlink" href="#step-2-apply-the-multiplication-rule" title="Permanent link">&para;</a></h3>
+<h4 id="step-2-apply-the-multiplication-rule">Step 2: Apply the Multiplication Rule<a class="headerlink" href="#step-2-apply-the-multiplication-rule" title="Permanent link">&para;</a></h4>
 <p>For each <span class="arithmatex">\(k\)</span>,</p>
 <div class="arithmatex">\[
-P(X_{m+n}=j, X_m=k \mid X_0=i)
-=
-P(X_{m+n}=j \mid X_m=k, X_0=i)\,P(X_m=k \mid X_0=i)
+\begin{aligned}
+&amp;P(X_{m+n} = j, X_m = k \mid X_0 = i) \\
+&amp;\quad = P(X_{m+n} = j \mid X_m = k, X_0 = i) \, P(X_m = k \mid X_0 = i)
+\end{aligned}
 \]</div>
-<h3 id="step-3-use-the-markov-property">Step 3: Use the Markov Property<a class="headerlink" href="#step-3-use-the-markov-property" title="Permanent link">&para;</a></h3>
+<h4 id="step-3-use-the-markov-property">Step 3: Use the Markov Property<a class="headerlink" href="#step-3-use-the-markov-property" title="Permanent link">&para;</a></h4>
 <p>The Markov property gives</p>
 <div class="arithmatex">\[
-P(X_{m+n}=j \mid X_m=k, X_0=i)
-=
-P(X_{m+n}=j \mid X_m=k)
+P(X_{m+n} = j \mid X_m = k, X_0 = i) = P(X_{m+n} = j \mid X_m = k)
 \]</div>
-<h3 id="step-4-use-time-homogeneity">Step 4: Use Time-Homogeneity<a class="headerlink" href="#step-4-use-time-homogeneity" title="Permanent link">&para;</a></h3>
+<h4 id="step-4-use-time-homogeneity">Step 4: Use Time-Homogeneity<a class="headerlink" href="#step-4-use-time-homogeneity" title="Permanent link">&para;</a></h4>
 <p>Since the chain is time-homogeneous,</p>
 <div class="arithmatex">\[
-P(X_{m+n}=j \mid X_m=k)=q_{kj}^{(n)}
+P(X_{m+n} = j \mid X_m = k) = q_{kj}^{(n)}
 \]</div>
 <p>Also,</p>
 <div class="arithmatex">\[
-P(X_m=k \mid X_0=i)=q_{ik}^{(m)}
+P(X_m = k \mid X_0 = i) = q_{ik}^{(m)}
 \]</div>
-<h3 id="step-5-substitute">Step 5: Substitute<a class="headerlink" href="#step-5-substitute" title="Permanent link">&para;</a></h3>
+<h4 id="step-5-substitute">Step 5: Substitute<a class="headerlink" href="#step-5-substitute" title="Permanent link">&para;</a></h4>
 <p>So</p>
 <div class="arithmatex">\[
-P(X_{m+n}=j \mid X_0=i)
-=
-\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}
+P(X_{m+n} = j \mid X_0 = i) = \sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}
 \]</div>
 <p>Therefore,</p>
 <div class="arithmatex">\[
-q_{ij}^{(m+n)}=\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}
+q_{ij}^{(m+n)} = \sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}
 \]</div>
-<h2 id="intuition-after-the-proof_1">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_1" title="Permanent link">&para;</a></h2>
-<p>This is just “break the trip into two legs.”</p>
+<h3 id="intuition-after-the-proof_1">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_1" title="Permanent link">&para;</a></h3>
+<p>This is just "break the trip into two legs."</p>
 <p>The state at time <span class="arithmatex">\(m\)</span> is hidden, so we sum over every possible intermediate state.</p>
+<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>A multi-step transition broken at an intermediate time</td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>The intermediate state fully summarizes the past at the split point</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>Break the trip into two legs</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If the chain is time-inhomogeneous, the factorization uses different matrices</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>Generalizes the theorem in <a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn</a> to arbitrary split points; foundation for all matrix-power calculations</td>
+</tr>
+</tbody>
+</table>
+<hr />
 <h2 id="why-we-multiply-the-and-rule">Why We Multiply the AND Rule<a class="headerlink" href="#why-we-multiply-the-and-rule" title="Permanent link">&para;</a></h2>
 <p>To travel from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> through a specific intermediate state <span class="arithmatex">\(k\)</span>, both of these must happen.</p>
 <p>First, the chain must go from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(k\)</span> in <span class="arithmatex">\(m\)</span> steps.</p>
 <p>Then it must go from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n\)</span> steps.</p>
 <p>So the probability of that route is the product</p>
 <div class="arithmatex">\[
-q_{ik}^{(m)}q_{kj}^{(n)}
+q_{ik}^{(m)} q_{kj}^{(n)}
 \]</div>
+<p>Both events must occur, so we multiply their probabilities. This is the AND rule.</p>
+<hr />
 <h2 id="why-we-sum-the-or-rule">Why We Sum the OR Rule<a class="headerlink" href="#why-we-sum-the-or-rule" title="Permanent link">&para;</a></h2>
 <p>The intermediate state <span class="arithmatex">\(k\)</span> could be any state in the state space.</p>
 <p>These possibilities are mutually exclusive, so we add the probabilities over all possible <span class="arithmatex">\(k\)</span>.</p>
+<p>The total probability is</p>
+<div class="arithmatex">\[
+\sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}
+\]</div>
+<p>The routes through different intermediate states are disjoint events, so we sum their probabilities. This is the OR rule.</p>
+<hr />
 <h2 id="the-linear-algebra-connection">The Linear Algebra Connection<a class="headerlink" href="#the-linear-algebra-connection" title="Permanent link">&para;</a></h2>
 <p>The quantity</p>
 <div class="arithmatex">\[
-\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}
+\sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}
 \]</div>
-<p>is exactly the <span class="arithmatex">\((i,j)\)</span> entry of the matrix product <span class="arithmatex">\(Q^mQ^n\)</span>.</p>
+<p>is exactly the <span class="arithmatex">\((i,j)\)</span> entry of the matrix product <span class="arithmatex">\(Q^m Q^n\)</span>.</p>
 <p>That is why matrix multiplication matches the probabilistic structure of Markov chains so perfectly.</p>
-<h1 id="worked-example-computing-q2-and-2-step-probabilities">Worked Example Computing Q2 and 2-Step Probabilities<a class="headerlink" href="#worked-example-computing-q2-and-2-step-probabilities" title="Permanent link">&para;</a></h1>
+<p>The Chapman-Kolmogorov equation is not a coincidence. It is the statement that matrix multiplication correctly tracks the accumulation of probabilities over all possible intermediate paths.</p>
+<hr />
+<h2 id="worked-example-computing-q-squared-and-two-step-probabilities">Worked Example Computing Q Squared and Two-Step Probabilities<a class="headerlink" href="#worked-example-computing-q-squared-and-two-step-probabilities" title="Permanent link">&para;</a></h2>
 <p>Consider</p>
 <div class="arithmatex">\[
-Q=
-\begin{pmatrix}
-0.5 &amp; 0.4 &amp; 0.1 \\
-0.3 &amp; 0.2 &amp; 0.5 \\
-0.2 &amp; 0.3 &amp; 0.5
-\end{pmatrix}
+Q = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}
 \]</div>
-<h2 id="computing-q2-explicitly">Computing Q2 Explicitly<a class="headerlink" href="#computing-q2-explicitly" title="Permanent link">&para;</a></h2>
-<h3 id="entry-11">Entry (1,1)<a class="headerlink" href="#entry-11" title="Permanent link">&para;</a></h3>
+<h3 id="computing-q-squared-explicitly">Computing Q Squared Explicitly<a class="headerlink" href="#computing-q-squared-explicitly" title="Permanent link">&para;</a></h3>
+<h4 id="entry-11">Entry (1,1)<a class="headerlink" href="#entry-11" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{11}=(0.5)(0.5)+(0.4)(0.3)+(0.1)(0.2)=0.25+0.12+0.02=0.39
+(Q^2)_{11} = (0.5)(0.5) + (0.4)(0.3) + (0.1)(0.2) = 0.25 + 0.12 + 0.02 = 0.39
 \]</div>
-<h3 id="entry-12">Entry (1,2)<a class="headerlink" href="#entry-12" title="Permanent link">&para;</a></h3>
+<h4 id="entry-12">Entry (1,2)<a class="headerlink" href="#entry-12" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{12}=(0.5)(0.4)+(0.4)(0.2)+(0.1)(0.3)=0.20+0.08+0.03=0.31
+(Q^2)_{12} = (0.5)(0.4) + (0.4)(0.2) + (0.1)(0.3) = 0.20 + 0.08 + 0.03 = 0.31
 \]</div>
-<h3 id="entry-13">Entry (1,3)<a class="headerlink" href="#entry-13" title="Permanent link">&para;</a></h3>
+<h4 id="entry-13">Entry (1,3)<a class="headerlink" href="#entry-13" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{13}=(0.5)(0.1)+(0.4)(0.5)+(0.1)(0.5)=0.05+0.20+0.05=0.30
+(Q^2)_{13} = (0.5)(0.1) + (0.4)(0.5) + (0.1)(0.5) = 0.05 + 0.20 + 0.05 = 0.30
 \]</div>
-<h3 id="entry-21">Entry (2,1)<a class="headerlink" href="#entry-21" title="Permanent link">&para;</a></h3>
+<h4 id="entry-21">Entry (2,1)<a class="headerlink" href="#entry-21" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{21}=(0.3)(0.5)+(0.2)(0.3)+(0.5)(0.2)=0.15+0.06+0.10=0.31
+(Q^2)_{21} = (0.3)(0.5) + (0.2)(0.3) + (0.5)(0.2) = 0.15 + 0.06 + 0.10 = 0.31
 \]</div>
-<h3 id="entry-22">Entry (2,2)<a class="headerlink" href="#entry-22" title="Permanent link">&para;</a></h3>
+<h4 id="entry-22">Entry (2,2)<a class="headerlink" href="#entry-22" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{22}=(0.3)(0.4)+(0.2)(0.2)+(0.5)(0.3)=0.12+0.04+0.15=0.31
+(Q^2)_{22} = (0.3)(0.4) + (0.2)(0.2) + (0.5)(0.3) = 0.12 + 0.04 + 0.15 = 0.31
 \]</div>
-<h3 id="entry-23">Entry (2,3)<a class="headerlink" href="#entry-23" title="Permanent link">&para;</a></h3>
+<h4 id="entry-23">Entry (2,3)<a class="headerlink" href="#entry-23" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{23}=(0.3)(0.1)+(0.2)(0.5)+(0.5)(0.5)=0.03+0.10+0.25=0.38
+(Q^2)_{23} = (0.3)(0.1) + (0.2)(0.5) + (0.5)(0.5) = 0.03 + 0.10 + 0.25 = 0.38
 \]</div>
-<h3 id="entry-31">Entry (3,1)<a class="headerlink" href="#entry-31" title="Permanent link">&para;</a></h3>
+<h4 id="entry-31">Entry (3,1)<a class="headerlink" href="#entry-31" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{31}=(0.2)(0.5)+(0.3)(0.3)+(0.5)(0.2)=0.10+0.09+0.10=0.29
+(Q^2)_{31} = (0.2)(0.5) + (0.3)(0.3) + (0.5)(0.2) = 0.10 + 0.09 + 0.10 = 0.29
 \]</div>
-<h3 id="entry-32">Entry (3,2)<a class="headerlink" href="#entry-32" title="Permanent link">&para;</a></h3>
+<h4 id="entry-32">Entry (3,2)<a class="headerlink" href="#entry-32" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{32}=(0.2)(0.4)+(0.3)(0.2)+(0.5)(0.3)=0.08+0.06+0.15=0.29
+(Q^2)_{32} = (0.2)(0.4) + (0.3)(0.2) + (0.5)(0.3) = 0.08 + 0.06 + 0.15 = 0.29
 \]</div>
-<h3 id="entry-33">Entry (3,3)<a class="headerlink" href="#entry-33" title="Permanent link">&para;</a></h3>
+<h4 id="entry-33">Entry (3,3)<a class="headerlink" href="#entry-33" title="Permanent link">&para;</a></h4>
 <div class="arithmatex">\[
-(Q^2)_{33}=(0.2)(0.1)+(0.3)(0.5)+(0.5)(0.5)=0.02+0.15+0.25=0.42
+(Q^2)_{33} = (0.2)(0.1) + (0.3)(0.5) + (0.5)(0.5) = 0.02 + 0.15 + 0.25 = 0.42
 \]</div>
 <p>So</p>
 <div class="arithmatex">\[
-Q^2=
-\begin{pmatrix}
-0.39 &amp; 0.31 &amp; 0.30 \\
-0.31 &amp; 0.31 &amp; 0.38 \\
-0.29 &amp; 0.29 &amp; 0.42
-\end{pmatrix}
+Q^2 = \begin{pmatrix} 0.39 &amp; 0.31 &amp; 0.30 \\ 0.31 &amp; 0.31 &amp; 0.38 \\ 0.29 &amp; 0.29 &amp; 0.42 \end{pmatrix}
 \]</div>
-<p>Each row sums to <span class="arithmatex">\(1\)</span>, as expected.</p>
-<h2 id="scenario-a-starting-from-state-1-reach-state-3-in-2-steps">Scenario A Starting from State 1, Reach State 3 in 2 Steps<a class="headerlink" href="#scenario-a-starting-from-state-1-reach-state-3-in-2-steps" title="Permanent link">&para;</a></h2>
+<p>Each row sums to 1, as expected.</p>
+<h3 id="scenario-a-starting-from-state-1-reach-state-3-in-2-steps">Scenario A: Starting from State 1, Reach State 3 in 2 Steps<a class="headerlink" href="#scenario-a-starting-from-state-1-reach-state-3-in-2-steps" title="Permanent link">&para;</a></h3>
 <p>By the theorem,</p>
 <div class="arithmatex">\[
-P(X_2=3 \mid X_0=1)=(Q^2)_{13}=0.30
+P(X_2 = 3 \mid X_0 = 1) = (Q^2)_{13} = 0.30
 \]</div>
 <p>By path decomposition,</p>
 <div class="arithmatex">\[
-q_{13}^{(2)}=q_{11}q_{13}+q_{12}q_{23}+q_{13}q_{33}
+q_{13}^{(2)} = q_{11} q_{13} + q_{12} q_{23} + q_{13} q_{33}
 \]</div>
 <p>Substitute:</p>
 <div class="arithmatex">\[
-q_{13}^{(2)}=(0.5)(0.1)+(0.4)(0.5)+(0.1)(0.5)=0.05+0.20+0.05=0.30
+q_{13}^{(2)} = (0.5)(0.1) + (0.4)(0.5) + (0.1)(0.5) = 0.05 + 0.20 + 0.05 = 0.30
 \]</div>
 <p>The three paths are</p>
 <div class="arithmatex">\[
-1 \to 1 \to 3
+1 \to 1 \to 3 \quad \text{with probability } 0.05
 \]</div>
-<p>with probability <span class="arithmatex">\(0.05\)</span>.</p>
 <div class="arithmatex">\[
-1 \to 2 \to 3
+1 \to 2 \to 3 \quad \text{with probability } 0.20
 \]</div>
-<p>with probability <span class="arithmatex">\(0.20\)</span>.</p>
 <div class="arithmatex">\[
-1 \to 3 \to 3
+1 \to 3 \to 3 \quad \text{with probability } 0.05
 \]</div>
-<p>with probability <span class="arithmatex">\(0.05\)</span>.</p>
-<p>The most likely route is through state <span class="arithmatex">\(2\)</span>.</p>
-<h2 id="scenario-b-starting-from-state-2-reach-state-3-in-2-steps">Scenario B Starting from State 2, Reach State 3 in 2 Steps<a class="headerlink" href="#scenario-b-starting-from-state-2-reach-state-3-in-2-steps" title="Permanent link">&para;</a></h2>
+<p>The most likely route is through state 2.</p>
+<h3 id="scenario-b-starting-from-state-2-reach-state-3-in-2-steps">Scenario B: Starting from State 2, Reach State 3 in 2 Steps<a class="headerlink" href="#scenario-b-starting-from-state-2-reach-state-3-in-2-steps" title="Permanent link">&para;</a></h3>
 <p>Again,</p>
 <div class="arithmatex">\[
-P(X_2=3 \mid X_0=2)=(Q^2)_{23}=0.38
+P(X_2 = 3 \mid X_0 = 2) = (Q^2)_{23} = 0.38
 \]</div>
 <p>By path decomposition,</p>
 <div class="arithmatex">\[
-q_{23}^{(2)}=q_{21}q_{13}+q_{22}q_{23}+q_{23}q_{33}
+q_{23}^{(2)} = q_{21} q_{13} + q_{22} q_{23} + q_{23} q_{33}
 \]</div>
 <p>Substitute:</p>
 <div class="arithmatex">\[
-q_{23}^{(2)}=(0.3)(0.1)+(0.2)(0.5)+(0.5)(0.5)=0.03+0.10+0.25=0.38
+q_{23}^{(2)} = (0.3)(0.1) + (0.2)(0.5) + (0.5)(0.5) = 0.03 + 0.10 + 0.25 = 0.38
 \]</div>
 <p>The three paths are</p>
 <div class="arithmatex">\[
-2 \to 1 \to 3
+2 \to 1 \to 3 \quad \text{with probability } 0.03
 \]</div>
-<p>with probability <span class="arithmatex">\(0.03\)</span>.</p>
 <div class="arithmatex">\[
-2 \to 2 \to 3
+2 \to 2 \to 3 \quad \text{with probability } 0.10
 \]</div>
-<p>with probability <span class="arithmatex">\(0.10\)</span>.</p>
 <div class="arithmatex">\[
-2 \to 3 \to 3
+2 \to 3 \to 3 \quad \text{with probability } 0.25
 \]</div>
-<p>with probability <span class="arithmatex">\(0.25\)</span>.</p>
-<p>The most likely route is through state <span class="arithmatex">\(3\)</span>.</p>
-<h2 id="intuition-after-the-example">Intuition After the Example<a class="headerlink" href="#intuition-after-the-example" title="Permanent link">&para;</a></h2>
+<p>The most likely route is through state 3.</p>
+<h3 id="intuition-after-the-example">Intuition After the Example<a class="headerlink" href="#intuition-after-the-example" title="Permanent link">&para;</a></h3>
 <p>The example makes the matrix interpretation concrete.</p>
 <p>Each entry of <span class="arithmatex">\(Q^2\)</span> is a sum over all possible hidden middle states.</p>
-<p>The two-step probability is not the square of a single entry.</p>
-<p>It is a sum of route probabilities.</p>
-<h2 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h2>
+<p>The two-step probability is not the square of a single entry. It is a sum of route probabilities.</p>
+<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7406,7 +9530,7 @@ q_{23}^{(2)}=(0.3)(0.1)+(0.2)(0.5)+(0.5)(0.5)=0.03+0.10+0.25=0.38
 </tr>
 <tr>
 <td>Core Invariant</td>
-<td>Each entry of Q2 is a sum over all 2-step paths through intermediate states</td>
+<td>Each entry of <span class="arithmatex">\(Q^2\)</span> is a sum over all 2-step paths through intermediate states</td>
 </tr>
 <tr>
 <td>Compression Handle</td>
@@ -7414,85 +9538,70 @@ q_{23}^{(2)}=(0.3)(0.1)+(0.2)(0.5)+(0.5)(0.5)=0.03+0.10+0.25=0.38
 </tr>
 <tr>
 <td>Boundary / Failure Mode</td>
-<td>If you confuse entries of Q2 with squares of entries of Q, the probabilities are wrong</td>
+<td>If you confuse entries of <span class="arithmatex">\(Q^2\)</span> with squares of entries of <span class="arithmatex">\(Q\)</span>, the probabilities are wrong</td>
 </tr>
 <tr>
 <td>Phenomenon Web</td>
-<td>Instantiates the Theorem: Entries of Qn Are n-Step Transition Probabilities block and the The Chapman-Kolmogorov Equation block</td>
+<td>Instantiates the theorem in <a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn</a> and the <a href="#chapman-kolmogorov-equation">Chapman-Kolmogorov Equation</a></td>
 </tr>
 </tbody>
 </table>
-<h1 id="common-mistakes">Common Mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h1>
-<h2 id="mistake-1-markov-does-not-mean-independent">Mistake 1: Markov Does Not Mean Independent<a class="headerlink" href="#mistake-1-markov-does-not-mean-independent" title="Permanent link">&para;</a></h2>
+<hr />
+<h2 id="common-mistakes">Common Mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h2>
+<h3 id="mistake-1-markov-does-not-mean-independent">Mistake 1: Markov Does Not Mean Independent<a class="headerlink" href="#mistake-1-markov-does-not-mean-independent" title="Permanent link">&para;</a></h3>
 <p>A Markov chain is not generally independent across time.</p>
 <p>The future often depends strongly on the present.</p>
 <p>For example,</p>
 <div class="arithmatex">\[
-Q=
-\begin{pmatrix}
-0 &amp; 1 \\
-1 &amp; 0
-\end{pmatrix}
+Q = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}
 \]</div>
 <p>is perfectly Markov but maximally dependent.</p>
 <p>The chain alternates deterministically.</p>
-<h2 id="mistake-2-rows-and-columns-are-not-interchangeable">Mistake 2: Rows and Columns Are Not Interchangeable<a class="headerlink" href="#mistake-2-rows-and-columns-are-not-interchangeable" title="Permanent link">&para;</a></h2>
-<p>Rows represent the current state.</p>
-<p>Columns represent the next state.</p>
-<p>Transposing the matrix changes the meaning completely.</p>
-<p>It gives backward-looking probabilities rather than forward transition probabilities.</p>
-<h2 id="mistake-3-qn-does-not-mean-nq">Mistake 3: Qn Does Not Mean nQ<a class="headerlink" href="#mistake-3-qn-does-not-mean-nq" title="Permanent link">&para;</a></h2>
-<p>Qn means repeated matrix multiplication, not scalar multiplication of every entry by n.</p>
+<h3 id="mistake-2-rows-and-columns-are-not-interchangeable">Mistake 2: Rows and Columns Are Not Interchangeable<a class="headerlink" href="#mistake-2-rows-and-columns-are-not-interchangeable" title="Permanent link">&para;</a></h3>
+<p>Rows represent the current state. Columns represent the next state.</p>
+<p>Transposing the matrix changes the meaning completely. It gives backward-looking probabilities rather than forward transition probabilities.</p>
+<h3 id="mistake-3-qn-does-not-mean-n-times-q">Mistake 3: Qn Does Not Mean n Times Q<a class="headerlink" href="#mistake-3-qn-does-not-mean-n-times-q" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(Q^n\)</span> means repeated matrix multiplication, not scalar multiplication of every entry by <span class="arithmatex">\(n\)</span>.</p>
 <p>For example, if</p>
 <div class="arithmatex">\[
-Q=
-\begin{pmatrix}
-0.5 &amp; 0.5 \\
-0.5 &amp; 0.5
-\end{pmatrix}
+Q = \begin{pmatrix} 0.5 &amp; 0.5 \\ 0.5 &amp; 0.5 \end{pmatrix}
 \]</div>
-<p>then <span class="arithmatex">\(Q^2=Q\)</span>, but</p>
+<p>then <span class="arithmatex">\(Q^2 = Q\)</span>, but</p>
 <div class="arithmatex">\[
-2Q=
-\begin{pmatrix}
-1 &amp; 1 \\
-1 &amp; 1
-\end{pmatrix}
+2Q = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}
 \]</div>
 <p>which is not stochastic.</p>
-<h2 id="mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present">Mistake 4: Future Independent of Past Does Not Mean Future Independent of Present<a class="headerlink" href="#mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present" title="Permanent link">&para;</a></h2>
+<h3 id="mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present">Mistake 4: Future Independent of Past Does Not Mean Future Independent of Present<a class="headerlink" href="#mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present" title="Permanent link">&para;</a></h3>
 <p>The Markov property says the future is independent of the past given the present.</p>
 <p>It does not say the future is independent of the present.</p>
 <p>That distinction matters whenever you compute a conditional probability versus a marginal one.</p>
-<h2 id="notation-trap">Notation Trap<a class="headerlink" href="#notation-trap" title="Permanent link">&para;</a></h2>
+<h3 id="notation-trap">Notation Trap<a class="headerlink" href="#notation-trap" title="Permanent link">&para;</a></h3>
 <p>When you see</p>
 <div class="arithmatex">\[
 q_{ij}^{(n)}
 \]</div>
-<p>the superscript <span class="arithmatex">\((n)\)</span> indicates an entry of <span class="arithmatex">\(Q^n\)</span>.</p>
-<p>It is not the scalar power <span class="arithmatex">\((q_{ij})^n\)</span>.</p>
+<p>the superscript <span class="arithmatex">\((n)\)</span> indicates an entry of <span class="arithmatex">\(Q^n\)</span>. It is not the scalar power <span class="arithmatex">\((q_{ij})^n\)</span>.</p>
 <p><strong>Dummy-index warning:</strong> in sums like</p>
 <div class="arithmatex">\[
-\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}
+\sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}
 \]</div>
-<p>the index <span class="arithmatex">\(k\)</span> is temporary.</p>
-<p>It is not a fixed state like <span class="arithmatex">\(i\)</span> or <span class="arithmatex">\(j\)</span>.</p>
-<h1 id="looking-ahead">Looking Ahead<a class="headerlink" href="#looking-ahead" title="Permanent link">&para;</a></h1>
+<p>the index <span class="arithmatex">\(k\)</span> is temporary. It is not a fixed state like <span class="arithmatex">\(i\)</span> or <span class="arithmatex">\(j\)</span>.</p>
+<hr />
+<h2 id="looking-ahead">Looking Ahead<a class="headerlink" href="#looking-ahead" title="Permanent link">&para;</a></h2>
 <p>If an initial distribution is <span class="arithmatex">\(t\)</span>, then the distribution after <span class="arithmatex">\(n\)</span> steps is</p>
 <div class="arithmatex">\[
-tQ^n
+t Q^n
 \]</div>
 <p>A natural next question is whether the chain stabilizes as <span class="arithmatex">\(n\)</span> grows large.</p>
 <p>For finite irreducible aperiodic chains, the answer is yes.</p>
 <p>The distribution converges to a stationary distribution <span class="arithmatex">\(s\)</span> satisfying</p>
 <div class="arithmatex">\[
-sQ=s
+s Q = s
 \]</div>
-<p>This is a left eigenvector equation with eigenvalue <span class="arithmatex">\(1\)</span>.</p>
-<p>Not every chain converges.</p>
-<p>Periodic chains can oscillate forever, and reducible chains can behave differently depending on where they start.</p>
+<p>This is a left eigenvector equation with eigenvalue 1.</p>
+<p>Not every chain converges. Periodic chains can oscillate forever, and reducible chains can behave differently depending on where they start.</p>
 <p>Later topics include hitting times, absorption, expected return times, and reversibility.</p>
-<h2 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h2>
+<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7511,7 +9620,7 @@ sQ=s
 </tr>
 <tr>
 <td>Compression Handle</td>
-<td>Stationary means sQ = s</td>
+<td>Stationary means <span class="arithmatex">\(sQ = s\)</span></td>
 </tr>
 <tr>
 <td>Boundary / Failure Mode</td>
@@ -7519,7 +9628,7 @@ sQ=s
 </tr>
 <tr>
 <td>Phenomenon Web</td>
-<td>See the The Transition Matrix Q block and the The n-Step Transition Matrix Qn block</td>
+<td>See <a href="#the-transition-matrix-q">The Transition Matrix Q</a> and <a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn</a></td>
 </tr>
 </tbody>
 </table>
@@ -7538,7 +9647,7 @@ sQ=s
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:58:59 UTC">June 24, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 15:51:40 UTC">June 24, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 16:01:31 UTC">June 24, 2026</span>
       </span>
     
   </aside>
