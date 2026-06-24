@@ -1,0 +1,7 @@
+title: Epidemic and Gossip-based Algorithms
+chapter: 01-epidemic-gossip
+description: Information dissemination, anti-entropy, and scalable failure detection
+  in dynamic groups.
+topics:
+- epidemic-models
+- membership-failure-detection

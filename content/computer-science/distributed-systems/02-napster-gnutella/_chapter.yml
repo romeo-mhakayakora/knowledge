@@ -1,0 +1,8 @@
+title: Napster and Gnutella
+chapter: 02-napster-gnutella
+description: First and second generation Peer-to-Peer (P2P) systems, centralized indexes,
+  flooding, and supernodes.
+topics:
+- napster-architecture
+- gnutella-flooding
+- hierarchical-p2p
