@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/08-joint-distributions/joint-distributions-notes/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/economics/game-theory/">
       
       
-        <link rel="prev" href="../exercises/">
+        <link rel="prev" href="../">
       
       
-        <link rel="next" href="../../09-transformations/exercises/">
+        <link rel="next" href="../../mathematics/">
       
       
         
       
       
-      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Joint Distributions - Knowledge</title>
+        <title>Game Theory - Knowledge</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Joint Distributions - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/08-joint-distributions/joint-distributions-notes.png" />
+<meta property="og:title" content="Game Theory - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/economics/game-theory.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/08-joint-distributions/joint-distributions-notes/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/economics/game-theory/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Joint Distributions - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/08-joint-distributions/joint-distributions-notes.png" />
+<meta property="twitter:title" content="Game Theory - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/economics/game-theory.png" />
 </head>
   
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#key-ideas" class="md-skip">
+        <a href="#game-theory" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../../.." title="Knowledge" class="md-header__button md-logo" aria-label="Knowledge" data-md-component="logo">
+    <a href="../.." title="Knowledge" class="md-header__button md-logo" aria-label="Knowledge" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Joint Distributions
+              Game Theory
             
           </span>
         </div>
@@ -243,7 +243,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../.." title="Knowledge" class="md-nav__button md-logo" aria-label="Knowledge" data-md-component="logo">
+    <a href="../.." title="Knowledge" class="md-nav__button md-logo" aria-label="Knowledge" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -273,7 +273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -328,7 +328,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../_concepts/" class="md-nav__link ">
+            <a href="../../_concepts/" class="md-nav__link ">
               
   
   
@@ -372,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../_concepts/common-mistakes/" class="md-nav__link">
+      <a href="../../_concepts/common-mistakes/" class="md-nav__link">
         
   
   
@@ -407,7 +407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../_concepts/distributions-cheatsheet/" class="md-nav__link">
+      <a href="../../_concepts/distributions-cheatsheet/" class="md-nav__link">
         
   
   
@@ -442,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../_concepts/named-distributions/" class="md-nav__link">
+      <a href="../../_concepts/named-distributions/" class="md-nav__link">
         
   
   
@@ -477,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../_concepts/proof-techniques/" class="md-nav__link">
+      <a href="../../_concepts/proof-techniques/" class="md-nav__link">
         
   
   
@@ -512,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../_concepts/r-functions-reference/" class="md-nav__link">
+      <a href="../../_concepts/r-functions-reference/" class="md-nav__link">
         
   
   
@@ -572,7 +572,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../ai/" class="md-nav__link ">
+            <a href="../../ai/" class="md-nav__link ">
               
   
   
@@ -636,7 +636,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../business/" class="md-nav__link ">
+            <a href="../../business/" class="md-nav__link ">
               
   
   
@@ -700,7 +700,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../computer-science/" class="md-nav__link ">
+            <a href="../../computer-science/" class="md-nav__link ">
               
   
   
@@ -743,6 +743,8 @@
       
   
   
+    
+  
   
   
     
@@ -758,15 +760,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../economics/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -790,7 +792,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -807,10 +809,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../../economics/game-theory/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game Theory
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -826,6 +855,215 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-core-components-of-a-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Core Components of a Game
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-normal-form-games-strategic-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Normal Form Games (Strategic Form)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Normal Form Games (Strategic Form)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-payoff-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The Payoff Matrix
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-dominated-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Dominated Strategies
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-nash-equilibrium-pure-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Nash Equilibrium (Pure Strategies)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-classical-normal-form-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Classical Normal Form Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Classical Normal Form Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-the-prisoners-dilemma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 The Prisoner's Dilemma
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-battle-of-the-sexes-coordination-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Battle of the Sexes (Coordination Game)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-matching-pennies-zero-sum-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Matching Pennies (Zero-Sum Game)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mixed-strategy-nash-equilibrium-msne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mixed Strategy Nash Equilibrium (MSNE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Mixed Strategy Nash Equilibrium (MSNE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-solving-matching-pennies-for-msne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Solving Matching Pennies for MSNE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-extensive-form-games-sequential-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Extensive Form Games (Sequential Form)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Extensive Form Games (Sequential Form)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-game-tree-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Game Tree Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-backward-induction-subgame-perfection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Backward Induction &amp; Subgame Perfection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-connections-to-other-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Connections to Other Domains
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -842,8 +1080,6 @@
       
   
   
-    
-  
   
   
     
@@ -861,15 +1097,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../" class="md-nav__link ">
+            <a href="../../mathematics/" class="md-nav__link ">
               
   
   
@@ -893,7 +1129,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -935,7 +1171,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../linear-algebra-ml-qc/" class="md-nav__link ">
+            <a href="../../mathematics/linear-algebra-ml-qc/" class="md-nav__link ">
               
   
   
@@ -1011,7 +1247,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/" class="md-nav__link ">
+            <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/" class="md-nav__link ">
               
   
   
@@ -1055,7 +1291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/01-geometry-linear-equations/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/01-geometry-linear-equations/" class="md-nav__link">
         
   
   
@@ -1083,7 +1319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/02-column-space-nullspace/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/02-column-space-nullspace/" class="md-nav__link">
         
   
   
@@ -1111,7 +1347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/03-independence-basis-dimension/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/03-independence-basis-dimension/" class="md-nav__link">
         
   
   
@@ -1139,7 +1375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/04-four-fundamental-subspaces/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/04-four-fundamental-subspaces/" class="md-nav__link">
         
   
   
@@ -1167,7 +1403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces/" class="md-nav__link">
         
   
   
@@ -1195,7 +1431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces/" class="md-nav__link">
         
   
   
@@ -1223,7 +1459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares/" class="md-nav__link">
         
   
   
@@ -1289,7 +1525,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/" class="md-nav__link ">
+            <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/" class="md-nav__link ">
               
   
   
@@ -1333,7 +1569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt/" class="md-nav__link">
         
   
   
@@ -1361,7 +1597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors/" class="md-nav__link">
         
   
   
@@ -1389,7 +1625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers/" class="md-nav__link">
         
   
   
@@ -1417,7 +1653,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/04-symmetric-positive-definite/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/04-symmetric-positive-definite/" class="md-nav__link">
         
   
   
@@ -1445,7 +1681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/05-positive-definite-minima/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-positive-definite-minima/" class="md-nav__link">
         
   
   
@@ -1473,7 +1709,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/06-svd/" class="md-nav__link">
+      <a href="../../mathematics/linear-algebra-ml-qc/week-02-eigen-svd/06-svd/" class="md-nav__link">
         
   
   
@@ -1514,8 +1750,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1559,15 +1793,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../mathematics/probability/" class="md-nav__link ">
               
   
   
@@ -1591,7 +1825,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1633,7 +1867,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../01-fundamentals/" class="md-nav__link ">
+            <a href="../../mathematics/probability/01-fundamentals/" class="md-nav__link ">
               
   
   
@@ -1677,7 +1911,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-fundamentals/probability-axioms/" class="md-nav__link">
+      <a href="../../mathematics/probability/01-fundamentals/probability-axioms/" class="md-nav__link">
         
   
   
@@ -1712,7 +1946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../01-fundamentals/sample-spaces-and-events/" class="md-nav__link">
+      <a href="../../mathematics/probability/01-fundamentals/sample-spaces-and-events/" class="md-nav__link">
         
   
   
@@ -1810,7 +2044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-probability-counting/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/02-probability-counting/exercises/" class="md-nav__link">
         
   
   
@@ -1845,7 +2079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-probability-counting/probability-counting-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/02-probability-counting/probability-counting-notes/" class="md-nav__link">
         
   
   
@@ -1935,7 +2169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-probability-counting/lectures/l01-probability-and-counting/" class="md-nav__link">
+      <a href="../../mathematics/probability/02-probability-counting/lectures/l01-probability-and-counting/" class="md-nav__link">
         
   
   
@@ -1970,7 +2204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-probability-counting/lectures/l02-story-proofs-axioms/" class="md-nav__link">
+      <a href="../../mathematics/probability/02-probability-counting/lectures/l02-story-proofs-axioms/" class="md-nav__link">
         
   
   
@@ -2005,7 +2239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../02-probability-counting/lectures/l03-birthday-problem-properties/" class="md-nav__link">
+      <a href="../../mathematics/probability/02-probability-counting/lectures/l03-birthday-problem-properties/" class="md-nav__link">
         
   
   
@@ -2111,7 +2345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-conditional-probability/conditional-probability-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/03-conditional-probability/conditional-probability-notes/" class="md-nav__link">
         
   
   
@@ -2146,7 +2380,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-conditional-probability/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/03-conditional-probability/exercises/" class="md-nav__link">
         
   
   
@@ -2234,7 +2468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-conditional-probability/lectures/l04-conditional-probability/" class="md-nav__link">
+      <a href="../../mathematics/probability/03-conditional-probability/lectures/l04-conditional-probability/" class="md-nav__link">
         
   
   
@@ -2269,7 +2503,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../03-conditional-probability/lectures/l05-conditioning-continued/" class="md-nav__link">
+      <a href="../../mathematics/probability/03-conditional-probability/lectures/l05-conditioning-continued/" class="md-nav__link">
         
   
   
@@ -2375,7 +2609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-random-variables/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/04-random-variables/exercises/" class="md-nav__link">
         
   
   
@@ -2410,7 +2644,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-random-variables/lecture-8-binomial-hypergeometricandrandom-variables/" class="md-nav__link">
+      <a href="../../mathematics/probability/04-random-variables/lecture-8-binomial-hypergeometricandrandom-variables/" class="md-nav__link">
         
   
   
@@ -2445,7 +2679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../04-random-variables/random-variables-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/04-random-variables/random-variables-notes/" class="md-nav__link">
         
   
   
@@ -2541,7 +2775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-expectation/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/05-expectation/exercises/" class="md-nav__link">
         
   
   
@@ -2576,7 +2810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../05-expectation/expectation-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/05-expectation/expectation-notes/" class="md-nav__link">
         
   
   
@@ -2672,7 +2906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-continuous-random-variables/continuous-random-variables-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/06-continuous-random-variables/continuous-random-variables-notes/" class="md-nav__link">
         
   
   
@@ -2707,7 +2941,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../06-continuous-random-variables/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/06-continuous-random-variables/exercises/" class="md-nav__link">
         
   
   
@@ -2803,7 +3037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../07-moments/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/07-moments/exercises/" class="md-nav__link">
         
   
   
@@ -2838,7 +3072,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../07-moments/moments-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/07-moments/moments-notes/" class="md-nav__link">
         
   
   
@@ -2878,10 +3112,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -2893,11 +3125,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3_9" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3_9" >
         
           
           <label class="md-nav__link" for="__nav_7_3_9" id="__nav_7_3_9_label" tabindex="0">
@@ -2918,7 +3150,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_3_9_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_7_3_9_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7_3_9">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2936,7 +3168,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/08-joint-distributions/exercises/" class="md-nav__link">
         
   
   
@@ -2968,42 +3200,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Joint Distributions
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--draft"></span>
-  
-
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../mathematics/probability/08-joint-distributions/joint-distributions-notes/" class="md-nav__link">
         
   
   
@@ -3026,90 +3226,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#key-ideas" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Ideas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#definitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Definitions
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#theorems-results" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Theorems &amp; Results
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#intuition-story-proof" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Intuition / Story Proof
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#connections-to-other-topics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Connections to Other Topics
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#r-notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        R Notes
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -3183,7 +3299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../09-transformations/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/09-transformations/exercises/" class="md-nav__link">
         
   
   
@@ -3218,7 +3334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../09-transformations/transformations-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/09-transformations/transformations-notes/" class="md-nav__link">
         
   
   
@@ -3314,7 +3430,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../10-conditional-expectation/conditional-expectation-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/10-conditional-expectation/conditional-expectation-notes/" class="md-nav__link">
         
   
   
@@ -3349,7 +3465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../10-conditional-expectation/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/10-conditional-expectation/exercises/" class="md-nav__link">
         
   
   
@@ -3445,7 +3561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../11-inequalities-limit-theorems/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/11-inequalities-limit-theorems/exercises/" class="md-nav__link">
         
   
   
@@ -3480,7 +3596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../11-inequalities-limit-theorems/inequalities-limit-theorems-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/11-inequalities-limit-theorems/inequalities-limit-theorems-notes/" class="md-nav__link">
         
   
   
@@ -3563,7 +3679,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../12-markov-chains/" class="md-nav__link ">
+            <a href="../../mathematics/probability/12-markov-chains/" class="md-nav__link ">
               
   
   
@@ -3607,7 +3723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.1-Markov-Property/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.1-Markov-Property/" class="md-nav__link">
         
   
   
@@ -3635,7 +3751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.1.6-Marginal-Distributions/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.1.6-Marginal-Distributions/" class="md-nav__link">
         
   
   
@@ -3663,7 +3779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.2-State-Classification/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.2-State-Classification/" class="md-nav__link">
         
   
   
@@ -3691,7 +3807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.2.8-Periodicity/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.2.8-Periodicity/" class="md-nav__link">
         
   
   
@@ -3719,7 +3835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.3-Stationary-Distributions/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.3-Stationary-Distributions/" class="md-nav__link">
         
   
   
@@ -3747,7 +3863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.3.5-Existence-Uniqueness/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.3.5-Existence-Uniqueness/" class="md-nav__link">
         
   
   
@@ -3775,7 +3891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/11.3.6-Convergence/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/11.3.6-Convergence/" class="md-nav__link">
         
   
   
@@ -3803,7 +3919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/Cheat-Sheet/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/Cheat-Sheet/" class="md-nav__link">
         
   
   
@@ -3831,7 +3947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/Examples/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/Examples/" class="md-nav__link">
         
   
   
@@ -3859,7 +3975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/Questions/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/Questions/" class="md-nav__link">
         
   
   
@@ -3887,7 +4003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../12-markov-chains/lecture/" class="md-nav__link">
+      <a href="../../mathematics/probability/12-markov-chains/lecture/" class="md-nav__link">
         
   
   
@@ -3976,7 +4092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-markov-chain-monte-carlo/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/13-markov-chain-monte-carlo/exercises/" class="md-nav__link">
         
   
   
@@ -4011,7 +4127,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../13-markov-chain-monte-carlo/markov-chain-monte-carlo-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/13-markov-chain-monte-carlo/markov-chain-monte-carlo-notes/" class="md-nav__link">
         
   
   
@@ -4109,7 +4225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../14-poisson-processes/exercises/" class="md-nav__link">
+      <a href="../../mathematics/probability/14-poisson-processes/exercises/" class="md-nav__link">
         
   
   
@@ -4144,7 +4260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../14-poisson-processes/poisson-processes-notes/" class="md-nav__link">
+      <a href="../../mathematics/probability/14-poisson-processes/poisson-processes-notes/" class="md-nav__link">
         
   
   
@@ -4223,7 +4339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../14-poisson-processes/lectures/l34-goodbye-stats110/" class="md-nav__link">
+      <a href="../../mathematics/probability/14-poisson-processes/lectures/l34-goodbye-stats110/" class="md-nav__link">
         
   
   
@@ -4327,7 +4443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../problem-sets/ps01/" class="md-nav__link">
+      <a href="../../mathematics/probability/problem-sets/ps01/" class="md-nav__link">
         
   
   
@@ -4362,7 +4478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../problem-sets/ps02/" class="md-nav__link">
+      <a href="../../mathematics/probability/problem-sets/ps02/" class="md-nav__link">
         
   
   
@@ -4438,7 +4554,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../physics/" class="md-nav__link ">
+            <a href="../../physics/" class="md-nav__link ">
               
   
   
@@ -4502,7 +4618,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../../systems/" class="md-nav__link ">
+            <a href="../../systems/" class="md-nav__link ">
               
   
   
@@ -4558,6 +4674,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -4566,10 +4684,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#key-ideas" class="md-nav__link">
+  <a href="#1-core-components-of-a-game" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Ideas
+        1. Core Components of a Game
       
     </span>
   </a>
@@ -4577,54 +4695,177 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#definitions" class="md-nav__link">
+  <a href="#2-normal-form-games-strategic-form" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Definitions
+        2. Normal Form Games (Strategic Form)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Normal Form Games (Strategic Form)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-payoff-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The Payoff Matrix
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#theorems-results" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#22-dominated-strategies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Theorems &amp; Results
+        2.2 Dominated Strategies
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#intuition-story-proof" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#23-nash-equilibrium-pure-strategies" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Intuition / Story Proof
+        2.3 Nash Equilibrium (Pure Strategies)
       
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#connections-to-other-topics" class="md-nav__link">
+  <a href="#3-classical-normal-form-examples" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Connections to Other Topics
+        3. Classical Normal Form Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Classical Normal Form Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-the-prisoners-dilemma" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 The Prisoner's Dilemma
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#r-notes" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#32-battle-of-the-sexes-coordination-game" class="md-nav__link">
     <span class="md-ellipsis">
       
-        R Notes
+        3.2 Battle of the Sexes (Coordination Game)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-matching-pennies-zero-sum-game" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 Matching Pennies (Zero-Sum Game)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mixed-strategy-nash-equilibrium-msne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mixed Strategy Nash Equilibrium (MSNE)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Mixed Strategy Nash Equilibrium (MSNE)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-solving-matching-pennies-for-msne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Solving Matching Pennies for MSNE
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-extensive-form-games-sequential-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Extensive Form Games (Sequential Form)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Extensive Form Games (Sequential Form)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-game-tree-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Game Tree Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-backward-induction-subgame-perfection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Backward Induction &amp; Subgame Perfection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-connections-to-other-domains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Connections to Other Domains
       
     </span>
   </a>
@@ -4645,57 +4886,221 @@
               <article class="md-content__inner md-typeset">
                 
   
-    <div class="meta-line">
-      
-        DRAFT &middot; INTERMEDIATE
-      
-    </div>
-  
 
   
                   
 
-  <nav class="md-tags" >
-    
-      
-      
-      
-      
-        <span class="md-tag">mathematics</span>
-      
-    
-      
-      
-      
-      
-        <span class="md-tag">probability</span>
-      
-    
-  </nav>
-
 
   
   
 
 
-  <h1>Joint Distributions</h1>
-
-<p><strong>Book:</strong> Blitzstein &amp; Hwang, <em>Introduction to Probability</em>
-<strong>Lecture(s):</strong> Stats 110 L## — Title</p>
+<h1 id="game-theory">Game Theory<a class="headerlink" href="#game-theory" title="Permanent link">&para;</a></h1>
+<p>Game theory is the study of <strong>strategic interaction</strong> where the outcome for each participant (player) depends not only on their own actions but also on the actions of others. While single-agent decision-making (optimization) deals with an agent maximizing utility against a static or random environment, game theory focuses on scenarios where agents interact with other rational, optimizing agents.</p>
 <hr />
-<h2 id="key-ideas">Key Ideas<a class="headerlink" href="#key-ideas" title="Permanent link">&para;</a></h2>
-<p>...</p>
-<h2 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h2>
-<p><strong>Definition (Name):</strong> ...</p>
-<h2 id="theorems-results">Theorems &amp; Results<a class="headerlink" href="#theorems-results" title="Permanent link">&para;</a></h2>
-<p><strong>Theorem (Name):</strong> ...</p>
-<p><em>Proof sketch:</em> ...</p>
-<h2 id="intuition-story-proof">Intuition / Story Proof<a class="headerlink" href="#intuition-story-proof" title="Permanent link">&para;</a></h2>
-<p>...</p>
-<h2 id="connections-to-other-topics">Connections to Other Topics<a class="headerlink" href="#connections-to-other-topics" title="Permanent link">&para;</a></h2>
-<p>...</p>
-<h2 id="r-notes">R Notes<a class="headerlink" href="#r-notes" title="Permanent link">&para;</a></h2>
-<p>See <code>r-code.R</code> in this folder.</p>
+<h2 id="1-core-components-of-a-game">1. Core Components of a Game<a class="headerlink" href="#1-core-components-of-a-game" title="Permanent link">&para;</a></h2>
+<p>Every game consists of three fundamental components, historically denoted as the <strong><span class="arithmatex">\(\{N, S, U\}\)</span> tuple</strong>:</p>
+<ol>
+<li><strong>Players (<span class="arithmatex">\(N\)</span>)</strong>: The set of decision-makers. We assume there are <span class="arithmatex">\(n\)</span> players, indexed by <span class="arithmatex">\(i \in \{1, 2, \ldots, n\}\)</span>.</li>
+<li><strong>Strategies (<span class="arithmatex">\(S\)</span>)</strong>: The set of actions or plans available to the players. Player <span class="arithmatex">\(i\)</span>'s strategy set is denoted by <span class="arithmatex">\(S_i\)</span>. A specific strategy profile is a combination of strategies chosen by all players:
+    $<span class="arithmatex">\(s = (s_1, s_2, \ldots, s_n) \in S\)</span>$
+    where <span class="arithmatex">\(S = S_1 \times S_2 \times \cdots \times S_n\)</span>.</li>
+<li><strong>Payoffs (<span class="arithmatex">\(U\)</span>)</strong>: The utility or reward received by each player given the chosen strategy profile. For player <span class="arithmatex">\(i\)</span>, this is represented by a utility function:
+    $<span class="arithmatex">\(u_i: S \to \mathbb{R}\)</span>$</li>
+</ol>
+<blockquote>
+<p><strong>Notation Convention:</strong> We use the subscript <span class="arithmatex">\(-i\)</span> to denote all players <em>other than</em> player <span class="arithmatex">\(i\)</span>. Thus, a strategy profile <span class="arithmatex">\(s\)</span> can be written as <span class="arithmatex">\((s_i, s_{-i})\)</span>, separating player <span class="arithmatex">\(i\)</span>'s action from everyone else's.</p>
+</blockquote>
+<hr />
+<h2 id="2-normal-form-games-strategic-form">2. Normal Form Games (Strategic Form)<a class="headerlink" href="#2-normal-form-games-strategic-form" title="Permanent link">&para;</a></h2>
+<p>In a <strong>Normal Form Game</strong>, players make their decisions simultaneously and independently at the start of the game, without knowing the decisions of the other players.</p>
+<h3 id="21-the-payoff-matrix">2.1 The Payoff Matrix<a class="headerlink" href="#21-the-payoff-matrix" title="Permanent link">&para;</a></h3>
+<p>For two-player finite games, the normal form is represented using a <strong>payoff matrix</strong> where rows represent Player 1's strategies, columns represent Player 2's strategies, and each cell contains the payoff pair <span class="arithmatex">\((u_1, u_2)\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Player 1 \ Player 2</th>
+<th style="text-align: center;">Left (<span class="arithmatex">\(L\)</span>)</th>
+<th style="text-align: center;">Right (<span class="arithmatex">\(R\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Up (<span class="arithmatex">\(U\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((u_1(U,L), u_2(U,L))\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((u_1(U,R), u_2(U,R))\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Down (<span class="arithmatex">\(D\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((u_1(D,L), u_2(D,L))\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((u_1(D,R), u_2(D,R))\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="22-dominated-strategies">2.2 Dominated Strategies<a class="headerlink" href="#22-dominated-strategies" title="Permanent link">&para;</a></h3>
+<p>A strategy is <strong>strictly dominated</strong> if there exists another strategy that yields a strictly higher payoff for the player, regardless of what the other players do.</p>
+<ul>
+<li><strong>Strict Dominance:</strong> Strategy <span class="arithmatex">\(s_i'\)</span> strictly dominates <span class="arithmatex">\(s_i\)</span> for player <span class="arithmatex">\(i\)</span> if:
+    $<span class="arithmatex">\(\forall s_{-i} \in S_{-i}, \quad u_i(s_i', s_{-i}) &gt; u_i(s_i, s_{-i})\)</span>$</li>
+<li><strong>Weak Dominance:</strong> Strategy <span class="arithmatex">\(s_i'\)</span> weakly dominates <span class="arithmatex">\(s_i\)</span> for player <span class="arithmatex">\(i\)</span> if:
+    $<span class="arithmatex">\(\forall s_{-i} \in S_{-i}, \quad u_i(s_i', s_{-i}) \ge u_i(s_i, s_{-i}) \quad \text{and} \quad \exists s_{-i} \in S_{-i} \ \text{s.t.} \ u_i(s_i', s_{-i}) &gt; u_i(s_i, s_{-i})\)</span>$</li>
+</ul>
+<blockquote>
+<p><strong>Rationality Principle:</strong> Rational players will never play strictly dominated strategies. Thus, we can simplify games by iteratively eliminating strictly dominated strategies (Iterated Elimination of Strictly Dominated Strategies, or IESDS).</p>
+</blockquote>
+<hr />
+<h3 id="23-nash-equilibrium-pure-strategies">2.3 Nash Equilibrium (Pure Strategies)<a class="headerlink" href="#23-nash-equilibrium-pure-strategies" title="Permanent link">&para;</a></h3>
+<p>A <strong>Nash Equilibrium</strong> is a strategy profile <span class="arithmatex">\(s^* = (s_1^*, \ldots, s_n^*)\)</span> such that no player has a unilateral incentive to deviate. That is, each player's strategy is a <strong>best response</strong> to the other players' strategies.</p>
+<div class="arithmatex">\[\forall i \in N, \quad u_i(s_i^*, s_{-i}^*) \ge u_i(s_i, s_{-i}^*) \quad \forall s_i \in S_i\]</div>
+<p>In simple terms: <em>Given what everyone else is doing, I am doing the best I can.</em></p>
+<hr />
+<h2 id="3-classical-normal-form-examples">3. Classical Normal Form Examples<a class="headerlink" href="#3-classical-normal-form-examples" title="Permanent link">&para;</a></h2>
+<h3 id="31-the-prisoners-dilemma">3.1 The Prisoner's Dilemma<a class="headerlink" href="#31-the-prisoners-dilemma" title="Permanent link">&para;</a></h3>
+<p>Two suspects are arrested and placed in separate cells. They can either <strong>Cooperate</strong> (remain silent) or <strong>Defect</strong> (confess and testify against the other).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Prisoner 1 \ Prisoner 2</th>
+<th style="text-align: center;">Cooperate (<span class="arithmatex">\(C\)</span>)</th>
+<th style="text-align: center;">Defect (<span class="arithmatex">\(D\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Cooperate (<span class="arithmatex">\(C\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((-1, -1)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((-3, 0)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Defect (<span class="arithmatex">\(D\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((0, -3)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((-2, -2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Dominant Strategy:</strong> For both players, Defect (<span class="arithmatex">\(D\)</span>) strictly dominates Cooperate (<span class="arithmatex">\(C\)</span>).</li>
+<li><strong>Unique Nash Equilibrium:</strong> <span class="arithmatex">\((D, D)\)</span> yielding payoffs of <span class="arithmatex">\((-2, -2)\)</span>.</li>
+<li><strong>Pareto Inefficiency:</strong> The equilibrium <span class="arithmatex">\((D, D)\)</span> is Pareto-dominated by <span class="arithmatex">\((C, C)\)</span>, which yields <span class="arithmatex">\((-1, -1)\)</span>. This highlights the tension between individual rationality and collective welfare.</li>
+</ul>
+<hr />
+<h3 id="32-battle-of-the-sexes-coordination-game">3.2 Battle of the Sexes (Coordination Game)<a class="headerlink" href="#32-battle-of-the-sexes-coordination-game" title="Permanent link">&para;</a></h3>
+<p>A couple wants to go out. Player 1 prefers Opera (<span class="arithmatex">\(O\)</span>), and Player 2 prefers Football (<span class="arithmatex">\(F\)</span>). However, they both prefer going to the same event together over going to different events alone.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Player 1 \ Player 2</th>
+<th style="text-align: center;">Opera (<span class="arithmatex">\(O\)</span>)</th>
+<th style="text-align: center;">Football (<span class="arithmatex">\(F\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Opera (<span class="arithmatex">\(O\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((2, 1)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((0, 0)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Football (<span class="arithmatex">\(F\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((0, 0)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((1, 2)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Nash Equilibria:</strong> Two pure-strategy Nash equilibria exist: <span class="arithmatex">\((O, O)\)</span> and <span class="arithmatex">\((F, F)\)</span>. This is a coordination game where players must coordinate to avoid <span class="arithmatex">\((0,0)\)</span>.</li>
+</ul>
+<hr />
+<h3 id="33-matching-pennies-zero-sum-game">3.3 Matching Pennies (Zero-Sum Game)<a class="headerlink" href="#33-matching-pennies-zero-sum-game" title="Permanent link">&para;</a></h3>
+<p>Two players simultaneously show a penny, either Heads (<span class="arithmatex">\(H\)</span>) or Tails (<span class="arithmatex">\(T\)</span>). Player 1 wins if the pennies match; Player 2 wins if they differ.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Player 1 \ Player 2</th>
+<th style="text-align: center;">Heads (<span class="arithmatex">\(H\)</span>)</th>
+<th style="text-align: center;">Tails (<span class="arithmatex">\(T\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Heads (<span class="arithmatex">\(H\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((1, -1)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((-1, 1)\)</span></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Tails (<span class="arithmatex">\(T\)</span>)</strong></td>
+<td style="text-align: center;"><span class="arithmatex">\((-1, 1)\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\((1, -1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Pure Strategy Nash Equilibrium:</strong> <strong>None</strong>. If Player 1 plays <span class="arithmatex">\(H\)</span>, Player 2 wants to switch to <span class="arithmatex">\(T\)</span>. If Player 2 plays <span class="arithmatex">\(T\)</span>, Player 1 wants to switch to <span class="arithmatex">\(T\)</span>, and so on.</li>
+</ul>
+<hr />
+<h2 id="4-mixed-strategy-nash-equilibrium-msne">4. Mixed Strategy Nash Equilibrium (MSNE)<a class="headerlink" href="#4-mixed-strategy-nash-equilibrium-msne" title="Permanent link">&para;</a></h2>
+<p>When no pure-strategy equilibrium exists, or when we wish to find all equilibria, we allow players to randomize over their actions. A <strong>mixed strategy</strong> <span class="arithmatex">\(p_i\)</span> is a probability distribution over <span class="arithmatex">\(S_i\)</span>.</p>
+<p>Let Player 1 choose Up (<span class="arithmatex">\(U\)</span>) with probability <span class="arithmatex">\(p\)</span> and Down (<span class="arithmatex">\(D\)</span>) with probability <span class="arithmatex">\(1-p\)</span>.
+Let Player 2 choose Left (<span class="arithmatex">\(L\)</span>) with probability <span class="arithmatex">\(q\)</span> and Right (<span class="arithmatex">\(R\)</span>) with probability <span class="arithmatex">\(1-q\)</span>.</p>
+<h3 id="41-solving-matching-pennies-for-msne">4.1 Solving Matching Pennies for MSNE<a class="headerlink" href="#41-solving-matching-pennies-for-msne" title="Permanent link">&para;</a></h3>
+<p>Using the Matching Pennies matrix above:
+*   Player 1's expected payoff from playing Heads (<span class="arithmatex">\(H\)</span>) is:
+    $<span class="arithmatex">\(E[u_1(H, q)] = q(1) + (1-q)(-1) = 2q - 1\)</span>$
+*   Player 1's expected payoff from playing Tails (<span class="arithmatex">\(T\)</span>) is:
+    $<span class="arithmatex">\(E[u_1(T, q)] = q(-1) + (1-q)(1) = 1 - 2q\)</span>$</p>
+<p>According to the <strong>Indifference Principle</strong>, a player will only randomize between strategies if the expected payoffs of those strategies are equal:
+$<span class="arithmatex">\(E[u_1(H, q)] = E[u_1(T, q)] \implies 2q - 1 = 1 - 2q \implies 4q = 2 \implies q^* = \frac{1}{2}\)</span>$</p>
+<p>By symmetry, Player 2 is indifferent between <span class="arithmatex">\(L\)</span> and <span class="arithmatex">\(R\)</span> when Player 1 plays Heads with probability <span class="arithmatex">\(p^* = \frac{1}{2}\)</span>.
+Thus, the unique Nash Equilibrium of Matching Pennies is the mixed strategy profile:
+$<span class="arithmatex">\((p^*, q^*) = \left(\frac{1}{2}, \frac{1}{2}\right)\)</span>$</p>
+<blockquote>
+<p><strong>Nash's Theorem:</strong> Every finite game (finite number of players and finite strategy sets) has at least one Nash Equilibrium in pure or mixed strategies.</p>
+</blockquote>
+<hr />
+<h2 id="5-extensive-form-games-sequential-form">5. Extensive Form Games (Sequential Form)<a class="headerlink" href="#5-extensive-form-games-sequential-form" title="Permanent link">&para;</a></h2>
+<p>In an <strong>Extensive Form Game</strong>, players move sequentially rather than simultaneously. These games are represented using a <strong>game tree</strong>.</p>
+<h3 id="51-game-tree-structure">5.1 Game Tree Structure<a class="headerlink" href="#51-game-tree-structure" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Nodes</strong> represent points of decision-making.</li>
+<li><strong>Edges</strong> represent actions.</li>
+<li><strong>Terminals</strong> show the final payoffs.</li>
+</ul>
+<p>Consider a market entry game: An <strong>Entrant</strong> decides to enter the market or stay out. If they enter, the <strong>Incumbent</strong> decides to fight a price war or acquiesce.</p>
+<pre class="mermaid"><code>graph TD
+    A("Entrant") --&gt;|Stay Out| B("Payoff: (0, 2)")
+    A --&gt;|Enter| C["Incumbent"]
+    C --&gt;|Fight| D("Payoff: (-1, -1)")
+    C --&gt;|Acquiesce| E("Payoff: (1, 1)")</code></pre>
+<hr />
+<h3 id="52-backward-induction-subgame-perfection">5.2 Backward Induction &amp; Subgame Perfection<a class="headerlink" href="#52-backward-induction-subgame-perfection" title="Permanent link">&para;</a></h3>
+<p>While normal form games use Nash Equilibrium, extensive form games with perfect information use a refinement called <strong>Subgame Perfect Nash Equilibrium (SPNE)</strong>, solved using <strong>backward induction</strong>:</p>
+<ol>
+<li>Start at the final decision node (Incumbent).</li>
+<li>If the Entrant has entered, the Incumbent compares their payoffs:<ul>
+<li>Fight: <span class="arithmatex">\(-1\)</span></li>
+<li>Acquiesce: <span class="arithmatex">\(1\)</span></li>
+<li>Since <span class="arithmatex">\(1 &gt; -1\)</span>, the rational Incumbent will choose <strong>Acquiesce</strong>.</li>
+</ul>
+</li>
+<li>Move backward to the Entrant's node, substituting the Incumbent's optimal choice. The Entrant compares:<ul>
+<li>Stay Out: <span class="arithmatex">\(0\)</span></li>
+<li>Enter (knowing Incumbent will acquiesce): <span class="arithmatex">\(1\)</span></li>
+<li>Since <span class="arithmatex">\(1 &gt; 0\)</span>, the Entrant chooses <strong>Enter</strong>.</li>
+</ul>
+</li>
+<li>The unique SPNE is <strong>(Enter, Acquiesce)</strong> with payoff <span class="arithmatex">\((1, 1)\)</span>.</li>
+</ol>
+<blockquote>
+<p><strong>Threats Credibility:</strong> Backward induction eliminates "non-credible threats." For example, the Incumbent threatening <em>"If you enter, I will fight a price war"</em> is not credible because once entry occurs, fighting hurts the Incumbent.</p>
+</blockquote>
+<hr />
+<h2 id="6-connections-to-other-domains">6. Connections to Other Domains<a class="headerlink" href="#6-connections-to-other-domains" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Economics:</strong> Used to model oligopoly competition (e.g., Cournot quantity-setting, Bertrand price-setting), bargaining, auction design, and contract theory.</li>
+<li><strong>Computer Science &amp; AI:</strong> Algorithmic game theory deals with designing algorithms in strategic environments (e.g., ad auctions, congestion routing) and multi-agent reinforcement learning (where agents play Markov Games).</li>
+<li><strong>Probability:</strong> Game theory utilizes probability theory extensively to analyze mixed strategies, beliefs (Bayesian games), and stochastic processes in dynamic games.</li>
+</ul>
 
   
     
@@ -4708,7 +5113,7 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 05:41:46 UTC">June 20, 2026</span>
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 05:59:42 UTC">June 24, 2026</span>
       </span>
     
   </aside>
@@ -4719,6 +5124,21 @@
 
                 
 
+  
+    <div class="backlinks-panel">
+      <div class="backlinks-title">Linked from 2 notes</div>
+      <ul class="backlinks-list">
+        
+          <li>
+            <a href="../../_concepts/" class="backlink-item">Cross-Domain Concepts</a>
+          </li>
+        
+          <li>
+            <a href="../" class="backlink-item">Economics</a>
+          </li>
+        
+      </ul>
+    </div>
   
 
               </article>
@@ -4745,7 +5165,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../exercises/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Exercises">
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Economics">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -4755,20 +5175,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Exercises
+                Economics
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../09-transformations/exercises/" class="md-footer__link md-footer__link--next" aria-label="Next: Exercises">
+          <a href="../../mathematics/" class="md-footer__link md-footer__link--next" aria-label="Next: Mathematics">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Exercises
+                Mathematics
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -4805,14 +5225,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.indexes", "navigation.top", "navigation.tracking", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.top", "navigation.tracking", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../javascripts/mathjax.js"></script>
+        <script src="../../javascripts/mathjax.js"></script>
       
-        <script src="../../../../javascripts/resizable-sidebars.js"></script>
+        <script src="../../javascripts/resizable-sidebars.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
