@@ -4350,17 +4350,16 @@
 <p><strong>Critical rule:</strong> Every single row must sum to <strong>exactly 1.0</strong> — because the agent must go somewhere (even if it stays).</p>
 <p><strong>Example — 3-state system:</strong></p>
 <div class="arithmatex">\[Q = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}\]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>graph LR
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    S1((State 1\nSearching)) -- &quot;0.5&quot; --&gt; S1
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    S1 -- &quot;0.4&quot; --&gt; S2((State 2\nAcquiring))
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    S1 -- &quot;0.1&quot; --&gt; S3((State 3\nProcessing))
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    S2 -- &quot;0.3&quot; --&gt; S1
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    S2 -- &quot;0.2&quot; --&gt; S2
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    S2 -- &quot;0.5&quot; --&gt; S3
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    S3 -- &quot;0.2&quot; --&gt; S1
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    S3 -- &quot;0.3&quot; --&gt; S2
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    S3 -- &quot;0.5&quot; --&gt; S3
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S1((State 1\nSearching)) -- "0.5" --&gt; S1
+    S1 -- "0.4" --&gt; S2((State 2\nAcquiring))
+    S1 -- "0.1" --&gt; S3((State 3\nProcessing))
+    S2 -- "0.3" --&gt; S1
+    S2 -- "0.2" --&gt; S2
+    S2 -- "0.5" --&gt; S3
+    S3 -- "0.2" --&gt; S1
+    S3 -- "0.3" --&gt; S2
+    S3 -- "0.5" --&gt; S3</code></pre>
 <hr />
 <h2 id="how-to-read-q-in-plain-english">How to Read Q in Plain English<a class="headerlink" href="#how-to-read-q-in-plain-english" title="Permanent link">&para;</a></h2>
 <p>Using the language of Chapter 7, the transition matrix <span class="arithmatex">\(Q\)</span> <strong>encodes the conditional distribution of <span class="arithmatex">\(X_1\)</span> given the initial state of the chain</strong>.</p>
@@ -4461,19 +4460,18 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>flowchart TD
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    Start([Lobby: 100 Players]) --&gt; Z1[Zone 1\nt₁ = 0.60]
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    Start --&gt; Z2[Zone 2\nt₂ = 0.40]
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    Start --&gt; Z3[Zone 3\nt₃ = 0.00]
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    Z1 -- &quot;P = 0.10&quot; --&gt; FC[Final Circle\nState 3]
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    Z2 -- &quot;P = 0.50&quot; --&gt; FC
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    Z3 -- &quot;P = 0.90&quot; --&gt; FC
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    Z1 -- &quot;0.60 × 0.10 = 0.06&quot; --&gt; Sum[Sum = 0.06 + 0.20 + 0.00 = 0.26]
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    Z2 -- &quot;0.40 × 0.50 = 0.20&quot; --&gt; Sum
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    Z3 -- &quot;0.00 × 0.90 = 0.00&quot; --&gt; Sum
-</code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    Start([Lobby: 100 Players]) --&gt; Z1[Zone 1\nt₁ = 0.60]
+    Start --&gt; Z2[Zone 2\nt₂ = 0.40]
+    Start --&gt; Z3[Zone 3\nt₃ = 0.00]
+
+    Z1 -- "P = 0.10" --&gt; FC[Final Circle\nState 3]
+    Z2 -- "P = 0.50" --&gt; FC
+    Z3 -- "P = 0.90" --&gt; FC
+
+    Z1 -- "0.60 × 0.10 = 0.06" --&gt; Sum[Sum = 0.06 + 0.20 + 0.00 = 0.26]
+    Z2 -- "0.40 × 0.50 = 0.20" --&gt; Sum
+    Z3 -- "0.00 × 0.90 = 0.00" --&gt; Sum</code></pre>
 <blockquote>
 <p><strong>Core intuition:</strong> You take the probability of moving from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span>, then <strong>multiply</strong> by the probability of starting there in the first place. You cannot just look at survival rates in a vacuum — Zone 3 has a 90% rate but nobody spawned there, so it contributes nothing.</p>
 </blockquote>
@@ -4567,27 +4565,25 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <p><strong>Transition Matrix:</strong></p>
 <div class="arithmatex">\[P = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}\]</div>
 <p><strong>Scenario A — Starting from State 1, reach State 3 in 2 steps:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>graph TD
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    S1_start([Start: State 1]) --&gt; P1[Path 1:\nStay in 1 then jump to 3\n0.5 × 0.1 = 0.05]
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    S1_start --&gt; P2[Path 2:\nJump to 2 then jump to 3\n0.4 × 0.5 = 0.20]
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    S1_start --&gt; P3[Path 3:\nJump to 3 then stay in 3\n0.1 × 0.5 = 0.05]
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    P1 --&gt; Total1[Total = 0.05 + 0.20 + 0.05 = 0.30]
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    P2 --&gt; Total1
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    P3 --&gt; Total1
-</code></pre></div>
+<pre class="mermaid"><code>graph TD
+    S1_start([Start: State 1]) --&gt; P1[Path 1:\nStay in 1 then jump to 3\n0.5 × 0.1 = 0.05]
+    S1_start --&gt; P2[Path 2:\nJump to 2 then jump to 3\n0.4 × 0.5 = 0.20]
+    S1_start --&gt; P3[Path 3:\nJump to 3 then stay in 3\n0.1 × 0.5 = 0.05]
+    P1 --&gt; Total1[Total = 0.05 + 0.20 + 0.05 = 0.30]
+    P2 --&gt; Total1
+    P3 --&gt; Total1</code></pre>
 <div class="arithmatex">\[P(X_2 = 3 \mid X_0 = 1) = 0.05 + 0.20 + 0.05 = 0.30\]</div>
 <blockquote>
 <p>The most likely path is bouncing through State 2 first, because <span class="arithmatex">\(P_{12}\)</span> and <span class="arithmatex">\(P_{23}\)</span> are relatively strong connections.</p>
 </blockquote>
 <p><strong>Scenario B — Starting from State 2, reach State 3 in 2 steps:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>graph TD
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    S2_start([Start: State 2]) --&gt; P1[Path 1:\nJump to 1 then jump to 3\n0.3 × 0.1 = 0.03]
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    S2_start --&gt; P2[Path 2:\nStay in 2 then jump to 3\n0.2 × 0.5 = 0.10]
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    S2_start --&gt; P3[Path 3:\nJump to 3 then stay in 3\n0.5 × 0.5 = 0.25]
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    P1 --&gt; Total2[Total = 0.03 + 0.10 + 0.25 = 0.38]
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    P2 --&gt; Total2
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    P3 --&gt; Total2
-</code></pre></div>
+<pre class="mermaid"><code>graph TD
+    S2_start([Start: State 2]) --&gt; P1[Path 1:\nJump to 1 then jump to 3\n0.3 × 0.1 = 0.03]
+    S2_start --&gt; P2[Path 2:\nStay in 2 then jump to 3\n0.2 × 0.5 = 0.10]
+    S2_start --&gt; P3[Path 3:\nJump to 3 then stay in 3\n0.5 × 0.5 = 0.25]
+    P1 --&gt; Total2[Total = 0.03 + 0.10 + 0.25 = 0.38]
+    P2 --&gt; Total2
+    P3 --&gt; Total2</code></pre>
 <div class="arithmatex">\[P(X_2 = 3 \mid X_0 = 2) = 0.03 + 0.10 + 0.25 = 0.38\]</div>
 <p>Starting in State 2 gives a higher probability (38%) of reaching State 3 in two steps than starting in State 1 (30%).</p>
 <hr />
@@ -4595,10 +4591,9 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <h2 id="recurrent-states">Recurrent States<a class="headerlink" href="#recurrent-states" title="Permanent link">&para;</a></h2>
 <p><strong>Definition:</strong> State <span class="arithmatex">\(i\)</span> is <strong>recurrent</strong> if, starting from <span class="arithmatex">\(i\)</span>, the probability is <strong>1</strong> that the chain will eventually return to <span class="arithmatex">\(i\)</span>.</p>
 <p><strong>Physical meaning:</strong> A recurrent state is a location with <strong>no permanent escape</strong>. No matter which doors you take, every path through the map eventually loops back to this room. Given infinite time, you will return to a recurrent state <strong>infinitely many times</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>graph LR
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    R1((Recurrent\nState 1)) -- &quot;inevitable\nreturn&quot; --&gt; R2((Recurrent\nState 2))
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    R2 -- &quot;inevitable\nreturn&quot; --&gt; R1
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    R1((Recurrent\nState 1)) -- "inevitable\nreturn" --&gt; R2((Recurrent\nState 2))
+    R2 -- "inevitable\nreturn" --&gt; R1</code></pre>
 <hr />
 <h2 id="transient-states">Transient States<a class="headerlink" href="#transient-states" title="Permanent link">&para;</a></h2>
 <p><strong>Definition:</strong> State <span class="arithmatex">\(i\)</span> is <strong>transient</strong> if there is a <strong>positive probability of never returning</strong> to <span class="arithmatex">\(i\)</span> after leaving it.</p>
@@ -4634,11 +4629,10 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <blockquote>
 <p>The <strong>relentless grinding of infinite time</strong> guarantees that the 1% escape hatch is eventually found. You cannot dodge a positive probability forever.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>graph LR
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    T1((Transient\nState 1)) -- &quot;99%&quot; --&gt; T1
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    T1 -- &quot;1% escape\nhatch&quot; --&gt; R1((Recurrent\nState\nTrapdoor))
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    R1 -- &quot;100%&quot; --&gt; R1
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    T1((Transient\nState 1)) -- "99%" --&gt; T1
+    T1 -- "1% escape\nhatch" --&gt; R1((Recurrent\nState\nTrapdoor))
+    R1 -- "100%" --&gt; R1</code></pre>
 <hr />
 <h2 id="the-geometric-distribution-proof">The Geometric Distribution Proof<a class="headerlink" href="#the-geometric-distribution-proof" title="Permanent link">&para;</a></h2>
 <p>The textbook proves the finite-visit guarantee using the <strong>story of the Geometric distribution</strong>:</p>
@@ -4652,12 +4646,11 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <blockquote>
 <p>After some <strong>finite</strong> number of visits, the chain will leave transient state <span class="arithmatex">\(i\)</span> <strong>forever</strong>. The counter freezes. You never return.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>flowchart TD
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    Enter([Enter Transient State i]) --&gt; Trial{Bernoulli Trial}
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    Trial -- &quot;Failure\nreturn to i\nMemoryless!&quot; --&gt; Enter
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    Trial -- &quot;Success\np &gt; 0\nLeave forever&quot; --&gt; Gone([Left State i\nForever])
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    Gone --&gt; Note[Number of returns\n~ Geometric r.v.\nAlways finite!]
-</code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    Enter([Enter Transient State i]) --&gt; Trial{Bernoulli Trial}
+    Trial -- "Failure\nreturn to i\nMemoryless!" --&gt; Enter
+    Trial -- "Success\np &gt; 0\nLeave forever" --&gt; Gone([Left State i\nForever])
+    Gone --&gt; Note[Number of returns\n~ Geometric r.v.\nAlways finite!]</code></pre>
 <hr />
 <h2 id="proposition-1124-irreducible-chains">Proposition 11.2.4 — Irreducible Chains<a class="headerlink" href="#proposition-1124-irreducible-chains" title="Permanent link">&para;</a></h2>
 <p><strong>Proposition:</strong> In an <strong>irreducible</strong> Markov chain with a <strong>finite state space</strong>, all states are recurrent.</p>
@@ -4674,12 +4667,11 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <p><strong>Trap 4 — The Rubber Band Effect:</strong></p>
 <p>From State <span class="arithmatex">\(i\)</span>, the chain must eventually return to State 1 (because State 1 is recurrent and the map is irreducible). Then it reaches State <span class="arithmatex">\(i\)</span> again. The cycle repeats infinitely. Visiting State <span class="arithmatex">\(i\)</span> infinitely often means <strong>State <span class="arithmatex">\(i\)</span> is recurrent</strong>.</p>
 <p>Since <span class="arithmatex">\(i\)</span> was arbitrary, <strong>all states are recurrent</strong>. <span class="arithmatex">\(\blacksquare\)</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>graph LR
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    S1((State 1\nRecurrent)) -- &quot;q_1i^n &gt; 0\nfor some n&quot; --&gt; Si((State i\nArbitrary))
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    Si -- &quot;must return\nby recurrence\nof State 1&quot; --&gt; S1
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    S1 -.-&gt;|&quot;visits ∞ times\n= ∞ lottery tickets&quot; | Si
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    Si -.-&gt;|&quot;therefore also\nvisited ∞ times\n= Recurrent!&quot; | Si
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S1((State 1\nRecurrent)) -- "q_1i^n &gt; 0\nfor some n" --&gt; Si((State i\nArbitrary))
+    Si -- "must return\nby recurrence\nof State 1" --&gt; S1
+    S1 -.-&gt;|"visits ∞ times\n= ∞ lottery tickets" | Si
+    Si -.-&gt;|"therefore also\nvisited ∞ times\n= Recurrent!" | Si</code></pre>
 <hr />
 <h2 id="the-converse-is-false-two-islands">The Converse is False — Two Islands<a class="headerlink" href="#the-converse-is-false-two-islands" title="Permanent link">&para;</a></h2>
 <p><strong>The Converse (FALSE):</strong> IF all states are Recurrent <span class="arithmatex">\(\to\)</span> THEN the map is Irreducible.</p>
@@ -4689,21 +4681,20 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <li><strong>Island B:</strong> States 3 and 4 loop forever between themselves</li>
 </ul>
 <p>Every state is <strong>recurrent</strong> (once you are on an island you never leave — infinite visits). But the map is <strong>reducible</strong> because you cannot travel from Island A to Island B.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>graph LR
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    subgraph IslandA [&quot; Island A — Closed Loop&quot;]
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        A1((State 1)) -- &quot;0.6&quot; --&gt; A2((State 2))
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        A2 -- &quot;0.4&quot; --&gt; A1
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        A1 -- &quot;0.4&quot; --&gt; A1
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        A2 -- &quot;0.6&quot; --&gt; A2
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    end
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    subgraph IslandB [&quot; Island B — Closed Loop&quot;]
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        B1((State 3)) -- &quot;0.7&quot; --&gt; B2((State 4))
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        B2 -- &quot;0.3&quot; --&gt; B1
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        B1 -- &quot;0.3&quot; --&gt; B1
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        B2 -- &quot;0.7&quot; --&gt; B2
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    end
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    IslandA -. &quot;NO PATH\nbetween islands&quot; .- IslandB
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    subgraph IslandA [" Island A — Closed Loop"]
+        A1((State 1)) -- "0.6" --&gt; A2((State 2))
+        A2 -- "0.4" --&gt; A1
+        A1 -- "0.4" --&gt; A1
+        A2 -- "0.6" --&gt; A2
+    end
+    subgraph IslandB [" Island B — Closed Loop"]
+        B1((State 3)) -- "0.7" --&gt; B2((State 4))
+        B2 -- "0.3" --&gt; B1
+        B1 -- "0.3" --&gt; B1
+        B2 -- "0.7" --&gt; B2
+    end
+    IslandA -. "NO PATH\nbetween islands" .- IslandB</code></pre>
 <blockquote>
 <p><strong>Recurrent</strong> = a property of an <strong>individual state</strong> (once visited, I can get visited again)</p>
 <p><strong>Irreducible</strong> = a property of the <strong>entire map</strong> (every state can be reached from every other state)</p>
@@ -4771,11 +4762,10 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <p>Possible return times to Left: <span class="arithmatex">\(\{2, 4, 6, 8, \ldots\}\)</span></p>
 <div class="arithmatex">\[\gcd\{2, 4, 6, 8, \ldots\} = 2\]</div>
 <p><strong>Period = 2.</strong> You are trapped on a strict, unbreakable rhythm. The door back only unlocks on steps 2, 4, 6, 8...</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>graph LR
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    L((Left)) -- &quot;100%&quot; --&gt; R((Right))
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    R -- &quot;100%&quot; --&gt; L
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    Note[&quot;Period = 2\nCan only return on\nsteps 2, 4, 6, 8...&quot;] 
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    L((Left)) -- "100%" --&gt; R((Right))
+    R -- "100%" --&gt; L
+    Note["Period = 2\nCan only return on\nsteps 2, 4, 6, 8..."] </code></pre>
 <hr />
 <h2 id="the-aperiodic-state">The Aperiodic State<a class="headerlink" href="#the-aperiodic-state" title="Permanent link">&para;</a></h2>
 <p><strong>The broken rhythm (Period = 1).</strong> Add a third room so you can travel in a triangle.</p>
@@ -4786,13 +4776,12 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <p>Possible return times: <span class="arithmatex">\(\{2, 3, 4, 5, 6, \ldots\}\)</span></p>
 <div class="arithmatex">\[\gcd\{2, 3, 4, 5, 6, \ldots\} = 1\]</div>
 <p><strong>Period = 1.</strong> The rigid rhythm is broken. You can return on any step — the timing is completely fluid.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>graph LR
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    A((State A)) -- &quot;p₁&quot; --&gt; B((State B))
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    B -- &quot;p₂&quot; --&gt; C((State C))
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    C -- &quot;p₃&quot; --&gt; A
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    A -- &quot;p₄\nself-loop\n= instant aperiodic&quot; --&gt; A
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    Note[&quot;Period = 1\nCan return in 2 steps\nOR 3 steps → GCD = 1&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    A((State A)) -- "p₁" --&gt; B((State B))
+    B -- "p₂" --&gt; C((State C))
+    C -- "p₃" --&gt; A
+    A -- "p₄\nself-loop\n= instant aperiodic" --&gt; A
+    Note["Period = 1\nCan return in 2 steps\nOR 3 steps → GCD = 1"]</code></pre>
 <blockquote>
 <p><strong>Cheat Code:</strong> If a state has a <strong>self-loop</strong> (<span class="arithmatex">\(P(i \to i) &gt; 0\)</span>), it is <strong>automatically aperiodic</strong> (Period 1). Because you can "return" in exactly 1 step, and <span class="arithmatex">\(\gcd\)</span> of any list containing 1 is always 1.</p>
 </blockquote>
@@ -4824,13 +4813,12 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <p>The equilibrium satisfies:</p>
 <div class="arithmatex">\[\pi P = \pi\]</div>
 <p><strong>Read in English:</strong> "Multiplying the steady-state distribution by the transition matrix returns the exact same steady-state distribution." Taking one more step in time changes <strong>nothing</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>graph LR
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    T0[&quot;π at t=0\n[0.6, 0.3, 0.1]&quot;] -- &quot;×P&quot; --&gt; T1[&quot;π at t=1\n[0.5, 0.35, 0.15]&quot;]
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    T1 -- &quot;×P&quot; --&gt; T2[&quot;π at t=10\n[0.42, 0.38, 0.20]&quot;]
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    T2 -- &quot;×P&quot; --&gt; T3[&quot;π at t=∞\n[π₁, π₂, π₃]&quot;]
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    T3 -- &quot;×P&quot; --&gt; T3
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    T3 -.-&gt;|&quot;πP = π\nEquilibrium!&quot; | T3
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    T0["π at t=0\n[0.6, 0.3, 0.1]"] -- "×P" --&gt; T1["π at t=1\n[0.5, 0.35, 0.15]"]
+    T1 -- "×P" --&gt; T2["π at t=10\n[0.42, 0.38, 0.20]"]
+    T2 -- "×P" --&gt; T3["π at t=∞\n[π₁, π₂, π₃]"]
+    T3 -- "×P" --&gt; T3
+    T3 -.-&gt;|"πP = π\nEquilibrium!" | T3</code></pre>
 <p><strong>Why this matters:</strong> Instead of infinitely multiplying <span class="arithmatex">\(P \times P \times P \ldots\)</span> to find behavior at step 10,000, you use <strong>eigenvector decomposition</strong> on <span class="arithmatex">\(\pi P = \pi\)</span> to instantly calculate the infinite-time equilibrium of any stochastic system.</p>
 <hr />
 <h1 id="applications">Applications<a class="headerlink" href="#applications" title="Permanent link">&para;</a></h1>
@@ -4841,14 +4829,13 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <li><strong>State 0 (Bankruptcy):</strong> <span class="arithmatex">\(P(0 \to 0) = 1.0\)</span> — you cannot bet with no money. This is an <strong>Absorbing Recurrent State</strong>.</li>
 <li><strong>States 1 through N-1:</strong> Because Bankruptcy is an inescapable black hole, every state where you have money has a path leading to State 0. This makes them all <strong>Transient States</strong>.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>graph LR
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    S0((&quot;$0\nBANKRUPTCY\nAbsorbing\nRecurrent&quot;)) 
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    S1((&quot;$1\nTransient&quot;)) -- &quot;p\nwin&quot; --&gt; S2((&quot;$2\nTransient&quot;))
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    S2 -- &quot;1-p\nlose&quot; --&gt; S1
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    S1 -- &quot;1-p\nlose&quot; --&gt; S0
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    S2 -. &quot;... eventually ...&quot; .-&gt; S0
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    Note[&quot;State 0 is the ONLY\nrecurrent state.\nAll money states\nare transient.\nInfinite time → bankruptcy\nwith probability 1.&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S0(("$0\nBANKRUPTCY\nAbsorbing\nRecurrent")) 
+    S1(("$1\nTransient")) -- "p\nwin" --&gt; S2(("$2\nTransient"))
+    S2 -- "1-p\nlose" --&gt; S1
+    S1 -- "1-p\nlose" --&gt; S0
+    S2 -. "... eventually ..." .-&gt; S0
+    Note["State 0 is the ONLY\nrecurrent state.\nAll money states\nare transient.\nInfinite time → bankruptcy\nwith probability 1."]</code></pre>
 <p><strong>The mathematical proof of why the house always wins:</strong></p>
 <p>Because all money states are transient, the relentless grinding of infinite time guarantees the agent must eventually fall into the <strong>only recurrent trapdoor</strong> — State 0 (Bankruptcy). If you play an infinite game against an opponent with an infinite bankroll, the probability of reaching State 0 is <strong>exactly 1.0</strong>.</p>
 <blockquote>
@@ -4864,17 +4851,16 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <div class="arithmatex">\[P(\text{move } k \to k+1) = \frac{C-k}{C} \quad \text{(get a new toy)}$$
 $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 <p>It gets harder the further you go. At State 9, the chance of completing the set is a brutal <span class="arithmatex">\(\frac{1}{10}\)</span>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>graph LR
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    S0((0)) -- &quot;10/10&quot; --&gt; S1((1))
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    S1 -- &quot;9/10&quot; --&gt; S2((2))
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    S2 -- &quot;8/10&quot; --&gt; S3((3))
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    S3 -- &quot;...&quot; --&gt; S9((9))
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    S9 -- &quot;1/10&quot; --&gt; S10((&quot;10\nAbsorbing&quot;))
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    S1 -- &quot;1/10&quot; --&gt; S1
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    S2 -- &quot;2/10&quot; --&gt; S2
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    S9 -- &quot;9/10&quot; --&gt; S9
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    S10 -- &quot;10/10&quot; --&gt; S10
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S0((0)) -- "10/10" --&gt; S1((1))
+    S1 -- "9/10" --&gt; S2((2))
+    S2 -- "8/10" --&gt; S3((3))
+    S3 -- "..." --&gt; S9((9))
+    S9 -- "1/10" --&gt; S10(("10\nAbsorbing"))
+    S1 -- "1/10" --&gt; S1
+    S2 -- "2/10" --&gt; S2
+    S9 -- "9/10" --&gt; S9
+    S10 -- "10/10" --&gt; S10</code></pre>
 <p><strong>Topology:</strong>
 - <strong>States 0–9:</strong> Transient — there is always a positive probability of gaining a new toy and moving forward forever
 - <strong>State 10 (<span class="arithmatex">\(C\)</span>):</strong> Absorbing Recurrent — the game is over; every new meal is a guaranteed duplicate; <span class="arithmatex">\(P(10 \to 10) = 1.0\)</span></p>
@@ -4935,16 +4921,15 @@ $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 </tbody>
 </table>
 <p>Tracking the state of an M/M/1 queue (number of items in the buffer) is <strong>literally computing the transition probabilities of a CTMC</strong> jumping between states <span class="arithmatex">\(0, 1, 2, 3, \ldots\)</span></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>graph LR
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    Q0((0\nEmpty)) -- &quot;λ&quot; --&gt; Q1((1))
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    Q1 -- &quot;μ&quot; --&gt; Q0
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    Q1 -- &quot;λ&quot; --&gt; Q2((2))
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    Q2 -- &quot;μ&quot; --&gt; Q1
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    Q2 -- &quot;λ&quot; --&gt; Q3((3))
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    Q3 -- &quot;μ&quot; --&gt; Q2
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>    Q3 -- &quot;λ&quot; --&gt; Qdot((...))
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>    Note[&quot;λ = arrival rate\nμ = service rate\nρ = λ/μ &lt; 1 for stability&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    Q0((0\nEmpty)) -- "λ" --&gt; Q1((1))
+    Q1 -- "μ" --&gt; Q0
+    Q1 -- "λ" --&gt; Q2((2))
+    Q2 -- "μ" --&gt; Q1
+    Q2 -- "λ" --&gt; Q3((3))
+    Q3 -- "μ" --&gt; Q2
+    Q3 -- "λ" --&gt; Qdot((...))
+    Note["λ = arrival rate\nμ = service rate\nρ = λ/μ &lt; 1 for stability"]</code></pre>
 <p><strong>Little's Law — The Crown Jewel:</strong></p>
 <div class="arithmatex">\[L = \lambda W\]</div>
 <table>
@@ -5034,17 +5019,16 @@ $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 - <strong>Q-Learning:</strong> Sweeping through state transitions, weighting by likelihood
 - <strong>Monte Carlo Methods:</strong> Averaging over entire episode trajectories
 - <strong>The Bellman Equation:</strong> Recursively computing value functions by conditioning on the current state</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>graph TD
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    MC[Markov Chain\nStates + Transitions] --&gt; MRP[Markov Reward Process\n+ Rewards]
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    MRP --&gt; MDP[Markov Decision Process\n+ Actions + Policy]
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    MDP --&gt; PG[Policy Gradient\nObjective J_theta]
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    MDP --&gt; BE[Bellman Equation\nValue Functions]
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    BE --&gt; QL[Q-Learning]
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    BE --&gt; PPO[PPO / Actor-Critic]
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>    MC -.-&gt;|&quot;tQ^n = marginal\ndistribution&quot;| MC
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>    MDP -.-&gt;|&quot;J = Σ p_s0 × V_π\n= LOTP with rewards&quot;| PG
-</code></pre></div>
+<pre class="mermaid"><code>graph TD
+    MC[Markov Chain\nStates + Transitions] --&gt; MRP[Markov Reward Process\n+ Rewards]
+    MRP --&gt; MDP[Markov Decision Process\n+ Actions + Policy]
+    MDP --&gt; PG[Policy Gradient\nObjective J_theta]
+    MDP --&gt; BE[Bellman Equation\nValue Functions]
+    BE --&gt; QL[Q-Learning]
+    BE --&gt; PPO[PPO / Actor-Critic]
+
+    MC -.-&gt;|"tQ^n = marginal\ndistribution"| MC
+    MDP -.-&gt;|"J = Σ p_s0 × V_π\n= LOTP with rewards"| PG</code></pre>
 <p><strong>The stationary distribution and convergence:</strong></p>
 <p>Understanding that transient states are eventually escaped and recurrent states are visited infinitely is the theoretical guarantee that <strong>RL algorithms converge</strong>. As long as the agent operates in a fully communicating recurrent environment, infinite time guarantees it will explore every state and update every value function</p>
 <blockquote>
@@ -5073,11 +5057,10 @@ $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 <p>The stationary distribution vector <span class="arithmatex">\(s\)</span> is a list of percentages answering exactly this:</p>
 <div class="arithmatex">\[s = [0.70, 0.20, 0.10]\]</div>
 <p>means the chain spends 70% of eternity in State 1, 20% in State 2, and 10% in State 3.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>graph LR
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    Start([Chain starts]) --&gt; Transient[&quot;Phase 1:\nTransient states\nChaos, burning off\nGeometric distribution\nfinite visits&quot;]
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    Transient -- &quot;Eventually falls\nthrough trapdoor&quot; --&gt; Recurrent[&quot;Phase 2:\nRecurrent states\nInfinite rhythm\nStationary distribution s\ntakes over&quot;]
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    Recurrent --&gt; Equilibrium[&quot;s = [s₁, s₂, s₃]\nFraction of eternity\nspent in each state\nLocked forever&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    Start([Chain starts]) --&gt; Transient["Phase 1:\nTransient states\nChaos, burning off\nGeometric distribution\nfinite visits"]
+    Transient -- "Eventually falls\nthrough trapdoor" --&gt; Recurrent["Phase 2:\nRecurrent states\nInfinite rhythm\nStationary distribution s\ntakes over"]
+    Recurrent --&gt; Equilibrium["s = [s₁, s₂, s₃]\nFraction of eternity\nspent in each state\nLocked forever"]</code></pre>
 <hr />
 <h1 id="1131-definition-of-stationary-distribution">11.3.1 Definition of Stationary Distribution<a class="headerlink" href="#1131-definition-of-stationary-distribution" title="Permanent link">&para;</a></h1>
 <p><strong>Definition:</strong> A row vector <span class="arithmatex">\(s = (s_1, \ldots, s_M)\)</span> such that <span class="arithmatex">\(s_i \geq 0\)</span> and <span class="arithmatex">\(\sum_i s_i = 1\)</span> is a <strong>stationary distribution</strong> for a Markov chain with transition matrix <span class="arithmatex">\(Q\)</span> if:</p>
@@ -5198,11 +5181,10 @@ $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 </ul>
 <p>There is only one specific combination of water levels where the plumbing perfectly replaces what it drains. When you find that combination, you have found the stationary distribution.</p>
 <p><span class="arithmatex">\(sQ = s\)</span> is the mathematical way of saying: "When this specific distribution survives being pushed through the transition rules unchanged, we have reached equilibrium."</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>graph LR
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    Random[&quot;[90, 10]\nRandom guess&quot;] -- &quot;×Q&quot; --&gt; Changed[&quot;[85, 15]\nChanged!\nNot stationary&quot;]
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    Magic[&quot;[60, 40]\nThe magic s&quot;] -- &quot;×Q&quot; --&gt; Same[&quot;[60, 40]\nIdentical!\nThis is s&quot;]
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    Same -.-&gt;|&quot;sQ = s\nEquilibrium!&quot; | Same
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    Random["[90, 10]\nRandom guess"] -- "×Q" --&gt; Changed["[85, 15]\nChanged!\nNot stationary"]
+    Magic["[60, 40]\nThe magic s"] -- "×Q" --&gt; Same["[60, 40]\nIdentical!\nThis is s"]
+    Same -.-&gt;|"sQ = s\nEquilibrium!" | Same</code></pre>
 <hr />
 <h1 id="the-city-apartment-analogy">The City Apartment Analogy<a class="headerlink" href="#the-city-apartment-analogy" title="Permanent link">&para;</a></h1>
 <p>Imagine a city with 10,000 apartments. Every apartment is either <strong>Occupied (State 1)</strong> or <strong>Vacant (State 2)</strong>.</p>
@@ -5244,13 +5226,12 @@ $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 <div class="arithmatex">\[s_1 \times q_{11} + s_2 \times q_{21} = 0.95 \times 0.99 + 0.05 \times 0.19 = 0.9405 + 0.0095 = 0.95 = s_1 \checkmark\]</div>
 <p><strong>Flow into Vacant (State 2):</strong></p>
 <div class="arithmatex">\[s_1 \times q_{12} + s_2 \times q_{22} = 0.95 \times 0.01 + 0.05 \times 0.81 = 0.0095 + 0.0405 = 0.05 = s_2 \checkmark\]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>graph LR
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    Occ(&quot;Occupied\ns₁ = 0.95\n9500 apts&quot;) -- &quot;0.01 move out\n95 apts leaving&quot; --&gt; Vac(&quot;Vacant\ns₂ = 0.05\n500 apts&quot;)
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    Vac -- &quot;0.19 sign lease\n95 apts arriving&quot; --&gt; Occ
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    Occ -- &quot;0.99 renew&quot; --&gt; Occ
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    Vac -- &quot;0.81 sit empty&quot; --&gt; Vac
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    Note[&quot;95 leaving = 95 arriving\nPerfect balance\nVacancy rate frozen at 5%&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    Occ("Occupied\ns₁ = 0.95\n9500 apts") -- "0.01 move out\n95 apts leaving" --&gt; Vac("Vacant\ns₂ = 0.05\n500 apts")
+    Vac -- "0.19 sign lease\n95 apts arriving" --&gt; Occ
+    Occ -- "0.99 renew" --&gt; Occ
+    Vac -- "0.81 sit empty" --&gt; Vac
+    Note["95 leaving = 95 arriving\nPerfect balance\nVacancy rate frozen at 5%"]</code></pre>
 <hr />
 <h2 id="the-key-insight-q-does-not-change-its-transitions-cancel-out">The Key Insight — Q Does Not Change, Its Transitions Cancel Out<a class="headerlink" href="#the-key-insight-q-does-not-change-its-transitions-cancel-out" title="Permanent link">&para;</a></h2>
 <p><em>"Q doesn't change"</em> — The leasing rate stays at 19%, the eviction rate stays at 1%. These are the fixed rules of the system.</p>
@@ -5344,12 +5325,11 @@ If you walk away, let the simulation run for a billion steps, then randomly paus
 <blockquote>
 <p><strong>Why this matters:</strong> If every starting state had its own different stationary distribution, the macro-level statistics would still depend on where the first agent started. The magic of <span class="arithmatex">\(s\)</span> is that it is a <strong>universal gravitational pull</strong> — no matter which row you start in, <span class="arithmatex">\(Q^\infty\)</span> drags every single one to the exact same destination.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>graph LR
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    Row1[&quot;Row 1 of Q^n\n(started in State 1)&quot;] -- &quot;n → ∞&quot; --&gt; s[&quot;s = [s₁, s₂, s₃]\nUniversal destination&quot;]
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    Row2[&quot;Row 2 of Q^n\n(started in State 2)&quot;] -- &quot;n → ∞&quot; --&gt; s
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    Row3[&quot;Row 3 of Q^n\n(started in State 3)&quot;] -- &quot;n → ∞&quot; --&gt; s
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    s -.-&gt;|&quot;Every starting point\nconverges to the same s\nComplete amnesia&quot; | s
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    Row1["Row 1 of Q^n\n(started in State 1)"] -- "n → ∞" --&gt; s["s = [s₁, s₂, s₃]\nUniversal destination"]
+    Row2["Row 2 of Q^n\n(started in State 2)"] -- "n → ∞" --&gt; s
+    Row3["Row 3 of Q^n\n(started in State 3)"] -- "n → ∞" --&gt; s
+    s -.-&gt;|"Every starting point\nconverges to the same s\nComplete amnesia" | s</code></pre>
 <hr />
 <h2 id="why-rows-cannot-all-be-same-if-chain-is-reducible">Why Rows Cannot All Be Same If Chain Is Reducible<a class="headerlink" href="#why-rows-cannot-all-be-same-if-chain-is-reducible" title="Permanent link">&para;</a></h2>
 <p>You deduced this perfectly: <em>"If there was no path I can't simply put a 3 in that slot."</em></p>
@@ -5556,18 +5536,17 @@ $$\text{Eventually} \to s\]</div>
 <blockquote>
 <p><strong>Why is the map reducible?</strong> Once at State 0, you cannot travel back to any money state. The "every state reachable from every other state" condition is permanently broken. → Reducible.</p>
 </blockquote>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>graph LR
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    S0((&quot;$0\nBANKRUPTCY\nAbsorbing Recurrent\nP = 1 forever&quot;)) 
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    S1((&quot;$1\nTransient&quot;))
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    S2((&quot;$2\nTransient&quot;))
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    SN((&quot;$N\nGoal\nAbsorbing Recurrent&quot;))
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    S1 -- &quot;p win&quot; --&gt; S2
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>    S2 -- &quot;1-p lose&quot; --&gt; S1
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    S1 -- &quot;1-p lose&quot; --&gt; S0
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>    S0 -- &quot;1.0&quot; --&gt; S0
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>    SN -- &quot;1.0&quot; --&gt; SN
-<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>    Note[&quot;All money states = Transient\nMust eventually fall into\nthe only recurrent trap: $0&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S0(("$0\nBANKRUPTCY\nAbsorbing Recurrent\nP = 1 forever")) 
+    S1(("$1\nTransient"))
+    S2(("$2\nTransient"))
+    SN(("$N\nGoal\nAbsorbing Recurrent"))
+    S1 -- "p win" --&gt; S2
+    S2 -- "1-p lose" --&gt; S1
+    S1 -- "1-p lose" --&gt; S0
+    S0 -- "1.0" --&gt; S0
+    SN -- "1.0" --&gt; SN
+    Note["All money states = Transient\nMust eventually fall into\nthe only recurrent trap: $0"]</code></pre>
 <hr />
 <h2 id="the-coupon-collector">The Coupon Collector<a class="headerlink" href="#the-coupon-collector" title="Permanent link">&para;</a></h2>
 <p><span class="arithmatex">\(C = 10\)</span> different toys. State <span class="arithmatex">\(X_n\)</span> = number of distinct toys after <span class="arithmatex">\(n\)</span> meals. State space <span class="arithmatex">\(\{0, 1, \ldots, C\}\)</span>.</p>
@@ -5575,17 +5554,16 @@ $$\text{Eventually} \to s\]</div>
 <p><strong>Transition probabilities:</strong></p>
 <div class="arithmatex">\[P(\text{stay at } k) = \frac{k}{C} \quad \text{(duplicate)}$$
 $$P(k \to k+1) = \frac{C-k}{C} \quad \text{(new toy)}\]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>graph LR
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    S0((0)) -- &quot;10/10&quot; --&gt; S1((1))
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    S1 -- &quot;9/10&quot; --&gt; S2((2))
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    S2 -- &quot;8/10&quot; --&gt; S3((3))
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    S3 -. &quot;...&quot; .-&gt; S9((9))
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    S9 -- &quot;1/10&quot; --&gt; S10((&quot;10\nAbsorbing&quot;))
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    S1 -- &quot;1/10&quot; --&gt; S1
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>    S2 -- &quot;2/10&quot; --&gt; S2
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>    S9 -- &quot;9/10&quot; --&gt; S9
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    S10 -- &quot;1.0&quot; --&gt; S10
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S0((0)) -- "10/10" --&gt; S1((1))
+    S1 -- "9/10" --&gt; S2((2))
+    S2 -- "8/10" --&gt; S3((3))
+    S3 -. "..." .-&gt; S9((9))
+    S9 -- "1/10" --&gt; S10(("10\nAbsorbing"))
+    S1 -- "1/10" --&gt; S1
+    S2 -- "2/10" --&gt; S2
+    S9 -- "9/10" --&gt; S9
+    S10 -- "1.0" --&gt; S10</code></pre>
 <p><strong>Topology:</strong>
 - <strong>States 0–9:</strong> Transient — always a positive probability of moving forward
 - <strong>State 10:</strong> Absorbing Recurrent — <span class="arithmatex">\(P(10 \to 10) = 1.0\)</span></p>
@@ -5624,13 +5602,12 @@ $$P(k \to k+1) = \frac{C-k}{C} \quad \text{(new toy)}\]</div>
 <p>The multiplication (spawn probability × value) is the same AND rule from Chapman-Kolmogorov. The summation is the same OR rule. The formula is structurally identical to <span class="arithmatex">\(tQ^n\)</span>.</p>
 <p><strong>The stationary distribution under a policy</strong> is the distribution of states the agent visits when following that policy forever. It is the <span class="arithmatex">\(s\)</span> vector for the MDP transition matrix induced by the policy.</p>
 <p><strong>Why RL algorithms converge:</strong> The Geometric distribution proof guarantees transient states are eventually escaped. Proposition 11.2.4 guarantees all states in an irreducible chain are visited infinitely often. Given sufficient exploration (every state-action pair visited infinitely), Q-values converge to optimal. The theoretical guarantee is the same relentless grinding of infinite time.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>graph TD
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    MC[&quot;Markov Chain\ntQ^n = marginal distribution\nsQ = s stationary distribution&quot;] --&gt; MDP[&quot;MDP\n+ Actions + Rewards\n+ Policy π&quot;]
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    MDP --&gt; J[&quot;J(θ) = Σ p(s₀) × V^π(s₀)\n= LOTP with rewards attached\nSame structure as tQ^n&quot;]
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    MDP --&gt; BE[&quot;Bellman Equation\nV(s) = E[r + γV(s&#39;)]\nRecursive Chapman-Kolmogorov&quot;]
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    J --&gt; PG[&quot;Policy Gradient ∇J(θ)\nloss.backward() in PyTorch\nAdjust transition probs\nto maximize J&quot;]
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    BE --&gt; QL[&quot;Q-Learning\nConverges by recurrence guarantee\n+ infinite exploration&quot;]
-</code></pre></div>
+<pre class="mermaid"><code>graph TD
+    MC["Markov Chain\ntQ^n = marginal distribution\nsQ = s stationary distribution"] --&gt; MDP["MDP\n+ Actions + Rewards\n+ Policy π"]
+    MDP --&gt; J["J(θ) = Σ p(s₀) × V^π(s₀)\n= LOTP with rewards attached\nSame structure as tQ^n"]
+    MDP --&gt; BE["Bellman Equation\nV(s) = E[r + γV(s')]\nRecursive Chapman-Kolmogorov"]
+    J --&gt; PG["Policy Gradient ∇J(θ)\nloss.backward() in PyTorch\nAdjust transition probs\nto maximize J"]
+    BE --&gt; QL["Q-Learning\nConverges by recurrence guarantee\n+ infinite exploration"]</code></pre>
 
   
     

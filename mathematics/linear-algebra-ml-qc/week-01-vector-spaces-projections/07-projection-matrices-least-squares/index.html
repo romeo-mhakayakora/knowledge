@@ -4527,13 +4527,12 @@ Pb = A(A^TA)^{-1}A^T(Ax) = A(A^TA)^{-1}(A^TA)x = Ax = b
 <li><strong>Symmetric:</strong> <span class="arithmatex">\((I-P)^T = I^T - P^T = I - P\)</span>.</li>
 <li><strong>Idempotent:</strong> <span class="arithmatex">\((I-P)^2 = I - 2P + P^2 = I - 2P + P = I-P\)</span> (using <span class="arithmatex">\(P^2=P\)</span> from note 06).</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>flowchart LR
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    B[&quot;b ∈ ℝᵐ&quot;] --&gt; P1[&quot;P b&lt;br/&gt;(in column space)&quot;]
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    B --&gt; P2[&quot;(I−P) b&lt;br/&gt;(in left null space)&quot;]
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    P1 -. &quot;⊥&quot; .- P2
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    P1 --&gt; SUM[&quot;Pb + (I−P)b = b&quot;]
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    P2 --&gt; SUM
-</code></pre></div>
+<pre class="mermaid"><code>flowchart LR
+    B["b ∈ ℝᵐ"] --&gt; P1["P b&lt;br/&gt;(in column space)"]
+    B --&gt; P2["(I−P) b&lt;br/&gt;(in left null space)"]
+    P1 -. "⊥" .- P2
+    P1 --&gt; SUM["Pb + (I−P)b = b"]
+    P2 --&gt; SUM</code></pre>
 <hr />
 <h2 id="2-finishing-the-line-fitting-example">2. Finishing the line-fitting example<a class="headerlink" href="#2-finishing-the-line-fitting-example" title="Permanent link">&para;</a></h2>
 <p>Note 06 set up — but didn't solve — fitting a line <span class="arithmatex">\(y = C + Dt\)</span> through three points: <span class="arithmatex">\((1,2)\)</span>, <span class="arithmatex">\((2,3)\)</span>, <span class="arithmatex">\((3,5)\)</span>. The unsolvable system was <span class="arithmatex">\(Ax=b\)</span> with</p>
