@@ -25,7 +25,7 @@
     
     
       
-        <title>Markov Chains — Foundations - Knowledge</title>
+        <title>Markov Property and Transition Matrix - Knowledge</title>
       
     
     
@@ -61,14 +61,14 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Markov Chains — Foundations - Knowledge" />
+<meta property="og:title" content="Markov Property and Transition Matrix - Knowledge" />
 <meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/12-markov-chains/11.1-Markov-Property.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/12-markov-chains/11.1-Markov-Property/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Markov Chains — Foundations - Knowledge" />
+<meta property="twitter:title" content="Markov Property and Transition Matrix - Knowledge" />
 <meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/12-markov-chains/11.1-Markov-Property.png" />
 </head>
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#markov-chains-foundations" class="md-skip">
+        <a href="#markov-property-and-transition-matrix" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Markov Chains — Foundations
+              Markov Property and Transition Matrix
             
           </span>
         </div>
@@ -3507,7 +3507,7 @@
   <span class="md-ellipsis">
     
   
-    Markov Chains — Foundations
+    Markov Property and Transition Matrix
   
 
     
@@ -3525,7 +3525,7 @@
   <span class="md-ellipsis">
     
   
-    Markov Chains — Foundations
+    Markov Property and Transition Matrix
   
 
     
@@ -4543,649 +4543,746 @@
   
 
 
-<h1 id="markov-chains-foundations">Markov Chains — Foundations<a class="headerlink" href="#markov-chains-foundations" title="Permanent link">&para;</a></h1>
-<blockquote>
-<p><em>Introduction to Probability</em> — Blitzstein &amp; Hwang | Chapter 11</p>
-</blockquote>
-<hr />
+<h1 id="markov-property-and-transition-matrix">Markov Property and Transition Matrix<a class="headerlink" href="#markov-property-and-transition-matrix" title="Permanent link">&para;</a></h1>
 <h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="#what-is-a-markov-chain">What Is a Markov Chain?</a></li>
-<li><a href="#why-markov-chains-matter--the-memory-problem">Why Markov Chains Matter — The Memory Problem</a></li>
+<li><a href="#why-markov-chains-matter">Why Markov Chains Matter</a></li>
 <li><a href="#state-space">State Space</a></li>
-<li><a href="#why-the-state-space-must-be-defined">Why the State Space Must Be Defined</a></li>
-<li><a href="#what-changes-for-infinite-state-spaces">What Changes for Infinite State Spaces</a></li>
 <li><a href="#time-homogeneous-markov-chains">Time-Homogeneous Markov Chains</a></li>
-<li><a href="#why-this-assumption-exists">Why This Assumption Exists</a></li>
-<li><a href="#what-breaks-without-it--concrete-example">What Breaks Without It — Concrete Example</a></li>
-<li><a href="#the-markov-property--formal-definition">The Markov Property — Formal Definition</a></li>
-<li><a href="#reading-every-symbol-in-plain-english">Reading Every Symbol in Plain English</a></li>
-<li><a href="#why-this-definition-and-not-another">Why This Definition and Not Another</a></li>
-<li><a href="#what-breaks-without-the-markov-property">What Breaks Without the Markov Property</a></li>
-<li><a href="#how-to-recover-the-markov-property-when-it-fails">How to Recover the Markov Property When It Fails</a></li>
-<li><a href="#the-dependency-chain--how-everything-flows-from-the-markov-property">The Dependency Chain — How Everything Flows from the Markov Property</a></li>
+<li><a href="#the-markov-property">The Markov Property</a></li>
 <li><a href="#the-transition-matrix-q">The Transition Matrix Q</a></li>
-<li><a href="#why-every-row-must-sum-to-1">Why Every Row Must Sum to 1</a></li>
-<li><a href="#what-breaks-if-rows-do-not-sum-to-1">What Breaks If Rows Do Not Sum to 1</a></li>
 <li><a href="#how-to-read-q-in-plain-english">How to Read Q in Plain English</a></li>
-<li><a href="#notation-warning--q-versus-p">Notation Warning — Q Versus P</a></li>
-<li><a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Q^n</a></li>
-<li><a href="#notation-warning--superscripts">Notation Warning — Superscripts</a></li>
-<li><a href="#theorem--entries-of-qn-are-n-step-transition-probabilities">Theorem — Entries of Q^n Are n-Step Transition Probabilities</a></li>
-<li><a href="#what-breaks-without-the-markov-property-in-this-proof">What Breaks Without the Markov Property in This Proof</a></li>
-<li><a href="#what-breaks-without-time-homogeneity-in-this-proof">What Breaks Without Time-Homogeneity in This Proof</a></li>
+<li><a href="#the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn</a></li>
+<li><a href="#theorem-entries-of-qn-are-n-step-transition-probabilities">Theorem: Entries of Qn Are n-Step Transition Probabilities</a></li>
 <li><a href="#the-chapman-kolmogorov-equation">The Chapman-Kolmogorov Equation</a></li>
-<li><a href="#statement-and-both-forms">Statement and Both Forms</a></li>
-<li><a href="#why-it-is-true--the-and-and-or-rules">Why It Is True — The AND and OR Rules</a></li>
-<li><a href="#full-proof-with-every-step-justified">Full Proof with Every Step Justified</a></li>
-<li><a href="#why-time-homogeneity-appears-in-the-proof">Why Time-Homogeneity Appears in the Proof</a></li>
+<li><a href="#why-we-multiply-the-and-rule">Why We Multiply (The AND Rule)</a></li>
+<li><a href="#why-we-sum-the-or-rule">Why We Sum (The OR Rule)</a></li>
 <li><a href="#the-linear-algebra-connection">The Linear Algebra Connection</a></li>
-<li><a href="#worked-example--computing-q-and-all-2-step-probabilities">Worked Example — Computing Q² and All 2-Step Probabilities</a></li>
-<li><a href="#full-entry-by-entry-calculation">Full Entry-by-Entry Calculation</a></li>
-<li><a href="#path-analysis--scenario-a-start-from-state-1-reach-state-3">Path Analysis — Scenario A: Start from State 1, Reach State 3</a></li>
-<li><a href="#path-analysis--scenario-b-start-from-state-2-reach-state-3">Path Analysis — Scenario B: Start from State 2, Reach State 3</a></li>
-<li><a href="#common-mistakes-and-conceptual-traps">Common Mistakes and Conceptual Traps</a></li>
+<li><a href="#worked-example-computing-q2-and-2-step-probabilities">Worked Example: Computing Q2 and 2-Step Probabilities</a></li>
+<li><a href="#common-mistakes">Common Mistakes</a></li>
 <li><a href="#looking-ahead">Looking Ahead</a></li>
 </ul>
-<hr />
 <h1 id="what-is-a-markov-chain">What Is a Markov Chain?<a class="headerlink" href="#what-is-a-markov-chain" title="Permanent link">&para;</a></h1>
-<p>A <strong>Markov chain</strong> is a sequence of random variables</p>
-<div class="arithmatex">\[X_0, X_1, X_2, X_3, \ldots\]</div>
-<p>taking values in a state space <span class="arithmatex">\(S\)</span>, whose future evolution depends only on the present state — never on the history of how the present state was reached. Successive random variables are generally <strong>dependent</strong>, but the defining feature is not the dependence itself. It is the precise structure of that dependence: only the current state matters for predicting the next.</p>
-<p>This is the <strong>Markov property</strong>, stated informally as:</p>
-<blockquote>
-<p><strong>The future is conditionally independent of the past, given the present.</strong></p>
-</blockquote>
-<p>Think of a Markov chain as a system with <strong>absolute amnesia</strong>. No matter what journey the chain took to reach its current state, only the current state determines what happens next. The path is erased the moment you arrive.</p>
-<p><strong>A concrete analogy — the amnesiac chess player:</strong>
-Imagine a chess player who can see the current board position perfectly but cannot remember any previous moves. Their strategy depends only on the board as it currently stands — not on the sequence of moves that produced it. If this player's strategy is a deterministic function of the current board, their game evolves as a Markov chain. The history of moves is irrelevant; the present position is everything.</p>
-<p><strong>Physical example — the Coupon Collector:</strong>
-You are collecting toys from a fast-food restaurant. Your state is the count of distinct toys you currently own. If you are in State 4 (owning 4 unique toys), your probability of getting a new toy on the next meal is exactly <span class="arithmatex">\(\frac{6}{10}\)</span>, regardless of whether you reached State 4 in 4 meals (perfect luck) or 500 meals (terrible luck). The count right now is all that matters.</p>
-<p><strong>The memory structure of a general process versus a Markov chain:</strong></p>
-<p>A general dependent process remembers everything:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>X_0 --&gt; X_1 --&gt; X_2 --&gt; ... --&gt; X_n --&gt; X_{n+1}
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> |       |       |               |
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> |       |       |               |
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a> +-------+-------+---... --------+---&gt; (X_{n+1} depends on ALL prior states)
+<p>A <strong>Markov chain</strong> is a sequence of random variables
+$$
+X_0, X_1, X_2, X_3, \ldots
+$$
+whose future evolution depends only on the present state.</p>
+<p>The key point is not that there is no dependence. There usually is dependence. The key point is that the dependence is organized so that once the present state is known, older history gives no extra information for predicting the next step.</p>
+<p>Think of the chain as having memory only of where it is right now. It does not remember how it got there.</p>
+<p>A useful visual is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>General process:
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>X_0 -&gt; X_1 -&gt; X_2 -&gt; ... -&gt; X_n -&gt; X_{n+1}
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>|      |      |            |      |
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>v      v      v            v      v
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>(history can matter)
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>Markov chain:
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>X_0 -&gt; X_1 -&gt; ... -&gt; X_{n-1} ~~X_n~~~~&gt; X_{n+1}
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                                |
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                                v
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                     next step uses only X_n
 </code></pre></div>
-<p>A Markov chain severs every connection except the most recent:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>X_0   X_1   X_2  ...  X_{n-1}    X_n ----&gt; X_{n+1}
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>                                   |
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>                          (Only this arrow survives.
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>                           Everything before X_n is cut.)
-</code></pre></div>
-<p>The double cut represents the Markov property: conditioned on <span class="arithmatex">\(X_n\)</span>, the variable <span class="arithmatex">\(X_{n+1}\)</span> is independent of <span class="arithmatex">\(X_0, X_1, \ldots, X_{n-1}\)</span>.</p>
-<blockquote>
-<p><strong>Warning:</strong> If a system requires you to look at its history to predict its next move, it is <strong>not</strong> a Markov chain. A weather model where tomorrow's rain probability depends on both today's and yesterday's weather is not Markov in the single-day state space. We will see below how to recover the Markov property by expanding the state space.</p>
-</blockquote>
-<hr />
-<h1 id="why-markov-chains-matter-the-memory-problem">Why Markov Chains Matter — The Memory Problem<a class="headerlink" href="#why-markov-chains-matter-the-memory-problem" title="Permanent link">&para;</a></h1>
-<p>Many real systems evolve through time: weather, search engines, communication networks, population models, queueing systems, reinforcement learning environments. A central challenge in modeling these systems is that historical information accumulates without bound.</p>
-<p>After:
-- 10 steps, there are 10 previous states to remember
-- 100 steps, there are 100 previous states
-- <span class="arithmatex">\(n\)</span> steps, there are <span class="arithmatex">\(n\)</span> previous states</p>
-<p><strong>The computational explosion without the Markov property:</strong></p>
-<p>Suppose you want to compute <span class="arithmatex">\(P(X_{n+1} = j \mid X_0 = i_0, X_1 = i_1, \ldots, X_n = i_n)\)</span> without the Markov property. This conditional probability is a function of the entire vector <span class="arithmatex">\((i_0, i_1, \ldots, i_n)\)</span>. If the state space has <span class="arithmatex">\(M\)</span> states, there are <span class="arithmatex">\(M^{n+1}\)</span> possible histories. To store a complete probability table for every possible history and every possible next state requires <span class="arithmatex">\(M^{n+1} \times M\)</span> entries — a table of size <span class="arithmatex">\(M^{n+2}\)</span>, which grows exponentially with time.</p>
-<p><strong>The compression the Markov property provides:</strong></p>
-<p>With the Markov property, the probability of the next state depends only on <span class="arithmatex">\(X_n = i_n\)</span>, not on the full history. The complete description of transition behavior fits in a single <span class="arithmatex">\(M \times M\)</span> matrix <span class="arithmatex">\(Q\)</span>, regardless of how many steps have passed.</p>
+<h2 id="scouting-report">Scouting Report<a class="headerlink" href="#scouting-report" title="Permanent link">&para;</a></h2>
+<p>What to look for: a process indexed by time where the next step is determined by a compact current state.</p>
+<p>Why you care: this is the structural condition that makes transition matrices and matrix powers possible.</p>
+<h2 id="why-this-is-defined-this-way">Why This Is Defined This Way<a class="headerlink" href="#why-this-is-defined-this-way" title="Permanent link">&para;</a></h2>
+<p>The definition is designed so that the “state” contains exactly the information needed to predict the next move. If the present state were not enough, then the next-step rule would have to depend on some longer history, and the process would no longer be captured by one-step transition probabilities alone.</p>
+<p>This is the compression principle behind Markov chains: a full path is reduced to a single current state.</p>
+<h2 id="what-would-break-without-this-property">What Would Break Without This Property?<a class="headerlink" href="#what-would-break-without-this-property" title="Permanent link">&para;</a></h2>
+<p>If the next-step probability depends on older states too, then the process is not Markov in the current state space. For example, if tomorrow’s weather depends on today and yesterday, then today alone is not enough information. The state would have to be enlarged, perhaps to pairs like <span class="arithmatex">\((X_{n-1}, X_n)\)</span>.</p>
+<p>Without the Markov property, there is no clean one-step matrix that captures the dynamics.</p>
+<h2 id="phenomenon-metadata">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Without Markov property</th>
-<th>With Markov property</th>
+<th>Element</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Store all <span class="arithmatex">\(n\)</span> past states</td>
-<td>Store current state only</td>
+<td>Structural Signature</td>
+<td>The next move depends only on the current state</td>
 </tr>
 <tr>
-<td>Memory grows: <span class="arithmatex">\(O(n)\)</span> states</td>
-<td>Memory constant: <span class="arithmatex">\(O(1)\)</span> state</td>
+<td>Core Invariant</td>
+<td>The current state is sufficient for one-step prediction</td>
 </tr>
 <tr>
-<td>Prediction table: <span class="arithmatex">\(M^{n+2}\)</span> entries</td>
-<td>Prediction table: <span class="arithmatex">\(M^2\)</span> entries (fixed)</td>
+<td>Compression Handle</td>
+<td>“The past is folded into the present”</td>
 </tr>
 <tr>
-<td>No matrix power shortcut</td>
-<td><span class="arithmatex">\(n\)</span>-step probabilities: compute <span class="arithmatex">\(Q^n\)</span></td>
+<td>Boundary / Failure Mode</td>
+<td>If older history changes the next-step law, the state is too small</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>See the Transition Matrix Q, The n-Step Transition Matrix Qn, and the Chapman-Kolmogorov Equation blocks</td>
 </tr>
 </tbody>
 </table>
-<p><strong>A numerical illustration:</strong>
-For <span class="arithmatex">\(M = 10\)</span> states over <span class="arithmatex">\(n = 1{,}000{,}000\)</span> steps: a non-Markov model might require distinguishing among <span class="arithmatex">\(10^{1{,}000{,}000}\)</span> possible histories, a number incomprehensibly larger than the number of atoms in the observable universe. A Markov model tracks only 10 possible current states.</p>
-<blockquote>
-<p><strong>PageRank</strong> — the algorithm that powered the original Google search engine — is literally a Markov chain. The internet is modeled as a Markov chain where states are web pages and transitions represent the probability of clicking a link. The stationary distribution of this chain gives the "importance" of each page. Without the Markov structure, this computation would be impossible.</p>
-</blockquote>
-<hr />
+<h1 id="why-markov-chains-matter">Why Markov Chains Matter<a class="headerlink" href="#why-markov-chains-matter" title="Permanent link">&para;</a></h1>
+<p>Many systems evolve over time: weather, routing, queues, populations, and reinforcement learning environments.</p>
+<p>The challenge is that history grows forever. If we had to condition on the entire past, then the number of possible histories would expand rapidly with time. That makes prediction and computation unwieldy.</p>
+<p>The Markov property solves this by saying that the current state already contains everything relevant about the past.</p>
+<p><strong>Intuition:</strong> instead of storing a whole trajectory, we store one state.</p>
+<h2 id="why-this-matters-for-computation">Why This Matters for Computation<a class="headerlink" href="#why-this-matters-for-computation" title="Permanent link">&para;</a></h2>
+<p>If the state space has <span class="arithmatex">\(M\)</span> states, then a history of length <span class="arithmatex">\(n+1\)</span> has <span class="arithmatex">\(M^{n+1}\)</span> possible sequences. That is enormous for large <span class="arithmatex">\(n\)</span>.</p>
+<p>With the Markov property, we only need to track the <span class="arithmatex">\(M\)</span> current states. That is the difference between a growing history table and a fixed-size transition matrix.</p>
+<h2 id="what-would-break-without-it">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it" title="Permanent link">&para;</a></h2>
+<p>Without the Markov property, the conditional probability of the next step could depend on the full history, so there would be no single transition matrix indexed only by current state and next state.</p>
+<h2 id="phenomenon-metadata_1">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>History grows but prediction still depends only on the present</td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>The current state is a sufficient statistic for the future</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>“One state replaces a whole trajectory”</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If memory of the past improves prediction, Markov fails</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>Explains why matrices replace history tables</td>
+</tr>
+</tbody>
+</table>
 <h1 id="state-space">State Space<a class="headerlink" href="#state-space" title="Permanent link">&para;</a></h1>
-<p>The <strong>state space</strong> <span class="arithmatex">\(S\)</span> is the set of all possible values the chain can take at any time step. Every <span class="arithmatex">\(X_n\)</span> must belong to <span class="arithmatex">\(S\)</span>.</p>
-<p><strong>Examples:</strong></p>
-<ul>
-<li><span class="arithmatex">\(S = \{1, 2, 3\}\)</span>: a chain with three numerical states</li>
-<li><span class="arithmatex">\(S = \{\text{Sunny}, \text{Cloudy}, \text{Rainy}\}\)</span>: a weather model</li>
-<li><span class="arithmatex">\(S = \{0, 1, 2, \ldots, 10\}\)</span>: the Coupon Collector with <span class="arithmatex">\(C = 10\)</span> toys</li>
-<li><span class="arithmatex">\(S = \{0, 1, 2, \ldots\}\)</span>: an M/M/1 queue where state = number of customers</li>
-</ul>
-<h2 id="why-the-state-space-must-be-defined">Why the State Space Must Be Defined<a class="headerlink" href="#why-the-state-space-must-be-defined" title="Permanent link">&para;</a></h2>
-<p>Without explicitly specifying <span class="arithmatex">\(S\)</span>, the transition matrix <span class="arithmatex">\(Q\)</span> would have undefined dimensions. If you try to write <span class="arithmatex">\(q_{ij} = P(X_{n+1} = j \mid X_n = i)\)</span>, you have no way to enumerate the valid indices <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>. You could not construct the matrix because you would not know its size. If <span class="arithmatex">\(|S| = M\)</span>, then <span class="arithmatex">\(Q\)</span> is an <span class="arithmatex">\(M \times M\)</span> matrix — the state space determines the size of everything downstream.</p>
-<p>The state space is to a Markov chain what the alphabet is to a language: it defines the universe of symbols from which the process can draw. Without specifying that universe, no transition probability, no <span class="arithmatex">\(Q^n\)</span>, no stationary distribution can be written down.</p>
-<h2 id="what-changes-for-infinite-state-spaces">What Changes for Infinite State Spaces<a class="headerlink" href="#what-changes-for-infinite-state-spaces" title="Permanent link">&para;</a></h2>
-<p><strong>Countably infinite chains</strong> (<span class="arithmatex">\(S = \{0, 1, 2, \ldots\}\)</span> or <span class="arithmatex">\(S = \mathbb{Z}\)</span>) exist and are widely used in queueing theory and random walks. However:</p>
-<ul>
-<li>The transition "matrix" becomes an infinite-dimensional operator, not a finite matrix</li>
-<li>Matrix multiplication requires convergence of infinite series rather than finite sums</li>
-<li>Some finite-state theorems fail: an irreducible finite chain always has all states recurrent, but an irreducible infinite chain can have all states transient (the simple random walk on <span class="arithmatex">\(\mathbb{Z}^d\)</span> for <span class="arithmatex">\(d \geq 3\)</span> is transient — it drifts away and never returns)</li>
-</ul>
-<p><strong>Uncountable state spaces</strong> (e.g., <span class="arithmatex">\(S = \mathbb{R}\)</span>) require measure-theoretic machinery: transition kernels replace transition matrices, integrals replace sums. The matrix-power theory collapses entirely.</p>
-<blockquote>
-<p><strong>The finite state space is what makes <span class="arithmatex">\(Q\)</span> an actual matrix we can raise to powers.</strong> This is the computational engine of everything in this chapter.</p>
-</blockquote>
-<hr />
+<p>The <strong>state space</strong> is the set of all possible states of the chain. We usually denote it by <span class="arithmatex">\(S\)</span>.</p>
+<p>Examples:
+- <span class="arithmatex">\(S=\{1,2,3\}\)</span>
+- <span class="arithmatex">\(S=\{\text{Sunny}, \text{Cloudy}, \text{Rainy}\}\)</span>
+- <span class="arithmatex">\(S=\{0,1,2,\ldots,10\}\)</span></p>
+<p>Every random variable <span class="arithmatex">\(X_n\)</span> takes values in <span class="arithmatex">\(S\)</span>.</p>
+<h2 id="scouting-report_1">Scouting Report<a class="headerlink" href="#scouting-report_1" title="Permanent link">&para;</a></h2>
+<p>What to look for: the complete list of values that the chain can occupy.</p>
+<p>Why you care: the state space determines the row and column labels of the transition matrix.</p>
+<h2 id="why-this-definition-exists">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists" title="Permanent link">&para;</a></h2>
+<p>The state space tells us what values the indices <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> may take in
+$$
+q_{ij}=P(X_{n+1}=j \mid X_n=i).
+$$
+Without a specified state space, the matrix dimensions are undefined.</p>
+<h2 id="what-would-break-without-it_1">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_1" title="Permanent link">&para;</a></h2>
+<p>If <span class="arithmatex">\(S\)</span> were not specified, we would not know how large the transition matrix is, which entries are valid, or how to compute matrix powers consistently.</p>
+<p>For infinite state spaces, the theory changes substantially: the matrix may become infinite-dimensional, and uncountable spaces require kernels and measure theory rather than finite matrices.</p>
+<h2 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>A well-defined set of possible states</td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>Every <span class="arithmatex">\(X_n\)</span> must take values in the state space</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>“The alphabet of the chain”</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If the state space is unspecified, the matrix is undefined</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>Supplies the row and column labels for Q</td>
+</tr>
+</tbody>
+</table>
 <h1 id="time-homogeneous-markov-chains">Time-Homogeneous Markov Chains<a class="headerlink" href="#time-homogeneous-markov-chains" title="Permanent link">&para;</a></h1>
-<p>Throughout these notes, the chain is assumed to be <strong>time-homogeneous</strong>. This means the transition probabilities do not depend on time:</p>
-<div class="arithmatex">\[q_{ij} = P(X_{n+1} = j \mid X_n = i) \quad \text{does not depend on } n\]</div>
-<p>The rules of movement are frozen. Today, tomorrow, and next year, the probability of moving from state <span class="arithmatex">\(i\)</span> to state <span class="arithmatex">\(j\)</span> in one step is always the same <span class="arithmatex">\(q_{ij}\)</span>.</p>
-<h2 id="why-this-assumption-exists">Why This Assumption Exists<a class="headerlink" href="#why-this-assumption-exists" title="Permanent link">&para;</a></h2>
-<p>Without time-homogeneity, each step would have its own transition matrix:</p>
-<div class="arithmatex">\[Q_0, Q_1, Q_2, \ldots, Q_{n-1}\]</div>
-<p>The <span class="arithmatex">\(n\)</span>-step probability of going from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> would require the <strong>product of <span class="arithmatex">\(n\)</span> distinct matrices</strong>:</p>
-<div class="arithmatex">\[P(X_n = j \mid X_0 = i) = (Q_0 Q_1 Q_2 \cdots Q_{n-1})_{ij}\]</div>
-<p>This product cannot be simplified. You must multiply all <span class="arithmatex">\(n\)</span> matrices sequentially, storing each one, with no shortcut. Compare this to the time-homogeneous case: you only store one matrix <span class="arithmatex">\(Q\)</span> and compute <span class="arithmatex">\(Q^n\)</span> by repeated squaring, which takes <span class="arithmatex">\(O(\log n)\)</span> matrix multiplications instead of <span class="arithmatex">\(O(n)\)</span>.</p>
-<p><strong>Concrete computational comparison:</strong>
-To compute the 1{,}000-step probability from <span class="arithmatex">\(Q\)</span>:
-- Time-homogeneous: compute <span class="arithmatex">\(Q^{1000}\)</span> by squaring <span class="arithmatex">\(\approx 10\)</span> times
-- Time-inhomogeneous: multiply <span class="arithmatex">\(Q_0 \cdot Q_1 \cdots Q_{999}\)</span> — 999 sequential multiplications, no shortcut</p>
-<p>The time-homogeneous assumption is not just a mathematical convenience — it is what makes the theory computationally viable.</p>
-<h2 id="what-breaks-without-it-concrete-example">What Breaks Without It — Concrete Example<a class="headerlink" href="#what-breaks-without-it-concrete-example" title="Permanent link">&para;</a></h2>
-<p>Let <span class="arithmatex">\(Q_n = \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix}\)</span> for even <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(Q_n = \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix}\)</span> for odd <span class="arithmatex">\(n\)</span>.</p>
-<p>The 2-step matrix starting at step 0 is:</p>
-<div class="arithmatex">\[Q_0 Q_1 = \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix}\begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix} = \begin{pmatrix} 0.18 &amp; 0.82 \\ 0.82 &amp; 0.18 \end{pmatrix}\]</div>
-<p>The 2-step matrix starting at step 1 is:</p>
-<div class="arithmatex">\[Q_1 Q_2 = \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix}\begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix} = \begin{pmatrix} 0.18 &amp; 0.82 \\ 0.82 &amp; 0.18 \end{pmatrix}\]</div>
-<p>In this particular case the two-step matrices happen to be the same — but this is a coincidence of the symmetric alternation, not a general rule. The key point is that no single "<span class="arithmatex">\(Q^2\)</span>" exists that represents all 2-step transitions regardless of when you start. The notion of "<span class="arithmatex">\(Q^n\)</span> encodes <span class="arithmatex">\(n\)</span>-step probabilities" depends entirely on having one fixed matrix <span class="arithmatex">\(Q\)</span>.</p>
-<hr />
-<h1 id="the-markov-property-formal-definition">The Markov Property — Formal Definition<a class="headerlink" href="#the-markov-property-formal-definition" title="Permanent link">&para;</a></h1>
-<p>For all states <span class="arithmatex">\(i_0, i_1, \ldots, i_{n-1}, i, j\)</span> and all <span class="arithmatex">\(n \geq 0\)</span>:</p>
-<div class="arithmatex">\[\boxed{P(X_{n+1} = j \mid X_n = i,\; X_{n-1} = i_{n-1},\; \ldots,\; X_0 = i_0) = P(X_{n+1} = j \mid X_n = i)}\]</div>
-<h2 id="reading-every-symbol-in-plain-english">Reading Every Symbol in Plain English<a class="headerlink" href="#reading-every-symbol-in-plain-english" title="Permanent link">&para;</a></h2>
+<p>A Markov chain is <strong>time-homogeneous</strong> if the one-step transition probabilities do not depend on time:
+$$
+q_{ij}=P(X_{n+1}=j \mid X_n=i)
+$$
+for every <span class="arithmatex">\(n\)</span>.</p>
+<p>So the same transition rule applies at every step.</p>
+<h2 id="scouting-report_2">Scouting Report<a class="headerlink" href="#scouting-report_2" title="Permanent link">&para;</a></h2>
+<p>What to look for: the same one-step law at every time step.</p>
+<p>Why you care: one fixed matrix <span class="arithmatex">\(Q\)</span> can describe the entire chain only when this property holds.</p>
+<h2 id="why-this-definition-exists_1">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_1" title="Permanent link">&para;</a></h2>
+<p>Time-homogeneity lets us use one matrix for all time steps. If the transition rule changed with time, we would need a different matrix at each step:
+$$
+Q_0, Q_1, Q_2, \ldots
+$$
+and then long-run evolution would be a product of different matrices rather than a power of one matrix.</p>
+<h2 id="what-would-break-without-it_2">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_2" title="Permanent link">&para;</a></h2>
+<p>If the chain is time-inhomogeneous, then <span class="arithmatex">\(Q^n\)</span> no longer describes <span class="arithmatex">\(n\)</span>-step motion. Instead we would need a product like
+$$
+Q_0Q_1Q_2\cdots Q_{n-1}.
+$$
+That destroys the neat matrix-power structure.</p>
+<h2 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Symbol</th>
-<th>Read as</th>
-<th>Plain meaning</th>
+<th>Element</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span class="arithmatex">\(P(\ldots)\)</span></td>
-<td>"The probability that..."</td>
-<td>We are computing a probability</td>
+<td>Structural Signature</td>
+<td>The transition law is constant across time</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(X_{n+1} = j\)</span></td>
-<td>"<span class="arithmatex">\(X\)</span> sub <span class="arithmatex">\(n\)</span> plus one equals <span class="arithmatex">\(j\)</span>"</td>
-<td>The chain is in state <span class="arithmatex">\(j\)</span> one step from now</td>
+<td>Core Invariant</td>
+<td>The same one-step matrix applies at each step</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(\mid\)</span></td>
-<td>"given that"</td>
-<td>Everything to the right is treated as known fact</td>
+<td>Compression Handle</td>
+<td>“Same physics at every time”</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(X_n = i, X_{n-1} = i_{n-1}, \ldots, X_0 = i_0\)</span></td>
-<td>"the entire history"</td>
-<td>Every state the chain has visited, from start to right now</td>
+<td>Boundary / Failure Mode</td>
+<td>If the rule changes with time, powers of one matrix fail</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(X_n = i\)</span> (right side only)</td>
-<td>"only the current state"</td>
-<td>The complete past is discarded; only the present survives</td>
+<td>Phenomenon Web</td>
+<td>Enables Qn, Chapman-Kolmogorov, and stationary distributions</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Full sentence reading:</strong></p>
-<blockquote>
-<p>"The probability of the chain being in state <span class="arithmatex">\(j\)</span> at the next step, given the entire history of states it has ever visited, equals the probability of being in state <span class="arithmatex">\(j\)</span> at the next step given only the current state."</p>
-</blockquote>
-<p><strong>The equation says these are equal.</strong> The left side has the maximum possible information — the entire past. The right side has the minimum necessary information — just the present. Their equality means the extra information on the left contributes nothing.</p>
-<h2 id="why-this-definition-and-not-another">Why This Definition and Not Another<a class="headerlink" href="#why-this-definition-and-not-another" title="Permanent link">&para;</a></h2>
-<p>Without the Markov property, predicting the future requires knowing and storing an ever-growing history. With it, the current state is a <strong>sufficient statistic</strong> for the future — it compresses all relevant past information into a single value.</p>
-<p>This compression is precisely why we can build a transition matrix <span class="arithmatex">\(Q\)</span>. If histories mattered, <span class="arithmatex">\(Q\)</span> would need a row for every possible history, not for every possible current state. The number of histories grows as <span class="arithmatex">\(M^n\)</span> after <span class="arithmatex">\(n\)</span> steps, making the matrix infinite-dimensional in the limit. With the Markov property, we need exactly <span class="arithmatex">\(M\)</span> rows — one per current state — forever.</p>
-<h2 id="what-breaks-without-the-markov-property">What Breaks Without the Markov Property<a class="headerlink" href="#what-breaks-without-the-markov-property" title="Permanent link">&para;</a></h2>
-<p>Consider a weather model where:</p>
-<ul>
-<li>If it rained <strong>both</strong> today and yesterday → tomorrow rains with probability 0.9</li>
-<li>If it rained <strong>only</strong> today → tomorrow rains with probability 0.5</li>
-</ul>
-<p>Then knowing today's weather alone is insufficient. We need:</p>
-<div class="arithmatex">\[P(X_{n+1} \mid X_n, X_{n-1}) \neq P(X_{n+1} \mid X_n)\]</div>
-<p><strong>Mathematically:</strong></p>
-<ul>
-<li>The transition matrix <span class="arithmatex">\(Q\)</span> is insufficient — it records only <span class="arithmatex">\(q_{ij} = P(\text{next} = j \mid \text{current} = i)\)</span>, but the true probability also depends on the previous state</li>
-<li>Matrix powers <span class="arithmatex">\(Q^n\)</span> no longer encode multi-step probabilities because the factorization used in the proof fails:</li>
-</ul>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_n = k, X_0 = i) \neq P(X_{n+1} = j \mid X_n = k)\]</div>
-<p>The probability of the last jump depends on how the chain reached <span class="arithmatex">\(k\)</span>, but <span class="arithmatex">\(Q\)</span> has no way to record this path-dependence</p>
-<ul>
-<li>Chapman-Kolmogorov collapses: the intermediate state <span class="arithmatex">\(k\)</span> is no longer a sufficient summary of everything before it</li>
-</ul>
-<p><strong>Concrete counterexample:</strong></p>
-<p>A 2-state chain where <span class="arithmatex">\(P(X_{n+1} = 2 \mid X_n = 1, X_{n-1} = 1) = 0.1\)</span> but <span class="arithmatex">\(P(X_{n+1} = 2 \mid X_n = 1, X_{n-1} = 2) = 0.9\)</span>.</p>
-<p>The one-step matrix <span class="arithmatex">\(Q\)</span> records a single value <span class="arithmatex">\(q_{12}\)</span>, but the true transition probability from State 1 takes two different values depending on the previous state. Any computation using <span class="arithmatex">\(Q^2\)</span> would use the same <span class="arithmatex">\(q_{12}\)</span> in both paths through State 1, giving the wrong answer. The matrix power method breaks.</p>
-<h2 id="how-to-recover-the-markov-property-when-it-fails">How to Recover the Markov Property When It Fails<a class="headerlink" href="#how-to-recover-the-markov-property-when-it-fails" title="Permanent link">&para;</a></h2>
-<p>If the true dynamics require remembering the last <span class="arithmatex">\(k\)</span> states, <strong>expand the state space</strong> to include tuples of <span class="arithmatex">\(k\)</span> consecutive states.</p>
-<p><strong>Example — the weather model above (<span class="arithmatex">\(k = 2\)</span>):</strong></p>
-<p>Instead of <span class="arithmatex">\(S = \{\text{Sunny}, \text{Rainy}\}\)</span> with <span class="arithmatex">\(|S| = 2\)</span>, use:</p>
-<div class="arithmatex">\[S' = \{(\text{S,S}),\; (\text{S,R}),\; (\text{R,S}),\; (\text{R,R})\}\]</div>
-<p>where the pair <span class="arithmatex">\((\text{yesterday}, \text{today})\)</span> is the new state. Now:</p>
-<div class="arithmatex">\[P(\text{tomorrow} = \text{R} \mid \text{today} = (\text{R,R})) = 0.9$$
-$$P(\text{tomorrow} = \text{R} \mid \text{today} = (\text{S,R})) = 0.5\]</div>
-<p>The Markov property holds for the new expanded chain, but the transition matrix is now <span class="arithmatex">\(4 \times 4\)</span> instead of <span class="arithmatex">\(2 \times 2\)</span>. The trade-off is a larger state space in exchange for recovering tractability.</p>
-<h2 id="the-dependency-chain-how-everything-flows-from-the-markov-property">The Dependency Chain — How Everything Flows from the Markov Property<a class="headerlink" href="#the-dependency-chain-how-everything-flows-from-the-markov-property" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Markov Property
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>       |
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>       v (justifies one-step dependence only — past is irrelevant given present)
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>       |
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>Transition Matrix Q (one row per current state, not per history)
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>       |
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>       v (matrix multiplication = summing over intermediate states)
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>       |
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>Matrix Powers Q^n (encode all n-step transition probabilities)
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>       |
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>       v (partition at intermediate time m)
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>       |
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>Chapman-Kolmogorov (Q^{m+n} = Q^m · Q^n — algebraic = probabilistic)
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>       |
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>       v (let n → ∞)
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>       |
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>Long-Run Analysis (stationary distributions, convergence theorems)
-</code></pre></div>
-<p><strong>Every result downstream depends on the Markov property at the top.</strong> Remove it, and the entire chain of reasoning collapses at the first step.</p>
-<hr />
+<h1 id="the-markov-property">The Markov Property<a class="headerlink" href="#the-markov-property" title="Permanent link">&para;</a></h1>
+<p>For all states <span class="arithmatex">\(i_0,i_1,\ldots,i_{n-1},i,j\)</span>, the Markov property states
+$$
+P(X_{n+1}=j \mid X_n=i, X_{n-1}=i_{n-1}, \ldots, X_0=i_0)
+=
+P(X_{n+1}=j \mid X_n=i).
+$$</p>
+<h2 id="scouting-report_3">Scouting Report<a class="headerlink" href="#scouting-report_3" title="Permanent link">&para;</a></h2>
+<p>What to look for: a conditional probability where the whole history appears on one side and only the present appears on the other.</p>
+<p>Why you care: this is the identity that allows multi-step probabilities to be reduced to matrix multiplication.</p>
+<h2 id="intuition-before-the-proof">Intuition Before the Proof<a class="headerlink" href="#intuition-before-the-proof" title="Permanent link">&para;</a></h2>
+<p>Once the current state is known, the old path that led there becomes irrelevant for the next move. The current state is the whole summary of the past that matters.</p>
+<h2 id="why-this-definition-exists_2">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_2" title="Permanent link">&para;</a></h2>
+<p>If the future depended on the entire past, then the process could not be represented by a transition matrix indexed only by current and next states. The Markov property is exactly what allows the future to be summarized by the present.</p>
+<h2 id="what-would-break-without-it_3">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_3" title="Permanent link">&para;</a></h2>
+<p>If the next-step probability still depended on earlier states, then the factorization used in multi-step proofs would not collapse to a single matrix product. The chain would need a larger state space or a more complicated model.</p>
+<h2 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>Conditioning on the full past equals conditioning on the present alone</td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>Older history adds no predictive power once the present is fixed</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>“History collapses to the current state”</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If the past changes the next-step law, the process is not Markov</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>The engine behind Qn and Chapman-Kolmogorov</td>
+</tr>
+</tbody>
+</table>
 <h1 id="the-transition-matrix-q">The Transition Matrix Q<a class="headerlink" href="#the-transition-matrix-q" title="Permanent link">&para;</a></h1>
-<p>The <strong>transition matrix</strong> <span class="arithmatex">\(Q = (q_{ij})\)</span> collects all one-step transition probabilities into a single <span class="arithmatex">\(M \times M\)</span> array:</p>
-<div class="arithmatex">\[q_{ij} = P(X_{n+1} = j \mid X_n = i)\]</div>
-<p><strong>Rows</strong> correspond to the current state. <strong>Columns</strong> correspond to the next state. The <span class="arithmatex">\((i,j)\)</span> entry is the probability of moving from state <span class="arithmatex">\(i\)</span> to state <span class="arithmatex">\(j\)</span> in one step.</p>
-<p><strong>Example — 3-state system:</strong></p>
-<div class="arithmatex">\[Q = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}\]</div>
-<pre class="mermaid"><code>graph LR
-    S1((State 1)) -- "0.5" --&gt; S1
-    S1 -- "0.4" --&gt; S2((State 2))
-    S1 -- "0.1" --&gt; S3((State 3))
-    S2 -- "0.3" --&gt; S1
-    S2 -- "0.2" --&gt; S2
-    S2 -- "0.5" --&gt; S3
-    S3 -- "0.2" --&gt; S1
-    S3 -- "0.3" --&gt; S2
-    S3 -- "0.5" --&gt; S3</code></pre>
-<p>Row 1 describes all possible moves from State 1. Row 2 from State 2. Row 3 from State 3. Each row is a complete conditional probability distribution — it covers all possible destinations from that state.</p>
-<h2 id="why-every-row-must-sum-to-1">Why Every Row Must Sum to 1<a class="headerlink" href="#why-every-row-must-sum-to-1" title="Permanent link">&para;</a></h2>
-<p>Fix any state <span class="arithmatex">\(i\)</span>. After exactly one step, the chain must occupy <em>some</em> state. The events <span class="arithmatex">\(\{X_{n+1} = 1\}, \{X_{n+1} = 2\}, \ldots, \{X_{n+1} = M\}\)</span> are:</p>
-<ul>
-<li><strong>Mutually exclusive:</strong> the chain cannot occupy two states simultaneously</li>
-<li><strong>Collectively exhaustive:</strong> the chain must occupy some state — it cannot disappear</li>
-</ul>
-<p>Because they form a partition of the sample space, their conditional probabilities must sum to 1:</p>
-<div class="arithmatex">\[\sum_{j=1}^{M} q_{ij} = \sum_{j=1}^{M} P(X_{n+1} = j \mid X_n = i) = 1\]</div>
-<p>This is simply the axiom that a probability distribution sums to 1, applied to the conditional distribution <span class="arithmatex">\(P(X_{n+1} = \cdot \mid X_n = i)\)</span>.</p>
-<p>A matrix with non-negative entries whose rows each sum to 1 is called a <strong>stochastic matrix</strong> (or row-stochastic matrix). This property is preserved under matrix multiplication: if <span class="arithmatex">\(Q\)</span> is stochastic, then <span class="arithmatex">\(Q^n\)</span> is stochastic for all <span class="arithmatex">\(n \geq 1\)</span>.</p>
-<h2 id="what-breaks-if-rows-do-not-sum-to-1">What Breaks If Rows Do Not Sum to 1<a class="headerlink" href="#what-breaks-if-rows-do-not-sum-to-1" title="Permanent link">&para;</a></h2>
-<p><strong>Case 1 — Row sums to 0.8:</strong></p>
-<p>Twenty percent of probability mass has vanished. The chain has a 20% chance of entering an undefined "void." When we compute <span class="arithmatex">\(Q^n\)</span>, this missing mass compounds: row sums become <span class="arithmatex">\((0.8)^n \to 0\)</span> as <span class="arithmatex">\(n \to \infty\)</span>. The entries of <span class="arithmatex">\(Q^n\)</span> no longer sum to 1, violating the probability axioms.</p>
-<p><strong>Case 2 — Row sums to 1.3:</strong></p>
-<p>We have assigned 130% probability to the next state. This is impossible under standard probability axioms — no event can have probability greater than 1. If we naively compute <span class="arithmatex">\(Q^n\)</span>, entries in that row explode: <span class="arithmatex">\((1.3)^n \to \infty\)</span>. The matrix no longer represents any stochastic process.</p>
-<p><strong>Case 3 — Different rows sum to different values:</strong></p>
-<p>The semigroup property <span class="arithmatex">\(Q^{m+n} = Q^m Q^n\)</span> still holds algebraically, but the probabilistic interpretation is destroyed. Some states gain probability mass from nothing; others lose it. We can no longer read rows as probability distributions.</p>
-<p>The stochastic condition is what makes <span class="arithmatex">\(Q\)</span> a <strong>probability operator</strong> rather than an arbitrary matrix.</p>
-<h2 id="how-to-read-q-in-plain-english">How to Read Q in Plain English<a class="headerlink" href="#how-to-read-q-in-plain-english" title="Permanent link">&para;</a></h2>
-<p>The <span class="arithmatex">\(i\)</span>-th row of <span class="arithmatex">\(Q\)</span> is the conditional PMF of <span class="arithmatex">\(X_1\)</span> given <span class="arithmatex">\(X_0 = i\)</span>. More generally, the <span class="arithmatex">\(i\)</span>-th row of <span class="arithmatex">\(Q^n\)</span> is the conditional PMF of <span class="arithmatex">\(X_n\)</span> given <span class="arithmatex">\(X_0 = i\)</span>.</p>
-<p><strong>Example:</strong> If the chain is in State 3, only Row 3 is relevant: <span class="arithmatex">\([0.2, 0.3, 0.5]\)</span>.</p>
-<ul>
-<li>20% chance of moving to State 1</li>
-<li>30% chance of moving to State 2</li>
-<li>50% chance of remaining in State 3</li>
-</ul>
-<p>Rows 1 and 2 describe alternate timelines where the chain started elsewhere — they are completely irrelevant for a prediction conditioned on being in State 3.</p>
-<blockquote>
-<p>You compute the entire matrix <span class="arithmatex">\(Q^n\)</span> to build the engine. You extract only the one row corresponding to your starting state to run a specific prediction.</p>
-</blockquote>
-<h2 id="notation-warning-q-versus-p">Notation Warning — Q Versus P<a class="headerlink" href="#notation-warning-q-versus-p" title="Permanent link">&para;</a></h2>
-<p>The symbol <span class="arithmatex">\(Q\)</span> is standard in this text for the transition matrix. Some other texts use <span class="arithmatex">\(P\)</span>, but here <span class="arithmatex">\(P\)</span> is reserved for probability, so <span class="arithmatex">\(Q\)</span> avoids ambiguity. When you encounter <span class="arithmatex">\(P_{ij}\)</span> in another text, it means exactly <span class="arithmatex">\(q_{ij}\)</span> here — the probability of moving from state <span class="arithmatex">\(i\)</span> to state <span class="arithmatex">\(j\)</span> in one step. The letter differs; the definition is identical.</p>
-<p><strong>Row-vector versus column-vector convention:</strong> We write distributions as row vectors and multiply on the right: <span class="arithmatex">\(p^{(n+1)} = p^{(n)} Q\)</span>. Some linear algebra texts use column vectors and multiply on the left: <span class="arithmatex">\(p_{\text{col}}^{(n+1)} = Q^T p_{\text{col}}^{(n)}\)</span>. Both conventions give identical numerical results. Do not mix them in the same calculation.</p>
-<hr />
-<h1 id="the-n-step-transition-matrix-qn">The n-Step Transition Matrix Q^n<a class="headerlink" href="#the-n-step-transition-matrix-qn" title="Permanent link">&para;</a></h1>
-<p>The matrix <span class="arithmatex">\(Q^n\)</span> contains all <span class="arithmatex">\(n\)</span>-step transition probabilities. Its <span class="arithmatex">\((i,j)\)</span> entry is:</p>
-<div class="arithmatex">\[q_{ij}^{(n)} = P(X_n = j \mid X_0 = i)\]</div>
-<p>The <span class="arithmatex">\(i\)</span>-th row gives the complete conditional probability distribution after exactly <span class="arithmatex">\(n\)</span> steps, starting from state <span class="arithmatex">\(i\)</span>.</p>
-<p>Think of <span class="arithmatex">\(Q^1\)</span> as one step into the future, <span class="arithmatex">\(Q^2\)</span> as two steps, <span class="arithmatex">\(Q^n\)</span> as <span class="arithmatex">\(n\)</span> steps. But this interpretation is not just a definition — it requires proof. We cannot simply assert that matrix powers encode multi-step probabilities. The theorem below establishes this rigorously.</p>
-<h2 id="notation-warning-superscripts">Notation Warning — Superscripts<a class="headerlink" href="#notation-warning-superscripts" title="Permanent link">&para;</a></h2>
-<p>The notation <span class="arithmatex">\(q_{ij}^{(n)}\)</span> denotes the <span class="arithmatex">\((i,j)\)</span> entry of the matrix <span class="arithmatex">\(Q^n\)</span> — the <span class="arithmatex">\(n\)</span>-step transition probability from state <span class="arithmatex">\(i\)</span> to state <span class="arithmatex">\(j\)</span>. The parentheses around <span class="arithmatex">\((n)\)</span> are essential: they distinguish this from <span class="arithmatex">\((q_{ij})^n\)</span>, which would mean the scalar <span class="arithmatex">\(q_{ij}\)</span> raised to the <span class="arithmatex">\(n\)</span>-th power.</p>
-<p>These are completely different objects. For example, in our 3-state chain above, <span class="arithmatex">\(q_{12} = 0.4\)</span>, so:</p>
-<ul>
-<li><span class="arithmatex">\((q_{12})^2 = (0.4)^2 = 0.16\)</span> — squaring the scalar</li>
-<li><span class="arithmatex">\(q_{12}^{(2)} = (Q^2)_{12}\)</span> — computed by a dot product, equals 0.31 (calculated in the worked example below)</li>
-</ul>
-<p><span class="arithmatex">\(0.16 \neq 0.31\)</span>. Never conflate these.</p>
-<h2 id="theorem-entries-of-qn-are-n-step-transition-probabilities">Theorem — Entries of Q^n Are n-Step Transition Probabilities<a class="headerlink" href="#theorem-entries-of-qn-are-n-step-transition-probabilities" title="Permanent link">&para;</a></h2>
-<p><strong>Statement:</strong> For every <span class="arithmatex">\(n \geq 1\)</span> and all states <span class="arithmatex">\(i, j\)</span>:</p>
-<div class="arithmatex">\[(Q^n)_{ij} = P(X_n = j \mid X_0 = i)\]</div>
-<p><strong>Why this theorem matters:</strong> It is the bridge between linear algebra (matrix powers) and probability (multi-step transition probabilities). Without it, <span class="arithmatex">\(Q^n\)</span> is just a matrix computation with no probabilistic content. With it, every tool of linear algebra — eigenvalues, diagonalization, spectral decomposition — becomes a tool for computing probabilities.</p>
-<p><strong>Proof by induction on <span class="arithmatex">\(n\)</span>:</strong></p>
-<p><strong>Base case (<span class="arithmatex">\(n = 1\)</span>):</strong></p>
-<p><span class="arithmatex">\((Q^1)_{ij} = Q_{ij} = q_{ij} = P(X_1 = j \mid X_0 = i)\)</span>.</p>
-<p>This holds by definition of the transition matrix. Nothing needs to be proved; it is simply what <span class="arithmatex">\(Q\)</span> means.</p>
-<p><strong>Inductive step:</strong></p>
-<p><strong>Inductive hypothesis:</strong> Assume <span class="arithmatex">\((Q^n)_{ij} = P(X_n = j \mid X_0 = i)\)</span> holds for all states <span class="arithmatex">\(i, j\)</span>.</p>
-<p><strong>Goal:</strong> Prove <span class="arithmatex">\((Q^{n+1})_{ij} = P(X_{n+1} = j \mid X_0 = i)\)</span>.</p>
-<p><strong>Step 1 — Matrix multiplication definition:</strong></p>
-<div class="arithmatex">\[(Q^{n+1})_{ij} = (Q^n \cdot Q)_{ij} = \sum_{k=1}^{M} (Q^n)_{ik} \cdot Q_{kj}\]</div>
-<p>This is simply the definition of matrix multiplication. Nothing probabilistic yet.</p>
-<p><strong>Step 2 — Apply the Law of Total Probability, conditioning on <span class="arithmatex">\(X_n\)</span>:</strong></p>
-<p>At time <span class="arithmatex">\(n\)</span>, the chain occupies exactly one state. The events <span class="arithmatex">\(\{X_n = 1\}, \{X_n = 2\}, \ldots, \{X_n = M\}\)</span> are mutually exclusive and collectively exhaustive (they partition the sample space). By the Law of Total Probability:</p>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_0 = i) = \sum_{k=1}^{M} P(X_{n+1} = j,\; X_n = k \mid X_0 = i)\]</div>
-<p><em>Why the Law of Total Probability applies here:</em> The events <span class="arithmatex">\(\{X_n = k\}\)</span> for <span class="arithmatex">\(k = 1, \ldots, M\)</span> form a partition of the sample space conditioned on <span class="arithmatex">\(X_0 = i\)</span>. They are disjoint (the chain is in exactly one state at time <span class="arithmatex">\(n\)</span>) and their union has probability 1 (the chain must be somewhere). Therefore <span class="arithmatex">\(P(A \mid X_0 = i) = \sum_k P(A \cap \{X_n = k\} \mid X_0 = i)\)</span> for any event <span class="arithmatex">\(A\)</span>.</p>
-<p><strong>Step 3 — Apply the multiplication rule for conditional probability:</strong></p>
-<div class="arithmatex">\[P(X_{n+1} = j,\; X_n = k \mid X_0 = i) = P(X_{n+1} = j \mid X_n = k,\; X_0 = i) \cdot P(X_n = k \mid X_0 = i)\]</div>
-<p><em>Why this is valid:</em> The chain rule for conditional probability states <span class="arithmatex">\(P(A \cap B \mid C) = P(A \mid B \cap C) \cdot P(B \mid C)\)</span> whenever <span class="arithmatex">\(P(B \cap C) &gt; 0\)</span>. Apply with <span class="arithmatex">\(A = \{X_{n+1} = j\}\)</span>, <span class="arithmatex">\(B = \{X_n = k\}\)</span>, <span class="arithmatex">\(C = \{X_0 = i\}\)</span>.</p>
-<p><strong>Step 4 — Apply the Markov property:</strong></p>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_n = k,\; X_0 = i) = P(X_{n+1} = j \mid X_n = k)\]</div>
-<p><em>Why the Markov property applies here:</em> The Markov property says that conditioned on the present state <span class="arithmatex">\(X_n = k\)</span>, the future <span class="arithmatex">\(X_{n+1}\)</span> is independent of everything before <span class="arithmatex">\(X_n\)</span>, including <span class="arithmatex">\(X_0 = i\)</span>. Knowing the starting state <span class="arithmatex">\(i\)</span> adds no information beyond knowing the current state <span class="arithmatex">\(k\)</span>.</p>
-<p><em>This is the crucial step.</em> Without the Markov property, the left side could depend on <span class="arithmatex">\(i\)</span> — meaning the probability of the last jump depends on where we started <span class="arithmatex">\(n\)</span> steps ago. The Markov property says: no, the current state <span class="arithmatex">\(k\)</span> is all that matters.</p>
-<p><strong>Step 5 — Apply time-homogeneity:</strong></p>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_n = k) = q_{kj}\]</div>
-<p>The one-step transition probability from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> is the same regardless of which time step we are at. This is the time-homogeneity assumption.</p>
-<p><strong>Step 6 — Apply the inductive hypothesis:</strong></p>
-<div class="arithmatex">\[P(X_n = k \mid X_0 = i) = (Q^n)_{ik}\]</div>
-<p>This is exactly the inductive hypothesis.</p>
-<p><strong>Step 7 — Assemble the pieces:</strong></p>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_0 = i) = \sum_{k=1}^{M} (Q^n)_{ik} \cdot q_{kj} = \sum_{k=1}^{M} (Q^n)_{ik} \cdot Q_{kj} = (Q^{n+1})_{ij}\]</div>
-<p>The left side equals the right side. The induction is complete. <span class="arithmatex">\(\blacksquare\)</span></p>
-<h2 id="what-breaks-without-the-markov-property-in-this-proof">What Breaks Without the Markov Property in This Proof<a class="headerlink" href="#what-breaks-without-the-markov-property-in-this-proof" title="Permanent link">&para;</a></h2>
-<p>Step 4 is where the Markov property is invoked. Without it:</p>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_n = k, X_0 = i) \neq P(X_{n+1} = j \mid X_n = k)\]</div>
-<p>The one-step probability from state <span class="arithmatex">\(k\)</span> would depend on <span class="arithmatex">\(i\)</span> — on where the chain started <span class="arithmatex">\(n\)</span> steps ago. This means <span class="arithmatex">\(Q_{kj}\)</span> is the wrong quantity to use: the actual transition probability from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> is not a fixed number but varies based on the starting state. The sum <span class="arithmatex">\(\sum_k (Q^n)_{ik} Q_{kj}\)</span> would give the wrong answer because it uses a single <span class="arithmatex">\(Q_{kj}\)</span> where the truth requires a different value for each starting state <span class="arithmatex">\(i\)</span>.</p>
-<p>Matrix powers would not encode multi-step probabilities. The entire computational shortcut of raising <span class="arithmatex">\(Q\)</span> to a power would produce incorrect results.</p>
-<h2 id="what-breaks-without-time-homogeneity-in-this-proof">What Breaks Without Time-Homogeneity in This Proof<a class="headerlink" href="#what-breaks-without-time-homogeneity-in-this-proof" title="Permanent link">&para;</a></h2>
-<p>Step 5 is where time-homogeneity is used. Without it, the one-step transition probability at step <span class="arithmatex">\(n\)</span> would depend on <span class="arithmatex">\(n\)</span>:</p>
-<div class="arithmatex">\[P(X_{n+1} = j \mid X_n = k) = (Q_n)_{kj}\]</div>
-<p>The inductive formula would become:</p>
-<div class="arithmatex">\[(Q_0 Q_1 \cdots Q_n)_{ij} = \sum_k (Q_0 \cdots Q_{n-1})_{ik} \cdot (Q_n)_{kj}\]</div>
-<p>which is correct — but it is a product of <span class="arithmatex">\(n\)</span> distinct matrices, not a power of one matrix. The elegant formula <span class="arithmatex">\((Q^n)_{ij}\)</span> would not exist.</p>
-<hr />
+<p>The <strong>transition matrix</strong> is
+$$
+Q=(q_{ij}),
+$$
+where
+$$
+q_{ij}=P(X_{n+1}=j \mid X_n=i).
+$$</p>
+<p>Rows correspond to the current state. Columns correspond to the next state.</p>
+<h2 id="why-rows-sum-to-1">Why Rows Sum to 1<a class="headerlink" href="#why-rows-sum-to-1" title="Permanent link">&para;</a></h2>
+<p>Fix a current state <span class="arithmatex">\(i\)</span>. Then the possible next states are <span class="arithmatex">\(1,2,\ldots,M\)</span>, and exactly one of them must occur. Therefore the events
+$$
+{X_{n+1}=1},{X_{n+1}=2},\ldots,{X_{n+1}=M}
+$$
+form a partition of the sample space conditioned on <span class="arithmatex">\(X_n=i\)</span>. Hence
+$$
+\sum_{j=1}^M q_{ij}=1.
+$$</p>
+<h2 id="scouting-report_4">Scouting Report<a class="headerlink" href="#scouting-report_4" title="Permanent link">&para;</a></h2>
+<p>What to look for: a nonnegative matrix whose rows sum to 1.</p>
+<p>Why you care: this is the compact object that stores the one-step dynamics.</p>
+<h2 id="why-this-definition-exists_3">Why This Definition Exists<a class="headerlink" href="#why-this-definition-exists_3" title="Permanent link">&para;</a></h2>
+<p>The matrix is arranged so that the <span class="arithmatex">\(i\)</span>th row is the full probability distribution of the next state given current state <span class="arithmatex">\(i\)</span>. That makes the matrix directly interpretable in probabilistic terms.</p>
+<h2 id="what-would-break-without-it_4">What Would Break Without It?<a class="headerlink" href="#what-would-break-without-it_4" title="Permanent link">&para;</a></h2>
+<p>If rows did not sum to 1, then the matrix would not represent a valid probability law. Probability mass would either disappear or exceed 1, and the chain would not be stochastic.</p>
+<h2 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>Nonnegative matrix with row sums equal to 1</td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>Each row is a probability distribution</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>“Row = current, column = next”</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If rows do not sum to 1, the matrix is not stochastic</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>Supplies the one-step probabilities used in Qn</td>
+</tr>
+</tbody>
+</table>
+<h1 id="how-to-read-q-in-plain-english">How to Read Q in Plain English<a class="headerlink" href="#how-to-read-q-in-plain-english" title="Permanent link">&para;</a></h1>
+<p>To read <span class="arithmatex">\(Q\)</span>, fix the current state and look across that row. The row tells you the probabilities of the possible next states.</p>
+<p>For instance, if the chain is in state <span class="arithmatex">\(3\)</span>, then the third row tells you what happens next.</p>
+<p>Notation warning: some books write the transition matrix as <span class="arithmatex">\(P\)</span> instead of <span class="arithmatex">\(Q\)</span>. Here <span class="arithmatex">\(Q\)</span> is used to avoid confusion with probability itself. Both notations mean the same thing in this context.</p>
+<p>Row-vector convention: we write distributions as row vectors and multiply on the right:
+$$
+p^{(n+1)}=p^{(n)}Q.
+$$
+If we instead use column vectors, then
+$$
+p_{\text{col}}^{(n+1)}=Q^T p_{\text{col}}^{(n)}.
+$$
+Both conventions are equivalent if used consistently.</p>
+<h1 id="the-n-step-transition-matrix-qn">The n-Step Transition Matrix Qn<a class="headerlink" href="#the-n-step-transition-matrix-qn" title="Permanent link">&para;</a></h1>
+<p>The matrix <span class="arithmatex">\(Q^n\)</span> contains the probabilities of moving in exactly <span class="arithmatex">\(n\)</span> steps. Its <span class="arithmatex">\((i,j)\)</span> entry is written
+$$
+q_{ij}^{(n)}=P(X_n=j \mid X_0=i).
+$$</p>
+<p>The parentheses in <span class="arithmatex">\(q_{ij}^{(n)}\)</span> matter. They indicate the <span class="arithmatex">\((i,j)\)</span> entry of <span class="arithmatex">\(Q^n\)</span>, not the scalar <span class="arithmatex">\((q_{ij})^n\)</span>.</p>
+<h2 id="scouting-report_5">Scouting Report<a class="headerlink" href="#scouting-report_5" title="Permanent link">&para;</a></h2>
+<p>What to look for: a matrix power on the left and an <span class="arithmatex">\(n\)</span>-step conditional probability on the right.</p>
+<p>Why you care: this is the bridge between linear algebra and probability.</p>
+<h2 id="intuition-before-the-theorem">Intuition Before the Theorem<a class="headerlink" href="#intuition-before-the-theorem" title="Permanent link">&para;</a></h2>
+<p>It is tempting to guess that one step is <span class="arithmatex">\(Q\)</span>, two steps is <span class="arithmatex">\(Q^2\)</span>, three steps is <span class="arithmatex">\(Q^3\)</span>, and so on. The theorem below shows why that guess is correct.</p>
+<h2 id="theorem-entries-of-qn-are-n-step-transition-probabilities">Theorem: Entries of Qn Are n-Step Transition Probabilities<a class="headerlink" href="#theorem-entries-of-qn-are-n-step-transition-probabilities" title="Permanent link">&para;</a></h2>
+<p><strong>Statement.</strong> For every <span class="arithmatex">\(n\ge 1\)</span> and all states <span class="arithmatex">\(i,j\)</span>,
+$$
+(Q^n)_{ij}=P(X_n=j \mid X_0=i).
+$$</p>
+<h2 id="scouting-report_6">Scouting Report<a class="headerlink" href="#scouting-report_6" title="Permanent link">&para;</a></h2>
+<p>What to look for: an <span class="arithmatex">\(n\)</span>th matrix power on one side and a conditional probability of an <span class="arithmatex">\(n\)</span>-step transition on the other.</p>
+<p>Why you care: this theorem turns matrix powers into a probability calculator.</p>
+<h2 id="full-proof">Full Proof<a class="headerlink" href="#full-proof" title="Permanent link">&para;</a></h2>
+<p>We prove the statement by induction on <span class="arithmatex">\(n\)</span>.</p>
+<h3 id="base-case-n-1">Base Case: n = 1<a class="headerlink" href="#base-case-n-1" title="Permanent link">&para;</a></h3>
+<p>By definition of the transition matrix,
+$$
+(Q^1)<em ij="ij">{ij}=Q</em>=P(X_1=j \mid X_0=i).
+$$
+So the statement is true for <span class="arithmatex">\(n=1\)</span>.</p>
+<h3 id="inductive-hypothesis">Inductive Hypothesis<a class="headerlink" href="#inductive-hypothesis" title="Permanent link">&para;</a></h3>
+<p>Assume that for some <span class="arithmatex">\(n\ge 1\)</span>,
+$$
+(Q^n)_{ik}=P(X_n=k \mid X_0=i)
+$$
+for every pair of states <span class="arithmatex">\(i,k\)</span>.</p>
+<p><strong>Dummy-index warning:</strong> here <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> are fixed throughout the argument, while <span class="arithmatex">\(k\)</span> is a dummy summation index. It changes inside the sum and disappears after summation.</p>
+<p>We must prove that
+$$
+(Q^{n+1})<em n_1="n+1">{ij}=P(X</em>=j \mid X_0=i).
+$$</p>
+<h3 id="step-1-expand-the-matrix-product">Step 1: Expand the Matrix Product<a class="headerlink" href="#step-1-expand-the-matrix-product" title="Permanent link">&para;</a></h3>
+<p>By matrix multiplication,
+$$
+(Q^{n+1})<em ij="ij">{ij}=(Q^nQ)</em>^M (Q^n)}=\sum_{k=1<em kj="kj">{ik}Q</em>.
+$$</p>
+<p>ASCII structure:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>i --n steps--&gt; k --1 step--&gt; j
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>      sum over all possible k
+</code></pre></div>
+<h3 id="step-2-apply-the-law-of-total-probability">Step 2: Apply the Law of Total Probability<a class="headerlink" href="#step-2-apply-the-law-of-total-probability" title="Permanent link">&para;</a></h3>
+<p>To go from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n+1\)</span> steps, the chain must be in some intermediate state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(n\)</span> steps. Therefore
+$$
+P(X_{n+1}=j \mid X_0=i)
+=
+\sum_{k=1}^M P(X_{n+1}=j, X_n=k \mid X_0=i).
+$$</p>
+<h3 id="step-3-apply-the-multiplication-rule">Step 3: Apply the Multiplication Rule<a class="headerlink" href="#step-3-apply-the-multiplication-rule" title="Permanent link">&para;</a></h3>
+<p>For each <span class="arithmatex">\(k\)</span>,
+$$
+P(X_{n+1}=j, X_n=k \mid X_0=i)
+=
+P(X_{n+1}=j \mid X_n=k, X_0=i)\,P(X_n=k \mid X_0=i).
+$$</p>
+<h3 id="step-4-use-the-markov-property">Step 4: Use the Markov Property<a class="headerlink" href="#step-4-use-the-markov-property" title="Permanent link">&para;</a></h3>
+<p>By the Markov property,
+$$
+P(X_{n+1}=j \mid X_n=k, X_0=i)=P(X_{n+1}=j \mid X_n=k).
+$$</p>
+<p>Because the chain is time-homogeneous, this equals
+$$
+Q_{kj}.
+$$</p>
+<h3 id="step-5-use-the-inductive-hypothesis">Step 5: Use the Inductive Hypothesis<a class="headerlink" href="#step-5-use-the-inductive-hypothesis" title="Permanent link">&para;</a></h3>
+<p>By the inductive hypothesis,
+$$
+P(X_n=k \mid X_0=i)=(Q^n)_{ik}.
+$$</p>
+<p>Substitute everything:
+$$
+P(X_{n+1}=j \mid X_0=i)
+=
+\sum_{k=1}^M (Q^n)<em kj="kj">{ik}Q</em>.
+$$</p>
+<p>But the right-hand side is exactly
+$$
+(Q^{n+1})_{ij}.
+$$</p>
+<p>So
+$$
+(Q^{n+1})<em n_1="n+1">{ij}=P(X</em>=j \mid X_0=i).
+$$</p>
+<p>This completes the induction.</p>
+<h2 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h2>
+<p>Every <span class="arithmatex">\((n+1)\)</span>-step path from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> must pass through one intermediate state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(n\)</span> steps. The probability of one route is “probability to reach <span class="arithmatex">\(k\)</span>” times “probability to leave <span class="arithmatex">\(k\)</span> for <span class="arithmatex">\(j\)</span>,” and then we add over all possible <span class="arithmatex">\(k\)</span>.</p>
+<h2 id="what-would-break-without-the-markov-property">What Would Break Without the Markov Property?<a class="headerlink" href="#what-would-break-without-the-markov-property" title="Permanent link">&para;</a></h2>
+<p>If the next-step probability still depended on older history, then
+$$
+P(X_{n+1}=j \mid X_n=k, X_0=i)
+$$
+would not simplify to a function of <span class="arithmatex">\(k\)</span> alone. The matrix product would no longer encode the correct probability.</p>
+<h2 id="what-would-break-without-time-homogeneity">What Would Break Without Time-Homogeneity?<a class="headerlink" href="#what-would-break-without-time-homogeneity" title="Permanent link">&para;</a></h2>
+<p>If the transition probabilities changed with time, then the last factor would depend on the step number, and we would no longer have a single matrix power describing the chain.</p>
+<h2 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>An <span class="arithmatex">\((n+1)\)</span>-step move splits at an intermediate state <span class="arithmatex">\(k\)</span></td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>The intermediate state fully summarizes the past at the split point</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>“Reach k, then leave k”</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If the next move depends on older history or on time, the product formula fails</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>Direct precursor to the Chapman-Kolmogorov Equation</td>
+</tr>
+</tbody>
+</table>
 <h1 id="the-chapman-kolmogorov-equation">The Chapman-Kolmogorov Equation<a class="headerlink" href="#the-chapman-kolmogorov-equation" title="Permanent link">&para;</a></h1>
-<h2 id="statement-and-both-forms">Statement and Both Forms<a class="headerlink" href="#statement-and-both-forms" title="Permanent link">&para;</a></h2>
-<p>For any nonnegative integers <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>:</p>
-<div class="arithmatex">\[q_{ij}^{(m+n)} = \sum_{k=1}^{M} q_{ik}^{(m)} q_{kj}^{(n)}\]</div>
-<p><strong>Read as:</strong> "The probability of going from state <span class="arithmatex">\(i\)</span> to state <span class="arithmatex">\(j\)</span> in exactly <span class="arithmatex">\(m+n\)</span> steps equals the sum over all intermediate states <span class="arithmatex">\(k\)</span> of the probability of going from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(k\)</span> in <span class="arithmatex">\(m\)</span> steps times the probability of going from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n\)</span> steps."</p>
-<p>In matrix form, this is:</p>
-<div class="arithmatex">\[Q^{m+n} = Q^m \cdot Q^n\]</div>
-<p>This is an algebraic identity for matrices — the semigroup property of matrix multiplication. The remarkable fact is that this purely algebraic identity has a precise probabilistic interpretation: the <span class="arithmatex">\((i,j)\)</span> entry of <span class="arithmatex">\(Q^{m+n}\)</span> is the probability of traveling from state <span class="arithmatex">\(i\)</span> to state <span class="arithmatex">\(j\)</span> in exactly <span class="arithmatex">\(m+n\)</span> steps.</p>
-<p><strong>An analogy:</strong> Think of planning a trip from New York to Los Angeles with exactly one layover. To find the total probability of reaching LA, you sum over all possible layover cities <span class="arithmatex">\(k\)</span> the product of (probability of reaching city <span class="arithmatex">\(k\)</span>) <span class="arithmatex">\(\times\)</span> (probability of reaching LA from city <span class="arithmatex">\(k\)</span>). No single path is guaranteed; you must account for all of them.</p>
-<h2 id="why-it-is-true-the-and-and-or-rules">Why It Is True — The AND and OR Rules<a class="headerlink" href="#why-it-is-true-the-and-and-or-rules" title="Permanent link">&para;</a></h2>
-<p><strong>Why we multiply — the AND rule:</strong></p>
-<p>To travel from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(m + n\)</span> steps via a specific intermediate state <span class="arithmatex">\(k\)</span>:</p>
-<ol>
-<li>Reach <span class="arithmatex">\(k\)</span> from <span class="arithmatex">\(i\)</span> in <span class="arithmatex">\(m\)</span> steps — Probability: <span class="arithmatex">\(q_{ik}^{(m)}\)</span></li>
-<li><strong>AND</strong> reach <span class="arithmatex">\(j\)</span> from <span class="arithmatex">\(k\)</span> in <span class="arithmatex">\(n\)</span> steps — Probability: <span class="arithmatex">\(q_{kj}^{(n)}\)</span></li>
-</ol>
-<p>These two events must happen in sequence. The Markov property ensures they are conditionally independent given <span class="arithmatex">\(X_m = k\)</span>: once we know the chain is at <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(m\)</span> steps, the next <span class="arithmatex">\(n\)</span> steps depend only on <span class="arithmatex">\(k\)</span> and not on how the chain got to <span class="arithmatex">\(k\)</span>. Two conditionally independent events multiply:</p>
-<div class="arithmatex">\[\text{Probability of path } i \to k \to j = q_{ik}^{(m)} \times q_{kj}^{(n)}\]</div>
-<p><strong>Why we sum — the OR rule:</strong></p>
-<p>The intermediate state <span class="arithmatex">\(k\)</span> could be any element of the state space. In an <span class="arithmatex">\(M\)</span>-state system, there are <span class="arithmatex">\(M\)</span> parallel paths from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(m+n\)</span> steps, one for each choice of <span class="arithmatex">\(k\)</span>:</p>
-<ul>
-<li>Via State 1: <span class="arithmatex">\(i \xrightarrow{m \text{ steps}} 1 \xrightarrow{n \text{ steps}} j\)</span></li>
-<li><strong>OR</strong> Via State 2: <span class="arithmatex">\(i \xrightarrow{m \text{ steps}} 2 \xrightarrow{n \text{ steps}} j\)</span></li>
-<li><strong>OR</strong> <span class="arithmatex">\(\ldots\)</span></li>
-<li><strong>OR</strong> Via State <span class="arithmatex">\(M\)</span>: <span class="arithmatex">\(i \xrightarrow{m \text{ steps}} M \xrightarrow{n \text{ steps}} j\)</span></li>
-</ul>
-<p>These paths are mutually exclusive — at time <span class="arithmatex">\(m\)</span>, the chain is in exactly one state, so it travels through exactly one intermediate. Mutually exclusive alternatives add:</p>
-<div class="arithmatex">\[q_{ij}^{(m+n)} = \sum_{k=1}^{M} q_{ik}^{(m)} \cdot q_{kj}^{(n)}\]</div>
-<blockquote>
-<p><strong>Core insight:</strong> You are summing the probabilities of every possible parallel universe that successfully carries you from start to end. Multiply for each individual path (AND); add across all paths (OR).</p>
-</blockquote>
-<h2 id="full-proof-with-every-step-justified">Full Proof with Every Step Justified<a class="headerlink" href="#full-proof-with-every-step-justified" title="Permanent link">&para;</a></h2>
-<p><strong>Step 1 — Apply the Law of Total Probability, partitioning on <span class="arithmatex">\(X_m\)</span>:</strong></p>
-<p>At time <span class="arithmatex">\(m\)</span>, the chain is in exactly one state. The events <span class="arithmatex">\(\{X_m = 1\}, \ldots, \{X_m = M\}\)</span> partition the sample space. By LOTP:</p>
-<div class="arithmatex">\[P(X_{m+n} = j \mid X_0 = i) = \sum_{k=1}^{M} P(X_{m+n} = j,\; X_m = k \mid X_0 = i)\]</div>
-<p><em>Why applicable:</em> The events <span class="arithmatex">\(\{X_m = k\}\)</span> are disjoint (the chain occupies one state) and exhaustive (it must be somewhere). The union has probability 1.</p>
-<p><strong>Step 2 — Apply the multiplication rule for conditional probability:</strong></p>
-<div class="arithmatex">\[P(X_{m+n} = j,\; X_m = k \mid X_0 = i) = P(X_{m+n} = j \mid X_m = k,\; X_0 = i) \cdot P(X_m = k \mid X_0 = i)\]</div>
-<p><em>Why applicable:</em> <span class="arithmatex">\(P(A \cap B \mid C) = P(A \mid B \cap C) \cdot P(B \mid C)\)</span>, a direct consequence of the definition of conditional probability. Apply with <span class="arithmatex">\(A = \{X_{m+n} = j\}\)</span>, <span class="arithmatex">\(B = \{X_m = k\}\)</span>, <span class="arithmatex">\(C = \{X_0 = i\}\)</span>.</p>
-<p><strong>Step 3 — Apply the Markov property:</strong></p>
-<div class="arithmatex">\[P(X_{m+n} = j \mid X_m = k,\; X_0 = i) = P(X_{m+n} = j \mid X_m = k)\]</div>
-<p><em>Why applicable:</em> The Markov property states that conditioned on the present state <span class="arithmatex">\(X_m = k\)</span>, the future is independent of the past <span class="arithmatex">\(X_0, \ldots, X_{m-1}\)</span>. Knowing the starting state <span class="arithmatex">\(X_0 = i\)</span> is part of the past — it can be dropped from the conditioning.</p>
-<p><strong>Step 4 — Apply time-homogeneity:</strong></p>
-<div class="arithmatex">\[P(X_{m+n} = j \mid X_m = k) = q_{kj}^{(n)}\]</div>
-<p>The probability of traveling from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n\)</span> steps does not depend on when we start — it is <span class="arithmatex">\(q_{kj}^{(n)}\)</span> whether we start at time <span class="arithmatex">\(m = 0\)</span> or time <span class="arithmatex">\(m = 100\)</span>.</p>
-<div class="arithmatex">\[P(X_m = k \mid X_0 = i) = q_{ik}^{(m)}\]</div>
-<p>by definition of the <span class="arithmatex">\(m\)</span>-step transition probability.</p>
-<p><strong>Step 5 — Substitute and conclude:</strong></p>
-<div class="arithmatex">\[q_{ij}^{(m+n)} = P(X_{m+n} = j \mid X_0 = i) = \sum_{k=1}^{M} q_{ik}^{(m)} \cdot q_{kj}^{(n)} \qquad \blacksquare\]</div>
-<h2 id="why-time-homogeneity-appears-in-the-proof">Why Time-Homogeneity Appears in the Proof<a class="headerlink" href="#why-time-homogeneity-appears-in-the-proof" title="Permanent link">&para;</a></h2>
-<p>Step 4 requires that the <span class="arithmatex">\(n\)</span>-step probability starting from <span class="arithmatex">\(k\)</span> at time <span class="arithmatex">\(m\)</span> is the same as starting from <span class="arithmatex">\(k\)</span> at time 0. This is exactly time-homogeneity. Without it, Step 4 would read:</p>
-<div class="arithmatex">\[P(X_{m+n} = j \mid X_m = k) = (Q_m^{(n)})_{kj}\]</div>
-<p>— a different set of <span class="arithmatex">\(n\)</span>-step probabilities for each starting time <span class="arithmatex">\(m\)</span>. The clean formula <span class="arithmatex">\(q_{kj}^{(n)}\)</span> assumes there is only one set of <span class="arithmatex">\(n\)</span>-step probabilities regardless of starting time.</p>
+<p>For nonnegative integers <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(n\)</span>,
+$$
+q_{ij}^{(m+n)}=\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}.
+$$</p>
+<p>In matrix form,
+$$
+Q^{m+n}=Q^mQ^n.
+$$</p>
+<h2 id="scouting-report_7">Scouting Report<a class="headerlink" href="#scouting-report_7" title="Permanent link">&para;</a></h2>
+<p>What to look for: a multi-step transition broken at an intermediate time.</p>
+<p>Why you care: this equation is the probabilistic reason matrix multiplication works for Markov chains.</p>
+<h2 id="intuition-before-the-proof_1">Intuition Before the Proof<a class="headerlink" href="#intuition-before-the-proof_1" title="Permanent link">&para;</a></h2>
+<p>To go from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(m+n\)</span> steps, the chain must be in some state <span class="arithmatex">\(k\)</span> after <span class="arithmatex">\(m\)</span> steps, and then it must travel from <span class="arithmatex">\(k\)</span> to <span class="arithmatex">\(j\)</span> in the remaining <span class="arithmatex">\(n\)</span> steps. Since <span class="arithmatex">\(k\)</span> is unknown, we sum over all possible states.</p>
+<p>ASCII structure:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>time 0            time m                       time m+n
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a> i  ----------------&gt;  k  -------------------------&gt;  j
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>       m steps                    n steps
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>sum over all possible k
+</code></pre></div>
+<h2 id="full-proof_1">Full Proof<a class="headerlink" href="#full-proof_1" title="Permanent link">&para;</a></h2>
+<p>Fix states <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span>.</p>
+<h3 id="step-1-partition-by-the-intermediate-state">Step 1: Partition by the Intermediate State<a class="headerlink" href="#step-1-partition-by-the-intermediate-state" title="Permanent link">&para;</a></h3>
+<p>At time <span class="arithmatex">\(m\)</span>, the chain must be in exactly one state. So the events <span class="arithmatex">\(\{X_m=k\}\)</span> for <span class="arithmatex">\(k=1,\ldots,M\)</span> form a partition. Hence
+$$
+P(X_{m+n}=j \mid X_0=i)
+=
+\sum_{k=1}^M P(X_{m+n}=j, X_m=k \mid X_0=i).
+$$</p>
+<p><strong>Dummy-index warning:</strong> <span class="arithmatex">\(k\)</span> is only a temporary summation variable. <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j\)</span> are fixed.</p>
+<h3 id="step-2-apply-the-multiplication-rule">Step 2: Apply the Multiplication Rule<a class="headerlink" href="#step-2-apply-the-multiplication-rule" title="Permanent link">&para;</a></h3>
+<p>For each <span class="arithmatex">\(k\)</span>,
+$$
+P(X_{m+n}=j, X_m=k \mid X_0=i)
+=
+P(X_{m+n}=j \mid X_m=k, X_0=i)\,P(X_m=k \mid X_0=i).
+$$</p>
+<h3 id="step-3-use-the-markov-property">Step 3: Use the Markov Property<a class="headerlink" href="#step-3-use-the-markov-property" title="Permanent link">&para;</a></h3>
+<p>The Markov property gives
+$$
+P(X_{m+n}=j \mid X_m=k, X_0=i)
+=
+P(X_{m+n}=j \mid X_m=k).
+$$</p>
+<h3 id="step-4-use-time-homogeneity">Step 4: Use Time-Homogeneity<a class="headerlink" href="#step-4-use-time-homogeneity" title="Permanent link">&para;</a></h3>
+<p>Since the chain is time-homogeneous,
+$$
+P(X_{m+n}=j \mid X_m=k)=q_{kj}^{(n)}.
+$$
+Also,
+$$
+P(X_m=k \mid X_0=i)=q_{ik}^{(m)}.
+$$</p>
+<h3 id="step-5-substitute">Step 5: Substitute<a class="headerlink" href="#step-5-substitute" title="Permanent link">&para;</a></h3>
+<p>So
+$$
+P(X_{m+n}=j \mid X_0=i)
+=
+\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}.
+$$</p>
+<p>Therefore,
+$$
+q_{ij}^{(m+n)}=\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}.
+$$</p>
+<h2 id="intuition-after-the-proof_1">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_1" title="Permanent link">&para;</a></h2>
+<p>This is just “break the trip into two legs.” The state at time <span class="arithmatex">\(m\)</span> is hidden, so we sum over every possible intermediate state.</p>
+<h2 id="why-we-multiply-the-and-rule">Why We Multiply (The AND Rule)<a class="headerlink" href="#why-we-multiply-the-and-rule" title="Permanent link">&para;</a></h2>
+<p>To travel from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> through a specific intermediate state <span class="arithmatex">\(k\)</span>, both of these must happen:
+1. <span class="arithmatex">\(i \to k\)</span> in <span class="arithmatex">\(m\)</span> steps
+2. <span class="arithmatex">\(k \to j\)</span> in <span class="arithmatex">\(n\)</span> steps</p>
+<p>So the probability of that route is the product
+$$
+q_{ik}^{(m)}q_{kj}^{(n)}.
+$$</p>
+<h2 id="why-we-sum-the-or-rule">Why We Sum (The OR Rule)<a class="headerlink" href="#why-we-sum-the-or-rule" title="Permanent link">&para;</a></h2>
+<p>The intermediate state <span class="arithmatex">\(k\)</span> could be any state in the state space. These possibilities are mutually exclusive, so we add the probabilities over all possible <span class="arithmatex">\(k\)</span>.</p>
 <h2 id="the-linear-algebra-connection">The Linear Algebra Connection<a class="headerlink" href="#the-linear-algebra-connection" title="Permanent link">&para;</a></h2>
-<p>The summation <span class="arithmatex">\(\sum_k q_{ik}^{(m)} \cdot q_{kj}^{(n)}\)</span> is <strong>literally the formula for a matrix product</strong>:</p>
-<ul>
-<li>Take the <span class="arithmatex">\(i\)</span>-th row of <span class="arithmatex">\(Q^m\)</span>: <span class="arithmatex">\((q_{i1}^{(m)}, q_{i2}^{(m)}, \ldots, q_{iM}^{(m)})\)</span></li>
-<li>Take the <span class="arithmatex">\(j\)</span>-th column of <span class="arithmatex">\(Q^n\)</span>: <span class="arithmatex">\((q_{1j}^{(n)}, q_{2j}^{(n)}, \ldots, q_{Mj}^{(n)})^\top\)</span></li>
-<li>Their dot product is <span class="arithmatex">\(\sum_k q_{ik}^{(m)} q_{kj}^{(n)} = (Q^m \cdot Q^n)_{ij} = (Q^{m+n})_{ij}\)</span></li>
-</ul>
-<p>This is why the algebraic identity <span class="arithmatex">\(Q^m \cdot Q^n = Q^{m+n}\)</span> has a probabilistic interpretation. The algebraic structure of matrix multiplication is <strong>perfectly matched</strong> to the probabilistic structure of conditional independence in Markov chains. The computation "row times column" is the same computation as "sum over intermediate states," and this is not a coincidence — the Markov property creates exactly this structure.</p>
-<hr />
-<h1 id="worked-example-computing-q2-and-all-2-step-probabilities">Worked Example — Computing Q² and All 2-Step Probabilities<a class="headerlink" href="#worked-example-computing-q2-and-all-2-step-probabilities" title="Permanent link">&para;</a></h1>
-<p>Let:</p>
-<div class="arithmatex">\[Q = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}\]</div>
-<p>We compute <span class="arithmatex">\(Q^2\)</span> entry by entry. Each entry <span class="arithmatex">\((Q^2)_{ij}\)</span> is the dot product of Row <span class="arithmatex">\(i\)</span> of <span class="arithmatex">\(Q\)</span> with Column <span class="arithmatex">\(j\)</span> of <span class="arithmatex">\(Q\)</span>.</p>
-<h2 id="full-entry-by-entry-calculation">Full Entry-by-Entry Calculation<a class="headerlink" href="#full-entry-by-entry-calculation" title="Permanent link">&para;</a></h2>
-<p><strong>Entry <span class="arithmatex">\((1,1)\)</span>:</strong> Row 1 <span class="arithmatex">\(\cdot\)</span> Column 1</p>
-<div class="arithmatex">\[(Q^2)_{11} = (0.5)(0.5) + (0.4)(0.3) + (0.1)(0.2) = 0.25 + 0.12 + 0.02 = 0.39\]</div>
-<p><strong>Entry <span class="arithmatex">\((1,2)\)</span>:</strong> Row 1 <span class="arithmatex">\(\cdot\)</span> Column 2</p>
-<div class="arithmatex">\[(Q^2)_{12} = (0.5)(0.4) + (0.4)(0.2) + (0.1)(0.3) = 0.20 + 0.08 + 0.03 = 0.31\]</div>
-<p><strong>Entry <span class="arithmatex">\((1,3)\)</span>:</strong> Row 1 <span class="arithmatex">\(\cdot\)</span> Column 3</p>
-<div class="arithmatex">\[(Q^2)_{13} = (0.5)(0.1) + (0.4)(0.5) + (0.1)(0.5) = 0.05 + 0.20 + 0.05 = 0.30\]</div>
-<p><strong>Entry <span class="arithmatex">\((2,1)\)</span>:</strong> Row 2 <span class="arithmatex">\(\cdot\)</span> Column 1</p>
-<div class="arithmatex">\[(Q^2)_{21} = (0.3)(0.5) + (0.2)(0.3) + (0.5)(0.2) = 0.15 + 0.06 + 0.10 = 0.31\]</div>
-<p><strong>Entry <span class="arithmatex">\((2,2)\)</span>:</strong> Row 2 <span class="arithmatex">\(\cdot\)</span> Column 2</p>
-<div class="arithmatex">\[(Q^2)_{22} = (0.3)(0.4) + (0.2)(0.2) + (0.5)(0.3) = 0.12 + 0.04 + 0.15 = 0.31\]</div>
-<p><strong>Entry <span class="arithmatex">\((2,3)\)</span>:</strong> Row 2 <span class="arithmatex">\(\cdot\)</span> Column 3</p>
-<div class="arithmatex">\[(Q^2)_{23} = (0.3)(0.1) + (0.2)(0.5) + (0.5)(0.5) = 0.03 + 0.10 + 0.25 = 0.38\]</div>
-<p><strong>Entry <span class="arithmatex">\((3,1)\)</span>:</strong> Row 3 <span class="arithmatex">\(\cdot\)</span> Column 1</p>
-<div class="arithmatex">\[(Q^2)_{31} = (0.2)(0.5) + (0.3)(0.3) + (0.5)(0.2) = 0.10 + 0.09 + 0.10 = 0.29\]</div>
-<p><strong>Entry <span class="arithmatex">\((3,2)\)</span>:</strong> Row 3 <span class="arithmatex">\(\cdot\)</span> Column 2</p>
-<div class="arithmatex">\[(Q^2)_{32} = (0.2)(0.4) + (0.3)(0.2) + (0.5)(0.3) = 0.08 + 0.06 + 0.15 = 0.29\]</div>
-<p><strong>Entry <span class="arithmatex">\((3,3)\)</span>:</strong> Row 3 <span class="arithmatex">\(\cdot\)</span> Column 3</p>
-<div class="arithmatex">\[(Q^2)_{33} = (0.2)(0.1) + (0.3)(0.5) + (0.5)(0.5) = 0.02 + 0.15 + 0.25 = 0.42\]</div>
-<p><strong>Final result:</strong></p>
-<div class="arithmatex">\[Q^2 = \begin{pmatrix} 0.39 &amp; 0.31 &amp; 0.30 \\ 0.31 &amp; 0.31 &amp; 0.38 \\ 0.29 &amp; 0.29 &amp; 0.42 \end{pmatrix}\]</div>
-<p><strong>Verification — stochastic property preserved:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Row</th>
-<th>Sum</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Row 1</td>
-<td><span class="arithmatex">\(0.39 + 0.31 + 0.30 = 1.00\)</span> ✓</td>
-</tr>
-<tr>
-<td>Row 2</td>
-<td><span class="arithmatex">\(0.31 + 0.31 + 0.38 = 1.00\)</span> ✓</td>
-</tr>
-<tr>
-<td>Row 3</td>
-<td><span class="arithmatex">\(0.29 + 0.29 + 0.42 = 1.00\)</span> ✓</td>
-</tr>
-</tbody>
-</table>
-<p>Each row of <span class="arithmatex">\(Q^2\)</span> sums to 1, confirming it is a valid stochastic matrix encoding a complete probability distribution for the 2-step future.</p>
-<h2 id="path-analysis-scenario-a-start-from-state-1-reach-state-3">Path Analysis — Scenario A: Start from State 1, Reach State 3<a class="headerlink" href="#path-analysis-scenario-a-start-from-state-1-reach-state-3" title="Permanent link">&para;</a></h2>
-<p>We want <span class="arithmatex">\(P(X_2 = 3 \mid X_0 = 1) = (Q^2)_{13} = 0.30\)</span>.</p>
-<p>By Chapman-Kolmogorov with <span class="arithmatex">\(m = n = 1\)</span>, this probability is the sum over all intermediate states at time 1:</p>
-<div class="arithmatex">\[q_{13}^{(2)} = q_{11} \cdot q_{13} + q_{12} \cdot q_{23} + q_{13} \cdot q_{33}\]</div>
-<div class="arithmatex">\[= (0.5)(0.1) + (0.4)(0.5) + (0.1)(0.5)\]</div>
-<div class="arithmatex">\[= 0.05 + 0.20 + 0.05 = 0.30\]</div>
-<pre class="mermaid"><code>graph TD
-    A(["Start: State 1"]) --&gt; B1["Path 1→1→3\n0.5 × 0.1 = 0.05"]
-    A --&gt; B2["Path 1→2→3\n0.4 × 0.5 = 0.20  ← dominant"]
-    A --&gt; B3["Path 1→3→3\n0.1 × 0.5 = 0.05"]
-    B1 --&gt; C(["State 3 after 2 steps\nTotal = 0.30"])
-    B2 --&gt; C
-    B3 --&gt; C</code></pre>
-<p><strong>Path-by-path interpretation:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Intermediate</th>
-<th>Probability</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(1 \to 1 \to 3\)</span></td>
-<td>State 1</td>
-<td><span class="arithmatex">\(0.5 \times 0.1 = 0.05\)</span></td>
-<td>Self-loop likely; direct link to 3 weak</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(1 \to 2 \to 3\)</span></td>
-<td>State 2</td>
-<td><span class="arithmatex">\(0.4 \times 0.5 = 0.20\)</span></td>
-<td>Both <span class="arithmatex">\(q_{12}\)</span> and <span class="arithmatex">\(q_{23}\)</span> are strong</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(1 \to 3 \to 3\)</span></td>
-<td>State 3</td>
-<td><span class="arithmatex">\(0.1 \times 0.5 = 0.05\)</span></td>
-<td>Direct link to 3 is weak</td>
-</tr>
-</tbody>
-</table>
-<p>The path through State 2 dominates, contributing <span class="arithmatex">\(0.20\)</span> out of <span class="arithmatex">\(0.30\)</span> (two-thirds of the total). This is because both <span class="arithmatex">\(q_{12} = 0.4\)</span> (State 1 has a strong outgoing link to State 2) and <span class="arithmatex">\(q_{23} = 0.5\)</span> (State 2 has a strong link to State 3) are relatively large simultaneously.</p>
-<h2 id="path-analysis-scenario-b-start-from-state-2-reach-state-3">Path Analysis — Scenario B: Start from State 2, Reach State 3<a class="headerlink" href="#path-analysis-scenario-b-start-from-state-2-reach-state-3" title="Permanent link">&para;</a></h2>
-<p>We want <span class="arithmatex">\(P(X_2 = 3 \mid X_0 = 2) = (Q^2)_{23} = 0.38\)</span>.</p>
-<div class="arithmatex">\[q_{23}^{(2)} = q_{21} \cdot q_{13} + q_{22} \cdot q_{23} + q_{23} \cdot q_{33}\]</div>
-<div class="arithmatex">\[= (0.3)(0.1) + (0.2)(0.5) + (0.5)(0.5)\]</div>
-<div class="arithmatex">\[= 0.03 + 0.10 + 0.25 = 0.38\]</div>
-<pre class="mermaid"><code>graph TD
-    A2(["Start: State 2"]) --&gt; C1["Path 2→1→3\n0.3 × 0.1 = 0.03"]
-    A2 --&gt; C2["Path 2→2→3\n0.2 × 0.5 = 0.10"]
-    A2 --&gt; C3["Path 2→3→3\n0.5 × 0.5 = 0.25  ← dominant"]
-    C1 --&gt; D(["State 3 after 2 steps\nTotal = 0.38"])
-    C2 --&gt; D
-    C3 --&gt; D</code></pre>
-<p><strong>Path-by-path interpretation:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Path</th>
-<th>Intermediate</th>
-<th>Probability</th>
-<th>Why</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(2 \to 1 \to 3\)</span></td>
-<td>State 1</td>
-<td><span class="arithmatex">\(0.3 \times 0.1 = 0.03\)</span></td>
-<td>Weak on both legs</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(2 \to 2 \to 3\)</span></td>
-<td>State 2</td>
-<td><span class="arithmatex">\(0.2 \times 0.5 = 0.10\)</span></td>
-<td>Self-loop low; then strong to 3</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(2 \to 3 \to 3\)</span></td>
-<td>State 3</td>
-<td><span class="arithmatex">\(0.5 \times 0.5 = 0.25\)</span></td>
-<td>Strong direct link; strong self-loop</td>
-</tr>
-</tbody>
-</table>
-<p>Starting from State 2 gives a higher 2-step probability (38%) than starting from State 1 (30%). The dominant path is <span class="arithmatex">\(2 \to 3 \to 3\)</span>: State 2 has a strong direct link to State 3 (<span class="arithmatex">\(q_{23} = 0.5\)</span>), and once there, State 3 has a strong self-loop (<span class="arithmatex">\(q_{33} = 0.5\)</span>), giving <span class="arithmatex">\(0.5 \times 0.5 = 0.25\)</span> from this single path alone. Starting from State 1 requires more effort to reach State 3 in the first step (<span class="arithmatex">\(q_{13} = 0.1\)</span> only), so this dominant path is weaker.</p>
-<hr />
-<h1 id="common-mistakes-and-conceptual-traps">Common Mistakes and Conceptual Traps<a class="headerlink" href="#common-mistakes-and-conceptual-traps" title="Permanent link">&para;</a></h1>
-<h2 id="mistake-1-markov-does-not-mean-independent">Mistake 1 — Markov Does Not Mean Independent<a class="headerlink" href="#mistake-1-markov-does-not-mean-independent" title="Permanent link">&para;</a></h2>
-<p><strong>False belief:</strong> "Markov means the future is independent of everything."</p>
-<p><strong>Truth:</strong> Most Markov chains are highly dependent. The future usually depends strongly on the present. The Markov property only removes dependence on states <em>before</em> the present. It does not remove dependence on the present.</p>
-<p><strong>Counterexample:</strong> For <span class="arithmatex">\(Q = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>, knowing <span class="arithmatex">\(X_n = 1\)</span> tells you <span class="arithmatex">\(X_{n+1} = 2\)</span> with certainty. This is perfect deterministic dependence — maximum possible dependence on the current state — yet the chain is perfectly Markov. The past is irrelevant; the present determines everything.</p>
-<p><strong>Precise statement:</strong> <span class="arithmatex">\(P(X_{n+1} \mid X_n, X_{n-1}, \ldots, X_0) = P(X_{n+1} \mid X_n)\)</span>. The future is conditionally independent of the past <em>given the present</em> — not unconditionally independent of everything. Never drop the "given the present" part.</p>
-<hr />
-<h2 id="mistake-2-rows-and-columns-are-not-interchangeable">Mistake 2 — Rows and Columns Are Not Interchangeable<a class="headerlink" href="#mistake-2-rows-and-columns-are-not-interchangeable" title="Permanent link">&para;</a></h2>
-<p><strong>False belief:</strong> "Switching rows and columns gives an equivalent interpretation."</p>
-<p><strong>Truth:</strong> Rows represent the current state; columns represent the next state. Transposing <span class="arithmatex">\(Q\)</span> gives the backward transition probability <span class="arithmatex">\(P(X_n = i \mid X_{n+1} = j)\)</span> — completely different from the forward probability <span class="arithmatex">\(q_{ij}\)</span>.</p>
-<p><strong>Concrete error:</strong> Looking at Column 1 instead of Row 1 of <span class="arithmatex">\(Q\)</span> gives <span class="arithmatex">\([0.5, 0.3, 0.2]^\top\)</span> — the distribution of <em>previous</em> states given that you are now in State 1, not the distribution of <em>next</em> states given that you are currently in State 1. This is a backward-in-time quantity.</p>
-<hr />
-<h2 id="mistake-3-qn-is-not-nq">Mistake 3 — Q^n Is Not nQ<a class="headerlink" href="#mistake-3-qn-is-not-nq" title="Permanent link">&para;</a></h2>
-<p><strong>False belief:</strong> "<span class="arithmatex">\(Q^n\)</span> means multiplying each entry by <span class="arithmatex">\(n\)</span>."</p>
-<p><strong>Truth:</strong> <span class="arithmatex">\(Q^n\)</span> means the matrix <span class="arithmatex">\(Q\)</span> multiplied by itself <span class="arithmatex">\(n\)</span> times: <span class="arithmatex">\(Q \cdot Q \cdot \ldots \cdot Q\)</span>.</p>
-<p><strong>Counterexample:</strong> For <span class="arithmatex">\(Q = \begin{pmatrix} 0.5 &amp; 0.5 \\ 0.5 &amp; 0.5 \end{pmatrix}\)</span>, we have <span class="arithmatex">\(Q^2 = Q\)</span> (since every row of <span class="arithmatex">\(Q\)</span> is the same distribution, multiplying by <span class="arithmatex">\(Q\)</span> leaves it unchanged). But <span class="arithmatex">\(2Q = \begin{pmatrix} 1 &amp; 1 \\ 1 &amp; 1 \end{pmatrix}\)</span>, which has rows summing to 2 — not even a valid stochastic matrix. These are entirely different objects.</p>
-<hr />
-<h2 id="mistake-4-q_ijn-is-not-q_ijn">Mistake 4 — <span class="arithmatex">\(q_{ij}^{(n)}\)</span> Is Not <span class="arithmatex">\((q_{ij})^n\)</span><a class="headerlink" href="#mistake-4-q_ijn-is-not-q_ijn" title="Permanent link">&para;</a></h2>
-<p>This is so important it was flagged in the notation section, but it deserves explicit repetition as a common mistake.</p>
-<p><span class="arithmatex">\(q_{ij}^{(n)} = (Q^n)_{ij}\)</span> — the <span class="arithmatex">\((i,j)\)</span> entry of the matrix <span class="arithmatex">\(Q^n\)</span>, the <span class="arithmatex">\(n\)</span>-step transition probability.</p>
-<p><span class="arithmatex">\((q_{ij})^n\)</span> — the scalar <span class="arithmatex">\(q_{ij}\)</span> raised to the <span class="arithmatex">\(n\)</span>-th power.</p>
-<p>In our example: <span class="arithmatex">\(q_{12} = 0.4\)</span>, but <span class="arithmatex">\(q_{12}^{(2)} = 0.31 \neq (0.4)^2 = 0.16\)</span>.</p>
-<p>The parentheses around the superscript <span class="arithmatex">\((n)\)</span> in <span class="arithmatex">\(q_{ij}^{(n)}\)</span> exist precisely to prevent this confusion. When you see <span class="arithmatex">\(q_{ij}^{(n)}\)</span>, always think "entry of matrix power," never "scalar power."</p>
-<hr />
+<p>The quantity
+$$
+\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)}
+$$
+is exactly the <span class="arithmatex">\((i,j)\)</span> entry of the matrix product <span class="arithmatex">\(Q^mQ^n\)</span>.</p>
+<p>That is why matrix multiplication matches the probabilistic structure of Markov chains so perfectly.</p>
+<h1 id="worked-example-computing-q2-and-2-step-probabilities">Worked Example: Computing Q2 and 2-Step Probabilities<a class="headerlink" href="#worked-example-computing-q2-and-2-step-probabilities" title="Permanent link">&para;</a></h1>
+<p>Consider
+$$
+Q=
+\begin{pmatrix}
+0.5 &amp; 0.4 &amp; 0.1 \
+0.3 &amp; 0.2 &amp; 0.5 \
+0.2 &amp; 0.3 &amp; 0.5
+\end{pmatrix}.
+$$</p>
+<h2 id="computing-q2-explicitly">Computing Q2 Explicitly<a class="headerlink" href="#computing-q2-explicitly" title="Permanent link">&para;</a></h2>
+<h3 id="entry-11">Entry (1,1)<a class="headerlink" href="#entry-11" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{11}=(0.5)(0.5)+(0.4)(0.3)+(0.1)(0.2)=0.25+0.12+0.02=0.39.
+\]</div>
+<h3 id="entry-12">Entry (1,2)<a class="headerlink" href="#entry-12" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{12}=(0.5)(0.4)+(0.4)(0.2)+(0.1)(0.3)=0.20+0.08+0.03=0.31.
+\]</div>
+<h3 id="entry-13">Entry (1,3)<a class="headerlink" href="#entry-13" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{13}=(0.5)(0.1)+(0.4)(0.5)+(0.1)(0.5)=0.05+0.20+0.05=0.30.
+\]</div>
+<h3 id="entry-21">Entry (2,1)<a class="headerlink" href="#entry-21" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{21}=(0.3)(0.5)+(0.2)(0.3)+(0.5)(0.2)=0.15+0.06+0.10=0.31.
+\]</div>
+<h3 id="entry-22">Entry (2,2)<a class="headerlink" href="#entry-22" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{22}=(0.3)(0.4)+(0.2)(0.2)+(0.5)(0.3)=0.12+0.04+0.15=0.31.
+\]</div>
+<h3 id="entry-23">Entry (2,3)<a class="headerlink" href="#entry-23" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{23}=(0.3)(0.1)+(0.2)(0.5)+(0.5)(0.5)=0.03+0.10+0.25=0.38.
+\]</div>
+<h3 id="entry-31">Entry (3,1)<a class="headerlink" href="#entry-31" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{31}=(0.2)(0.5)+(0.3)(0.3)+(0.5)(0.2)=0.10+0.09+0.10=0.29.
+\]</div>
+<h3 id="entry-32">Entry (3,2)<a class="headerlink" href="#entry-32" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{32}=(0.2)(0.4)+(0.3)(0.2)+(0.5)(0.3)=0.08+0.06+0.15=0.29.
+\]</div>
+<h3 id="entry-33">Entry (3,3)<a class="headerlink" href="#entry-33" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(Q^2)_{33}=(0.2)(0.1)+(0.3)(0.5)+(0.5)(0.5)=0.02+0.15+0.25=0.42.
+\]</div>
+<p>So
+$$
+Q^2=
+\begin{pmatrix}
+0.39 &amp; 0.31 &amp; 0.30 \
+0.31 &amp; 0.31 &amp; 0.38 \
+0.29 &amp; 0.29 &amp; 0.42
+\end{pmatrix}.
+$$</p>
+<p>Each row sums to <span class="arithmatex">\(1\)</span>, as expected.</p>
+<h2 id="scenario-a-starting-from-state-1-reach-state-3-in-2-steps">Scenario A: Starting from State 1, Reach State 3 in 2 Steps<a class="headerlink" href="#scenario-a-starting-from-state-1-reach-state-3-in-2-steps" title="Permanent link">&para;</a></h2>
+<p>By the theorem,
+$$
+P(X_2=3 \mid X_0=1)=(Q^2)_{13}=0.30.
+$$</p>
+<p>By path decomposition,
+$$
+q_{13}^{(2)}=q_{11}q_{13}+q_{12}q_{23}+q_{13}q_{33}.
+$$</p>
+<p>Substitute:
+$$
+q_{13}^{(2)}=(0.5)(0.1)+(0.4)(0.5)+(0.1)(0.5)=0.05+0.20+0.05=0.30.
+$$</p>
+<p>The three paths are:
+- <span class="arithmatex">\(1 \to 1 \to 3\)</span>, probability <span class="arithmatex">\(0.05\)</span>
+- <span class="arithmatex">\(1 \to 2 \to 3\)</span>, probability <span class="arithmatex">\(0.20\)</span>
+- <span class="arithmatex">\(1 \to 3 \to 3\)</span>, probability <span class="arithmatex">\(0.05\)</span></p>
+<p>The most likely route is through state <span class="arithmatex">\(2\)</span>.</p>
+<h2 id="scenario-b-starting-from-state-2-reach-state-3-in-2-steps">Scenario B: Starting from State 2, Reach State 3 in 2 Steps<a class="headerlink" href="#scenario-b-starting-from-state-2-reach-state-3-in-2-steps" title="Permanent link">&para;</a></h2>
+<p>Again,
+$$
+P(X_2=3 \mid X_0=2)=(Q^2)_{23}=0.38.
+$$</p>
+<p>By path decomposition,
+$$
+q_{23}^{(2)}=q_{21}q_{13}+q_{22}q_{23}+q_{23}q_{33}.
+$$</p>
+<p>Substitute:
+$$
+q_{23}^{(2)}=(0.3)(0.1)+(0.2)(0.5)+(0.5)(0.5)=0.03+0.10+0.25=0.38.
+$$</p>
+<p>The three paths are:
+- <span class="arithmatex">\(2 \to 1 \to 3\)</span>, probability <span class="arithmatex">\(0.03\)</span>
+- <span class="arithmatex">\(2 \to 2 \to 3\)</span>, probability <span class="arithmatex">\(0.10\)</span>
+- <span class="arithmatex">\(2 \to 3 \to 3\)</span>, probability <span class="arithmatex">\(0.25\)</span></p>
+<p>The most likely route is through state <span class="arithmatex">\(3\)</span>.</p>
+<h2 id="intuition-after-the-example">Intuition After the Example<a class="headerlink" href="#intuition-after-the-example" title="Permanent link">&para;</a></h2>
+<p>The example makes the matrix interpretation concrete: each entry of <span class="arithmatex">\(Q^2\)</span> is a sum over all possible hidden middle states. The two-step probability is not the square of a single entry. It is a sum of route probabilities.</p>
+<h1 id="common-mistakes">Common Mistakes<a class="headerlink" href="#common-mistakes" title="Permanent link">&para;</a></h1>
+<h2 id="mistake-1-markov-does-not-mean-independent">Mistake 1: Markov Does Not Mean Independent<a class="headerlink" href="#mistake-1-markov-does-not-mean-independent" title="Permanent link">&para;</a></h2>
+<p>A Markov chain is not generally independent across time. The future often depends strongly on the present.</p>
+<p>For example,
+$$
+Q=
+\begin{pmatrix}
+0 &amp; 1 \
+1 &amp; 0
+\end{pmatrix}
+$$
+is perfectly Markov but maximally dependent: the chain alternates deterministically.</p>
+<h2 id="mistake-2-rows-and-columns-are-not-interchangeable">Mistake 2: Rows and Columns Are Not Interchangeable<a class="headerlink" href="#mistake-2-rows-and-columns-are-not-interchangeable" title="Permanent link">&para;</a></h2>
+<p>Rows represent the current state. Columns represent the next state.</p>
+<p>Transposing the matrix changes the meaning completely. It gives backward-looking probabilities rather than forward transition probabilities.</p>
+<h2 id="mistake-3-qn-does-not-mean-nq">Mistake 3: Qn Does Not Mean nQ<a class="headerlink" href="#mistake-3-qn-does-not-mean-nq" title="Permanent link">&para;</a></h2>
+<p><span class="arithmatex">\(Q^n\)</span> means repeated matrix multiplication, not scalar multiplication of every entry by <span class="arithmatex">\(n\)</span>.</p>
+<p>For example, if
+$$
+Q=
+\begin{pmatrix}
+0.5 &amp; 0.5 \
+0.5 &amp; 0.5
+\end{pmatrix},
+$$
+then <span class="arithmatex">\(Q^2=Q\)</span>, but
+$$
+2Q=
+\begin{pmatrix}
+1 &amp; 1 \
+1 &amp; 1
+\end{pmatrix},
+$$
+which is not stochastic.</p>
+<h2 id="mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present">Mistake 4: Future Independent of Past Does Not Mean Future Independent of Present<a class="headerlink" href="#mistake-4-future-independent-of-past-does-not-mean-future-independent-of-present" title="Permanent link">&para;</a></h2>
+<p>The Markov property says the future is independent of the past <strong>given the present</strong>. It does not say the future is independent of the present.</p>
+<p>That distinction matters whenever you compute a conditional probability versus a marginal one.</p>
+<h2 id="notation-trap">Notation Trap<a class="headerlink" href="#notation-trap" title="Permanent link">&para;</a></h2>
+<p>When you see
+$$
+q_{ij}^{(n)},
+$$
+the superscript <span class="arithmatex">\((n)\)</span> indicates an entry of <span class="arithmatex">\(Q^n\)</span>. It is not the scalar power <span class="arithmatex">\((q_{ij})^n\)</span>.</p>
+<p><strong>Dummy-index warning:</strong> in sums like
+$$
+\sum_{k=1}^M q_{ik}^{(m)}q_{kj}^{(n)},
+$$
+the index <span class="arithmatex">\(k\)</span> is temporary. It is not a fixed state like <span class="arithmatex">\(i\)</span> or <span class="arithmatex">\(j\)</span>.</p>
 <h1 id="looking-ahead">Looking Ahead<a class="headerlink" href="#looking-ahead" title="Permanent link">&para;</a></h1>
-<p>We have built the foundation of Markov chain theory: the Markov property, the transition matrix <span class="arithmatex">\(Q\)</span>, and the theorem that <span class="arithmatex">\(Q^n\)</span> encodes <span class="arithmatex">\(n\)</span>-step probabilities via Chapman-Kolmogorov.</p>
-<p>A natural question now arises: <strong>what happens as <span class="arithmatex">\(n \to \infty\)</span>?</strong> Does the chain's distribution stabilize? Does it converge? Does the chain forget where it started?</p>
-<p>For an irreducible, aperiodic, finite chain, the answer to all three is yes. The marginal distribution converges to a unique <strong>stationary distribution</strong> <span class="arithmatex">\(s\)</span> satisfying:</p>
-<div class="arithmatex">\[sQ = s, \quad s_i \geq 0, \quad \sum_i s_i = 1\]</div>
-<p>No matter where the chain started, the long-run behavior is the same — the chain "forgets" its initial conditions completely. This equation <span class="arithmatex">\(sQ = s\)</span> is an <strong>eigenvalue equation</strong>: <span class="arithmatex">\(s\)</span> is a left eigenvector of <span class="arithmatex">\(Q\)</span> with eigenvalue 1. The entire machinery of linear algebra — eigenvalues, spectral decomposition, the Perron-Frobenius theorem — becomes available.</p>
-<p>But convergence is not automatic. Two conditions are needed:</p>
-<ul>
-<li><strong>Irreducibility:</strong> every state is accessible from every other state (no isolated islands)</li>
-<li><strong>Aperiodicity:</strong> the chain does not oscillate on a rigid schedule (no forced alternation)</li>
-</ul>
-<p>A periodic chain oscillates forever and never settles. A reducible chain converges to different limits depending on where it started. Understanding why these conditions are necessary — and exactly what breaks when each is removed — is the subject of the classification of states.</p>
-<p><strong>Topics ahead:</strong></p>
+<p>If an initial distribution is <span class="arithmatex">\(t\)</span>, then the distribution after <span class="arithmatex">\(n\)</span> steps is
+$$
+tQ^n.
+$$</p>
+<p>A natural next question is whether the chain stabilizes as <span class="arithmatex">\(n\)</span> grows large. For finite irreducible aperiodic chains, the answer is yes: the distribution converges to a stationary distribution <span class="arithmatex">\(s\)</span> satisfying
+$$
+sQ=s.
+$$</p>
+<p>This is a left eigenvector equation with eigenvalue <span class="arithmatex">\(1\)</span>.</p>
+<p>Not every chain converges. Periodic chains can oscillate forever, and reducible chains can behave differently depending on where they start.</p>
+<p>Later topics include hitting times, absorption, expected return times, and reversibility.</p>
+<h2 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Topic</th>
-<th>Key question</th>
+<th>Element</th>
+<th>Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Classification of states</td>
-<td>Which states are recurrent (visited infinitely often) and which are transient (eventually escaped forever)?</td>
+<td>Structural Signature</td>
+<td>Repeated application of the same transition matrix to an initial distribution</td>
 </tr>
 <tr>
-<td>Period</td>
-<td>Is the chain locked to a rigid return schedule, or can it return at any time?</td>
+<td>Core Invariant</td>
+<td>Long-run behavior is encoded by fixed points of the update rule</td>
 </tr>
 <tr>
-<td>Stationary distribution</td>
-<td>What is the long-run fraction of time spent in each state?</td>
+<td>Compression Handle</td>
+<td>“Stationary means sQ = s”</td>
 </tr>
 <tr>
-<td>Convergence theorem</td>
-<td>When and how fast does <span class="arithmatex">\(Q^n\)</span> converge to a limiting matrix?</td>
+<td>Boundary / Failure Mode</td>
+<td>Periodicity or reducibility can prevent convergence</td>
 </tr>
 <tr>
-<td>Expected return times</td>
-<td>For recurrent states, how long on average between visits?</td>
-</tr>
-<tr>
-<td>Hitting times</td>
-<td>How long until the chain first reaches a target state?</td>
+<td>Phenomenon Web</td>
+<td>See the Transition Matrix Q block and the n-Step Transition Matrix Qn block</td>
 </tr>
 </tbody>
 </table>
@@ -5204,7 +5301,7 @@ $$P(\text{tomorrow} = \text{R} \mid \text{today} = (\text{S,R})) = 0.5\]</div>
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:58:59 UTC">June 24, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 12:09:59 UTC">June 24, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 15:09:51 UTC">June 24, 2026</span>
       </span>
     
   </aside>
