@@ -1,5 +1,5 @@
 ---
-title: DHTs: Chord, Pastry, and BitTorrent
+title: "DHTs: Chord, Pastry, and BitTorrent"
 ---
 
 # DHTs: Chord, Pastry, and BitTorrent

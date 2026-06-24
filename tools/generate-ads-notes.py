@@ -1418,9 +1418,8 @@ for week_folder, week_info in weeks_data.items():
     with open(os.path.join(week_path, "_chapter.yml"), "w", encoding="utf-8") as f:
         yaml.dump(chapter_meta, f, default_flow_style=False, sort_keys=False)
         
-    # Write README.md for the chapter
     readme_content = f"""---
-title: {week_info["title"]}
+title: "{week_info["title"]}"
 ---
 
 # {week_info["title"]}
