@@ -222,15 +222,15 @@ Imagine 100 players dropping into a map with 3 spawn zones. We want the absolute
 
 ```mermaid
 flowchart TD
-    Start([Lobby: 100 Players]) --> Z1[Zone 1\nt₁ = 0.60]
-    Start --> Z2[Zone 2\nt₂ = 0.40]
-    Start --> Z3[Zone 3\nt₃ = 0.00]
+    Start([Lobby: 100 Players]) --> Z1["Zone 1\nt₁ = 0.60"]
+    Start --> Z2["Zone 2\nt₂ = 0.40"]
+    Start --> Z3["Zone 3\nt₃ = 0.00"]
 
-    Z1 -- "P = 0.10" --> FC[Final Circle\nState 3]
+    Z1 -- "P = 0.10" --> FC["Final Circle\nState 3"]
     Z2 -- "P = 0.50" --> FC
     Z3 -- "P = 0.90" --> FC
 
-    Z1 -- "0.60 × 0.10 = 0.06" --> Sum[Sum = 0.06 + 0.20 + 0.00 = 0.26]
+    Z1 -- "0.60 × 0.10 = 0.06" --> Sum["Sum = 0.06 + 0.20 + 0.00 = 0.26"]
     Z2 -- "0.40 × 0.50 = 0.20" --> Sum
     Z3 -- "0.00 × 0.90 = 0.00" --> Sum
 ```
@@ -322,10 +322,10 @@ $$P = \begin{pmatrix} 0.5 & 0.4 & 0.1 \\ 0.3 & 0.2 & 0.5 \\ 0.2 & 0.3 & 0.5 \end
 
 ```mermaid
 graph TD
-    S1_start([Start: State 1]) --> P1[Path 1:\nStay in 1 then jump to 3\n0.5 × 0.1 = 0.05]
-    S1_start --> P2[Path 2:\nJump to 2 then jump to 3\n0.4 × 0.5 = 0.20]
-    S1_start --> P3[Path 3:\nJump to 3 then stay in 3\n0.1 × 0.5 = 0.05]
-    P1 --> Total1[Total = 0.05 + 0.20 + 0.05 = 0.30]
+    S1_start([Start: State 1]) --> P1["Path 1:\nStay in 1 then jump to 3\n0.5 × 0.1 = 0.05"]
+    S1_start --> P2["Path 2:\nJump to 2 then jump to 3\n0.4 × 0.5 = 0.20"]
+    S1_start --> P3["Path 3:\nJump to 3 then stay in 3\n0.1 × 0.5 = 0.05"]
+    P1 --> Total1["Total = 0.05 + 0.20 + 0.05 = 0.30"]
     P2 --> Total1
     P3 --> Total1
 ```
@@ -338,10 +338,10 @@ $$P(X_2 = 3 \mid X_0 = 1) = 0.05 + 0.20 + 0.05 = 0.30$$
 
 ```mermaid
 graph TD
-    S2_start([Start: State 2]) --> P1[Path 1:\nJump to 1 then jump to 3\n0.3 × 0.1 = 0.03]
-    S2_start --> P2[Path 2:\nStay in 2 then jump to 3\n0.2 × 0.5 = 0.10]
-    S2_start --> P3[Path 3:\nJump to 3 then stay in 3\n0.5 × 0.5 = 0.25]
-    P1 --> Total2[Total = 0.03 + 0.10 + 0.25 = 0.38]
+    S2_start([Start: State 2]) --> P1["Path 1:\nJump to 1 then jump to 3\n0.3 × 0.1 = 0.03"]
+    S2_start --> P2["Path 2:\nStay in 2 then jump to 3\n0.2 × 0.5 = 0.10"]
+    S2_start --> P3["Path 3:\nJump to 3 then stay in 3\n0.5 × 0.5 = 0.25"]
+    P1 --> Total2["Total = 0.03 + 0.10 + 0.25 = 0.38"]
     P2 --> Total2
     P3 --> Total2
 ```
@@ -417,8 +417,8 @@ Since a Geometric random variable **always takes a finite value**, this guarante
 flowchart TD
     Enter([Enter Transient State i]) --> Trial{Bernoulli Trial}
     Trial -- "Failure\nreturn to i\nMemoryless!" --> Enter
-    Trial -- "Success\np > 0\nLeave forever" --> Gone([Left State i\nForever])
-    Gone --> Note[Number of returns\n~ Geometric r.v.\nAlways finite!]
+    Trial -- "Success\np > 0\nLeave forever" --> Gone(["Left State i\nForever"])
+    Gone --> Note["Number of returns\n~ Geometric r.v.\nAlways finite!"]
 ```
 
 ---
@@ -777,12 +777,12 @@ The Chapman-Kolmogorov summation (summing over all parallel paths) is the exact 
 
 ```mermaid
 graph TD
-    MC[Markov Chain\nStates + Transitions] --> MRP[Markov Reward Process\n+ Rewards]
-    MRP --> MDP[Markov Decision Process\n+ Actions + Policy]
-    MDP --> PG[Policy Gradient\nObjective J_theta]
-    MDP --> BE[Bellman Equation\nValue Functions]
-    BE --> QL[Q-Learning]
-    BE --> PPO[PPO / Actor-Critic]
+    MC["Markov Chain\nStates + Transitions"] --> MRP["Markov Reward Process\n+ Rewards"]
+    MRP --> MDP["Markov Decision Process\n+ Actions + Policy"]
+    MDP --> PG["Policy Gradient\nObjective J_theta"]
+    MDP --> BE["Bellman Equation\nValue Functions"]
+    BE --> QL["Q-Learning"]
+    BE --> PPO["PPO / Actor-Critic"]
 
     MC -.->|"tQ^n = marginal\ndistribution"| MC
     MDP -.->|"J = Σ p_s0 × V_π\n= LOTP with rewards"| PG
