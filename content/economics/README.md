@@ -16,4 +16,4 @@ Economic principles and analytical frameworks.
 
 - Probability and statistics for inference
 - Optimization for economic problems
-- Game theory for strategic interaction
+- [[game-theory]] for strategic interaction
