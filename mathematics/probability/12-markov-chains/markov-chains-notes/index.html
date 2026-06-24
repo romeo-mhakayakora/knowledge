@@ -4461,15 +4461,15 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 </tbody>
 </table>
 <pre class="mermaid"><code>flowchart TD
-    Start([Lobby: 100 Players]) --&gt; Z1[Zone 1\nt₁ = 0.60]
-    Start --&gt; Z2[Zone 2\nt₂ = 0.40]
-    Start --&gt; Z3[Zone 3\nt₃ = 0.00]
+    Start([Lobby: 100 Players]) --&gt; Z1["Zone 1\nt₁ = 0.60"]
+    Start --&gt; Z2["Zone 2\nt₂ = 0.40"]
+    Start --&gt; Z3["Zone 3\nt₃ = 0.00"]
 
-    Z1 -- "P = 0.10" --&gt; FC[Final Circle\nState 3]
+    Z1 -- "P = 0.10" --&gt; FC["Final Circle\nState 3"]
     Z2 -- "P = 0.50" --&gt; FC
     Z3 -- "P = 0.90" --&gt; FC
 
-    Z1 -- "0.60 × 0.10 = 0.06" --&gt; Sum[Sum = 0.06 + 0.20 + 0.00 = 0.26]
+    Z1 -- "0.60 × 0.10 = 0.06" --&gt; Sum["Sum = 0.06 + 0.20 + 0.00 = 0.26"]
     Z2 -- "0.40 × 0.50 = 0.20" --&gt; Sum
     Z3 -- "0.00 × 0.90 = 0.00" --&gt; Sum</code></pre>
 <blockquote>
@@ -4566,10 +4566,10 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <div class="arithmatex">\[P = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}\]</div>
 <p><strong>Scenario A — Starting from State 1, reach State 3 in 2 steps:</strong></p>
 <pre class="mermaid"><code>graph TD
-    S1_start([Start: State 1]) --&gt; P1[Path 1:\nStay in 1 then jump to 3\n0.5 × 0.1 = 0.05]
-    S1_start --&gt; P2[Path 2:\nJump to 2 then jump to 3\n0.4 × 0.5 = 0.20]
-    S1_start --&gt; P3[Path 3:\nJump to 3 then stay in 3\n0.1 × 0.5 = 0.05]
-    P1 --&gt; Total1[Total = 0.05 + 0.20 + 0.05 = 0.30]
+    S1_start([Start: State 1]) --&gt; P1["Path 1:\nStay in 1 then jump to 3\n0.5 × 0.1 = 0.05"]
+    S1_start --&gt; P2["Path 2:\nJump to 2 then jump to 3\n0.4 × 0.5 = 0.20"]
+    S1_start --&gt; P3["Path 3:\nJump to 3 then stay in 3\n0.1 × 0.5 = 0.05"]
+    P1 --&gt; Total1["Total = 0.05 + 0.20 + 0.05 = 0.30"]
     P2 --&gt; Total1
     P3 --&gt; Total1</code></pre>
 <div class="arithmatex">\[P(X_2 = 3 \mid X_0 = 1) = 0.05 + 0.20 + 0.05 = 0.30\]</div>
@@ -4578,10 +4578,10 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 </blockquote>
 <p><strong>Scenario B — Starting from State 2, reach State 3 in 2 steps:</strong></p>
 <pre class="mermaid"><code>graph TD
-    S2_start([Start: State 2]) --&gt; P1[Path 1:\nJump to 1 then jump to 3\n0.3 × 0.1 = 0.03]
-    S2_start --&gt; P2[Path 2:\nStay in 2 then jump to 3\n0.2 × 0.5 = 0.10]
-    S2_start --&gt; P3[Path 3:\nJump to 3 then stay in 3\n0.5 × 0.5 = 0.25]
-    P1 --&gt; Total2[Total = 0.03 + 0.10 + 0.25 = 0.38]
+    S2_start([Start: State 2]) --&gt; P1["Path 1:\nJump to 1 then jump to 3\n0.3 × 0.1 = 0.03"]
+    S2_start --&gt; P2["Path 2:\nStay in 2 then jump to 3\n0.2 × 0.5 = 0.10"]
+    S2_start --&gt; P3["Path 3:\nJump to 3 then stay in 3\n0.5 × 0.5 = 0.25"]
+    P1 --&gt; Total2["Total = 0.03 + 0.10 + 0.25 = 0.38"]
     P2 --&gt; Total2
     P3 --&gt; Total2</code></pre>
 <div class="arithmatex">\[P(X_2 = 3 \mid X_0 = 2) = 0.03 + 0.10 + 0.25 = 0.38\]</div>
@@ -4649,8 +4649,8 @@ $$Q^n = \text{PMFs for exactly } n \text{ steps into the future}\]</div>
 <pre class="mermaid"><code>flowchart TD
     Enter([Enter Transient State i]) --&gt; Trial{Bernoulli Trial}
     Trial -- "Failure\nreturn to i\nMemoryless!" --&gt; Enter
-    Trial -- "Success\np &gt; 0\nLeave forever" --&gt; Gone([Left State i\nForever])
-    Gone --&gt; Note[Number of returns\n~ Geometric r.v.\nAlways finite!]</code></pre>
+    Trial -- "Success\np &gt; 0\nLeave forever" --&gt; Gone(["Left State i\nForever"])
+    Gone --&gt; Note["Number of returns\n~ Geometric r.v.\nAlways finite!"]</code></pre>
 <hr />
 <h2 id="proposition-1124-irreducible-chains">Proposition 11.2.4 — Irreducible Chains<a class="headerlink" href="#proposition-1124-irreducible-chains" title="Permanent link">&para;</a></h2>
 <p><strong>Proposition:</strong> In an <strong>irreducible</strong> Markov chain with a <strong>finite state space</strong>, all states are recurrent.</p>
@@ -5020,12 +5020,12 @@ $$P(\text{stay at } k) = \frac{k}{C} \quad \text{(get a duplicate)}\]</div>
 - <strong>Monte Carlo Methods:</strong> Averaging over entire episode trajectories
 - <strong>The Bellman Equation:</strong> Recursively computing value functions by conditioning on the current state</p>
 <pre class="mermaid"><code>graph TD
-    MC[Markov Chain\nStates + Transitions] --&gt; MRP[Markov Reward Process\n+ Rewards]
-    MRP --&gt; MDP[Markov Decision Process\n+ Actions + Policy]
-    MDP --&gt; PG[Policy Gradient\nObjective J_theta]
-    MDP --&gt; BE[Bellman Equation\nValue Functions]
-    BE --&gt; QL[Q-Learning]
-    BE --&gt; PPO[PPO / Actor-Critic]
+    MC["Markov Chain\nStates + Transitions"] --&gt; MRP["Markov Reward Process\n+ Rewards"]
+    MRP --&gt; MDP["Markov Decision Process\n+ Actions + Policy"]
+    MDP --&gt; PG["Policy Gradient\nObjective J_theta"]
+    MDP --&gt; BE["Bellman Equation\nValue Functions"]
+    BE --&gt; QL["Q-Learning"]
+    BE --&gt; PPO["PPO / Actor-Critic"]
 
     MC -.-&gt;|"tQ^n = marginal\ndistribution"| MC
     MDP -.-&gt;|"J = Σ p_s0 × V_π\n= LOTP with rewards"| PG</code></pre>
@@ -5623,7 +5623,7 @@ $$P(k \to k+1) = \frac{C-k}{C} \quad \text{(new toy)}\]</div>
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 05:41:46 UTC">June 20, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 23, 2026 09:04:27 UTC">June 23, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:39:02 UTC">June 24, 2026</span>
       </span>
     
   </aside>
