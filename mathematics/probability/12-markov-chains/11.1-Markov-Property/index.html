@@ -5647,7 +5647,7 @@
 - Has no simple eigenvalue characterization
 - Requires storing <span class="arithmatex">\(n\)</span> distinct matrices instead of 1
 - Makes stationary distributions impossible to define in the same form (the equation <span class="arithmatex">\(sQ = s\)</span> requires a single <span class="arithmatex">\(Q\)</span>)</p>
-<p><strong>Concrete example:</strong> Suppose <span class="arithmatex">\(Q_n = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span> for even <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(Q_n = I\)</span> for odd <span class="arithmatex">\(n\)</span>. Then the 2-step transition probability from State 1 to State 1 depends on whether you start at an even or odd step. There is no universal <span class="arithmatex">\(Q^2\)</span> matrix. Starting at step 0, <span class="arithmatex">\(Q_0 Q_1 = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} \cdot \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>, so State 1 goes to State 2. But starting at step 1, <span class="arithmatex">\(Q_1 Q_2 = I \cdot \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span>, which also sends State 1 to State 2. Wait — in this particular example, the alternating pattern happens to give the same result. But now consider <span class="arithmatex">\(Q_n = \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix}\)</span> for even <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(Q_n = \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix}\)</span> for odd <span class="arithmatex">\(n\)</span>. Starting at step 0: <span class="arithmatex">\(Q_0 Q_1 = \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix} \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix} = \begin{pmatrix} 0.18 &amp; 0.82 \\ 0.82 &amp; 0.18 \end{pmatrix}\)</span>. Starting at step 1: <span class="arithmatex">\(Q_1 Q_2 = \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix} \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix} = \begin{pmatrix} 0.18 &amp; 0.82 \\ 0.82 &amp; 0.18 \end{pmatrix}\)</span>. So the two-step probability is the same by coincidence of the alternating pattern — but this is a special property of this pair. In general, <span class="arithmatex">\(Q_m Q_{m+1}\)</span> depends on <span class="arithmatex">\(m\)</span>, and no single "<span class="arithmatex">\(Q^2\)</span>" exists.</p>
+<p><strong>Concrete example:</strong> Suppose <span class="arithmatex">\(Q_n = \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix}\)</span> for even <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(Q_n = \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix}\)</span> for odd <span class="arithmatex">\(n\)</span>. Starting at step 0: <span class="arithmatex">\(Q_0 Q_1 = \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix} \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix} = \begin{pmatrix} 0.18 &amp; 0.82 \\ 0.82 &amp; 0.18 \end{pmatrix}\)</span>. Starting at step 1: <span class="arithmatex">\(Q_1 Q_2 = \begin{pmatrix} 0.1 &amp; 0.9 \\ 0.9 &amp; 0.1 \end{pmatrix} \begin{pmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{pmatrix} = \begin{pmatrix} 0.18 &amp; 0.82 \\ 0.82 &amp; 0.18 \end{pmatrix}\)</span>. In this particular pair the products happen to coincide, but change the off-diagonal entries slightly — say, use <span class="arithmatex">\(0.8\)</span> instead of <span class="arithmatex">\(0.9\)</span> for the even-step matrix — and the two-step transition probability depends on whether you started at an even or odd step. There is no universal "<span class="arithmatex">\(Q^2\)</span>" matrix.</p>
 <hr />
 <h2 id="the-markov-property">The Markov Property<a class="headerlink" href="#the-markov-property" title="Permanent link">&para;</a></h2>
 <p>For all states <span class="arithmatex">\(i_0, i_1, \ldots, i_{n-1}, i, j\)</span>, the <strong>Markov property</strong> states:</p>
@@ -5696,11 +5696,16 @@
 <p>Rows correspond to the <strong>current state</strong>. Columns correspond to the <strong>next state</strong>.</p>
 <h3 id="example-3-state-system">Example — 3-State System<a class="headerlink" href="#example-3-state-system" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[Q = \begin{pmatrix} 0.5 &amp; 0.4 &amp; 0.1 \\ 0.3 &amp; 0.2 &amp; 0.5 \\ 0.2 &amp; 0.3 &amp; 0.5 \end{pmatrix}\]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>         To State 1  To State 2  To State 3
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>From 1:    0.5          0.4          0.1
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>From 2:    0.3          0.2          0.5
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>From 3:    0.2          0.3          0.5
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    S1(("State 1")) -- "0.5" --&gt; S1
+    S1 -- "0.4" --&gt; S2(("State 2"))
+    S1 -- "0.1" --&gt; S3(("State 3"))
+    S2 -- "0.3" --&gt; S1
+    S2 -- "0.2" --&gt; S2
+    S2 -- "0.5" --&gt; S3
+    S3 -- "0.2" --&gt; S1
+    S3 -- "0.3" --&gt; S2
+    S3 -- "0.5" --&gt; S3</code></pre>
 <p>Row 1 describes movement from State 1. Row 2 from State 2. Row 3 from State 3.</p>
 <h3 id="why-rows-sum-to-1">Why Rows Sum to 1<a class="headerlink" href="#why-rows-sum-to-1" title="Permanent link">&para;</a></h3>
 <p>Fix a state <span class="arithmatex">\(i\)</span>. After one step the chain must move somewhere. The possible destinations are <span class="arithmatex">\(1, 2, \ldots, M\)</span>. These outcomes are:</p>
@@ -5963,7 +5968,7 @@
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:58:59 UTC">June 24, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 08:14:07 UTC">June 24, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 08:29:42 UTC">June 24, 2026</span>
       </span>
     
   </aside>
