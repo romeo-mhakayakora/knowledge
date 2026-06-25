@@ -7,11 +7,9 @@ from datetime import datetime, date, timedelta
 # (_concepts) are excluded from domain listings and counts.
 DOMAIN_FOLDERS = {
     'ai',
-    'business',
     'computer-science',
     'economics',
     'mathematics',
-    'physics',
     'systems',
 }
 
@@ -34,17 +32,9 @@ DOMAIN_META = {
         'icon': '↗',
         'description': 'Microeconomics, macroeconomics, game theory, and econometrics.',
     },
-    'physics': {
-        'icon': 'λ',
-        'description': 'Classical mechanics, quantum mechanics, thermodynamics, and electromagnetism.',
-    },
     'systems': {
         'icon': '⊞',
         'description': 'Complex systems, network science, and systems thinking.',
-    },
-    'business': {
-        'icon': '◇',
-        'description': 'Strategy, finance, operations, and organizational design.',
     },
 }
 

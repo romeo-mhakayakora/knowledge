@@ -136,9 +136,8 @@ subject/
 | **Computer Science** | Computing fundamentals | Algorithms, systems, databases |
 | **AI** | Artificial intelligence & ML | Deep learning, NLP, computer vision |
 | **Economics** | Economic principles | Micro, macro, econometrics |
-| **Physics** | Physical sciences | Mechanics, quantum, thermodynamics |
 | **Systems** | Complex adaptive systems | Networks, emergence, chaos |
-| **Business** | Organizational knowledge | Strategy, finance, management |
+
 
 Each domain:
 - Has its own folder under `content/`
@@ -165,7 +164,7 @@ Truly cross-domain concepts live in `content/_concepts/`:
 - `information-theory.md` — Relevant to AI, CS, Economics
 - `optimization.md` — Used in multiple domains
 - `graph-theory.md` — Foundation for CS, Networks, AI
-- `time-series.md` — Economics, Physics, Systems
+- `time-series.md` — Economics, Systems
 
 ### Linking Strategy
 

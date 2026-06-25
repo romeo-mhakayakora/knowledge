@@ -87,9 +87,8 @@ GitHub Actions will automatically build and deploy.
 - **Computer Science:** Algorithms, operating systems, distributed systems, databases, networks
 - **AI:** Deep learning, NLP, computer vision, reinforcement learning, LLMs
 - **Economics:** Microeconomics, macroeconomics, econometrics
-- **Physics:** Classical mechanics, quantum mechanics, thermodynamics
 - **Systems:** Complex systems, network science
-- **Business:** Strategy, finance, organization
+
 
 ## Standards
 

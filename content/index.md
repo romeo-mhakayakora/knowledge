@@ -11,7 +11,7 @@ hide:
   <div class="hero-inner">
     <div class="hero-badge">Personal Knowledge System</div>
     <h1 class="hero-title">Knowledge</h1>
-    <p class="hero-subtitle">A multi-domain learning repository spanning mathematics, computer science, AI, economics, physics, systems, and business — organized for deep, connected understanding.</p>
+    <p class="hero-subtitle">A multi-domain learning repository spanning mathematics, computer science, AI, economics, and systems — organized for deep, connected understanding.</p>
     <div class="hero-stats">
       <div class="hero-stat">
         <span class="hero-stat-value">{{ stats.notes }}</span>
