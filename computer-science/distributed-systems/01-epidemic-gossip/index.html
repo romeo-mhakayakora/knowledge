@@ -6978,8 +6978,49 @@
 <p>In an unstructured network, if you want to multicast a message to a group of nodes, you face two problems:</p>
 <ol>
 <li><strong>You do not know all nodes</strong>, so you cannot send directly to everyone.</li>
-<li><strong>Flooding is exponential</strong>: if every node forwards to all its neighbors, the message count explodes. With <span class="arithmatex">\(n\)</span> nodes each forwarding to <span class="arithmatex">\(d\)</span> neighbors, the number of messages grows as <span class="arithmatex">\(O(d^h)\)</span> where <span class="arithmatex">\(h\)</span> is the hop count.</li>
+<li><strong>Flooding is exponential</strong>: if every node forwards to all its neighbors, the message count explodes.</li>
 </ol>
+<h4 id="proving-the-exponential-growth-of-flooding-odh">Proving the Exponential Growth of Flooding: O(d^h)<a class="headerlink" href="#proving-the-exponential-growth-of-flooding-odh" title="Permanent link">&para;</a></h4>
+<p>With <span class="arithmatex">\(n\)</span> nodes each forwarding to <span class="arithmatex">\(d\)</span> neighbors, the number of messages grows as <span class="arithmatex">\(O(d^h)\)</span> where <span class="arithmatex">\(h\)</span> is the hop count. Here is the step-by-step proof:</p>
+<p><strong>Hop-by-hop derivation (assuming a tree topology with no cycle detection):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Hop</th>
+<th>Senders</th>
+<th>Messages sent at this hop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1 (the source)</td>
+<td><span class="arithmatex">\(d^1\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(d\)</span> nodes</td>
+<td><span class="arithmatex">\(d^2\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(d^2\)</span> nodes</td>
+<td><span class="arithmatex">\(d^3\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(h\)</span></td>
+<td><span class="arithmatex">\(d^{h-1}\)</span> nodes</td>
+<td><span class="arithmatex">\(d^h\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Summing across all hops gives a geometric series:</p>
+<div class="arithmatex">\[M = d^1 + d^2 + d^3 + \cdots + d^h = d \cdot \frac{d^h - 1}{d - 1}\]</div>
+<p>The dominant term is <span class="arithmatex">\(d^h\)</span>, so <span class="arithmatex">\(M = O(d^h)\)</span> — <strong>exponential in the hop count</strong>.</p>
+<blockquote>
+<p><strong>Critical conceptual trap</strong>: <span class="arithmatex">\(d\)</span> is a <strong>fixed property of each individual node</strong> — it represents the number of neighbors that one node has (like the number of cables plugged into a router). It does NOT grow as the tree expands. What grows exponentially is the <strong>number of active senders</strong> across the network (<span class="arithmatex">\(d^{h-1}\)</span> senders at hop <span class="arithmatex">\(h\)</span>), not the workload of any single node. Every individual node always sends exactly <span class="arithmatex">\(d\)</span> messages. Mixing these two up is the most common source of algebra errors (e.g., mistakenly computing <span class="arithmatex">\(d^4\)</span> at hop 3).</p>
+</blockquote>
+<p><strong>Why flooding still fails even with <span class="arithmatex">\(O(d^h)\)</span>:</strong> the number of messages will rapidly exceed <span class="arithmatex">\(n\)</span> (causing a "broadcast storm") unless the protocol uses strict state-tracking (e.g., a Time-To-Live counter or a cache of seen message IDs) to terminate the flood.</p>
 <p>Furthermore, there is no guarantee that flooding reaches every node. The network might have disconnected components, or the flood might die out in a sparse region.</p>
 <h3 id="what-would-break-without-this-abstraction">What Would Break Without This Abstraction?<a class="headerlink" href="#what-would-break-without-this-abstraction" title="Permanent link">&para;</a></h3>
 <p>If every node knew every other node (a complete graph), then direct mail would suffice and epidemic protocols would be unnecessary. The entire problem space collapses. The overlay abstraction is what creates the need for probabilistic dissemination.</p>
@@ -7029,7 +7070,53 @@
 <p>What to look for: a replicated system over an unstructured network where updates must propagate to all nodes, but no node has global knowledge.</p>
 <p>Why you care: this is the classic setting where epidemic algorithms outperform deterministic flooding.</p>
 <h3 id="intuition-before-the-formalism">Intuition Before the Formalism<a class="headerlink" href="#intuition-before-the-formalism" title="Permanent link">&para;</a></h3>
-<p>Think of an update as a virus. If one person has it and tells random people, and they tell random people, the information spreads like an epidemic. The key insight from epidemiology is that random contact is sufficient for near-universal infection, provided the contact rate is high enough. The same mathematics governs both biological epidemics and database updates.</p>
+<p>Think of an update as a virus. If one person has it and tells random people, and they tell random people, the information spreads like an epidemic.</p>
+<h4 id="why-this-analogy-is-mathematically-precise">Why This Analogy Is Mathematically Precise<a class="headerlink" href="#why-this-analogy-is-mathematically-precise" title="Permanent link">&para;</a></h4>
+<p>Both biological epidemics and database update propagation share the same underlying structure:</p>
+<table>
+<thead>
+<tr>
+<th>Epidemiology</th>
+<th>Database Systems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Infected individual</td>
+<td>Node with new update</td>
+</tr>
+<tr>
+<td>Susceptible individual</td>
+<td>Node with stale data</td>
+</tr>
+<tr>
+<td>Contact rate (<span class="arithmatex">\(\beta\)</span>)</td>
+<td>Gossip frequency / peer selection rate</td>
+</tr>
+<tr>
+<td>Recovery/removed state</td>
+<td>Node marked as "updated" (stops spreading)</td>
+</tr>
+<tr>
+<td>Herd immunity threshold</td>
+<td>Quorum / consistency threshold</td>
+</tr>
+</tbody>
+</table>
+<p>The key epidemiological result is the <strong>basic reproduction number</strong> <span class="arithmatex">\(R_0\)</span>:</p>
+<div class="arithmatex">\[R_0 = d \cdot p \cdot T &gt; 1\]</div>
+<p>Where:
+- <span class="arithmatex">\(d\)</span> = number of neighbors contacted per round
+- <span class="arithmatex">\(p\)</span> = probability of successful transmission
+- <span class="arithmatex">\(T\)</span> = fraction of neighbors still susceptible (don't have the update yet)</p>
+<p>If <span class="arithmatex">\(R_0 &gt; 1\)</span>, the infection spreads exponentially through the population and reaches near-universal coverage — even with purely random contact. You do not need carefully choreographed transmission chains or any central coordination.</p>
+<p><strong>The phase transition</strong>: the critical transition happens sharply at <span class="arithmatex">\(R_0 = 1\)</span>. Below it, the infection dies out. Above it, exponential growth sweeps the population. There is no gradual middle ground — it is a phase transition. This is why the epidemiology analogy is mathematically precise, not merely poetic.</p>
+<p><strong>Saturation</strong>: once a significant fraction of the network is updated, <span class="arithmatex">\(T \to 0\)</span> and growth slows from exponential to logistic. The early exponential regime only holds before the network "fills up."</p>
+<h4 id="the-correct-mental-picture">The Correct Mental Picture<a class="headerlink" href="#the-correct-mental-picture" title="Permanent link">&para;</a></h4>
+<p>Random contact is sufficient for near-universal infection, provided the contact rate is high enough. Specifically, you need:
+1. Each "infected" node to contact <strong>enough others</strong> while still "contagious"
+2. Those contacts to be <strong>random enough</strong> that they don't keep hitting already-infected nodes</p>
+<p>If both conditions hold, the update propagates to near-universal coverage through pure local interaction. The randomness is not a bug — it is the feature that makes the system resilient to failures, churn, and scale. If any single node or link fails, the "epidemic" routes around it through other random contacts.</p>
 <h3 id="phenomenon-metadata_1">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -7064,17 +7151,274 @@
 <hr />
 <h2 id="three-mechanisms-direct-mail-anti-entropy-and-rumor-mongering">Three Mechanisms: Direct Mail, Anti-Entropy, and Rumor Mongering<a class="headerlink" href="#three-mechanisms-direct-mail-anti-entropy-and-rumor-mongering" title="Permanent link">&para;</a></h2>
 <h3 id="direct-mail">Direct Mail<a class="headerlink" href="#direct-mail" title="Permanent link">&para;</a></h3>
-<p><strong>Mechanism</strong>: each update is sent from the originating site to all other sites.</p>
-<p><strong>Why it fails in large unstructured networks</strong>:
-- Not every node knows every other node (membership problem)
-- Message queues can overflow
-- Traffic is <span class="arithmatex">\(O(n)\)</span> per update from the source, and <span class="arithmatex">\(O(n \cdot \text{average distance})\)</span> total
-- Sequential sending is slow over a slow network</p>
-<p>Direct mail is the baseline. It is reliable when it works, but it does not scale.</p>
+<p><strong>Mechanism</strong>: each update is sent from the originating site to <strong>all</strong> other sites directly.</p>
+<h4 id="is-direct-mail-an-epidemic-protocol">Is Direct Mail an Epidemic Protocol?<a class="headerlink" href="#is-direct-mail-an-epidemic-protocol" title="Permanent link">&para;</a></h4>
+<p><strong>No — direct mail is the opposite of an epidemic protocol.</strong> The distinction is fundamental:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Direct Mail</th>
+<th>Epidemic / Gossip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who spreads?</td>
+<td>Only the originator</td>
+<td>Every node that receives the update</td>
+</tr>
+<tr>
+<td>How many contacts?</td>
+<td><span class="arithmatex">\(n-1\)</span> (everyone)</td>
+<td><span class="arithmatex">\(k\)</span> (small constant, e.g., 2–4)</td>
+</tr>
+<tr>
+<td>Work distribution</td>
+<td>Centralized at one node</td>
+<td>Distributed across the network</td>
+</tr>
+<tr>
+<td>Scalability</td>
+<td><span class="arithmatex">\(O(n)\)</span> per node, fails</td>
+<td><span class="arithmatex">\(O(1)\)</span> per node, succeeds</td>
+</tr>
+<tr>
+<td>Secondary transmission</td>
+<td>None — receivers are passive</td>
+<td>Every receiver becomes a new spreader</td>
+</tr>
+</tbody>
+</table>
+<p>An epidemic algorithm requires that each infected individual <strong>becomes a new spreader</strong>. In direct mail, only the originator sends. Recipients receive and stop — there is no secondary transmission. This is like a virus where only patient zero is contagious and everyone they infect is immediately quarantined. The "epidemic" dies in one hop.</p>
+<p><strong>The right physical mail analogy</strong>: direct mail is a marketing campaign where one sender prints <span class="arithmatex">\(n\)</span> flyers and pays for <span class="arithmatex">\(n\)</span> stamps. The <strong>epidemic equivalent</strong> in physical mail is the <strong>chain letter</strong>: "Copy this letter and send it to 5 friends." The original creator only pays for 5 stamps. Because every receiver becomes a new sender, the message explodes through the network without the originator doing any extra work.</p>
+<h4 id="why-direct-mail-fails-in-large-unstructured-networks">Why Direct Mail Fails in Large Unstructured Networks<a class="headerlink" href="#why-direct-mail-fails-in-large-unstructured-networks" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Membership problem</td>
+<td>To send to everyone, you need to know who "everyone" is. Maintaining a complete, current membership list is itself a hard distributed problem.</td>
+</tr>
+<tr>
+<td>Message queue overflow</td>
+<td>Multiple nodes simultaneously trying to push updates to thousands of others overwhelms both outbound buffers and recipients' inbound queues. Note: it is not just one node doing this — it is many nodes, each doing it independently.</td>
+</tr>
+<tr>
+<td>Traffic is <span class="arithmatex">\(O(n)\)</span> per update</td>
+<td>See proof below.</td>
+</tr>
+<tr>
+<td>Sequential sending is slow</td>
+<td>Sending one-by-one means the last node learns of the update much later than the first — high latency tail.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="proving-traffic-is-on-per-update-and-on2-in-aggregate">Proving Traffic is O(n) Per Update — and O(n²) in Aggregate<a class="headerlink" href="#proving-traffic-is-on-per-update-and-on2-in-aggregate" title="Permanent link">&para;</a></h4>
+<p><strong>Single update, single source:</strong></p>
+<p>A network has <span class="arithmatex">\(n\)</span> nodes. One node originates an update and sends it directly to every other node:</p>
+<div class="arithmatex">\[\text{Messages per update} = n - 1 = O(n)\]</div>
+<p><strong>When every node generates updates:</strong></p>
+<p>Suppose each of <span class="arithmatex">\(n\)</span> nodes generates 1 update per second. Each update triggers <span class="arithmatex">\(O(n)\)</span> messages from its source:</p>
+<div class="arithmatex">\[\text{Total messages/sec} = n \times (n-1) = n^2 - n = O(n^2)\]</div>
+<table>
+<thead>
+<tr>
+<th>Nodes (<span class="arithmatex">\(n\)</span>)</th>
+<th>Gossip (<span class="arithmatex">\(k=3\)</span>)</th>
+<th>Direct Mail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>30 msgs/sec</td>
+<td>90 msgs/sec</td>
+</tr>
+<tr>
+<td>1,000</td>
+<td>3,000 msgs/sec</td>
+<td>~1 million msgs/sec</td>
+</tr>
+<tr>
+<td>10,000</td>
+<td>30,000 msgs/sec</td>
+<td>~100 million msgs/sec</td>
+</tr>
+<tr>
+<td>100,000</td>
+<td>300,000 msgs/sec</td>
+<td>~10 billion msgs/sec</td>
+</tr>
+</tbody>
+</table>
+<p>The difference grows to <strong>three orders of magnitude</strong> at scale. This is not merely inefficient — it is operationally impossible. Direct mail violates a fundamental design principle: <strong>work must not concentrate at any single point</strong>.</p>
+<blockquote>
+<p><strong>One-liner intuition</strong>: Direct mail is like patient zero personally visiting every person in a city of 10 million to infect them. They would never finish (sequential visits take forever), collapse from exhaustion (buffer overflow), and not even know where everyone lives (membership problem). Gossip protocols fix this by letting every person patient zero infects become a new spreader — the epidemic does the work, not one node.</p>
+</blockquote>
+<p><strong>Why it fails at the epidemic test specifically</strong>: in a real epidemic, the infected population itself becomes the transmission infrastructure. The disease does not need a central post office — it uses the people it has already infected as delivery agents. Direct mail has no such delegation. It is centralized by design, and centralization is exactly what epidemic protocols were invented to eliminate.</p>
 <h3 id="anti-entropy">Anti-Entropy<a class="headerlink" href="#anti-entropy" title="Permanent link">&para;</a></h3>
 <p><strong>Mechanism</strong>: choose a site at random and synchronize database contents by exchanging updates.</p>
 <p><strong>Key property</strong>: this is a <strong>simple epidemic</strong> — it has no built-in termination mechanism. It runs forever, continuously reconciling state.</p>
 <p><strong>Trade-off</strong>: slower than direct mail for a single update, but robust and eventually consistent.</p>
+<h4 id="why-is-it-called-anti-entropy-entropy-is-disorder-doesnt-this-algorithm-create-it">Why Is It Called "Anti-Entropy"? (Entropy Is Disorder — Doesn't This Algorithm Create It?)<a class="headerlink" href="#why-is-it-called-anti-entropy-entropy-is-disorder-doesnt-this-algorithm-create-it" title="Permanent link">&para;</a></h4>
+<p>The name can seem backwards. Here is the resolution:</p>
+<p>In thermodynamics and information theory, <strong>entropy</strong> is the natural tendency toward disorder. Left alone, things fall apart. In a distributed database, entropy is the drift that happens automatically: replicas diverge as updates arrive at different sites at different times, nodes fail, network partitions occur. <strong>Entropy is the default state — it happens without any work.</strong></p>
+<p>"Anti-entropy" means <strong>anti-disorder</strong>. The algorithm does not encourage disorder — it recognizes that disorder is inevitable and continuously works to reverse it:</p>
+<table>
+<thead>
+<tr>
+<th>Physical System</th>
+<th>Distributed Database</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entropy: a room gets messy on its own</td>
+<td>Entropy: replicas diverge on their own</td>
+</tr>
+<tr>
+<td>Anti-entropy: you clean the room</td>
+<td>Anti-entropy: the algorithm repairs divergence</td>
+</tr>
+<tr>
+<td>Cleaning requires effort</td>
+<td>Repair requires communication</td>
+</tr>
+</tbody>
+</table>
+<p>The name describes <strong>what it fights against</strong>, not what it promotes.</p>
+<h4 id="why-anti-entropy-is-a-simple-epidemic">Why Anti-Entropy Is a "Simple Epidemic"<a class="headerlink" href="#why-anti-entropy-is-a-simple-epidemic" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Anti-Entropy</th>
+<th>Full Gossip / Rumor Mongering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Random contact</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Transmission upon contact</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>New spreaders become active</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Built-in termination</td>
+<td><strong>No</strong></td>
+<td>Usually yes</td>
+</tr>
+</tbody>
+</table>
+<p>The key difference is the absence of termination. In a typical gossip protocol for a single update, propagation slows once enough nodes have it. Anti-entropy <strong>never stops</strong> — it keeps running because the system is always receiving new updates, nodes are always failing, and entropy never sleeps.</p>
+<h4 id="the-o1-per-node-per-round-property">The O(1) Per-Node Per-Round Property<a class="headerlink" href="#the-o1-per-node-per-round-property" title="Permanent link">&para;</a></h4>
+<p>This is a critical scalability property. In each round of anti-entropy:
+- Each node is paired with <strong>exactly one other</strong> node (randomly)
+- They exchange only the updates the other is missing
+- The maximum updates that can be sent is bounded by the total number of updates — a <strong>constant</strong>, independent of how many nodes exist</p>
+<div class="arithmatex">\[\text{Messages per node per round} \leq \text{total updates} = O(1)\]</div>
+<p>Empirical confirmation: simulations show the per-node load is essentially the same whether the network has 20 nodes or 500 nodes — approximately 1.6–1.7 messages per node per round regardless of <span class="arithmatex">\(n\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Network Size</th>
+<th>Avg Messages / Node / Round</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20 nodes</td>
+<td>~1.70</td>
+</tr>
+<tr>
+<td>50 nodes</td>
+<td>~1.68</td>
+</tr>
+<tr>
+<td>100 nodes</td>
+<td>~1.63</td>
+</tr>
+<tr>
+<td>500 nodes</td>
+<td>~1.69</td>
+</tr>
+</tbody>
+</table>
+<p>Contrast with direct mail:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Direct Mail</th>
+<th>Anti-Entropy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per-node load</td>
+<td><span class="arithmatex">\(O(n)\)</span> — send to all <span class="arithmatex">\(n-1\)</span> others</td>
+<td><span class="arithmatex">\(O(1)\)</span> — send to 1 random peer</td>
+</tr>
+<tr>
+<td>Total network load</td>
+<td><span class="arithmatex">\(O(n^2)\)</span></td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+</tr>
+<tr>
+<td>Scales?</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="eventually-consistent">"Eventually Consistent"<a class="headerlink" href="#eventually-consistent" title="Permanent link">&para;</a></h4>
+<p>This means: if you stop changing the data and wait long enough, all replicas will converge to the same state. There is no guarantee about <em>when</em> — only that eventually the random pairwise exchanges will propagate every update everywhere. This is the defining characteristic of epidemic consistency protocols and the reason systems like Amazon Dynamo, Cassandra, and Riak use anti-entropy as their background repair mechanism.</p>
+<h3 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural Signature</td>
+<td>Replicated data + unstructured network + need for eventual consistency</td>
+</tr>
+<tr>
+<td>Core Invariant</td>
+<td>Random pairwise contact is sufficient for universal dissemination</td>
+</tr>
+<tr>
+<td>Compression Handle</td>
+<td>"Updates spread like a virus through random contact"</td>
+</tr>
+<tr>
+<td>Boundary / Failure Mode</td>
+<td>If the network is fully connected and small, direct mail is simpler and faster</td>
+</tr>
+<tr>
+<td>Phenomenon Web</td>
+<td>See Anti-Entropy and Rumor Mongering (the two epidemic mechanisms); see Gossip-Based Failure Detection (a later application of the same principle)</td>
+</tr>
+</tbody>
+</table>
 <h3 id="rumor-mongering">Rumor Mongering<a class="headerlink" href="#rumor-mongering" title="Permanent link">&para;</a></h3>
 <p><strong>Mechanism</strong>: a site distributes updates to other sites. When a site sees that most of its neighbors already have the update, the "rumor" ceases to be "hot" and gradually dies away.</p>
 <p><strong>Key property</strong>: this is a <strong>complex epidemic</strong> — it has a built-in termination mechanism. The update spreads aggressively at first, then fades.</p>
@@ -7141,7 +7485,7 @@
 <h3 id="scouting-report">Scouting Report<a class="headerlink" href="#scouting-report" title="Permanent link">&para;</a></h3>
 <p>What to look for: three mechanisms with different termination/guarantee trade-offs for the same problem.</p>
 <p>Why you care: choosing the wrong mechanism for your constraints (need guaranteed delivery vs. need fast termination) leads to system failure.</p>
-<h3 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7210,7 +7554,7 @@ K_s = \langle v, t \rangle
 <h3 id="scouting-report_1">Scouting Report<a class="headerlink" href="#scouting-report_1" title="Permanent link">&para;</a></h3>
 <p>What to look for: two sites exchanging database contents, with directionality determining who learns what.</p>
 <p>Why you care: the choice of push vs. pull affects convergence speed at different phases of dissemination.</p>
-<h3 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7365,7 +7709,7 @@ p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i
 <p>The mathematics reveals a phase transition in dissemination. Push and pull are not universally better — they dominate in different regimes. The optimal protocol is <strong>adaptive</strong>: start with push to seed the network, then switch to pull to mop up stragglers.</p>
 <h3 id="what-would-break-without-this-analysis">What Would Break Without This Analysis?<a class="headerlink" href="#what-would-break-without-this-analysis" title="Permanent link">&para;</a></h3>
 <p>If we used only pull at the beginning, dissemination would stall because almost no one has the update. If we used only push at the end, we would waste messages sending updates to nodes that already have them.</p>
-<h3 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7464,7 +7808,7 @@ i(s) = -s + \frac{s}{k} - \frac{\ln(s)}{k} + 1 - \frac{1}{k} = \frac{k+1}{k}(1-s
 <p>The <span class="arithmatex">\(i(s)\)</span> curve shows that infective nodes peak and then decline. The peak occurs because early on, many susceptible nodes mean rapid growth. Later, as susceptibles dwindle and removal kicks in, the infective population crashes. The nodes left behind — the residue — are the price of self-termination.</p>
 <h3 id="what-would-break-without-removal">What Would Break Without Removal?<a class="headerlink" href="#what-would-break-without-removal" title="Permanent link">&para;</a></h3>
 <p>Without the removal term <span class="arithmatex">\(\frac{1}{k}(1-s)i\)</span>, the model reduces to anti-entropy: infective nodes never stop propagating, and eventually <span class="arithmatex">\(s \to 0\)</span>. But the protocol never terminates, wasting bandwidth forever.</p>
-<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7535,7 +7879,7 @@ s = e^{-m}
 <li>If two sites discover a missing update, they can start a "hot rumor" locally.</li>
 </ol>
 <p>Xerox Clearinghouse used this hybrid approach, along with some direct mail for critical redistributions.</p>
-<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7582,7 +7926,7 @@ s = e^{-m}
 - <strong>Original timestamp</strong>: used to cancel updates
 - <strong>Activation timestamp</strong>: used to eventually discard the reactivated certificate</p>
 <p>Version numbers for updates prevent legitimate updates from being cancelled by stale death certificates.</p>
-<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7645,7 +7989,7 @@ s = e^{-m}
 <p>The <strong>inverse-square law</strong> (<span class="arithmatex">\(\alpha = 2\)</span>) is the critical boundary. This is analogous to results in random graph theory and wireless network capacity.</p>
 <h3 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">&para;</a></h3>
 <p>If you can occasionally make long-distance contacts, the network "shrinks" dramatically. The <span class="arithmatex">\(O(\log n)\)</span> result for uniform contact is because each long-distance contact can jump across the network, bypassing many hops. When <span class="arithmatex">\(\alpha &gt; 2\)</span>, long-distance contacts are too rare to help, and the network behaves like a local graph.</p>
-<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7696,7 +8040,7 @@ s = e^{-m}
 <li><strong>Bandwidth scales linearly</strong>: total network load is <span class="arithmatex">\(O(n)\)</span>, not <span class="arithmatex">\(O(n^2)\)</span>.</li>
 <li><strong>Accurate detection with known mistake probability</strong>: if clock drift is negligible, failures are detected with a quantifiable error rate.</li>
 </ol>
-<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_10">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_10" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7760,7 +8104,7 @@ T_{\text{cleanup}} = 2 \times T_{\text{fail}}
 <h3 id="scouting-report_2">Scouting Report<a class="headerlink" href="#scouting-report_2" title="Permanent link">&para;</a></h3>
 <p>What to look for: nodes exchanging heartbeat counters via random pairwise contact, with timeout-based failure declaration.</p>
 <p>Why you care: this is the canonical gossip-based failure detector, used in Cassandra, Dynamo, and many other systems.</p>
-<h3 id="phenomenon-metadata_10">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_10" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_11">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_11" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7857,7 +8201,7 @@ T_{\text{gossip}} = \frac{8n}{B}
 <p>The product gives <span class="arithmatex">\(O(n \log n)\)</span> detection time. This is the price of scalability: you cannot detect failures instantly in a large system with bounded bandwidth.</p>
 <h3 id="what-would-break-without-this-analysis_1">What Would Break Without This Analysis?<a class="headerlink" href="#what-would-break-without-this-analysis_1" title="Permanent link">&para;</a></h3>
 <p>If <span class="arithmatex">\(T_{\text{gossip}}\)</span> were fixed (not scaled with <span class="arithmatex">\(n\)</span>), bandwidth would grow as <span class="arithmatex">\(O(n^2)\)</span> — each node sends at fixed rate, but message size grows with <span class="arithmatex">\(n\)</span>. The system would collapse under its own communication overhead.</p>
-<h3 id="phenomenon-metadata_11">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_11" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_12">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_12" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7913,7 +8257,7 @@ T_{\text{gossip}} = \frac{8n}{B}
 <li>With 10% message loss, the price in detection time is small.</li>
 </ul>
 <p>The protocol is robust because gossip is randomized: lost messages are compensated by future gossips.</p>
-<h3 id="phenomenon-metadata_12">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_12" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_13">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7970,7 +8314,7 @@ p(t) = \frac{t^2}{20^2}
 <h3 id="the-broadcast-storm-problem">The Broadcast Storm Problem<a class="headerlink" href="#the-broadcast-storm-problem" title="Permanent link">&para;</a></h3>
 <p>If many nodes are unreachable, the expected time to the next broadcast shrinks toward 20 seconds. The concern is that many nodes might broadcast simultaneously, creating a storm.</p>
 <p>The paper shows that for <span class="arithmatex">\(n = 1000\)</span>, the probability that more than 20 members broadcast at once is less than <span class="arithmatex">\(10^{-5}\)</span>. This is because smaller partitions have fewer prospective senders, offsetting the increased individual broadcast probability.</p>
-<h3 id="phenomenon-metadata_13">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_13" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_14">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_14" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8023,7 +8367,7 @@ p(t) = \frac{t^2}{20^2}
 <p><strong>Misrecognized signature</strong>: you see "failure detection" and assume it handles malicious nodes.</p>
 <p><strong>The trap</strong>: the gossip-based failure detector assumes <strong>fail-stop</strong> — nodes do not lie about their heartbeats. A Byzantine node could forge heartbeats for other nodes, causing false negatives (failed nodes appear alive) or false positives (alive nodes appear failed).</p>
 <p><strong>Concrete counterexample</strong>: a compromised node could send gossips claiming a failed node is still alive, keeping it in membership lists indefinitely.</p>
-<h2 id="phenomenon-metadata_14">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_14" title="Permanent link">&para;</a></h2>
+<h2 id="phenomenon-metadata_15">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_15" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -8066,7 +8410,10 @@ p(t) = \frac{t^2}{20^2}
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 18:30:52 UTC">June 24, 2026</span>
+        Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 18:30:52 UTC">June 24, 2026</span>
+      </span>
+      <span class="md-source-file__fact">
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 25, 2026 05:13:26 UTC">June 25, 2026</span>
       </span>
     
   </aside>
