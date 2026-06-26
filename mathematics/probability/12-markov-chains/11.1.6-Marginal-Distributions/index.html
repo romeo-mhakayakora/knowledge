@@ -6934,47 +6934,135 @@
 <hr />
 <h1 id="law-of-total-probability-for-markov-chains">Law of Total Probability for Markov Chains<a class="headerlink" href="#law-of-total-probability-for-markov-chains" title="Permanent link">&para;</a></h1>
 <p>The tool that bridges the gap between conditional probabilities (which we already know how to compute from <span class="arithmatex">\(Q^n\)</span>) and marginal probabilities (which we actually want) is the <strong>Law of Total Probability</strong> (LOTP). LOTP is a general-purpose theorem from probability theory, but it takes a particularly clean and useful form when applied to Markov chains because the chain's state space provides a natural partition of the sample space.</p>
+<hr />
+<h2 id="background-sample-space-vs-state-space">Background: Sample Space vs. State Space<a class="headerlink" href="#background-sample-space-vs-state-space" title="Permanent link">&para;</a></h2>
+<p>Before diving into LOTP, it helps to be clear on what these two things are — they are <strong>not</strong> the same.</p>
+<ul>
+<li>
+<p><strong>Sample space <span class="arithmatex">\(\Omega\)</span></strong>: The set of all possible complete outcomes. For a Markov chain running for <span class="arithmatex">\(n\)</span> steps, a single outcome is an entire trajectory — a sequence of states:
+$<span class="arithmatex">\(\omega = (x_0, x_1, x_2, \ldots, x_n)\)</span>$
+This is an enormous set.</p>
+</li>
+<li>
+<p><strong>State space <span class="arithmatex">\(S = \{1, 2, \ldots, M\}\)</span></strong>: Just the small set of labels that any single <span class="arithmatex">\(x_k\)</span> can take at one moment in time.</p>
+</li>
+</ul>
+<p>The random variable <span class="arithmatex">\(X_n\)</span> maps each trajectory <span class="arithmatex">\(\omega\)</span> to its value at step <span class="arithmatex">\(n\)</span>: <span class="arithmatex">\(X_n(\omega) = x_n\)</span>. So the state space is not the sample space — it is the set of values the chain can visit at any single step.</p>
+<hr />
 <h2 id="the-partition-principle">The Partition Principle<a class="headerlink" href="#the-partition-principle" title="Permanent link">&para;</a></h2>
-<p>The Law of Total Probability applies whenever you can partition the sample space into mutually exclusive, exhaustive events. For a Markov chain, the events "the chain started in state <span class="arithmatex">\(1\)</span>," "the chain started in state <span class="arithmatex">\(2\)</span>," and so on through "the chain started in state <span class="arithmatex">\(M\)</span>" form exactly such a partition. These events are <strong>mutually exclusive</strong> (the chain cannot have started in two different states simultaneously) and <strong>exhaustive</strong> (the chain must have started in <em>some</em> state). This means the collection <span class="arithmatex">\(\{X_0 = 1\}, \{X_0 = 2\}, \ldots, \{X_0 = M\}\)</span> satisfies the prerequisites for LOTP.</p>
-<h2 id="the-marginal-probability-formula">The Marginal Probability Formula<a class="headerlink" href="#the-marginal-probability-formula" title="Permanent link">&para;</a></h2>
-<p>Applying LOTP to the event <span class="arithmatex">\(\{X_n = j\}\)</span>, using the partition <span class="arithmatex">\(\{X_0 = i\}_{i=1}^{M}\)</span>, we obtain:</p>
-<div class="arithmatex">\[P(X_n = j) = \sum_{i=1}^{M} P(X_0 = i) \cdot P(X_n = j \mid X_0 = i)\]</div>
-<p><strong>Dummy-index warning:</strong> In this summation, <span class="arithmatex">\(i\)</span> is a <strong>dummy (varying) index</strong> that runs over all <span class="arithmatex">\(M\)</span> states in the state space. It is not a fixed state — it is the variable that performs the loop. The only <strong>free (fixed) variable</strong> in this expression is <span class="arithmatex">\(j\)</span>, which is the target state whose marginal probability we are computing. The summation index <span class="arithmatex">\(i\)</span> will disappear once the sum is evaluated, while <span class="arithmatex">\(j\)</span> remains as the output label.</p>
-<p>Now, <span class="arithmatex">\(P(X_0 = i)\)</span> is precisely the definition of <span class="arithmatex">\(t_i\)</span>, the <span class="arithmatex">\(i\)</span>-th component of the initial vector. And the conditional probability of reaching state <span class="arithmatex">\(j\)</span> at time <span class="arithmatex">\(n\)</span> given a start in state <span class="arithmatex">\(i\)</span> at time <span class="arithmatex">\(0\)</span> is precisely the definition of <span class="arithmatex">\(q_{ij}^{(n)}\)</span>, the <span class="arithmatex">\((i, j)\)</span>-entry of the <span class="arithmatex">\(n\)</span>-step transition matrix. Making both substitutions:</p>
-<div class="arithmatex">\[P(X_n = j) = \sum_{i=1}^{M} t_i \cdot q_{ij}^{(n)}\]</div>
-<p>This is the fundamental formula for the marginal distribution of <span class="arithmatex">\(X_n\)</span>.</p>
-<h2 id="why-this-is-a-weighted-average-over-timelines">Why This Is a Weighted Average Over Timelines<a class="headerlink" href="#why-this-is-a-weighted-average-over-timelines" title="Permanent link">&para;</a></h2>
-<p>Each term <span class="arithmatex">\(t_i \cdot q_{ij}^{(n)}\)</span> in the sum represents the probability contribution from one "timeline": the timeline where the chain starts in state <span class="arithmatex">\(i\)</span>. The factor <span class="arithmatex">\(t_i\)</span> is the probability that this timeline is the actual one (the probability the chain started in state <span class="arithmatex">\(i\)</span>), and the factor <span class="arithmatex">\(q_{ij}^{(n)}\)</span> is the probability of reaching state <span class="arithmatex">\(j\)</span> at time <span class="arithmatex">\(n\)</span> along that timeline.</p>
-<p>The sum, therefore, is a <strong>weighted average</strong> of the transition probabilities from all possible starting states, where the weights are the probabilities of actually starting in each state. A timeline with a high spawn probability (<span class="arithmatex">\(t_i\)</span> close to <span class="arithmatex">\(1\)</span>) contributes heavily to the final answer, regardless of how good or bad its transition probability is. A timeline with a low spawn probability (<span class="arithmatex">\(t_i\)</span> close to <span class="arithmatex">\(0\)</span>) contributes almost nothing, even if its transition probability is excellent.</p>
-<p>This is why you cannot ignore the initial distribution. The transition probabilities alone tell you <em>what would happen</em> from each starting state, but they do not tell you <em>which starting states actually matter</em>.</p>
-<p><strong>Phenomenon Metadata — LOTP for Markov Chains</strong></p>
+<p>The Law of Total Probability applies whenever you can partition the sample space into mutually exclusive, exhaustive events.</p>
+<p>At any fixed time <span class="arithmatex">\(k\)</span>, the random variable <span class="arithmatex">\(X_k\)</span> naturally slices the sample space into <span class="arithmatex">\(M\)</span> groups:</p>
 <table>
 <thead>
 <tr>
-<th>Element</th>
-<th>Purpose</th>
+<th>Group</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Structural Signature</td>
-<td>You have a target state <span class="arithmatex">\(j\)</span> and a time horizon <span class="arithmatex">\(n\)</span>, and you need the absolute (unconditioned) probability of being in <span class="arithmatex">\(j\)</span> at time <span class="arithmatex">\(n\)</span>. You also have an initial distribution <span class="arithmatex">\(t\)</span> and an <span class="arithmatex">\(n\)</span>-step transition matrix <span class="arithmatex">\(Q^n\)</span>.</td>
+<td><span class="arithmatex">\(\{\omega : X_k(\omega) = 1\}\)</span></td>
+<td>All trajectories passing through state 1 at time <span class="arithmatex">\(k\)</span></td>
 </tr>
 <tr>
-<td>Core Invariant</td>
-<td>The events <span class="arithmatex">\(\{X_0 = i\}\)</span> for <span class="arithmatex">\(i = 1, \ldots, M\)</span> partition the sample space, which is the structural prerequisite for LOTP. The sum then collapses the partition-weighted conditional probabilities into a single marginal.</td>
+<td><span class="arithmatex">\(\{\omega : X_k(\omega) = 2\}\)</span></td>
+<td>All trajectories passing through state 2 at time <span class="arithmatex">\(k\)</span></td>
 </tr>
 <tr>
-<td>Compression Handle</td>
-<td>"Fan out to all possible starting states, compute each conditional probability, then weight by spawn probability and sum."</td>
+<td><span class="arithmatex">\(\vdots\)</span></td>
+<td><span class="arithmatex">\(\vdots\)</span></td>
 </tr>
 <tr>
-<td>Boundary / Failure Mode</td>
-<td>LOTP requires that the conditioning events form a partition. If the initial distribution does not sum to <span class="arithmatex">\(1\)</span> (e.g., you have incomplete information about the starting state), the formula will produce a value that is not a valid probability.</td>
+<td><span class="arithmatex">\(\{\omega : X_k(\omega) = M\}\)</span></td>
+<td>All trajectories passing through state <span class="arithmatex">\(M\)</span> at time <span class="arithmatex">\(k\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>These groups are <strong>subsets of <span class="arithmatex">\(\Omega\)</span></strong> (not elements of the state space), and together they form a <strong>partition</strong> because:</p>
+<ul>
+<li><strong>Mutually exclusive</strong>: The chain cannot be in two states simultaneously — no trajectory falls into two groups.</li>
+<li><strong>Exhaustive</strong>: The chain must be in <em>some</em> state — every trajectory falls into exactly one group.</li>
+</ul>
+<blockquote>
+<p><strong>Why this is "natural":</strong> You did not have to invent these groups. They arise automatically from the state space. At every time step, the chain's state hands you a ready-made, valid partition of the sample space for free — you do not need to construct it artificially. This is what is meant by <em>"the state space provides a natural partition of the sample space."</em></p>
+</blockquote>
+<hr />
+<h2 id="the-marginal-probability-formula">The Marginal Probability Formula<a class="headerlink" href="#the-marginal-probability-formula" title="Permanent link">&para;</a></h2>
+<p>We want to compute the <strong>absolute (marginal) probability</strong> <span class="arithmatex">\(P(X_n = j)\)</span> — the unconditional probability of being in state <span class="arithmatex">\(j\)</span> at time <span class="arithmatex">\(n\)</span>, regardless of where the chain started.</p>
+<h3 id="why-the-n-step-matrix-qn-alone-is-not-enough">Why the <span class="arithmatex">\(n\)</span>-step matrix <span class="arithmatex">\(Q^n\)</span> alone is not enough<a class="headerlink" href="#why-the-n-step-matrix-qn-alone-is-not-enough" title="Permanent link">&para;</a></h3>
+<p>The matrix <span class="arithmatex">\(Q^n\)</span> gives you conditional probabilities. Each entry:
+$<span class="arithmatex">\(q_{ij}^{(n)} = P(X_n = j \mid X_0 = i)\)</span>$
+answers: <em>"If you started in state <span class="arithmatex">\(i\)</span>, what is the probability of being in state <span class="arithmatex">\(j\)</span> after <span class="arithmatex">\(n\)</span> steps?"</em></p>
+<p>If there are <span class="arithmatex">\(M\)</span> possible starting states, you have <span class="arithmatex">\(M\)</span> separate conditional answers — one per row. Without knowing where the chain began, you have no mathematical basis for choosing one row over another, and you cannot combine them without additional information.</p>
+<h3 id="the-missing-ingredient-the-initial-vector">The missing ingredient: the initial vector<a class="headerlink" href="#the-missing-ingredient-the-initial-vector" title="Permanent link">&para;</a></h3>
+<p>The <strong>initial vector</strong> <span class="arithmatex">\(\mathbf{t} = (t_1, t_2, \ldots, t_M)\)</span> provides exactly what is missing. Here, <span class="arithmatex">\(t_i = P(X_0 = i)\)</span> is the probability that the chain started in state <span class="arithmatex">\(i\)</span>.</p>
+<p>This vector acts as a set of <strong>weights</strong>. Without it, the formula is incomplete:</p>
+<div class="arithmatex">\[P(X_n = j) = \sum_{i=1}^{M} \underbrace{P(X_0 = i)}_{\text{missing without } \mathbf{t}} \cdot \underbrace{P(X_n = j \mid X_0 = i)}_{\text{available from } Q^n}\]</div>
+<p>The initial vector supplies the missing weights and makes the marginal probability computable.</p>
+<h3 id="applying-lotp">Applying LOTP<a class="headerlink" href="#applying-lotp" title="Permanent link">&para;</a></h3>
+<p>Using the partition <span class="arithmatex">\(\{X_0 = i\}_{i=1}^{M}\)</span> and conditioning on the starting state, LOTP gives:</p>
+<div class="arithmatex">\[P(X_n = j) = \sum_{i=1}^{M} P(X_0 = i) \cdot P(X_n = j \mid X_0 = i)\]</div>
+<p><strong>In plain English:</strong> <em>"The probability of being in state <span class="arithmatex">\(j\)</span> at time <span class="arithmatex">\(n\)</span> is the sum, over all possible starting states <span class="arithmatex">\(i\)</span>, of: [the probability I started in <span class="arithmatex">\(i\)</span>] times [the probability of going from <span class="arithmatex">\(i\)</span> to <span class="arithmatex">\(j\)</span> in <span class="arithmatex">\(n\)</span> steps]."</em></p>
+<p><strong>Substituting Markov chain notation:</strong></p>
+<table>
+<thead>
+<tr>
+<th>General LOTP term</th>
+<th>Markov chain notation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(P(X_0 = i)\)</span></td>
+<td><span class="arithmatex">\(t_i\)</span></td>
+<td><span class="arithmatex">\(i\)</span>-th entry of the initial vector</td>
 </tr>
 <tr>
-<td>Phenomenon Web</td>
-<td>Directly uses the <a href="#the-initial-vector">Initial Vector</a>. Algebraic structure is identical to <a href="#marginal-distribution-as-vector-matrix-multiplication">Marginal Distribution as Vector-Matrix Multiplication</a> — LOTP is the <em>reason</em> the matrix multiplication works.</td>
+<td><span class="arithmatex">\(P(X_n = j \mid X_0 = i)\)</span></td>
+<td><span class="arithmatex">\(q_{ij}^{(n)}\)</span></td>
+<td><span class="arithmatex">\((i,j)\)</span>-entry of the <span class="arithmatex">\(n\)</span>-step transition matrix</td>
+</tr>
+</tbody>
+</table>
+<p>This gives the <strong>fundamental formula for the marginal distribution of <span class="arithmatex">\(X_n\)</span></strong>:</p>
+<div class="arithmatex">\[\boxed{P(X_n = j) = \sum_{i=1}^{M} t_i \cdot q_{ij}^{(n)}}\]</div>
+<p><strong>Dummy-index warning:</strong> In this summation, <span class="arithmatex">\(i\)</span> is a <strong>dummy (varying) index</strong> that loops through all <span class="arithmatex">\(M\)</span> states and disappears once the sum is evaluated. The only <strong>free (fixed) variable</strong> is <span class="arithmatex">\(j\)</span> — the target state whose marginal probability you are computing.</p>
+<hr />
+<h2 id="why-this-is-a-weighted-average-over-timelines">Why This Is a Weighted Average Over Timelines<a class="headerlink" href="#why-this-is-a-weighted-average-over-timelines" title="Permanent link">&para;</a></h2>
+<p>Each term <span class="arithmatex">\(t_i \cdot q_{ij}^{(n)}\)</span> represents the probability contribution from one <strong>"timeline"</strong>: the timeline where the chain starts in state <span class="arithmatex">\(i\)</span>.</p>
+<ul>
+<li><span class="arithmatex">\(t_i\)</span> = how likely this timeline is (the probability the chain started in state <span class="arithmatex">\(i\)</span>)</li>
+<li><span class="arithmatex">\(q_{ij}^{(n)}\)</span> = how likely it leads to state <span class="arithmatex">\(j\)</span> at time <span class="arithmatex">\(n\)</span> (the path probability along that timeline)</li>
+</ul>
+<p>The sum is therefore a <strong>weighted average</strong> of transition probabilities across all possible starting states, where the weights are the initial probabilities.</p>
+<ul>
+<li>A timeline with high <span class="arithmatex">\(t_i\)</span> (close to <span class="arithmatex">\(1\)</span>) contributes heavily to the final answer.</li>
+<li>A timeline with low <span class="arithmatex">\(t_i\)</span> (close to <span class="arithmatex">\(0\)</span>) contributes almost nothing, even if its transition probability is excellent.</li>
+</ul>
+<blockquote>
+<p>This is why you cannot ignore the initial distribution. The transition probabilities alone tell you <em>what would happen</em> from each starting state, but they do not tell you <em>which starting states actually matter.</em></p>
+</blockquote>
+<hr />
+<h2 id="matrix-form">Matrix Form<a class="headerlink" href="#matrix-form" title="Permanent link">&para;</a></h2>
+<p>The entire LOTP calculation is compactly expressed as a single vector-matrix product:</p>
+<div class="arithmatex">\[\mathbf{p}^{(n)} = \mathbf{t} \, Q^n\]</div>
+<p>where <span class="arithmatex">\(\mathbf{p}^{(n)}\)</span> is the marginal distribution vector at time <span class="arithmatex">\(n\)</span>. Each entry <span class="arithmatex">\(p_j^{(n)} = P(X_n = j)\)</span> is exactly the LOTP sum above.</p>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>What you have</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No initial vector <span class="arithmatex">\(\mathbf{t}\)</span></td>
+<td><span class="arithmatex">\(M\)</span> separate conditional "if" answers — no way to combine them</td>
+</tr>
+<tr>
+<td>With initial vector <span class="arithmatex">\(\mathbf{t}\)</span></td>
+<td>One weighted sum that collapses everything into a single marginal probability</td>
 </tr>
 </tbody>
 </table>
@@ -7259,7 +7347,7 @@
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:58:59 UTC">June 24, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 17:43:46 UTC">June 24, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 26, 2026 05:01:37 UTC">June 26, 2026</span>
       </span>
     
   </aside>
