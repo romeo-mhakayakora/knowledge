@@ -1,15 +1,4 @@
----
-title: Random Variables and Their Distributions
-subject: probability
-chapter: 04-random-variables
-tags:
-- probability
-- mathematics
-date: '2026-06-18'
-updated: '2026-06-19'
-status: complete
-difficulty: intermediate
----
+
 > Notes from *Introduction to Probability* — Blitzstein & Hwang | Full Chapter 3 + Lecture 8
 > 🎥 **Lecture source:** [Statistics 110 — Lecture 8 (Harvard, Prof. Joe Blitzstein)](https://youtu.be/k2BB0p8byGA?si=uOHXwDLpX4fPrAhm)
 
