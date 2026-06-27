@@ -1,14 +1,4 @@
 
-> Notes from *Introduction to Probability* — Blitzstein & Hwang | Full Chapter 3 + Lecture 8
-> 🎥 **Lecture source:** [Statistics 110 — Lecture 8 (Harvard, Prof. Joe Blitzstein)](https://youtu.be/k2BB0p8byGA?si=uOHXwDLpX4fPrAhm)
-
-> **Mental Model First:** Anchor this entire set of notes in one question — *what happens when you count successes under different sampling regimes?*
-> - Trials are **independent** (or sampling with replacement) → **Binomial**
-> - Sampling **without replacement** → **Hypergeometric**
->
-> Everything else — indicators, convolutions, CDFs, PMFs — is just the mathematical scaffolding that makes these stories precise.
-
----
 
 ## Table of Contents
 
