@@ -7117,37 +7117,6 @@
 1. Each "infected" node to contact <strong>enough others</strong> while still "contagious"
 2. Those contacts to be <strong>random enough</strong> that they don't keep hitting already-infected nodes</p>
 <p>If both conditions hold, the update propagates to near-universal coverage through pure local interaction. The randomness is not a bug — it is the feature that makes the system resilient to failures, churn, and scale. If any single node or link fails, the "epidemic" routes around it through other random contacts.</p>
-<h3 id="phenomenon-metadata_1">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_1" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Structural Signature</td>
-<td>Replicated data + unstructured network + need for eventual consistency</td>
-</tr>
-<tr>
-<td>Core Invariant</td>
-<td>Random pairwise contact is sufficient for universal dissemination</td>
-</tr>
-<tr>
-<td>Compression Handle</td>
-<td>"Updates spread like a virus through random contact"</td>
-</tr>
-<tr>
-<td>Boundary / Failure Mode</td>
-<td>If the network is fully connected and small, direct mail is simpler and faster</td>
-</tr>
-<tr>
-<td>Phenomenon Web</td>
-<td>See Anti-Entropy and Rumor Mongering (the two epidemic mechanisms); see Gossip-Based Failure Detection (a later application of the same principle)</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="three-mechanisms-direct-mail-anti-entropy-and-rumor-mongering">Three Mechanisms: Direct Mail, Anti-Entropy, and Rumor Mongering<a class="headerlink" href="#three-mechanisms-direct-mail-anti-entropy-and-rumor-mongering" title="Permanent link">&para;</a></h2>
 <h3 id="direct-mail">Direct Mail<a class="headerlink" href="#direct-mail" title="Permanent link">&para;</a></h3>
@@ -7388,7 +7357,7 @@
 </table>
 <h4 id="eventually-consistent">"Eventually Consistent"<a class="headerlink" href="#eventually-consistent" title="Permanent link">&para;</a></h4>
 <p>This means: if you stop changing the data and wait long enough, all replicas will converge to the same state. There is no guarantee about <em>when</em> — only that eventually the random pairwise exchanges will propagate every update everywhere. This is the defining characteristic of epidemic consistency protocols and the reason systems like Amazon Dynamo, Cassandra, and Riak use anti-entropy as their background repair mechanism.</p>
-<h3 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_1">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7485,7 +7454,7 @@
 <h3 id="scouting-report">Scouting Report<a class="headerlink" href="#scouting-report" title="Permanent link">&para;</a></h3>
 <p>What to look for: three mechanisms with different termination/guarantee trade-offs for the same problem.</p>
 <p>Why you care: choosing the wrong mechanism for your constraints (need guaranteed delivery vs. need fast termination) leads to system failure.</p>
-<h3 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_2">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_2" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7554,40 +7523,11 @@ K_s = \langle v, t \rangle
 <h3 id="scouting-report_1">Scouting Report<a class="headerlink" href="#scouting-report_1" title="Permanent link">&para;</a></h3>
 <p>What to look for: two sites exchanging database contents, with directionality determining who learns what.</p>
 <p>Why you care: the choice of push vs. pull affects convergence speed at different phases of dissemination.</p>
-<h3 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Structural Signature</td>
-<td>Two sites comparing timestamps and adopting the newer value</td>
-</tr>
-<tr>
-<td>Core Invariant</td>
-<td>Timestamps establish a total order on updates</td>
-</tr>
-<tr>
-<td>Compression Handle</td>
-<td>"Push = I tell you; Pull = you tell me; Push-pull = we compare notes"</td>
-</tr>
-<tr>
-<td>Boundary / Failure Mode</td>
-<td>Without timestamps, old updates could overwrite new ones (the "resurrection" problem)</td>
-</tr>
-<tr>
-<td>Phenomenon Web</td>
-<td>See Mathematical Analysis of Anti-Entropy (proves <span class="arithmatex">\(O(\log n)\)</span> convergence); see Deleting Nodes (timestamps also solve deletion ordering)</td>
-</tr>
-</tbody>
-</table>
+<h3 id="phenomenon-metadata_3">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_3" title="Permanent link">&para;</a></h3>
 <hr />
-<h2 id="mathematical-analysis-of-anti-entropy">Mathematical Analysis of Anti-Entropy<a class="headerlink" href="#mathematical-analysis-of-anti-entropy" title="Permanent link">&para;</a></h2>
-<h3 id="plain-english-what-we-are-about-to-prove">Plain English: What We Are About to Prove<a class="headerlink" href="#plain-english-what-we-are-about-to-prove" title="Permanent link">&para;</a></h3>
+<h1 id="mathematical-analysis-of-anti-entropy-enriched-notes">Mathematical Analysis of Anti-Entropy — Enriched Notes<a class="headerlink" href="#mathematical-analysis-of-anti-entropy-enriched-notes" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="plain-english-what-we-are-about-to-prove">Plain English: What We Are About to Prove<a class="headerlink" href="#plain-english-what-we-are-about-to-prove" title="Permanent link">&para;</a></h2>
 <p>Before the mathematics, let us state the goal in plain English.</p>
 <p><strong>Susceptible</strong> means "has not heard the news yet." Think of a room full of people where one person knows a secret. The "susceptible" people are the ones who have not heard it.</p>
 <p><strong>Infective</strong> means "has heard the news and is willing to tell others." This is the person who knows the secret and is actively telling people.</p>
@@ -7595,84 +7535,256 @@ K_s = \langle v, t \rangle
 <p>In anti-entropy, there are only two states: susceptible and infective. There is no "removed" state — people never stop telling the secret. They keep asking random people "do you know the secret?" forever.</p>
 <p><strong>What we want to prove</strong>: if everyone keeps asking random people forever, then eventually everyone hears the secret. And we want to show this happens fast — in <span class="arithmatex">\(O(\log n)\)</span> rounds.</p>
 <p>A <strong>round</strong> means one cycle where every node that knows the secret tries to tell one random person. In the mathematical analysis, we simplify this: we look at one node and ask "what is the chance this node still has not heard the secret after <span class="arithmatex">\(i\)</span> rounds?"</p>
-<h3 id="the-claim">The Claim<a class="headerlink" href="#the-claim" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="the-claim">The Claim<a class="headerlink" href="#the-claim" title="Permanent link">&para;</a></h2>
 <p>Anti-entropy distributes updates in <span class="arithmatex">\(O(\log n)\)</span> time.</p>
-<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 <p>Let:
 - <span class="arithmatex">\(n\)</span> = total number of sites
 - <span class="arithmatex">\(p_i\)</span> = probability that a given site remains <strong>susceptible</strong> (has not received the update) after the <span class="arithmatex">\(i\)</span>-th cycle</p>
 <p>We analyze pull-based and push-based algorithms separately.</p>
-<h3 id="pull-based-analysis">Pull-Based Analysis<a class="headerlink" href="#pull-based-analysis" title="Permanent link">&para;</a></h3>
-<p><strong>Step 1: Define the recurrence</strong></p>
+<hr />
+<h2 id="pull-based-analysis">Pull-Based Analysis<a class="headerlink" href="#pull-based-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-define-the-recurrence">Step 1: Define the Recurrence<a class="headerlink" href="#step-1-define-the-recurrence" title="Permanent link">&para;</a></h3>
 <p>In a pull-based algorithm, a susceptible site remains susceptible after cycle <span class="arithmatex">\(i+1\)</span> only if it contacts another susceptible site in cycle <span class="arithmatex">\(i+1\)</span>.</p>
 <p>The probability of contacting a susceptible site is <span class="arithmatex">\(p_i\)</span> (by definition, a fraction <span class="arithmatex">\(p_i\)</span> of all sites are susceptible).</p>
 <p>Therefore:</p>
-<div class="arithmatex">\[
-p_{i+1} = p_i \cdot p_i = p_i^2
-\]</div>
-<p><strong>Step 2: Solve the recurrence</strong></p>
+<div class="arithmatex">\[p_{i+1} = p_i \cdot p_i = p_i^2\]</div>
+<p><strong>Intuition — Why does it square?</strong>
+Think of the pull model as everyone in the room who does not know the secret picking one random person to ask. For someone to <em>stay</em> ignorant, they must accidentally pick another ignorant person. If half the room is still ignorant (<span class="arithmatex">\(p_i = 0.5\)</span>), the chance of that happening is <span class="arithmatex">\(0.5 \times 0.5 = 0.25\)</span>. The fraction of ignorant people does not just shrink — it <em>squares itself</em> every round. This is doubly exponential decay: devastatingly fast.</p>
+<h3 id="step-2-solve-the-recurrence">Step 2: Solve the Recurrence<a class="headerlink" href="#step-2-solve-the-recurrence" title="Permanent link">&para;</a></h3>
 <p>Starting from <span class="arithmatex">\(p_0 = 1\)</span> (no one has the update initially, except the source which we treat separately):</p>
-<div class="arithmatex">\[
-p_1 = p_0^2 = 1^2 = 1
-\]</div>
-<p>Wait — this seems wrong. Let us be more careful. The source has the update. So initially, one site is infective and <span class="arithmatex">\(n-1\)</span> sites are susceptible. The probability a given non-source site is susceptible after cycle 1 is the probability it did not contact the source.</p>
-<p>Actually, the lecturer's analysis uses a continuum approximation. Let us follow that.</p>
-<p>In the continuum approximation, <span class="arithmatex">\(p_i\)</span> is the fraction susceptible. After cycle <span class="arithmatex">\(i+1\)</span>, a site remains susceptible only if it contacts another susceptible site. The probability of this is <span class="arithmatex">\(p_i\)</span>.</p>
-<p>So:</p>
-<div class="arithmatex">\[
-p_{i+1} = p_i \cdot p_i = p_i^2
-\]</div>
+<p>Using the continuum approximation, <span class="arithmatex">\(p_i\)</span> is the fraction susceptible. After cycle <span class="arithmatex">\(i+1\)</span>, a site remains susceptible only if it contacts another susceptible site. The probability of this is <span class="arithmatex">\(p_i\)</span>.</p>
+<p>So: <span class="arithmatex">\(p_{i+1} = p_i^2\)</span></p>
 <p>This gives:</p>
-<div class="arithmatex">\[
-p_1 = p_0^2, \quad p_2 = p_1^2 = p_0^4, \quad p_3 = p_2^2 = p_0^8, \quad \ldots, \quad p_i = p_0^{2^i}
-\]</div>
+<div class="arithmatex">\[p_1 = p_0^2, \quad p_2 = p_1^2 = p_0^4, \quad p_3 = p_2^2 = p_0^8, \quad \ldots, \quad p_i = p_0^{2^i}\]</div>
 <p>If <span class="arithmatex">\(p_0 &lt; 1\)</span> (some sites already have the update), then <span class="arithmatex">\(p_i \to 0\)</span> <strong>doubly exponentially fast</strong>.</p>
-<p><strong>Step 3: Number of cycles for convergence</strong></p>
+<p><strong>Seeing the squaring in action (n = 1024):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th>Fraction still ignorant</th>
+<th>Ignorant people (out of 1024)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1/2</td>
+<td>512</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1/4</td>
+<td>256</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1/16</td>
+<td>64</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1/256</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1/65,536</td>
+<td>~0</td>
+</tr>
+</tbody>
+</table>
+<p>By round 4, the room is essentially done. The denominator sequences as <span class="arithmatex">\(2 \to 4 \to 16 \to 256 \to 65536\)</span>: each denominator is the square of the previous one. This is the signature of <span class="arithmatex">\(O(\log \log n)\)</span> decay.</p>
+<h3 id="step-3-number-of-cycles-for-convergence">Step 3: Number of Cycles for Convergence<a class="headerlink" href="#step-3-number-of-cycles-for-convergence" title="Permanent link">&para;</a></h3>
 <p>We want <span class="arithmatex">\(p_i \leq \epsilon\)</span> for some small <span class="arithmatex">\(\epsilon\)</span>.</p>
-<div class="arithmatex">\[
-p_0^{2^i} \leq \epsilon
-\]</div>
+<div class="arithmatex">\[p_0^{2^i} \leq \epsilon\]</div>
 <p>Taking logarithms:</p>
-<div class="arithmatex">\[
-2^i \cdot \ln(p_0) \leq \ln(\epsilon)
-\]</div>
+<div class="arithmatex">\[2^i \cdot \ln(p_0) \leq \ln(\epsilon)\]</div>
 <p>Since <span class="arithmatex">\(\ln(p_0) &lt; 0\)</span>:</p>
-<div class="arithmatex">\[
-2^i \geq \frac{\ln(\epsilon)}{\ln(p_0)} = \frac{\ln(1/\epsilon)}{\ln(1/p_0)}
-\]</div>
+<div class="arithmatex">\[2^i \geq \frac{\ln(\epsilon)}{\ln(p_0)} = \frac{\ln(1/\epsilon)}{\ln(1/p_0)}\]</div>
 <p>Taking logarithms again:</p>
-<div class="arithmatex">\[
-i \geq \log_2\left(\frac{\ln(1/\epsilon)}{\ln(1/p_0)}\right)
-\]</div>
-<p>So the number of cycles is <span class="arithmatex">\(O(\log \log(1/\epsilon))\)</span> for fixed <span class="arithmatex">\(p_0\)</span>. But since <span class="arithmatex">\(p_0\)</span> starts near 1 and decreases, the total number of cycles to reach near-zero susceptibility is <span class="arithmatex">\(O(\log n)\)</span> in the discrete setting.</p>
-<h3 id="push-based-analysis">Push-Based Analysis<a class="headerlink" href="#push-based-analysis" title="Permanent link">&para;</a></h3>
-<p><strong>Step 1: Define the recurrence</strong></p>
+<div class="arithmatex">\[i \geq \log_2\left(\frac{\ln(1/\epsilon)}{\ln(1/p_0)}\right)\]</div>
+<p>So the number of cycles is <span class="arithmatex">\(O(\log \log(1/\epsilon))\)</span> for fixed <span class="arithmatex">\(p_0\)</span>. In the discrete setting, the total number of cycles from the very beginning to near-zero susceptibility is <span class="arithmatex">\(O(\log n)\)</span>.</p>
+<hr />
+<h2 id="push-based-analysis">Push-Based Analysis<a class="headerlink" href="#push-based-analysis" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-define-the-recurrence_1">Step 1: Define the Recurrence<a class="headerlink" href="#step-1-define-the-recurrence_1" title="Permanent link">&para;</a></h3>
 <p>In a push-based algorithm, a susceptible site remains susceptible after cycle <span class="arithmatex">\(i+1\)</span> only if <strong>no infective site contacts it</strong>.</p>
 <p>The expected number of infective nodes is <span class="arithmatex">\(n(1 - p_i)\)</span>.</p>
 <p>The probability that a given infective node does <strong>not</strong> contact our susceptible node is <span class="arithmatex">\(1 - 1/n\)</span>.</p>
 <p>The probability that <strong>no</strong> infective node contacts our susceptible node is:</p>
-<div class="arithmatex">\[
-\left(1 - \frac{1}{n}\right)^{n(1-p_i)}
-\]</div>
+<div class="arithmatex">\[\left(1 - \frac{1}{n}\right)^{n(1-p_i)}\]</div>
 <p>Therefore:</p>
-<div class="arithmatex">\[
-p_{i+1} = p_i \cdot \left(1 - \frac{1}{n}\right)^{n(1-p_i)}
-\]</div>
-<p><strong>Step 2: Use the limit definition of <span class="arithmatex">\(e\)</span></strong></p>
+<div class="arithmatex">\[p_{i+1} = p_i \cdot \left(1 - \frac{1}{n}\right)^{n(1-p_i)}\]</div>
+<p><strong>Intuition — Where does this formula come from?</strong>
+For a specific ignorant person (call them Alex) to stay ignorant, every single one of the <span class="arithmatex">\(n(1-p_i)\)</span> informed people must <em>miss</em> Alex when they make their random call. Each informed person has a <span class="arithmatex">\(1 - 1/n\)</span> chance of not calling Alex. Since all their calls are independent, we multiply those probabilities together, giving the exponent. This uses the Poisson approximation of the Binomial distribution.</p>
+<h3 id="step-2-use-the-limit-definition-of-e">Step 2: Use the Limit Definition of <span class="arithmatex">\(e\)</span><a class="headerlink" href="#step-2-use-the-limit-definition-of-e" title="Permanent link">&para;</a></h3>
 <p>Recall that:</p>
-<div class="arithmatex">\[
-\lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = e^{-1} \approx 0.368
-\]</div>
+<div class="arithmatex">\[\lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = e^{-1} \approx 0.368\]</div>
 <p>For large <span class="arithmatex">\(n\)</span>:</p>
-<div class="arithmatex">\[
-\left(1 - \frac{1}{n}\right)^{n(1-p_i)} \approx e^{-(1-p_i)}
-\]</div>
+<div class="arithmatex">\[\left(1 - \frac{1}{n}\right)^{n(1-p_i)} \approx e^{-(1-p_i)}\]</div>
 <p>When <span class="arithmatex">\(p_i\)</span> is small (most nodes have the update), <span class="arithmatex">\(1 - p_i \approx 1\)</span>, so:</p>
-<div class="arithmatex">\[
-p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i
-\]</div>
+<div class="arithmatex">\[p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i\]</div>
 <p>This means the susceptible fraction decreases by a constant factor each cycle — <strong>exponentially fast</strong>, but not doubly exponentially.</p>
-<h3 id="why-push-is-better-at-the-beginning-pull-is-better-at-the-end">Why Push Is Better at the Beginning, Pull Is Better at the End<a class="headerlink" href="#why-push-is-better-at-the-beginning-pull-is-better-at-the-end" title="Permanent link">&para;</a></h3>
+<p><strong>Push in the late game — concrete numbers (n = 1024, 100 ignorant, 924 informed):</strong></p>
+<p>Each round, ignorant people survive with probability <span class="arithmatex">\(e^{-0.924} \approx 0.397\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th>Ignorant people</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>100</td>
+</tr>
+<tr>
+<td>1</td>
+<td>~37</td>
+</tr>
+<tr>
+<td>2</td>
+<td>~14</td>
+</tr>
+<tr>
+<td>3</td>
+<td>~5</td>
+</tr>
+<tr>
+<td>4</td>
+<td>~2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>~1</td>
+</tr>
+</tbody>
+</table>
+<p>Compare this to Pull's 2 rounds for the same scenario. Push takes ~5 rounds. The gap grows as <span class="arithmatex">\(n\)</span> grows.</p>
+<p><strong>Why the collision problem makes Push slower at the end:</strong>
+When 924 people each call one random person, they do not coordinate. Multiple informed people might call the same ignorant person (wasted calls), while some ignorant people receive zero calls and survive the round. This is the "Coupon Collector" problem — blindly trying to hit every target with random shots wastes a huge number of shots near the end.</p>
+<p>In Pull, the 100 ignorant people each make exactly one call. They cannot "overlap" on each other's behalf. Every single ignorant person gets exactly one attempt, and with 924 knowers in the room, each attempt has a 90% chance of success.</p>
+<hr />
+<h2 id="the-bernoulli-and-binomial-structure-inside-push-and-pull">The Bernoulli and Binomial Structure Inside Push and Pull<a class="headerlink" href="#the-bernoulli-and-binomial-structure-inside-push-and-pull" title="Permanent link">&para;</a></h2>
+<p>Every probability calculation in this analysis is secretly built from two fundamental building blocks: the <strong>Bernoulli trial</strong> and the <strong>Binomial distribution</strong>. Understanding them removes all mystery from where the formulas come from.</p>
+<h3 id="what-is-a-bernoulli-trial">What Is a Bernoulli Trial?<a class="headerlink" href="#what-is-a-bernoulli-trial" title="Permanent link">&para;</a></h3>
+<p>A Bernoulli trial is any single event with exactly two outcomes: success or failure. One coin flip. One phone call. One random ask.</p>
+<p>In Push, every time an informed person makes one phone call, that is one Bernoulli trial. From Alex's perspective (Alex is ignorant):</p>
+<ul>
+<li><strong>Failure</strong> (bad for Alex): the caller picks Alex. Probability <span class="arithmatex">\(= 1/N\)</span>.</li>
+<li><strong>Success</strong> (Alex survives): the caller picks someone else. Probability <span class="arithmatex">\(= 1 - 1/N\)</span>.</li>
+</ul>
+<p>A single call is a Bernoulli trial. Alex has to survive <em>all</em> of them.</p>
+<h3 id="what-is-a-binomial-distribution">What Is a Binomial Distribution?<a class="headerlink" href="#what-is-a-binomial-distribution" title="Permanent link">&para;</a></h3>
+<p>When you stack many independent Bernoulli trials together and count how many succeed (or fail), the total follows a <strong>Binomial distribution</strong>. A situation is Binomial if:</p>
+<ol>
+<li>There is a fixed number of trials <span class="arithmatex">\(n\)</span>.</li>
+<li>Each trial has only two outcomes.</li>
+<li>The probability <span class="arithmatex">\(p\)</span> is the same for every trial.</li>
+</ol>
+<p>The <strong>expected value</strong> (average outcome) of a Binomial distribution is simply:</p>
+<div class="arithmatex">\[E = n \cdot p\]</div>
+<p>This is the powerful shortcut. If you know the number of trials and the probability of each, you multiply them and get the average result.</p>
+<h3 id="pull-phase-1-is-a-binomial-the-full-proof">Pull Phase 1 Is a Binomial — The Full Proof<a class="headerlink" href="#pull-phase-1-is-a-binomial-the-full-proof" title="Permanent link">&para;</a></h3>
+<p>In the Pull model during Phase 1:</p>
+<ul>
+<li><span class="arithmatex">\(n = U_t\)</span> trials (each uninformed person makes one call — one Bernoulli trial each).</li>
+<li><span class="arithmatex">\(p = I_t / N\)</span> (probability of hitting an informed person).</li>
+<li>Only two outcomes per call: you hit a knower (learn the secret) or you don't.</li>
+<li>Every person's call is independent.</li>
+</ul>
+<p>All three Binomial conditions are met. So the expected number of newly informed people is:</p>
+<div class="arithmatex">\[E[\text{New Knowers}] = U_t \cdot \frac{I_t}{N}\]</div>
+<p>Now apply the Phase 1 approximation: when almost nobody knows yet, <span class="arithmatex">\(U_t \approx N\)</span>:</p>
+<div class="arithmatex">\[E[\text{New Knowers}] \approx N \cdot \frac{I_t}{N} = I_t\]</div>
+<p>Add these to the existing <span class="arithmatex">\(I_t\)</span> knowers:</p>
+<div class="arithmatex">\[E[I_{t+1}] = I_t + I_t = 2I_t\]</div>
+<p>The <span class="arithmatex">\(N\)</span> cancels perfectly. This is why the doubling is not just a rough guess — it follows rigorously from the Binomial expected value formula.</p>
+<h3 id="why-the-same-shortcut-breaks-for-push-in-the-late-game">Why the Same Shortcut Breaks for Push in the Late Game<a class="headerlink" href="#why-the-same-shortcut-breaks-for-push-in-the-late-game" title="Permanent link">&para;</a></h3>
+<p>You might think: "Can I use <span class="arithmatex">\(E = n \cdot p\)</span> for Push too?" Let's try.</p>
+<p>Late game: 924 informed, 100 ignorant, <span class="arithmatex">\(N = 1024\)</span>.</p>
+<ul>
+<li><span class="arithmatex">\(n = 924\)</span> calls being made.</li>
+<li><span class="arithmatex">\(p = 100/1024 \approx 0.1\)</span> (probability any call hits an ignorant person).</li>
+<li><span class="arithmatex">\(E = 924 \times 0.1 = 92.4\)</span> successful calls landing on ignorant people.</li>
+</ul>
+<p>If you stop here and subtract: <span class="arithmatex">\(100 - 92.4 \approx 8\)</span> people left. That sounds great — almost everyone informed!</p>
+<p><strong>But this is wrong.</strong> The actual answer is ~40 people left. The shortcut failed by 32 people.</p>
+<p><strong>Why?</strong> The shortcut <span class="arithmatex">\(E = n \cdot p\)</span> tells you the expected <em>number of successful calls</em>. It does not account for <em>who</em> those calls land on. Those 92.4 successful calls do not necessarily land on 92.4 different people. Some ignorant people get called twice. Some get called three times. Those extra calls are wasted. Meanwhile, other ignorant people receive zero calls and survive the round.</p>
+<p>The <span class="arithmatex">\(E = n \cdot p\)</span> shortcut only works cleanly when the searchers cannot overlap — i.e., when the uninformed people are the ones making the calls (Pull), because each uninformed person makes exactly one attempt and cannot accidentally make someone else's attempt for them.</p>
+<h3 id="the-correct-push-calculation-poisson-approximation">The Correct Push Calculation (Poisson Approximation)<a class="headerlink" href="#the-correct-push-calculation-poisson-approximation" title="Permanent link">&para;</a></h3>
+<p>Since the <span class="arithmatex">\(n \cdot p\)</span> shortcut fails, we go back to basics. For Alex (one specific ignorant person) to survive the round, all 924 informed people must miss him. Each informed person independently misses Alex with probability <span class="arithmatex">\(1 - 1/N\)</span>:</p>
+<div class="arithmatex">\[P(\text{Alex survives}) = \left(1 - \frac{1}{N}\right)^{924}\]</div>
+<p>Using the limit definition of <span class="arithmatex">\(e\)</span>: <span class="arithmatex">\(\left(1 - \frac{1}{N}\right)^N \approx e^{-1}\)</span>, so:</p>
+<div class="arithmatex">\[\left(1 - \frac{1}{N}\right)^{924} = \left[\left(1 - \frac{1}{N}\right)^N\right]^{924/N} \approx e^{-924/1024} \approx e^{-0.9} \approx 0.406\]</div>
+<p>Alex has a ~40.6% chance of surviving. Since there are 100 ignorant people like Alex:</p>
+<div class="arithmatex">\[E[\text{Survivors}] = 100 \times 0.406 \approx 40\]</div>
+<p>This is the Poisson approximation of the Binomial — used when you want the probability of <em>zero</em> successes across many trials, rather than just the average number of successes.</p>
+<h3 id="the-exponent-is-the-number-of-bullets-to-dodge">The Exponent Is the Number of Bullets to Dodge<a class="headerlink" href="#the-exponent-is-the-number-of-bullets-to-dodge" title="Permanent link">&para;</a></h3>
+<p>A common confusion: <em>why is the exponent 924 (the informed count) and not 100 (the ignorant count)?</em></p>
+<p>The exponent represents the number of independent events Alex must survive. In Push, the 924 informed people are making the calls — so there are 924 bullets flying. Alex must dodge all 924 of them. The 100 ignorant people appear only at the very end, as a multiplier:</p>
+<div class="arithmatex">\[E[\text{Survivors}] = \underbrace{100}_{\text{how many Alexes exist}} \times \underbrace{0.406}_{\text{Alex's personal survival rate}}\]</div>
+<p>If it were the Pull model instead, Alex would make exactly 1 call. He only faces 1 bullet. The exponent is 1. His survival probability is simply <span class="arithmatex">\(100/1024 = 0.1\)</span>. No Poisson approximation needed — the Binomial shortcut <span class="arithmatex">\(n \cdot p\)</span> works directly.</p>
+<h3 id="summary-when-to-use-which-tool">Summary: When to Use Which Tool<a class="headerlink" href="#summary-when-to-use-which-tool" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Tool</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pull — how many learn per round?</td>
+<td>Binomial <span class="arithmatex">\(E = n \cdot p\)</span></td>
+<td>Uninformed people each make one independent call. No overlap possible.</td>
+</tr>
+<tr>
+<td>Push — how many survive the round?</td>
+<td>Poisson/survival: <span class="arithmatex">\((1 - 1/N)^{\text{informed}}\)</span></td>
+<td>Need probability of <em>zero</em> hits on Alex across many independent callers. Overlap makes <span class="arithmatex">\(n \cdot p\)</span> wrong.</td>
+</tr>
+<tr>
+<td>Individual single call</td>
+<td>Bernoulli</td>
+<td>One trial, two outcomes. Building block for everything above.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="the-core-insight-many-looking-for-few-vs-few-looking-for-many">The Core Insight: Many Looking for Few vs. Few Looking for Many<a class="headerlink" href="#the-core-insight-many-looking-for-few-vs-few-looking-for-many" title="Permanent link">&para;</a></h2>
+<p>This is the single most important intuition for understanding Push vs. Pull.</p>
+<table>
+<thead>
+<tr>
+<th>Who searches</th>
+<th>Who gets found</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Push</strong> — the few informed →</td>
+<td>the many uninformed</td>
+<td>One flashlight per informed person. If only 3 people have flashlights, they can only light up 3 seats in a stadium of 1,000.</td>
+</tr>
+<tr>
+<td><strong>Pull</strong> — the many uninformed →</td>
+<td>the few informed</td>
+<td>Everyone shouts "does anyone know?" If 900 people can answer, the 100 who don't know will almost certainly get a response.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The direction of the search determines everything.</strong></p>
+<p>At the start, the few informed people push. The few ignorant people pull but mostly hit each other. Both are slow, but push is slightly less bad.</p>
+<p>At the end, the few remaining ignorant people pull. The world is full of answers. They cannot miss. This is where Pull's <span class="arithmatex">\(p_i^2\)</span> squaring becomes devastating. Push, by contrast, keeps firing random shots that mostly collide with already-informed people.</p>
+<hr />
+<h2 id="why-push-is-better-at-the-beginning-pull-is-better-at-the-end">Why Push Is Better at the Beginning, Pull Is Better at the End<a class="headerlink" href="#why-push-is-better-at-the-beginning-pull-is-better-at-the-end" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -7684,19 +7796,208 @@ p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i
 <tbody>
 <tr>
 <td><strong>Beginning</strong> (<span class="arithmatex">\(p_i \approx 1\)</span>, few infective)</td>
-<td><span class="arithmatex">\(p_{i+1} \approx p_i \cdot e^{-0} = p_i\)</span> (slow, almost no decrease)</td>
-<td><span class="arithmatex">\(p_{i+1} = p_i^2 \approx 1\)</span> (also slow initially, but improves rapidly)</td>
+<td><span class="arithmatex">\(p_{i+1} \approx p_i \cdot e^{0} = p_i\)</span> — slow, almost no decrease</td>
+<td><span class="arithmatex">\(p_{i+1} = p_i^2 \approx 1\)</span> — also slow initially</td>
 </tr>
 <tr>
 <td><strong>End</strong> (<span class="arithmatex">\(p_i \ll 1\)</span>, many infective)</td>
-<td><span class="arithmatex">\(p_{i+1} \approx p_i / e\)</span> (steady exponential decrease)</td>
-<td><span class="arithmatex">\(p_{i+1} = p_i^2\)</span> (doubly exponential, extremely fast)</td>
+<td><span class="arithmatex">\(p_{i+1} \approx p_i / e\)</span> — steady exponential decrease</td>
+<td><span class="arithmatex">\(p_{i+1} = p_i^2\)</span> — doubly exponential, extremely fast</td>
 </tr>
 </tbody>
 </table>
 <p><strong>The insight</strong>: at the beginning, there are very few infective nodes. A pull-based approach asks random nodes for updates, but most nodes do not have them yet. A push-based approach at least spreads what little exists. At the end, most nodes are infective, so pull-based approaches quickly find someone with the update.</p>
 <p><strong>Optimal strategy</strong>: push at the beginning, pull at the end.</p>
-<h3 id="optimizing-anti-entropy">Optimizing Anti-Entropy<a class="headerlink" href="#optimizing-anti-entropy" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="the-two-phase-proof-of-olog-n-total">The Two-Phase Proof of <span class="arithmatex">\(O(\log n)\)</span> Total<a class="headerlink" href="#the-two-phase-proof-of-olog-n-total" title="Permanent link">&para;</a></h2>
+<p>The full epidemic from 1 informed node to everyone informed has two distinct phases.</p>
+<h3 id="phase-1-the-slow-climb-olog-n-rounds">Phase 1: The Slow Climb — <span class="arithmatex">\(O(\log n)\)</span> rounds<a class="headerlink" href="#phase-1-the-slow-climb-olog-n-rounds" title="Permanent link">&para;</a></h3>
+<p><strong>Mental model</strong>: the informed population is doubling each round.</p>
+<p><strong>The Proof (3-step framework):</strong></p>
+<p><strong>Step 1 — The Micro-Step (Expected Value per round):</strong></p>
+<p>Let <span class="arithmatex">\(I_t\)</span> = number of informed people at round <span class="arithmatex">\(t\)</span>, <span class="arithmatex">\(U_t\)</span> = uninformed, <span class="arithmatex">\(N\)</span> = total.</p>
+<p>In Pull, every uninformed person asks one random person. The probability they hit a knower is <span class="arithmatex">\(I_t / N\)</span>.</p>
+<div class="arithmatex">\[E[\text{New Knowers}] = U_t \cdot \frac{I_t}{N}\]</div>
+<div class="arithmatex">\[E[I_{t+1}] = I_t + U_t \cdot \frac{I_t}{N}\]</div>
+<p><strong>Step 2 — The Macro-Sequence (Why it doubles):</strong></p>
+<p>Early on, <span class="arithmatex">\(I_t \ll N\)</span>, so almost everyone is still uninformed: <span class="arithmatex">\(U_t \approx N\)</span>.</p>
+<div class="arithmatex">\[E[I_{t+1}] \approx I_t + N \cdot \frac{I_t}{N} = I_t + I_t = 2I_t\]</div>
+<p>The <span class="arithmatex">\(N\)</span> cancels perfectly. Starting from <span class="arithmatex">\(I_0 = 1\)</span>:</p>
+<div class="arithmatex">\[I_t = 2^t\]</div>
+<p><em>(This same doubling argument works for Push too — the early phase is symmetric for all three protocols.)</em></p>
+<p><strong>Step 3 — The Boundary Condition (Solving for <span class="arithmatex">\(t\)</span>):</strong></p>
+<p>Phase 1 ends when half the room knows: <span class="arithmatex">\(I_t = N/2\)</span>.</p>
+<div class="arithmatex">\[2^t = \frac{N}{2}$$
+$$t = \log_2(N) - 1 = O(\log N)\]</div>
+<p><strong>Concrete example (N = 1024):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Round</th>
+<th>People who know</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>~2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>~4</td>
+</tr>
+<tr>
+<td>3</td>
+<td>~8</td>
+</tr>
+<tr>
+<td>4</td>
+<td>~16</td>
+</tr>
+<tr>
+<td>5</td>
+<td>~32</td>
+</tr>
+<tr>
+<td>6</td>
+<td>~64</td>
+</tr>
+<tr>
+<td>7</td>
+<td>~128</td>
+</tr>
+<tr>
+<td>8</td>
+<td>~256</td>
+</tr>
+<tr>
+<td>9</td>
+<td>~512</td>
+</tr>
+<tr>
+<td>10</td>
+<td>~1024</td>
+</tr>
+</tbody>
+</table>
+<p>10 rounds to fill a room of 1024. And <span class="arithmatex">\(2^{10} = 1024\)</span>, so 10 rounds <span class="arithmatex">\(= \log_2(1024)\)</span>.</p>
+<h3 id="phase-2-the-fast-collapse-olog-log-n-rounds">Phase 2: The Fast Collapse — <span class="arithmatex">\(O(\log \log n)\)</span> rounds<a class="headerlink" href="#phase-2-the-fast-collapse-olog-log-n-rounds" title="Permanent link">&para;</a></h3>
+<p>Once half the room knows, the squaring mechanism kicks in for Pull (and Push-Pull).</p>
+<p>Starting from <span class="arithmatex">\(p_0 = 1/2\)</span>:</p>
+<div class="arithmatex">\[p_k = \left(\frac{1}{2}\right)^{2^k}\]</div>
+<p>To reach fewer than 1 ignorant person out of <span class="arithmatex">\(N\)</span>, we need <span class="arithmatex">\(p_k \leq 1/N\)</span>:</p>
+<div class="arithmatex">\[\left(\frac{1}{2}\right)^{2^k} \leq \frac{1}{N}\]</div>
+<p>Taking <span class="arithmatex">\(\log_2\)</span> of both sides: <span class="arithmatex">\(-2^k \leq -\log_2 N\)</span>, so <span class="arithmatex">\(2^k \geq \log_2 N\)</span>.</p>
+<p>Taking <span class="arithmatex">\(\log_2\)</span> again: <span class="arithmatex">\(k \geq \log_2(\log_2 N)\)</span>.</p>
+<p>Therefore Phase 2 takes <span class="arithmatex">\(O(\log \log N)\)</span> rounds.</p>
+<p>For <span class="arithmatex">\(N = 1{,}000{,}000\)</span>: <span class="arithmatex">\(\log_2(\log_2(10^6)) \approx \log_2(20) \approx 4.3\)</span> rounds.</p>
+<hr />
+<h3 id="appendix-the-olog-log-n-proof-from-first-principles-the-search-space-view">Appendix: The <span class="arithmatex">\(O(\log \log N)\)</span> Proof from First Principles (The Search-Space View)<a class="headerlink" href="#appendix-the-olog-log-n-proof-from-first-principles-the-search-space-view" title="Permanent link">&para;</a></h3>
+<p>This is another way to see the same result, starting from the squaring sequence itself rather than from <span class="arithmatex">\(p_k\)</span>.</p>
+<p>The sequence of ignorant fractions is:</p>
+<div class="arithmatex">\[\frac{1}{2} \to \frac{1}{4} \to \frac{1}{16} \to \frac{1}{256} \to \frac{1}{65536} \ldots\]</div>
+<p>Look at just the denominators: <span class="arithmatex">\(2 \to 4 \to 16 \to 256 \to 65536\)</span>. Each denominator is the square of the previous one:</p>
+<table>
+<thead>
+<tr>
+<th>Step <span class="arithmatex">\(k\)</span></th>
+<th>Denominator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(2^1 = 2\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(2^2 = 4\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(4^2 = 16\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(16^2 = 256\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(256^2 = 65{,}536\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>After <span class="arithmatex">\(k\)</span> steps, the denominator is <span class="arithmatex">\(2^{2^k}\)</span>, so the fraction of ignorant people is:</p>
+<div class="arithmatex">\[p_k = \frac{1}{2^{2^k}} = N_k \cdot \frac{1}{N}\]</div>
+<p>where <span class="arithmatex">\(N_k = N^{1/2^k}\)</span> is the remaining "problem size." This is identical to taking the square root of the problem size at each step.</p>
+<p><strong>Solving for <span class="arithmatex">\(k\)</span>:</strong> We want the fraction to drop below <span class="arithmatex">\(1/N\)</span> (fewer than 1 ignorant person):</p>
+<div class="arithmatex">\[\frac{1}{2^{2^k}} \leq \frac{1}{N}\]</div>
+<div class="arithmatex">\[2^{2^k} \geq N\]</div>
+<p>Take <span class="arithmatex">\(\log_2\)</span> of both sides:</p>
+<div class="arithmatex">\[2^k \geq \log_2(N)\]</div>
+<p>Take <span class="arithmatex">\(\log_2\)</span> again:</p>
+<div class="arithmatex">\[k \geq \log_2(\log_2(N))\]</div>
+<p>Therefore <span class="arithmatex">\(k = O(\log \log N)\)</span>.</p>
+<p><strong>Why does taking the logarithm twice make sense?</strong> Think of it this way. Normally, if a number halves each step, you need <span class="arithmatex">\(\log_2(N)\)</span> steps to reach 1 — one logarithm. Here, the <em>exponent</em> is doubling each step (the denominator goes <span class="arithmatex">\(2^1, 2^2, 2^4, 2^8 \ldots\)</span>), so you need a logarithm to undo the outer exponent, and another logarithm to undo the inner one. Two logarithms, hence <span class="arithmatex">\(\log \log N\)</span>.</p>
+<h3 id="combining-the-phases">Combining the Phases<a class="headerlink" href="#combining-the-phases" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[T_{\text{total}} = O(\log N) + O(\log \log N) = O(\log N)\]</div>
+<p>In Big O notation, we drop the smaller term. <span class="arithmatex">\(\log \log N\)</span> grows far slower than <span class="arithmatex">\(\log N\)</span>, so the slow climb of Phase 1 dominates and sets the speed limit for the entire protocol.</p>
+<p>For <span class="arithmatex">\(N = 1{,}000{,}000\)</span>: Phase 1 takes ~20 rounds, Phase 2 takes ~4 rounds. Phase 1 is the bottleneck.</p>
+<hr />
+<h2 id="what-happens-with-pure-push-or-pure-pull-throughout">What Happens with Pure Push or Pure Pull Throughout?<a class="headerlink" href="#what-happens-with-pure-push-or-pure-pull-throughout" title="Permanent link">&para;</a></h2>
+<p>These cases help justify why the hybrid (Anti-Entropy) is necessary.</p>
+<p><strong>Pure Pull only:</strong> Terrible at the start. With only 1 informed person out of <span class="arithmatex">\(N\)</span>, each ignorant person has a <span class="arithmatex">\(1/N\)</span> chance of finding the answer. On average, <span class="arithmatex">\(N\)</span> calls are needed just to spread the secret once. Time complexity: <span class="arithmatex">\(O(N)\)</span> — linear, catastrophically slow.</p>
+<p><strong>Pure Push only:</strong> Works fine at first (exponential spread), but stalls at the end. This is the Coupon Collector's Problem — to hit every last ignorant person with random shots degrades to <span class="arithmatex">\(O(N \log N)\)</span> total messages, wasting enormous bandwidth on redundant calls that hit already-informed nodes.</p>
+<p><strong>Push-Pull (Anti-Entropy):</strong> Gets the best of both. Phase 1 uses Push's strength (spreading from the few). Phase 2 uses Pull's strength (the many can't miss). Total: <span class="arithmatex">\(O(\log N)\)</span> time, with the tail finishing in <span class="arithmatex">\(O(\log \log N)\)</span> — dramatically faster in practice even though the Big O label is the same as pure Push.</p>
+<hr />
+<h2 id="proof-pure-pull-alone-is-on-at-the-start">Proof: Pure Pull Alone Is <span class="arithmatex">\(O(N)\)</span> at the Start<a class="headerlink" href="#proof-pure-pull-alone-is-on-at-the-start" title="Permanent link">&para;</a></h2>
+<p><strong>Setup:</strong> <span class="arithmatex">\(N = 1024\)</span> people. 1 person knows. 1023 do not.</p>
+<p>Every ignorant person makes one random call. The chance they hit the one knower is:</p>
+<div class="arithmatex">\[P(\text{hit the knower}) = \frac{1}{N} = \frac{1}{1024}\]</div>
+<p>Expected new knowers in Round 1:</p>
+<div class="arithmatex">\[E[\text{New Knowers}] = U_0 \cdot \frac{I_0}{N} = 1023 \cdot \frac{1}{1024} \approx 1\]</div>
+<p>So after Round 1, roughly 1 more person knows. Now 2 know. In Round 2, roughly 2 more learn. The growth is the same as Push in Phase 1 — doubling — because the early math is symmetric (the <span class="arithmatex">\(N\)</span> cancels in both cases).</p>
+<p><strong>But what about even earlier, before doubling kicks in?</strong> In the very first round with 1 knower, each of the 1023 ignorant people has only a <span class="arithmatex">\(1/1024\)</span> chance of hitting the knower. The expected value is ~1 new knower. That is fine. But this is the best case.</p>
+<p>The real problem is if you try to use <em>only Pull</em> without any Push seeding: you must wait for the random process to naturally find that first knower, and the probability of finding them is <span class="arithmatex">\(1/N\)</span>. If no one gets lucky in Round 1, you are still stuck at 1 knower in Round 2. In the worst framing of this, the expected number of rounds before the first new knower learns is:</p>
+<div class="arithmatex">\[E[\text{rounds to first spread}] = \frac{N}{I_0} = N\]</div>
+<p>This is the <span class="arithmatex">\(O(N)\)</span> worst case — linear time just to get the epidemic started. That is catastrophic for a network of millions of servers.</p>
+<p><strong>The fix:</strong> seed with Push first. Even a few rounds of Push guarantees <span class="arithmatex">\(I_t\)</span> grows quickly, making Pull's probability <span class="arithmatex">\(I_t/N\)</span> large enough to be useful.</p>
+<hr />
+<h2 id="proof-pure-push-alone-degrades-to-on-log-n-at-the-end">Proof: Pure Push Alone Degrades to <span class="arithmatex">\(O(N \log N)\)</span> at the End<a class="headerlink" href="#proof-pure-push-alone-degrades-to-on-log-n-at-the-end" title="Permanent link">&para;</a></h2>
+<p><strong>The Coupon Collector's Problem</strong> is the classic result that explains why pure Push stalls.</p>
+<p><strong>Setup:</strong> Imagine <span class="arithmatex">\(N\)</span> different coupons. Each round, you draw one coupon uniformly at random (with replacement). How many draws do you need to collect all <span class="arithmatex">\(N\)</span> coupons?</p>
+<p>This maps directly to Push: the "coupons" are the ignorant people, and each "draw" is one informed person's random call. We want every ignorant person to get called at least once.</p>
+<p><strong>The proof idea:</strong> When <span class="arithmatex">\(k\)</span> coupons have already been collected (i.e., <span class="arithmatex">\(k\)</span> ignorant people have been informed), the probability that the next draw hits a new coupon (a still-ignorant person) is:</p>
+<div class="arithmatex">\[P(\text{new}) = \frac{N - k}{N}\]</div>
+<p>The expected number of draws to get one new coupon from this state is:</p>
+<div class="arithmatex">\[E[\text{draws}] = \frac{N}{N - k}\]</div>
+<p>Summing over all <span class="arithmatex">\(k\)</span> from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(N-1\)</span> (to go from 0 collected to all <span class="arithmatex">\(N\)</span> collected):</p>
+<div class="arithmatex">\[E[\text{total draws}] = \sum_{k=0}^{N-1} \frac{N}{N-k} = N \sum_{j=1}^{N} \frac{1}{j} = N \cdot H_N\]</div>
+<p>where <span class="arithmatex">\(H_N\)</span> is the <span class="arithmatex">\(N\)</span>-th Harmonic number. It is known that:</p>
+<div class="arithmatex">\[H_N \approx \ln(N)\]</div>
+<p>Therefore:</p>
+<div class="arithmatex">\[E[\text{total draws}] \approx N \ln N = O(N \log N)\]</div>
+<p><strong>What this means for Push:</strong> to guarantee the last few ignorant people get informed, you need <span class="arithmatex">\(O(N \log N)\)</span> total messages — far more than the <span class="arithmatex">\(O(\log N)\)</span> rounds of a hybrid protocol. The last ignorant person is like the last missing coupon: you keep drawing randomly, hitting people who already know, burning messages, until you finally get lucky and hit the one holdout.</p>
+<p><strong>Concrete example (<span class="arithmatex">\(N = 1024\)</span>):</strong></p>
+<p>Pure Push needs approximately <span class="arithmatex">\(1024 \times \ln(1024) \approx 1024 \times 6.9 \approx 7{,}000\)</span> total messages just to cover everyone. A hybrid Push-Pull protocol covers everyone in roughly <span class="arithmatex">\(\log_2(1024) = 10\)</span> rounds — orders of magnitude fewer messages.</p>
+<hr />
+<h2 id="the-three-mental-models-carry-these-forever">The Three Mental Models (Carry These Forever)<a class="headerlink" href="#the-three-mental-models-carry-these-forever" title="Permanent link">&para;</a></h2>
+<p><strong>Model 1 — Push (The Blind Broadcaster):</strong> Throwing darts while blindfolded. Explosive at the start when the board is full of targets. Disastrous at the end when only a few targets remain — massive wasted effort from collisions.</p>
+<p><strong>Model 2 — Pull (The Sponge):</strong> Shouting into a crowded room asking if anyone knows. Terrible at the start (finding a needle in a haystack). Unstoppable at the end — you are surrounded by answers and cannot miss.</p>
+<p><strong>Model 3 — Anti-Entropy (Sledgehammer + Scalpel):</strong> Use the sledgehammer (Push) to break the wall, then the scalpel (Pull) to clean up the edges. Zero blind spots.</p>
+<hr />
+<h2 id="the-mental-model-for-proofs-of-probabilistic-systems">The Mental Model for Proofs of Probabilistic Systems<a class="headerlink" href="#the-mental-model-for-proofs-of-probabilistic-systems" title="Permanent link">&para;</a></h2>
+<p>Whenever you see a randomized system, use this 3-step engine:</p>
+<p><strong>Step 1 — The Micro-Step:</strong> Freeze time. Look at exactly one round. What are the odds for one individual node? (This is where you spot the Bernoulli/Binomial structure.)</p>
+<p><strong>Step 2 — The Macro-Sequence:</strong> Press play. How does that single step compound over time? Are we doubling (<span class="arithmatex">\(2^t\)</span>) or squaring (<span class="arithmatex">\(U^2\)</span>)? Build the sequence.</p>
+<p><strong>Step 3 — The Boundary Condition:</strong> Where does the phase end? Set your sequence equal to your finish line (e.g., <span class="arithmatex">\(N/2\)</span>) and use logarithms to solve for <span class="arithmatex">\(t\)</span>.</p>
+<p>Textbooks often start with Step 3 and throw the final <span class="arithmatex">\(O(\log N)\)</span> formula at you. Starting with Step 1 and building up is how you develop real, durable intuition.</p>
+<hr />
+<h2 id="optimizing-anti-entropy">Optimizing Anti-Entropy<a class="headerlink" href="#optimizing-anti-entropy" title="Permanent link">&para;</a></h2>
 <p>Instead of comparing entire database contents:</p>
 <ol>
 <li>Compare timestamps of recent entries (less than <span class="arithmatex">\(\tau\)</span> seconds old).</li>
@@ -7705,41 +8006,18 @@ p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i
 <li>If checksums do not match, synchronize the full databases.</li>
 </ol>
 <p>Checksums act as compact hashes — a 64-bit checksum uniquely identifies database contents with high probability. This avoids expensive full-database comparisons.</p>
-<h3 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h3>
-<p>The mathematics reveals a phase transition in dissemination. Push and pull are not universally better — they dominate in different regimes. The optimal protocol is <strong>adaptive</strong>: start with push to seed the network, then switch to pull to mop up stragglers.</p>
-<h3 id="what-would-break-without-this-analysis">What Would Break Without This Analysis?<a class="headerlink" href="#what-would-break-without-this-analysis" title="Permanent link">&para;</a></h3>
-<p>If we used only pull at the beginning, dissemination would stall because almost no one has the update. If we used only push at the end, we would waste messages sending updates to nodes that already have them.</p>
-<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Structural Signature</td>
-<td>A recurrence relation for the fraction of susceptible nodes, with different recurrences for push vs. pull</td>
-</tr>
-<tr>
-<td>Core Invariant</td>
-<td>The probability of remaining susceptible factors into independent contact probabilities</td>
-</tr>
-<tr>
-<td>Compression Handle</td>
-<td>"Push = constant-factor decay; Pull = squaring decay; Use push early, pull late"</td>
-</tr>
-<tr>
-<td>Boundary / Failure Mode</td>
-<td>The <span class="arithmatex">\(e^{-1}\)</span> approximation fails for small <span class="arithmatex">\(n\)</span>; the <span class="arithmatex">\(p_i^2\)</span> recurrence assumes uniform random contact</td>
-</tr>
-<tr>
-<td>Phenomenon Web</td>
-<td>See Rumor Mongering (adds a removed state for self-termination); see Gossip-Based Failure Detection (uses the same push/pull analysis for heartbeat propagation)</td>
-</tr>
-</tbody>
-</table>
+<p><strong>Intuition for timestamps:</strong> Imagine you and a friend are collaborating on a shared note but can only message each other occasionally — and sometimes messages get lost or arrive out of order. Every time someone edits their copy, they also record <em>when</em> they did it. When you finally compare, you don't argue about the content — you check the timestamps. Whoever edited most recently wins. That is Last-Write-Wins (LWW) conflict resolution. It is the entire conflict resolution strategy for anti-entropy in one rule.</p>
+<hr />
+<h2 id="what-would-break-without-this-analysis">What Would Break Without This Analysis?<a class="headerlink" href="#what-would-break-without-this-analysis" title="Permanent link">&para;</a></h2>
+<p>If we used only pull at the beginning, dissemination would stall because almost no one has the update. If we used only push at the end, we would waste messages sending updates to nodes that already have them. The mathematical analysis of both phases is what tells us <em>precisely</em> when to switch, and proves the total time is <span class="arithmatex">\(O(\log n)\)</span>.</p>
+<hr />
+<h2 id="connection-to-real-world-systems">Connection to Real-World Systems<a class="headerlink" href="#connection-to-real-world-systems" title="Permanent link">&para;</a></h2>
+<p>What you derived is the backbone of <strong>Anti-Entropy Gossip Protocols</strong> used in distributed databases like Apache Cassandra and Amazon DynamoDB. Thousands of servers need to synchronize data. Engineers don't use pure Push or pure Pull. They program servers to:</p>
+<ul>
+<li>Push the data while the information is rare (to seed the network quickly).</li>
+<li>Pull the data when the information is common (to clean up remaining nodes instantly).</li>
+</ul>
+<p>By combining them, all servers sync in <span class="arithmatex">\(O(\log N)\)</span> rounds — avoiding the stall-out of pure Push and the slow start of pure Pull. The mathematics you just worked through is the reason those systems can stay consistent across millions of machines.</p>
 <hr />
 <h2 id="rumor-mongering-a-complex-epidemic-with-termination">Rumor Mongering: A Complex Epidemic with Termination<a class="headerlink" href="#rumor-mongering-a-complex-epidemic-with-termination" title="Permanent link">&para;</a></h2>
 <h3 id="plain-english-why-rumor-mongering-is-different-from-anti-entropy">Plain English: Why Rumor Mongering Is Different from Anti-Entropy<a class="headerlink" href="#plain-english-why-rumor-mongering-is-different-from-anti-entropy" title="Permanent link">&para;</a></h3>
@@ -7804,11 +8082,11 @@ i(s) = -s + \frac{s}{k} - \frac{\ln(s)}{k} + 1 - \frac{1}{k} = \frac{k+1}{k}(1-s
 \]</div>
 <p>For large <span class="arithmatex">\(k\)</span> (slow damping), <span class="arithmatex">\(s \approx e^{-(k+1)}\)</span>, which decreases exponentially with <span class="arithmatex">\(k\)</span>. But for small <span class="arithmatex">\(k\)</span>, a significant fraction of nodes remain susceptible — this is the <strong>residue</strong>.</p>
 <p>The residue represents nodes that never received the update. This is the fundamental trade-off: rumor mongering terminates, but it does not guarantee universal delivery.</p>
-<h3 id="intuition-after-the-proof_1">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_1" title="Permanent link">&para;</a></h3>
+<h3 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h3>
 <p>The <span class="arithmatex">\(i(s)\)</span> curve shows that infective nodes peak and then decline. The peak occurs because early on, many susceptible nodes mean rapid growth. Later, as susceptibles dwindle and removal kicks in, the infective population crashes. The nodes left behind — the residue — are the price of self-termination.</p>
 <h3 id="what-would-break-without-removal">What Would Break Without Removal?<a class="headerlink" href="#what-would-break-without-removal" title="Permanent link">&para;</a></h3>
 <p>Without the removal term <span class="arithmatex">\(\frac{1}{k}(1-s)i\)</span>, the model reduces to anti-entropy: infective nodes never stop propagating, and eventually <span class="arithmatex">\(s \to 0\)</span>. But the protocol never terminates, wasting bandwidth forever.</p>
-<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7879,7 +8157,7 @@ s = e^{-m}
 <li>If two sites discover a missing update, they can start a "hot rumor" locally.</li>
 </ol>
 <p>Xerox Clearinghouse used this hybrid approach, along with some direct mail for critical redistributions.</p>
-<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7926,7 +8204,7 @@ s = e^{-m}
 - <strong>Original timestamp</strong>: used to cancel updates
 - <strong>Activation timestamp</strong>: used to eventually discard the reactivated certificate</p>
 <p>Version numbers for updates prevent legitimate updates from being cancelled by stale death certificates.</p>
-<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -7989,7 +8267,7 @@ s = e^{-m}
 <p>The <strong>inverse-square law</strong> (<span class="arithmatex">\(\alpha = 2\)</span>) is the critical boundary. This is analogous to results in random graph theory and wireless network capacity.</p>
 <h3 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">&para;</a></h3>
 <p>If you can occasionally make long-distance contacts, the network "shrinks" dramatically. The <span class="arithmatex">\(O(\log n)\)</span> result for uniform contact is because each long-distance contact can jump across the network, bypassing many hops. When <span class="arithmatex">\(\alpha &gt; 2\)</span>, long-distance contacts are too rare to help, and the network behaves like a local graph.</p>
-<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8040,7 +8318,7 @@ s = e^{-m}
 <li><strong>Bandwidth scales linearly</strong>: total network load is <span class="arithmatex">\(O(n)\)</span>, not <span class="arithmatex">\(O(n^2)\)</span>.</li>
 <li><strong>Accurate detection with known mistake probability</strong>: if clock drift is negligible, failures are detected with a quantifiable error rate.</li>
 </ol>
-<h3 id="phenomenon-metadata_10">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_10" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8104,7 +8382,7 @@ T_{\text{cleanup}} = 2 \times T_{\text{fail}}
 <h3 id="scouting-report_2">Scouting Report<a class="headerlink" href="#scouting-report_2" title="Permanent link">&para;</a></h3>
 <p>What to look for: nodes exchanging heartbeat counters via random pairwise contact, with timeout-based failure declaration.</p>
 <p>Why you care: this is the canonical gossip-based failure detector, used in Cassandra, Dynamo, and many other systems.</p>
-<h3 id="phenomenon-metadata_11">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_11" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8194,14 +8472,14 @@ T_{\text{gossip}} = \frac{8n}{B}
 \text{Detection time} = O(n \log n)
 \]</div>
 <p>This is the key scalability result: detection time grows near-linearly with the number of members.</p>
-<h3 id="intuition-after-the-proof_2">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_2" title="Permanent link">&para;</a></h3>
+<h3 id="intuition-after-the-proof_1">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_1" title="Permanent link">&para;</a></h3>
 <p>The <span class="arithmatex">\(O(n \log n)\)</span> result comes from two factors:
 1. <strong>Logarithmic rounds</strong>: epidemic propagation needs <span class="arithmatex">\(O(\log n)\)</span> rounds to reach all nodes.
 2. <strong>Linear gossip interval</strong>: to keep bandwidth per node constant, the time between gossips must grow linearly with <span class="arithmatex">\(n\)</span> (because each message carries <span class="arithmatex">\(O(n)\)</span> state).</p>
 <p>The product gives <span class="arithmatex">\(O(n \log n)\)</span> detection time. This is the price of scalability: you cannot detect failures instantly in a large system with bounded bandwidth.</p>
 <h3 id="what-would-break-without-this-analysis_1">What Would Break Without This Analysis?<a class="headerlink" href="#what-would-break-without-this-analysis_1" title="Permanent link">&para;</a></h3>
 <p>If <span class="arithmatex">\(T_{\text{gossip}}\)</span> were fixed (not scaled with <span class="arithmatex">\(n\)</span>), bandwidth would grow as <span class="arithmatex">\(O(n^2)\)</span> — each node sends at fixed rate, but message size grows with <span class="arithmatex">\(n\)</span>. The system would collapse under its own communication overhead.</p>
-<h3 id="phenomenon-metadata_12">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_12" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_10">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_10" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8257,7 +8535,7 @@ T_{\text{gossip}} = \frac{8n}{B}
 <li>With 10% message loss, the price in detection time is small.</li>
 </ul>
 <p>The protocol is robust because gossip is randomized: lost messages are compensated by future gossips.</p>
-<h3 id="phenomenon-metadata_13">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_13" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_11">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_11" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8314,7 +8592,7 @@ p(t) = \frac{t^2}{20^2}
 <h3 id="the-broadcast-storm-problem">The Broadcast Storm Problem<a class="headerlink" href="#the-broadcast-storm-problem" title="Permanent link">&para;</a></h3>
 <p>If many nodes are unreachable, the expected time to the next broadcast shrinks toward 20 seconds. The concern is that many nodes might broadcast simultaneously, creating a storm.</p>
 <p>The paper shows that for <span class="arithmatex">\(n = 1000\)</span>, the probability that more than 20 members broadcast at once is less than <span class="arithmatex">\(10^{-5}\)</span>. This is because smaller partitions have fewer prospective senders, offsetting the increased individual broadcast probability.</p>
-<h3 id="phenomenon-metadata_14">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_14" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_12">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_12" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -8367,7 +8645,7 @@ p(t) = \frac{t^2}{20^2}
 <p><strong>Misrecognized signature</strong>: you see "failure detection" and assume it handles malicious nodes.</p>
 <p><strong>The trap</strong>: the gossip-based failure detector assumes <strong>fail-stop</strong> — nodes do not lie about their heartbeats. A Byzantine node could forge heartbeats for other nodes, causing false negatives (failed nodes appear alive) or false positives (alive nodes appear failed).</p>
 <p><strong>Concrete counterexample</strong>: a compromised node could send gossips claiming a failed node is still alive, keeping it in membership lists indefinitely.</p>
-<h2 id="phenomenon-metadata_15">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_15" title="Permanent link">&para;</a></h2>
+<h2 id="phenomenon-metadata_13">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_13" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -8413,7 +8691,7 @@ p(t) = \frac{t^2}{20^2}
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 18:30:52 UTC">June 24, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 25, 2026 05:13:26 UTC">June 25, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 27, 2026 06:42:30 UTC">June 27, 2026</span>
       </span>
     
   </aside>
