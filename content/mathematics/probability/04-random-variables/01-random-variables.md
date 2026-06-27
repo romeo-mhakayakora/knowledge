@@ -1,15 +1,3 @@
----
-title: Random Variables
-subject: probability
-chapter: 04-random-variables
-tags:
-- probability
-- mathematics
-date: '2026-06-18'
-updated: '2026-06-19'
-status: complete
-difficulty: intermediate
----
 
 # Random Variables
 
