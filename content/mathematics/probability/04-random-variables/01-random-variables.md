@@ -1,80 +1,151 @@
-
 # Random Variables
-
-> *Introduction to Probability* — Blitzstein & Hwang
-
----
-
-## Definition and Core Insight
-
-> **Definition 3.1.1** — A *random variable* (r.v.) is a **function** from the sample space $S$ to the real numbers $\mathbb{R}$:
-> $$X : S \rightarrow \mathbb{R}, \quad s \mapsto X(s)$$
-
-A random variable assigns a fixed numerical value to every possible outcome. It is **deterministic** — for a given outcome $s$, $X(s)$ is always the same fixed value. The randomness lives in *which outcome gets selected*, not in $X$ itself.
-
-**Pebble world picture:** Each pebble (outcome) in the sample space gets stamped with a number by $X$. The event $\{X = 7\}$ is not an equation to solve — it is the *set of all pebbles stamped with the number 7*. It is a legitimate event, so it has a probability. This means expressions like $P(X = k)$, $P(X \leq x)$, $P(a < X \leq b)$ are all well-defined probabilities of events.
-
-| Component | Role |
-|-----------|------|
-| Random variable $X$ | Deterministic function — gives each outcome a fixed number |
-| Probability function $P$ | Source of randomness — assigns weights to outcomes |
-
-Think of $X$ as a rating machine: it gives each outcome a fixed score. $P$ decides how often each score shows up.
-
-> **The pipeline from your own reasoning:** You have a school with students and bags. $X$ = number of bags is a fully known, deterministic function. The randomness comes from *which student gets picked* — that is where $P$ lives. $X$ just reads off the bag count once the student is selected.
+*Introduction to Probability — Blitzstein & Hwang, Ch. 3*
 
 ---
 
-### Example 3.1.2 — Two Coin Tosses
+## Why Random Variables?
 
-Sample space: $S = \{HH, HT, TH, TT\}$
+Working directly with sample spaces becomes painful fast. Suppose you're tracking how much wealth gambler A has after $k$ rounds — you'd need to describe an entire sequence of wins and losses just to express a single quantity.
 
-Three random variables defined on this experiment:
+**Random variables give us a way out.** Instead of describing outcomes in words ("HH", "got $5 after 3 rounds"), we describe them as numbers. This unlocks all of algebra and calculus to work on probability problems. It's one of the most powerful notational moves in all of mathematics.
 
-| R.V. | Formula | What it measures |
-|------|---------|-----------------|
-| $X$ | $s_1 + s_2$ | Number of Heads |
-| $Y$ | $2 - s_1 - s_2$ | Number of Tails ($Y = 2 - X$) |
-| $I$ | $s_1$ | Result of the first flip only |
-
-$I$ is an **indicator random variable** — it equals 1 if the first toss is Heads, 0 otherwise.
-
-> ⚠️ **Critical distinction — RV ≠ Distribution:**
-> Multiple random variables (e.g., $X_1, X_2, \ldots, X_n$ for $n$ coin tosses) can be *different* random variables — each depending on a different trial — yet all *share* the same distribution. The distribution is the blueprint (what are the probabilities?); the random variable is a specific instance of randomness (what actually happened on trial $j$?).
+> **The big idea:** A random variable is a number that summarises an experiment. It compresses a complicated outcome into a single value we can compute with.
 
 ---
 
-## Discrete vs Continuous Random Variables
+## Definition
 
-**Discrete:** X can only take a countable list of values — finite or countably infinite. Most commonly integers.
+**A random variable is a function from the sample space to the real line:**
 
-**Continuous:** X can take any real value in an interval. Between any two values there are infinitely many more — you can never write a complete list.
+$$X : S \rightarrow \mathbb{R}, \quad s \mapsto X(s)$$
 
-> **Always ask this first before anything else.** Everything that follows — which tools to use, how to compute probabilities — depends on this answer.
+This is the most important thing to absorb: **$X$ is a function, not a number, and not random by itself.**
 
-| | Discrete | Continuous |
+- $X$ is **deterministic** — given outcome $s$, $X(s)$ is always the same fixed value.
+- The **randomness** comes from which outcome $s$ gets selected — that's where the probability function $P$ lives.
+- Once an outcome is selected, $X$ just reads off the number.
+
+```mermaid
+graph LR
+    A[Experiment runs] --> B[Outcome s is selected\nvia probability P]
+    B --> C[X reads off X of s\ndeterministically]
+    C --> D[We get a number]
+```
+
+**Analogy:** Think of $X$ as a weighing scale. The scale is always honest — it gives the same reading for the same object. The randomness is in *which object you place on the scale*, not in the scale itself.
+
+---
+
+## The Pebble World Picture
+
+Imagine the sample space as a collection of pebbles. $P$ assigns weights (probabilities) to each pebble. $X$ stamps a number on each pebble.
+
+```mermaid
+graph TD
+    subgraph "Sample Space S"
+        P1["pebble HH\nstamp: 2"]
+        P2["pebble HT\nstamp: 1"]
+        P3["pebble TH\nstamp: 1"]
+        P4["pebble TT\nstamp: 0"]
+    end
+    P1 & P2 & P3 & P4 --> E["Event {X = 1}\n= {HT, TH}"]
+```
+
+The event $\{X = 1\}$ is not an equation — it is the **set of all pebbles stamped with 1**. This is a legitimate event, so it has a probability:
+
+$$P(X = 1) = P(\{HT, TH\}) = \frac{1}{2}$$
+
+Any expression like $P(X = k)$, $P(X \leq x)$, $P(a < X \leq b)$ is just the probability of some set of pebbles.
+
+---
+
+## Two Random Variables on the Same Experiment
+
+Consider two coin tosses. Sample space: $S = \{HH, HT, TH, TT\}$, each equally likely with probability $\frac{1}{4}$.
+
+| Outcome | $X$ = # Heads | $Y$ = # Tails | $I$ = 1st flip |
+|---------|--------------|--------------|----------------|
+| $HH$    | 2            | 0            | 1              |
+| $HT$    | 1            | 1            | 1              |
+| $TH$    | 1            | 1            | 0              |
+| $TT$    | 0            | 2            | 0              |
+
+Notice $Y = 2 - X$. These are different random variables — different functions — even though one is just a transformation of the other.
+
+$I$ is an **indicator random variable**: it equals 1 if some event occurs (first flip is Heads), and 0 otherwise. Indicators are surprisingly useful — they let you count things using expected values.
+
+---
+
+## Random Variable vs Distribution — A Critical Distinction
+
+These two concepts are often confused, but they are not the same thing.
+
+| Concept | What it is |
+|---------|-----------|
+| **Random variable** $X$ | A specific function on a specific sample space — tied to a particular trial or experiment |
+| **Distribution** | The blueprint: what are $P(X = k)$ for all $k$? |
+
+You can have many different random variables — $X_1, X_2, \ldots, X_n$ from $n$ separate coin tosses — that are **different functions** (each depending on a different trial) yet all **share the same distribution** (each is equally likely to be 0 or 1).
+
+> $X_j$ is what *actually happened* on trial $j$. The distribution is the *law governing* what could happen. One is a specific instance; the other is the general rule.
+
+---
+
+## Discrete vs Continuous
+
+Before reaching for any tool (PMF, CDF, expectation), always ask: **is this random variable discrete or continuous?**
+
+| | **Discrete** | **Continuous** |
 |---|---|---|
-| Values | Countable list | Any value in an interval |
-| Primary tool | PMF | PDF (later in course) |
+| Values | Countable list (often integers) | Any value in an interval |
+| Primary tool | PMF | PDF |
 | Universal tool | CDF | CDF |
-| Example | Number of bags | Height of a student |
-| $P(X = x)$ | Can be positive | Always 0 for any single point |
-| Gaps between values? | Yes | No |
+| $P(X = x)$ | Can be positive | Always exactly 0 |
+| Intuition | You can **count** the possibilities | You can **measure** the possibilities |
+| Example | Number of bags a student carries | Height of a student |
 
-> Discrete = you can **count** the possibilities. Continuous = you can **measure** the possibilities.
+```mermaid
+graph TD
+    RV[Random Variable X]
+    RV --> D{Can X only take\ncountably many values?}
+    D -- Yes --> Disc[Discrete\nUse PMF]
+    D -- No --> Cont[Continuous\nUse PDF]
+    Disc --> CDF1[CDF works for both]
+    Cont --> CDF1
+```
 
-Hybrid RVs (partly discrete, partly continuous) also exist — if you understand both types separately, you can handle hybrids too.
+A key subtlety: for a continuous r.v., $P(X = x) = 0$ for any single point $x$. This doesn't mean $X$ can't equal $x$ — it means the probability of landing on *exactly* one point in a continuum is infinitesimally small. Probability for continuous r.v.'s lives in **intervals**, not points.
+
+Hybrid r.v.'s (partly discrete, partly continuous) also exist — understanding both types cleanly is enough to handle them.
 
 ---
 
-## The Support of a Random Variable
+## The Support
 
-> **Definition:** The *support* of a discrete r.v. $X$ is the set of all values $x$ such that $P(X = x) > 0$.
+**The support of a discrete r.v. $X$ is the set of values it can actually take with positive probability:**
 
-Formally: $\text{Support of } X = \{x : P(X = x) > 0\}$
+$$\text{Support} = \{x : P(X = x) > 0\}$$
 
-Only values where X can actually land with nonzero probability belong to the support. Values outside the support have probability exactly 0 — X can never land there.
+Values outside the support have probability exactly 0. $X$ will never land there.
 
-> **Your lecturer analogy:** The support is the set of chairs in the room. The lecturer (X) will always sit on one of the chairs. The probability of the lecturer sitting on the ceiling = 0 because the ceiling is not in the support.
+**Analogy:** The support is the set of chairs in a room. The r.v. always sits on one of the chairs. The probability of it sitting on the ceiling is 0 — the ceiling is not in the support.
 
-A random variable X is **discrete** if its support is a finite or countably infinite list $\{a_1, a_2, \ldots\}$ such that $P(X = a_j \text{ for some } j) = 1$.
+A discrete r.v. is one whose support is a countable list $\{a_1, a_2, \ldots\}$ that captures all the probability: $P(X = a_j \text{ for some } j) = 1$.
+
+---
+
+## The Source of Randomness
+
+One subtle but important point from the book: **the source of randomness is the experiment itself** — specifically, the selection of outcome $s \in S$.
+
+Once we condition on knowing $s$ (i.e., the experiment is done and we see the result), the random variable $X(s)$ is just a fixed number. The uncertainty collapses.
+
+This is why random variables are useful for **summarising experiments**: we don't need to track every detail of $s$. We just care about the numerical summary $X(s)$ provides — whether that's the number of Heads, the total wealth, or the duration of a game.
+
+```mermaid
+graph LR
+    E[Experiment] --> S[Outcome s selected\naccording to P]
+    S --> X["X reads off X(s)"]
+    X --> N[A number\nwe can work with]
+    N --> Q[Ask: P of X in some set?]
+```
