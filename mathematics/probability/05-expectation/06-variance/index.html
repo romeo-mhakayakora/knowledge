@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/05-expectation/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/05-expectation/06-variance/">
       
       
-        <link rel="prev" href="../04-random-variables/random-variables-notes/">
+        <link rel="prev" href="../05-law-of-the-unconscious-statistician/">
       
       
-        <link rel="next" href="connections-between-poisson-and-binomial/">
+        <link rel="next" href="../07-poisson/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Expectation - Knowledge</title>
+        <title>Variance - Knowledge</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,9 +51,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Expectation - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/05-expectation/index.png" />
+<meta property="og:title" content="Variance - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/05-expectation/06-variance.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/05-expectation/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/probability/05-expectation/06-variance/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="Expectation - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/05-expectation/index.png" />
+<meta property="twitter:title" content="Variance - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/probability/05-expectation/06-variance.png" />
 </head>
   
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#chapter-4-expectation" class="md-skip">
+        <a href="#variance" class="md-skip">
           Skip to content
         </a>
       
@@ -105,7 +105,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Knowledge" class="md-header__button md-logo" aria-label="Knowledge" data-md-component="logo">
+    <a href="../../../.." title="Knowledge" class="md-header__button md-logo" aria-label="Knowledge" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Expectation
+              Variance
             
           </span>
         </div>
@@ -243,7 +243,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Knowledge" class="md-nav__button md-logo" aria-label="Knowledge" data-md-component="logo">
+    <a href="../../../.." title="Knowledge" class="md-nav__button md-logo" aria-label="Knowledge" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -273,7 +273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -328,7 +328,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../_concepts/" class="md-nav__link ">
+            <a href="../../../../_concepts/" class="md-nav__link ">
               
   
   
@@ -372,7 +372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../_concepts/common-mistakes/" class="md-nav__link">
+      <a href="../../../../_concepts/common-mistakes/" class="md-nav__link">
         
   
   
@@ -407,7 +407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../_concepts/distributions-cheatsheet/" class="md-nav__link">
+      <a href="../../../../_concepts/distributions-cheatsheet/" class="md-nav__link">
         
   
   
@@ -442,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../_concepts/named-distributions/" class="md-nav__link">
+      <a href="../../../../_concepts/named-distributions/" class="md-nav__link">
         
   
   
@@ -477,7 +477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../_concepts/proof-techniques/" class="md-nav__link">
+      <a href="../../../../_concepts/proof-techniques/" class="md-nav__link">
         
   
   
@@ -512,7 +512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../_concepts/r-functions-reference/" class="md-nav__link">
+      <a href="../../../../_concepts/r-functions-reference/" class="md-nav__link">
         
   
   
@@ -572,7 +572,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../ai/" class="md-nav__link ">
+            <a href="../../../../ai/" class="md-nav__link ">
               
   
   
@@ -638,7 +638,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/" class="md-nav__link ">
+            <a href="../../../../computer-science/" class="md-nav__link ">
               
   
   
@@ -755,7 +755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/01-epidemic-gossip/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/01-epidemic-gossip/" class="md-nav__link">
         
   
   
@@ -807,7 +807,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/02-napster-gnutella/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/02-napster-gnutella/" class="md-nav__link ">
               
   
   
@@ -851,7 +851,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/02-napster-gnutella/gnutella-flooding/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/02-napster-gnutella/gnutella-flooding/" class="md-nav__link">
         
   
   
@@ -886,7 +886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/02-napster-gnutella/hierarchical-p2p/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/02-napster-gnutella/hierarchical-p2p/" class="md-nav__link">
         
   
   
@@ -921,7 +921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/02-napster-gnutella/napster-architecture/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/02-napster-gnutella/napster-architecture/" class="md-nav__link">
         
   
   
@@ -988,7 +988,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/" class="md-nav__link ">
               
   
   
@@ -1032,7 +1032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/bittorrent-protocol/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/bittorrent-protocol/" class="md-nav__link">
         
   
   
@@ -1067,7 +1067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/chord-protocol/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/chord-protocol/" class="md-nav__link">
         
   
   
@@ -1102,7 +1102,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/pastry-protocol/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/pastry-protocol/" class="md-nav__link">
         
   
   
@@ -1169,7 +1169,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/" class="md-nav__link ">
               
   
   
@@ -1213,7 +1213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/logical-clocks/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/logical-clocks/" class="md-nav__link">
         
   
   
@@ -1248,7 +1248,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/mutual-exclusion/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/mutual-exclusion/" class="md-nav__link">
         
   
   
@@ -1283,7 +1283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/vector-clocks/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/04-logical-clocks-mutual-exclusion/vector-clocks/" class="md-nav__link">
         
   
   
@@ -1350,7 +1350,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/05-distributed-leader-election/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/05-distributed-leader-election/" class="md-nav__link ">
               
   
   
@@ -1394,7 +1394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/05-distributed-leader-election/bully-algorithm/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/05-distributed-leader-election/bully-algorithm/" class="md-nav__link">
         
   
   
@@ -1429,7 +1429,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/05-distributed-leader-election/lcr-algorithm/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/05-distributed-leader-election/lcr-algorithm/" class="md-nav__link">
         
   
   
@@ -1464,7 +1464,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/05-distributed-leader-election/ring-election/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/05-distributed-leader-election/ring-election/" class="md-nav__link">
         
   
   
@@ -1531,7 +1531,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/06-dmst-flp/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/06-dmst-flp/" class="md-nav__link ">
               
   
   
@@ -1575,7 +1575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/06-dmst-flp/consensus-bounds/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/06-dmst-flp/consensus-bounds/" class="md-nav__link">
         
   
   
@@ -1610,7 +1610,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/06-dmst-flp/distributed-mst/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/06-dmst-flp/distributed-mst/" class="md-nav__link">
         
   
   
@@ -1645,7 +1645,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/06-dmst-flp/flp-impossibility/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/06-dmst-flp/flp-impossibility/" class="md-nav__link">
         
   
   
@@ -1712,7 +1712,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/07-consistency-cap/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/07-consistency-cap/" class="md-nav__link ">
               
   
   
@@ -1756,7 +1756,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/07-consistency-cap/cap-theorem/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/07-consistency-cap/cap-theorem/" class="md-nav__link">
         
   
   
@@ -1791,7 +1791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/07-consistency-cap/consistency-models/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/07-consistency-cap/consistency-models/" class="md-nav__link">
         
   
   
@@ -1826,7 +1826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/07-consistency-cap/pacelc-theorem/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/07-consistency-cap/pacelc-theorem/" class="md-nav__link">
         
   
   
@@ -1893,7 +1893,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/08-paxos-raft/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/08-paxos-raft/" class="md-nav__link ">
               
   
   
@@ -1937,7 +1937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/08-paxos-raft/consensus-comparison/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/08-paxos-raft/consensus-comparison/" class="md-nav__link">
         
   
   
@@ -1972,7 +1972,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/08-paxos-raft/paxos-consensus/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/08-paxos-raft/paxos-consensus/" class="md-nav__link">
         
   
   
@@ -2007,7 +2007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/08-paxos-raft/raft-consensus/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/08-paxos-raft/raft-consensus/" class="md-nav__link">
         
   
   
@@ -2072,7 +2072,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/09-byzantine-virtual-synchrony/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/09-byzantine-virtual-synchrony/" class="md-nav__link ">
               
   
   
@@ -2116,7 +2116,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/09-byzantine-virtual-synchrony/byzantine-generals/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/09-byzantine-virtual-synchrony/byzantine-generals/" class="md-nav__link">
         
   
   
@@ -2151,7 +2151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/09-byzantine-virtual-synchrony/virtual-synchrony/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/09-byzantine-virtual-synchrony/virtual-synchrony/" class="md-nav__link">
         
   
   
@@ -2216,7 +2216,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/10-bitcoin-blockchains/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/10-bitcoin-blockchains/" class="md-nav__link ">
               
   
   
@@ -2260,7 +2260,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/10-bitcoin-blockchains/blockchain-mechanics/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/10-bitcoin-blockchains/blockchain-mechanics/" class="md-nav__link">
         
   
   
@@ -2295,7 +2295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/10-bitcoin-blockchains/proof-of-work/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/10-bitcoin-blockchains/proof-of-work/" class="md-nav__link">
         
   
   
@@ -2362,7 +2362,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/" class="md-nav__link ">
               
   
   
@@ -2406,7 +2406,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/amazon-dynamo/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/amazon-dynamo/" class="md-nav__link">
         
   
   
@@ -2441,7 +2441,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/facebook-cassandra/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/facebook-cassandra/" class="md-nav__link">
         
   
   
@@ -2476,7 +2476,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/google-percolator/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/11-dynamo-cassandra-percolator/google-percolator/" class="md-nav__link">
         
   
   
@@ -2543,7 +2543,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/" class="md-nav__link ">
+            <a href="../../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/" class="md-nav__link ">
               
   
   
@@ -2587,7 +2587,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/condor-scheduler/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/condor-scheduler/" class="md-nav__link">
         
   
   
@@ -2622,7 +2622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/dryadlinq-execution/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/dryadlinq-execution/" class="md-nav__link">
         
   
   
@@ -2657,7 +2657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/project-voldemort/" class="md-nav__link">
+      <a href="../../../../computer-science/distributed-systems/12-voldemort-condor-dryadlinq/project-voldemort/" class="md-nav__link">
         
   
   
@@ -2735,7 +2735,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../economics/" class="md-nav__link ">
+            <a href="../../../../economics/" class="md-nav__link ">
               
   
   
@@ -2827,7 +2827,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../economics/game-theory/" class="md-nav__link ">
+            <a href="../../../../economics/game-theory/" class="md-nav__link ">
               
   
   
@@ -2871,7 +2871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/01-Introduction-and-Dominance/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/01-Introduction-and-Dominance/" class="md-nav__link">
         
   
   
@@ -2899,7 +2899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/02-Coordination-and-Commons/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/02-Coordination-and-Commons/" class="md-nav__link">
         
   
   
@@ -2927,7 +2927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/03-Cournot-Duopoly/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/03-Cournot-Duopoly/" class="md-nav__link">
         
   
   
@@ -2955,7 +2955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/04-Mixed-Strategies/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/04-Mixed-Strategies/" class="md-nav__link">
         
   
   
@@ -2983,7 +2983,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/05-Rationality-and-IESDS/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/05-Rationality-and-IESDS/" class="md-nav__link">
         
   
   
@@ -3011,7 +3011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/06-Auctions-and-Paradoxes/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/06-Auctions-and-Paradoxes/" class="md-nav__link">
         
   
   
@@ -3039,7 +3039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/07-Extensive-Form-Games/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/07-Extensive-Form-Games/" class="md-nav__link">
         
   
   
@@ -3067,7 +3067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/08-Subgame-Perfection/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/08-Subgame-Perfection/" class="md-nav__link">
         
   
   
@@ -3095,7 +3095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/09-Stackelberg-Leadership/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/09-Stackelberg-Leadership/" class="md-nav__link">
         
   
   
@@ -3123,7 +3123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/10-Bayesian-Games/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/10-Bayesian-Games/" class="md-nav__link">
         
   
   
@@ -3151,7 +3151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/11-Bayesian-Auctions/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/11-Bayesian-Auctions/" class="md-nav__link">
         
   
   
@@ -3179,7 +3179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/12-Evolutionary-Games/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/12-Evolutionary-Games/" class="md-nav__link">
         
   
   
@@ -3207,7 +3207,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/13-Repeated-Games/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/13-Repeated-Games/" class="md-nav__link">
         
   
   
@@ -3235,7 +3235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/14-Bargaining-Theory/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/14-Bargaining-Theory/" class="md-nav__link">
         
   
   
@@ -3263,7 +3263,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../economics/game-theory/15-Incomplete-Information-and-PBE/" class="md-nav__link">
+      <a href="../../../../economics/game-theory/15-Incomplete-Information-and-PBE/" class="md-nav__link">
         
   
   
@@ -3330,7 +3330,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../" class="md-nav__link ">
               
   
   
@@ -3396,7 +3396,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../linear-algebra-ml-qc/" class="md-nav__link ">
+            <a href="../../../linear-algebra-ml-qc/" class="md-nav__link ">
               
   
   
@@ -3472,7 +3472,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/" class="md-nav__link ">
+            <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/" class="md-nav__link ">
               
   
   
@@ -3516,7 +3516,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/01-geometry-linear-equations/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/01-geometry-linear-equations/" class="md-nav__link">
         
   
   
@@ -3544,7 +3544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/02-column-space-nullspace/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/02-column-space-nullspace/" class="md-nav__link">
         
   
   
@@ -3572,7 +3572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/03-independence-basis-dimension/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/03-independence-basis-dimension/" class="md-nav__link">
         
   
   
@@ -3600,7 +3600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/04-four-fundamental-subspaces/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/04-four-fundamental-subspaces/" class="md-nav__link">
         
   
   
@@ -3628,7 +3628,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/05-orthogonal-vectors-subspaces/" class="md-nav__link">
         
   
   
@@ -3656,7 +3656,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/06-projections-onto-subspaces/" class="md-nav__link">
         
   
   
@@ -3684,7 +3684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-01-vector-spaces-projections/07-projection-matrices-least-squares/" class="md-nav__link">
         
   
   
@@ -3750,7 +3750,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/" class="md-nav__link ">
+            <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/" class="md-nav__link ">
               
   
   
@@ -3794,7 +3794,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt/" class="md-nav__link">
         
   
   
@@ -3822,7 +3822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors/" class="md-nav__link">
         
   
   
@@ -3850,7 +3850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers/" class="md-nav__link">
         
   
   
@@ -3878,7 +3878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/04-symmetric-positive-definite/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/04-symmetric-positive-definite/" class="md-nav__link">
         
   
   
@@ -3906,7 +3906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/05-positive-definite-minima/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/05-positive-definite-minima/" class="md-nav__link">
         
   
   
@@ -3934,7 +3934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra-ml-qc/week-02-eigen-svd/06-svd/" class="md-nav__link">
+      <a href="../../../linear-algebra-ml-qc/week-02-eigen-svd/06-svd/" class="md-nav__link">
         
   
   
@@ -4028,7 +4028,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -4094,7 +4094,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../01-fundamentals/" class="md-nav__link ">
+            <a href="../../01-fundamentals/" class="md-nav__link ">
               
   
   
@@ -4138,7 +4138,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-fundamentals/probability-axioms/" class="md-nav__link">
+      <a href="../../01-fundamentals/probability-axioms/" class="md-nav__link">
         
   
   
@@ -4173,7 +4173,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-fundamentals/sample-spaces-and-events/" class="md-nav__link">
+      <a href="../../01-fundamentals/sample-spaces-and-events/" class="md-nav__link">
         
   
   
@@ -4271,7 +4271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-probability-counting/exercises/" class="md-nav__link">
+      <a href="../../02-probability-counting/exercises/" class="md-nav__link">
         
   
   
@@ -4306,7 +4306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-probability-counting/probability-counting-notes/" class="md-nav__link">
+      <a href="../../02-probability-counting/probability-counting-notes/" class="md-nav__link">
         
   
   
@@ -4396,7 +4396,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-probability-counting/lectures/l01-probability-and-counting/" class="md-nav__link">
+      <a href="../../02-probability-counting/lectures/l01-probability-and-counting/" class="md-nav__link">
         
   
   
@@ -4431,7 +4431,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-probability-counting/lectures/l02-story-proofs-axioms/" class="md-nav__link">
+      <a href="../../02-probability-counting/lectures/l02-story-proofs-axioms/" class="md-nav__link">
         
   
   
@@ -4466,7 +4466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-probability-counting/lectures/l03-birthday-problem-properties/" class="md-nav__link">
+      <a href="../../02-probability-counting/lectures/l03-birthday-problem-properties/" class="md-nav__link">
         
   
   
@@ -4572,7 +4572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-conditional-probability/conditional-probability-notes/" class="md-nav__link">
+      <a href="../../03-conditional-probability/conditional-probability-notes/" class="md-nav__link">
         
   
   
@@ -4607,7 +4607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-conditional-probability/exercises/" class="md-nav__link">
+      <a href="../../03-conditional-probability/exercises/" class="md-nav__link">
         
   
   
@@ -4695,7 +4695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-conditional-probability/lectures/l04-conditional-probability/" class="md-nav__link">
+      <a href="../../03-conditional-probability/lectures/l04-conditional-probability/" class="md-nav__link">
         
   
   
@@ -4730,7 +4730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-conditional-probability/lectures/l05-conditioning-continued/" class="md-nav__link">
+      <a href="../../03-conditional-probability/lectures/l05-conditioning-continued/" class="md-nav__link">
         
   
   
@@ -4836,7 +4836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-random-variables/exercises/" class="md-nav__link">
+      <a href="../../04-random-variables/exercises/" class="md-nav__link">
         
   
   
@@ -4871,7 +4871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-random-variables/lecture-8-binomial-hypergeometricandrandom-variables/" class="md-nav__link">
+      <a href="../../04-random-variables/lecture-8-binomial-hypergeometricandrandom-variables/" class="md-nav__link">
         
   
   
@@ -4906,7 +4906,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-random-variables/random-variables-notes/" class="md-nav__link">
+      <a href="../../04-random-variables/random-variables-notes/" class="md-nav__link">
         
   
   
@@ -4954,8 +4954,6 @@
     
       
         
-          
-        
       
         
       
@@ -4992,9 +4990,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3_6" checked>
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
-              
+          <label class="md-nav__link" for="__nav_6_3_6" id="__nav_6_3_6_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -5008,14 +5005,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link md-nav__link--active" for="__nav_6_3_6" id="__nav_6_3_6_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_6_3_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6_3_6">
@@ -5029,34 +5020,25 @@
           <ul class="md-nav__list" data-md-scrollfix>
             
               
-            
-              
                 
   
   
   
   
     <li class="md-nav__item">
-      <a href="connections-between-poisson-and-binomial/" class="md-nav__link">
+      <a href="../00-introduction/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Connections Between Poisson and Binomial
+    Expectation
   
 
     
   </span>
   
-  
-    
-  
-  
-    <span class="md-status md-status--complete"></span>
-  
-
   
 
       </a>
@@ -5072,7 +5054,7 @@
   
   
     <li class="md-nav__item">
-      <a href="definition-of-expectation/" class="md-nav__link">
+      <a href="../01-definition-of-expectation/" class="md-nav__link">
         
   
   
@@ -5107,147 +5089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="exercises/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Exercises
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--draft"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="geometric-and-negative-binomial/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Geometric and Negative Binomial Expectation
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--complete"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="indicator-rvs-and-the-fundamental-bridge/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Indicator Random Variables and the Fundamental Bridge
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--complete"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="law-of-the-unconscious-statistician/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Law of the Unconscious Statistician (LOTUS)
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--complete"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="linearity-of-expectation/" class="md-nav__link">
+      <a href="../02-linearity-of-expectation/" class="md-nav__link">
         
   
   
@@ -5282,7 +5124,389 @@
   
   
     <li class="md-nav__item">
-      <a href="poisson/" class="md-nav__link">
+      <a href="../03-geometric-and-negative-binomial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geometric and Negative Binomial Expectation
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-indicator-rvs-and-the-fundamental-bridge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indicator Random Variables and the Fundamental Bridge
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-law-of-the-unconscious-statistician/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Law of the Unconscious Statistician (LOTUS)
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variance
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Variance
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#motivation-why-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motivation — Why Variance?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standard-deviation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Deviation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-continuous-case-and-the-gaussian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Continuous Case and the Gaussian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-squared-deviations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Squared Deviations?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-use-absolute-value-instead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Not Use Absolute Value Instead?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-computational-formula-for-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Computational Formula for Variance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties-of-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties of Variance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties of Variance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#property-1-shifting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 1 — Shifting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-2-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 2 — Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-3-additivity-for-independent-rvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 3 — Additivity for Independent R.V.s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-4-non-negativity-and-the-degenerate-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 4 — Non-negativity and the Degenerate Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variance-is-not-linear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variance is NOT Linear
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-geometric-and-negative-binomial-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Geometric and Negative Binomial Variance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-binomial-variance-via-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Binomial Variance via Indicators
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example — Binomial Variance via Indicators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternative-finding-ex2-via-pairs-of-trials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative — Finding \(E(X^2)\) via Pairs of Trials
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-poisson/" class="md-nav__link">
         
   
   
@@ -5317,14 +5541,14 @@
   
   
     <li class="md-nav__item">
-      <a href="r/" class="md-nav__link">
+      <a href="../08-connections-between-poisson-and-binomial/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    R
+    Connections Between Poisson and Binomial
   
 
     
@@ -5352,42 +5576,7 @@
   
   
     <li class="md-nav__item">
-      <a href="recap/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Recap
-  
-
-    
-  </span>
-  
-  
-    
-  
-  
-    <span class="md-status md-status--complete"></span>
-  
-
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="using-probability-and-expectation-to-prove-existence/" class="md-nav__link">
+      <a href="../09-using-probability-and-expectation-to-prove-existence/" class="md-nav__link">
         
   
   
@@ -5422,14 +5611,14 @@
   
   
     <li class="md-nav__item">
-      <a href="variance/" class="md-nav__link">
+      <a href="../10-recap/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Variance
+    Recap
   
 
     
@@ -5440,6 +5629,76 @@
   
   
     <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-r/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    R
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--complete"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Exercises
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--draft"></span>
   
 
   
@@ -5518,7 +5777,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-continuous-random-variables/continuous-random-variables-notes/" class="md-nav__link">
+      <a href="../../06-continuous-random-variables/continuous-random-variables-notes/" class="md-nav__link">
         
   
   
@@ -5553,7 +5812,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-continuous-random-variables/exercises/" class="md-nav__link">
+      <a href="../../06-continuous-random-variables/exercises/" class="md-nav__link">
         
   
   
@@ -5649,7 +5908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07-moments/exercises/" class="md-nav__link">
+      <a href="../../07-moments/exercises/" class="md-nav__link">
         
   
   
@@ -5684,7 +5943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07-moments/moments-notes/" class="md-nav__link">
+      <a href="../../07-moments/moments-notes/" class="md-nav__link">
         
   
   
@@ -5780,7 +6039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08-joint-distributions/exercises/" class="md-nav__link">
+      <a href="../../08-joint-distributions/exercises/" class="md-nav__link">
         
   
   
@@ -5815,7 +6074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08-joint-distributions/joint-distributions-notes/" class="md-nav__link">
+      <a href="../../08-joint-distributions/joint-distributions-notes/" class="md-nav__link">
         
   
   
@@ -5911,7 +6170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-transformations/exercises/" class="md-nav__link">
+      <a href="../../09-transformations/exercises/" class="md-nav__link">
         
   
   
@@ -5946,7 +6205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-transformations/transformations-notes/" class="md-nav__link">
+      <a href="../../09-transformations/transformations-notes/" class="md-nav__link">
         
   
   
@@ -6042,7 +6301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10-conditional-expectation/conditional-expectation-notes/" class="md-nav__link">
+      <a href="../../10-conditional-expectation/conditional-expectation-notes/" class="md-nav__link">
         
   
   
@@ -6077,7 +6336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10-conditional-expectation/exercises/" class="md-nav__link">
+      <a href="../../10-conditional-expectation/exercises/" class="md-nav__link">
         
   
   
@@ -6173,7 +6432,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../11-inequalities-limit-theorems/exercises/" class="md-nav__link">
+      <a href="../../11-inequalities-limit-theorems/exercises/" class="md-nav__link">
         
   
   
@@ -6208,7 +6467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../11-inequalities-limit-theorems/inequalities-limit-theorems-notes/" class="md-nav__link">
+      <a href="../../11-inequalities-limit-theorems/inequalities-limit-theorems-notes/" class="md-nav__link">
         
   
   
@@ -6291,7 +6550,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../12-markov-chains/" class="md-nav__link ">
+            <a href="../../12-markov-chains/" class="md-nav__link ">
               
   
   
@@ -6335,7 +6594,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.1-Markov-Property/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.1-Markov-Property/" class="md-nav__link">
         
   
   
@@ -6363,7 +6622,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.1.6-Marginal-Distributions/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.1.6-Marginal-Distributions/" class="md-nav__link">
         
   
   
@@ -6391,7 +6650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.2-State-Classification/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.2-State-Classification/" class="md-nav__link">
         
   
   
@@ -6419,7 +6678,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.2.8-Periodicity/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.2.8-Periodicity/" class="md-nav__link">
         
   
   
@@ -6447,7 +6706,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.3-Stationary-Distributions/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.3-Stationary-Distributions/" class="md-nav__link">
         
   
   
@@ -6475,7 +6734,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.3.5-Existence-Uniqueness/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.3.5-Existence-Uniqueness/" class="md-nav__link">
         
   
   
@@ -6503,7 +6762,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/11.3.6-Convergence/" class="md-nav__link">
+      <a href="../../12-markov-chains/11.3.6-Convergence/" class="md-nav__link">
         
   
   
@@ -6531,7 +6790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/Cheat-Sheet/" class="md-nav__link">
+      <a href="../../12-markov-chains/Cheat-Sheet/" class="md-nav__link">
         
   
   
@@ -6559,7 +6818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/Examples/" class="md-nav__link">
+      <a href="../../12-markov-chains/Examples/" class="md-nav__link">
         
   
   
@@ -6587,7 +6846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/Questions/" class="md-nav__link">
+      <a href="../../12-markov-chains/Questions/" class="md-nav__link">
         
   
   
@@ -6615,7 +6874,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../12-markov-chains/lecture/" class="md-nav__link">
+      <a href="../../12-markov-chains/lecture/" class="md-nav__link">
         
   
   
@@ -6704,7 +6963,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-markov-chain-monte-carlo/exercises/" class="md-nav__link">
+      <a href="../../13-markov-chain-monte-carlo/exercises/" class="md-nav__link">
         
   
   
@@ -6739,7 +6998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../13-markov-chain-monte-carlo/markov-chain-monte-carlo-notes/" class="md-nav__link">
+      <a href="../../13-markov-chain-monte-carlo/markov-chain-monte-carlo-notes/" class="md-nav__link">
         
   
   
@@ -6837,7 +7096,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-poisson-processes/exercises/" class="md-nav__link">
+      <a href="../../14-poisson-processes/exercises/" class="md-nav__link">
         
   
   
@@ -6872,7 +7131,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-poisson-processes/poisson-processes-notes/" class="md-nav__link">
+      <a href="../../14-poisson-processes/poisson-processes-notes/" class="md-nav__link">
         
   
   
@@ -6951,7 +7210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../14-poisson-processes/lectures/l34-goodbye-stats110/" class="md-nav__link">
+      <a href="../../14-poisson-processes/lectures/l34-goodbye-stats110/" class="md-nav__link">
         
   
   
@@ -7055,7 +7314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../problem-sets/ps01/" class="md-nav__link">
+      <a href="../../problem-sets/ps01/" class="md-nav__link">
         
   
   
@@ -7090,7 +7349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../problem-sets/ps02/" class="md-nav__link">
+      <a href="../../problem-sets/ps02/" class="md-nav__link">
         
   
   
@@ -7166,7 +7425,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../systems/" class="md-nav__link ">
+            <a href="../../../../systems/" class="md-nav__link ">
               
   
   
@@ -7232,13 +7491,190 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#topics" class="md-nav__link">
+  <a href="#motivation-why-variance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Topics
+        Motivation — Why Variance?
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#standard-deviation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Standard Deviation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-continuous-case-and-the-gaussian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Continuous Case and the Gaussian
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-squared-deviations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Squared Deviations?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-use-absolute-value-instead" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Not Use Absolute Value Instead?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-computational-formula-for-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Computational Formula for Variance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties-of-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Properties of Variance
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Properties of Variance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#property-1-shifting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 1 — Shifting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-2-scaling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 2 — Scaling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-3-additivity-for-independent-rvs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 3 — Additivity for Independent R.V.s
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#property-4-non-negativity-and-the-degenerate-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Property 4 — Non-negativity and the Degenerate Case
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#variance-is-not-linear" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variance is NOT Linear
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-geometric-and-negative-binomial-variance" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Geometric and Negative Binomial Variance
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#worked-example-binomial-variance-via-indicators" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Worked Example — Binomial Variance via Indicators
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Worked Example — Binomial Variance via Indicators">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alternative-finding-ex2-via-pairs-of-trials" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alternative — Finding \(E(X^2)\) via Pairs of Trials
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -7256,41 +7692,190 @@
               <article class="md-content__inner md-typeset">
                 
   
+    <div class="meta-line">
+      
+        COMPLETE &middot; INTERMEDIATE
+      
+    </div>
+  
 
   
                   
 
+  <nav class="md-tags" >
+    
+      
+      
+      
+      
+        <span class="md-tag">mathematics</span>
+      
+    
+      
+      
+      
+      
+        <span class="md-tag">probability</span>
+      
+    
+  </nav>
+
 
   
   
 
 
-<h1 id="chapter-4-expectation">Chapter 4: Expectation<a class="headerlink" href="#chapter-4-expectation" title="Permanent link">&para;</a></h1>
-<p>A distribution gives you the <em>full picture</em> of a random variable — every possible value and its probability. But sometimes that's too much information. Often you just want <strong>one number</strong> that summarizes the r.v.</p>
+<h1 id="variance">Variance<a class="headerlink" href="#variance" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>"It can be unwieldy to manage so many probabilities — so often we want just one number summarizing the 'average' value of the r.v."</p>
-</blockquote>
-<p>That one-number summary is the <strong>expected value</strong>, also called the <strong>expectation</strong> or <strong>mean</strong>.</p>
-<blockquote>
-<p>Much of statistics is also about understanding <em>variability</em> — how spread out a distribution is. This is formalized with <strong>variance</strong> and <strong>standard deviation</strong>, which are themselves defined in terms of expected values.</p>
 <p><em>Introduction to Probability</em> — Blitzstein &amp; Hwang</p>
 </blockquote>
 <hr />
-<h2 id="topics">Topics<a class="headerlink" href="#topics" title="Permanent link">&para;</a></h2>
+<h2 id="motivation-why-variance">Motivation — Why Variance?<a class="headerlink" href="#motivation-why-variance" title="Permanent link">&para;</a></h2>
+<p>One important application of LOTUS is for finding the <strong>variance</strong> of a random variable.</p>
+<p>Like expected value, variance is a single-number summary of the distribution of a random variable. While the expected value tells us the <strong>center of mass</strong> of a distribution, the variance tells us <strong>how spread out</strong> the distribution is.</p>
+<hr />
+<h2 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">&para;</a></h2>
+<p><strong>Definition 4.6.1 (Variance and standard deviation):</strong> The <em>variance</em> of an r.v. <span class="arithmatex">\(X\)</span> is:</p>
+<div class="arithmatex">\[\text{Var}(X) = E(X - EX)^2\]</div>
+<p>Recall that when we write <span class="arithmatex">\(E(X-EX)^2\)</span>, we mean the expectation of the random variable <span class="arithmatex">\((X-EX)^2\)</span> — <strong>not</strong> <span class="arithmatex">\((E(X-EX))^2\)</span> (which is 0 by linearity, since <span class="arithmatex">\(E(X - EX) = EX - EX = 0\)</span> always).</p>
+<p>This is exactly where LOTUS comes in: <span class="arithmatex">\((X - EX)^2\)</span> is <span class="arithmatex">\(g(X)\)</span> for <span class="arithmatex">\(g(x) = (x - EX)^2\)</span>, so <span class="arithmatex">\(\text{Var}(X) = E(g(X))\)</span> can be computed directly from the PMF of <span class="arithmatex">\(X\)</span> using LOTUS, without first finding the distribution of <span class="arithmatex">\((X-EX)^2\)</span>.</p>
+<hr />
+<h2 id="standard-deviation">Standard Deviation<a class="headerlink" href="#standard-deviation" title="Permanent link">&para;</a></h2>
+<p>The square root of the variance is called the <em>standard deviation</em> (SD):</p>
+<div class="arithmatex">\[\text{SD}(X) = \sqrt{\text{Var}(X)}\]</div>
+<p>We use the standard deviation because it brings the units of spread back into the <strong>original units</strong> of <span class="arithmatex">\(X\)</span>, making it physically intuitive — a deviation of "2 standard deviations" is directly comparable across different distributions in a way that variance alone is not.</p>
+<hr />
+<h2 id="the-continuous-case-and-the-gaussian">The Continuous Case and the Gaussian<a class="headerlink" href="#the-continuous-case-and-the-gaussian" title="Permanent link">&para;</a></h2>
+<p>Everything above is stated for discrete r.v.s using PMFs and sums, but the same definitions hold for <strong>continuous r.v.s</strong> with a probability density function (PDF) <span class="arithmatex">\(f(x)\)</span>, replacing sums with integrals. The second moment becomes:</p>
+<div class="arithmatex">\[E(X^2) = \int_{-\infty}^{\infty} x^2 f(x) \, dx\]</div>
+<p>and <span class="arithmatex">\(\text{Var}(X) = E(X^2) - (EX)^2\)</span> exactly as before. The derivation via linearity of expectation (Theorem 4.6.2 below) goes through identically — linearity of <span class="arithmatex">\(E[\cdot]\)</span> doesn't care whether the underlying sum is discrete or an integral.</p>
+<p><strong>The Gaussian connection:</strong> For a Normal (Gaussian) distribution, roughly <strong>68% of the probability mass lies within <span class="arithmatex">\(\pm 1\)</span> standard deviation of the mean</strong>. More strikingly, the mean <span class="arithmatex">\(\mu\)</span> and variance <span class="arithmatex">\(\sigma^2\)</span> are not just <em>a</em> summary of a Gaussian — they <strong>completely and uniquely determine its entire shape</strong>.</p>
+<p>This is special to the Gaussian. For most distributions, knowing the mean and variance tells you the center and spread but not the full shape — as the balancing-point example from earlier in this chapter showed, two very different PMFs can share the same mean, and the same logic extends to variance for non-Gaussian distributions.</p>
+<hr />
+<h2 id="why-squared-deviations">Why Squared Deviations?<a class="headerlink" href="#why-squared-deviations" title="Permanent link">&para;</a></h2>
+<p>The variance of <span class="arithmatex">\(X\)</span> measures how far <span class="arithmatex">\(X\)</span> is from its mean <strong>on average</strong> — but instead of simply taking the average difference between <span class="arithmatex">\(X\)</span> and its mean <span class="arithmatex">\(EX\)</span>, we take the average <strong>squared</strong> difference.</p>
+<p><strong>Why not just the average difference?</strong> Note that the average deviation from the mean, <span class="arithmatex">\(E(X - EX)\)</span>, <strong>always equals 0</strong> by linearity:</p>
+<div class="arithmatex">\[E(X - EX) = E(X) - E(EX) = EX - EX = 0\]</div>
+<p>Positive and negative deviations cancel each other out exactly, regardless of how spread out the distribution actually is. So <span class="arithmatex">\(E(X - EX)\)</span> is useless as a measure of spread — it's always 0 no matter what.</p>
+<p><strong>Squaring fixes this:</strong> By squaring the deviations, we ensure that both positive and negative deviations contribute positively to the overall variability. A deviation of <span class="arithmatex">\(-3\)</span> and a deviation of <span class="arithmatex">\(+3\)</span> both contribute <span class="arithmatex">\(9\)</span> to the squared sum — neither cancels the other.</p>
+<p><strong>The units problem:</strong> However, because variance is an average <em>squared</em> distance, it has the wrong units. If <span class="arithmatex">\(X\)</span> is in dollars, <span class="arithmatex">\(\text{Var}(X)\)</span> is in <em>squared dollars</em> — which is hard to interpret directly. To get back to the original units, we take the square root — this gives us the standard deviation, which is in the same units as <span class="arithmatex">\(X\)</span> itself.</p>
+<hr />
+<h2 id="why-not-use-absolute-value-instead">Why Not Use Absolute Value Instead?<a class="headerlink" href="#why-not-use-absolute-value-instead" title="Permanent link">&para;</a></h2>
+<p>One might wonder why variance isn't defined as <span class="arithmatex">\(E|X - EX|\)</span>, which would achieve the goal of counting both positive and negative deviations while maintaining the same units as <span class="arithmatex">\(X\)</span> (no squared-units problem).</p>
+<p>This measure of variability (called the <em>mean absolute deviation</em>) isn't nearly as popular as <span class="arithmatex">\(E(X-EX)^2\)</span>, for a variety of reasons. Most notably:</p>
 <ul>
-<li><a href="definition-of-expectation/">Definition of Expectation</a> — Expected value of discrete random variables</li>
-<li><a href="linearity-of-expectation/">Linearity of Expectation</a> — Linearity properties of expected values</li>
-<li><a href="geometric-and-negative-binomial/">Geometric and Negative Binomial Expectation</a> — Expectation of Geom and NBin distributions</li>
-<li><a href="indicator-rvs-and-the-fundamental-bridge/">Indicator Random Variables and the Fundamental Bridge</a> — Connecting probabilities and expectations</li>
-<li><a href="law-of-the-unconscious-statistician/">Law of the Unconscious Statistician (LOTUS)</a> — Directly finding E(g(X)) using LOTUS</li>
-<li><a href="variance/">Variance</a> — Spread of random variables</li>
-<li><a href="poisson/">Poisson Distribution</a> — Poisson PMF, properties, and paradigm</li>
-<li><a href="connections-between-poisson-and-binomial/">Connections Between Poisson and Binomial</a> — Limit and conditioning relations</li>
-<li><a href="using-probability-and-expectation-to-prove-existence/">Using Probability and Expectation to Prove Existence</a> — Probabilistic existence proofs</li>
-<li><a href="recap/">Recap</a> — Formula and concept reference sheet</li>
-<li><a href="r/">R</a> — R functions for probability calculations</li>
-<li><a href="../02-probability-counting/exercises/">Exercises</a> — Problem solutions and attempts</li>
+<li>The <strong>absolute value function isn't differentiable at 0</strong> — this causes problems in calculus-based derivations and optimization.</li>
+<li>The <strong>squaring function is differentiable everywhere</strong> and is central in various fundamental mathematical results, such as the <strong>Pythagorean theorem</strong>.</li>
 </ul>
+<p>Squaring connects variance to a rich body of mathematical theory (least-squares methods, orthogonality, the Pythagorean theorem in the context of random variables) that absolute value does not.</p>
+<hr />
+<h2 id="the-computational-formula-for-variance">The Computational Formula for Variance<a class="headerlink" href="#the-computational-formula-for-variance" title="Permanent link">&para;</a></h2>
+<p>An equivalent expression for variance is:</p>
+<div class="arithmatex">\[\text{Var}(X) = E(X^2) - (EX)^2\]</div>
+<p>This formula is often much easier to work with when doing actual calculations. Since this is the variance formula we will use over and over again, we state it as its own theorem.</p>
+<p><strong>Theorem 4.6.2:</strong> For any r.v. <span class="arithmatex">\(X\)</span>:</p>
+<div class="arithmatex">\[\text{Var}(X) = E(X^2) - (EX)^2\]</div>
+<p><strong>Proof:</strong> Let <span class="arithmatex">\(\mu = EX\)</span>. Expanding <span class="arithmatex">\((X - \mu)^2\)</span> and using linearity, the variance of <span class="arithmatex">\(X\)</span> is:</p>
+<div class="arithmatex">\[E(X-\mu)^2 = E(X^2 - 2\mu X + \mu^2) = E(X^2) - 2\mu E X + \mu^2 = E(X^2) - 2\mu^2 + \mu^2 = E(X^2) - \mu^2 \qquad \blacksquare\]</div>
+<p>Step by step: expand the square <span class="arithmatex">\((X-\mu)^2 = X^2 - 2\mu X + \mu^2\)</span>. Apply linearity of expectation to each term: <span class="arithmatex">\(E(X^2) - 2\mu E(X) + E(\mu^2)\)</span>. Since <span class="arithmatex">\(\mu = EX\)</span> is a constant, <span class="arithmatex">\(E(\mu^2) = \mu^2\)</span> and <span class="arithmatex">\(E(X) = \mu\)</span>, so the middle term becomes <span class="arithmatex">\(-2\mu \cdot \mu = -2\mu^2\)</span>. Combining: <span class="arithmatex">\(E(X^2) - 2\mu^2 + \mu^2 = E(X^2) - \mu^2 = E(X^2) - (EX)^2\)</span>.</p>
+<hr />
+<h2 id="properties-of-variance">Properties of Variance<a class="headerlink" href="#properties-of-variance" title="Permanent link">&para;</a></h2>
+<p>Variance has the following properties. The first two are easily verified from the definition, the third is addressed in a later chapter (Chapter 7), and the last is proven just after stating it.</p>
+<h3 id="property-1-shifting">Property 1 — Shifting<a class="headerlink" href="#property-1-shifting" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\text{Var}(X + c) = \text{Var}(X) \quad \text{for any constant } c\]</div>
+<p><strong>Intuition:</strong> If we shift a distribution to the left or right by a constant <span class="arithmatex">\(c\)</span>, that should affect the <em>center of mass</em> of the distribution (the mean shifts by <span class="arithmatex">\(c\)</span> too) but <strong>not</strong> its <em>spread</em> — the shape and width of the distribution stay exactly the same. Variance measures spread, so it is unaffected by shifts.</p>
+<hr />
+<h3 id="property-2-scaling">Property 2 — Scaling<a class="headerlink" href="#property-2-scaling" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\text{Var}(cX) = c^2 \text{Var}(X) \quad \text{for any constant } c\]</div>
+<p>Unlike shifting, scaling <strong>does</strong> affect spread — and it affects it by the <strong>square</strong> of the scaling factor. This is the first hint that variance is not linear (more on this below).</p>
+<hr />
+<h3 id="property-3-additivity-for-independent-rvs">Property 3 — Additivity for Independent R.V.s<a class="headerlink" href="#property-3-additivity-for-independent-rvs" title="Permanent link">&para;</a></h3>
+<p>If <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are independent, then:</p>
+<div class="arithmatex">\[\text{Var}(X+Y) = \text{Var}(X) + \text{Var}(Y)\]</div>
+<p>We prove this and discuss it more in Chapter 7. <strong>This is not true in general if <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are dependent.</strong></p>
+<p><strong>Example — extreme dependence:</strong> Consider the extreme case where <span class="arithmatex">\(X\)</span> always equals <span class="arithmatex">\(Y\)</span> (perfect dependence). Then:</p>
+<div class="arithmatex">\[\text{Var}(X+Y) = \text{Var}(2X) = 4\text{Var}(X) &gt; 2\text{Var}(X) = \text{Var}(X) + \text{Var}(Y)\]</div>
+<p>if <span class="arithmatex">\(\text{Var}(X) &gt; 0\)</span> (which will be true unless <span class="arithmatex">\(X\)</span> is a constant, as the next property shows). So when <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(Y\)</span> are perfectly dependent, <span class="arithmatex">\(\text{Var}(X+Y)\)</span> is <strong>strictly greater</strong> than <span class="arithmatex">\(\text{Var}(X) + \text{Var}(Y)\)</span> — additivity fails completely. This shows the independence assumption in Property 3 is essential, not just a technical nicety.</p>
+<hr />
+<h3 id="property-4-non-negativity-and-the-degenerate-case">Property 4 — Non-negativity and the Degenerate Case<a class="headerlink" href="#property-4-non-negativity-and-the-degenerate-case" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\text{Var}(X) \geq 0, \quad \text{with equality if and only if } P(X=a) = 1 \text{ for some constant } a\]</div>
+<p>In other words, the only random variables that have zero variance are <strong>constants</strong> (which can be thought of as <em>degenerate</em> r.v.s); all other r.v.s have positive variance.</p>
+<p><strong>Proof:</strong></p>
+<p>Note that <span class="arithmatex">\(\text{Var}(X)\)</span> is the expectation of the <strong>nonnegative</strong> r.v. <span class="arithmatex">\((X-EX)^2\)</span> — a square is always <span class="arithmatex">\(\geq 0\)</span>. So <span class="arithmatex">\(\text{Var}(X) \geq 0\)</span>, since the expectation of a nonnegative r.v. cannot be negative.</p>
+<p><strong>Forward direction:</strong> If <span class="arithmatex">\(P(X=a) = 1\)</span> for some constant <span class="arithmatex">\(a\)</span>, then <span class="arithmatex">\(E(X) = a\)</span> and <span class="arithmatex">\(E(X^2) = a^2\)</span> (since <span class="arithmatex">\(X^2 = a^2\)</span> with probability 1), so <span class="arithmatex">\(\text{Var}(X) = E(X^2) - (EX)^2 = a^2 - a^2 = 0\)</span>.</p>
+<p><strong>Converse direction:</strong> Suppose <span class="arithmatex">\(\text{Var}(X) = 0\)</span>. Then <span class="arithmatex">\(E(X-EX)^2 = 0\)</span>. Since <span class="arithmatex">\((X-EX)^2\)</span> is a nonnegative r.v. whose expectation is 0, this shows <span class="arithmatex">\((X-EX)^2 = 0\)</span> has probability 1 — because if <span class="arithmatex">\((X-EX)^2\)</span> took any positive value with positive probability, its expectation would be strictly positive (a nonnegative r.v. with positive expectation must take a positive value with positive probability). This in turn shows that <span class="arithmatex">\(X\)</span> equals its mean <span class="arithmatex">\(EX\)</span> with probability 1 — i.e., <span class="arithmatex">\(X\)</span> is the constant <span class="arithmatex">\(EX\)</span>. <span class="arithmatex">\(\blacksquare\)</span></p>
+<hr />
+<h2 id="variance-is-not-linear">Variance is NOT Linear<a class="headerlink" href="#variance-is-not-linear" title="Permanent link">&para;</a></h2>
+<p><strong>Remark 4.6.3 (Variance is not linear):</strong> Unlike expectation, variance is <strong>not linear</strong>.</p>
+<ul>
+<li>The constant comes out <strong>squared</strong>: <span class="arithmatex">\(\text{Var}(cX) = c^2 \text{Var}(X)\)</span>, not <span class="arithmatex">\(c \cdot \text{Var}(X)\)</span>.</li>
+<li>The variance of the sum of r.v.s may <strong>not</strong> be the sum of their variances if they are dependent.</li>
+</ul>
+<p>This is a critical distinction from expectation, where <span class="arithmatex">\(E(cX) = cE(X)\)</span> and <span class="arithmatex">\(E(X+Y) = E(X) + E(Y)\)</span> hold <strong>unconditionally</strong>, for any r.v.s. Variance only behaves additively under the <strong>independence</strong> assumption (Property 3) and only scales with the <strong>square</strong> of constants (Property 2).</p>
+<hr />
+<h2 id="worked-example-geometric-and-negative-binomial-variance">Worked Example — Geometric and Negative Binomial Variance<a class="headerlink" href="#worked-example-geometric-and-negative-binomial-variance" title="Permanent link">&para;</a></h2>
+<p><strong>Example 4.6.4 (Geometric and Negative Binomial variance):</strong> In this example we'll use LOTUS to compute the variance of the Geometric distribution.</p>
+<p>Let <span class="arithmatex">\(X \sim \text{Geom}(p)\)</span>. We already know <span class="arithmatex">\(E(X) = q/p\)</span> (from the geometric series derivation in the expectation chapter). By LOTUS:</p>
+<div class="arithmatex">\[E(X^2) = \sum_{k=0}^{\infty} k^2 P(X=k) = \sum_{k=0}^{\infty} k^2 p q^k = \sum_{k=1}^{\infty} k^2 p q^k\]</div>
+<p>(The <span class="arithmatex">\(k=0\)</span> term vanishes since <span class="arithmatex">\(0^2 = 0\)</span>, so the sum can equivalently start from <span class="arithmatex">\(k=1\)</span>.)</p>
+<p><strong>Strategy:</strong> Find this sum using a tactic similar to how we found the expectation — starting from the geometric series and taking derivatives.</p>
+<p><strong>Step 1 — Start with the geometric series:</strong></p>
+<div class="arithmatex">\[\sum_{k=0}^{\infty} q^k = \frac{1}{1-q}\]</div>
+<p><strong>Step 2 — Differentiate once with respect to <span class="arithmatex">\(q\)</span>:</strong></p>
+<div class="arithmatex">\[\sum_{k=1}^{\infty} k q^{k-1} = \frac{1}{(1-q)^2}\]</div>
+<p>We start the sum from <span class="arithmatex">\(k=1\)</span> since the <span class="arithmatex">\(k=0\)</span> term is 0 anyway (differentiating <span class="arithmatex">\(q^0=1\)</span> gives 0).</p>
+<p>If we differentiate again, we'll get <span class="arithmatex">\(k(k-1)\)</span> instead of <span class="arithmatex">\(k^2\)</span> as we want — so before differentiating again, let's replenish our supply of <span class="arithmatex">\(q\)</span>'s by multiplying both sides by <span class="arithmatex">\(q\)</span>:</p>
+<div class="arithmatex">\[\sum_{k=1}^{\infty} k q^k = \frac{q}{(1-q)^2}\]</div>
+<p><strong>Step 3 — Now take another derivative:</strong></p>
+<div class="arithmatex">\[\sum_{k=1}^{\infty} k^2 q^{k-1} = \frac{1+q}{(1-q)^3}\]</div>
+<p><strong>Step 4 — Multiply by <span class="arithmatex">\(q\)</span> and by <span class="arithmatex">\(p\)</span> to get <span class="arithmatex">\(E(X^2)\)</span>:</strong></p>
+<div class="arithmatex">\[E(X^2) = \sum_{k=1}^{\infty} k^2 p q^k = pq \cdot \frac{1+q}{(1-q)^3} = pq \cdot \frac{1+q}{p^3} = \frac{q(1+q)}{p^2}\]</div>
+<p>(using <span class="arithmatex">\(1 - q = p\)</span>, so <span class="arithmatex">\((1-q)^3 = p^3\)</span>, and one factor of <span class="arithmatex">\(p\)</span> from <span class="arithmatex">\(pq\)</span> cancels with <span class="arithmatex">\(p^3\)</span> leaving <span class="arithmatex">\(p^2\)</span> in the denominator).</p>
+<p><strong>Step 5 — Apply the computational variance formula:</strong></p>
+<div class="arithmatex">\[\text{Var}(X) = E(X^2) - (EX)^2 = \frac{q(1+q)}{p^2} - \left(\frac{q}{p}\right)^2 = \frac{q(1+q) - q^2}{p^2} = \frac{q + q^2 - q^2}{p^2} = \frac{q}{p^2}\]</div>
+<p><strong>Result:</strong> For <span class="arithmatex">\(X \sim \text{Geom}(p)\)</span>:</p>
+<div class="arithmatex">\[\boxed{\text{Var}(X) = \frac{q}{p^2}}\]</div>
+<p><strong>The First Success connection:</strong> This is also the variance of the <strong>First Success</strong> distribution, since shifting by a constant does not affect the variance (Property 1 above) — the First Success distribution is just Geom<span class="arithmatex">\((p) + 1\)</span>.</p>
+<p><strong>Negative Binomial:</strong> Since an <span class="arithmatex">\(\text{NBin}(r,p)\)</span> r.v. can be represented as a sum of <span class="arithmatex">\(r\)</span> i.i.d. <span class="arithmatex">\(\text{Geom}(p)\)</span> random variables (by the earlier theorem on the Negative Binomial story), and since variance is <strong>additive for independent random variables</strong> (Property 3), it follows that:</p>
+<div class="arithmatex">\[\text{Var}(\text{NBin}(r,p)) = r \cdot \frac{q}{p^2}\]</div>
+<p>Each of the <span class="arithmatex">\(r\)</span> i.i.d. Geometric pieces contributes <span class="arithmatex">\(\frac{q}{p^2}\)</span> to the variance, and since they are independent, the variances simply add.</p>
+<hr />
+<h2 id="worked-example-binomial-variance-via-indicators">Worked Example — Binomial Variance via Indicators<a class="headerlink" href="#worked-example-binomial-variance-via-indicators" title="Permanent link">&para;</a></h2>
+<p>LOTUS is an all-purpose tool for computing <span class="arithmatex">\(E(g(X))\)</span> for any <span class="arithmatex">\(g\)</span>, but as it usually leads to complicated sums, it should be used as a last resort. For variance calculations, our trusty <strong>indicator r.v.s</strong> can sometimes be used in place of LOTUS, as in this next example.</p>
+<p><strong>Example 4.6.5 (Binomial variance):</strong> Let's find the variance of <span class="arithmatex">\(X \sim \text{Bin}(n,p)\)</span> using indicator r.v.s to avoid tedious sums.</p>
+<p>Represent <span class="arithmatex">\(X = I_1 + I_2 + \cdots + I_n\)</span>, where <span class="arithmatex">\(I_j\)</span> is the indicator of the <span class="arithmatex">\(j\)</span>-th trial being a success (this is exactly the Bernoulli decomposition from the independence chapter).</p>
+<p><strong>Step 1 — Find the variance of each indicator <span class="arithmatex">\(I_j\)</span>:</strong></p>
+<div class="arithmatex">\[\text{Var}(I_j) = E(I_j^2) - (E(I_j))^2 = p - p^2 = p(1-p)\]</div>
+<p><strong>Why <span class="arithmatex">\(E(I_j^2) = p\)</span>:</strong> Recall that <span class="arithmatex">\(I_j^2 = I_j\)</span>, since an indicator squared is itself (<span class="arithmatex">\(0^2=0\)</span> and <span class="arithmatex">\(1^2=1\)</span>). So <span class="arithmatex">\(E(I_j^2) = E(I_j) = p\)</span>.</p>
+<p>So <span class="arithmatex">\(\text{Var}(I_j) = p - p^2 = p(1-p) = pq\)</span>.</p>
+<p><strong>Step 2 — Use additivity since the <span class="arithmatex">\(I_j\)</span> are independent:</strong></p>
+<p>Since the <span class="arithmatex">\(I_j\)</span> are independent (independent trials), we can add their variances to get the variance of their sum:</p>
+<div class="arithmatex">\[\text{Var}(X) = \text{Var}(I_1) + \cdots + \text{Var}(I_n) = np(1-p)\]</div>
+<p><strong>Result:</strong></p>
+<div class="arithmatex">\[\boxed{\text{Var}(\text{Bin}(n,p)) = np(1-p)}\]</div>
+<p>This required no LOTUS at all — just the indicator decomposition and additivity of variance for independent r.v.s.</p>
+<hr />
+<h3 id="alternative-finding-ex2-via-pairs-of-trials">Alternative — Finding <span class="arithmatex">\(E(X^2)\)</span> via Pairs of Trials<a class="headerlink" href="#alternative-finding-ex2-via-pairs-of-trials" title="Permanent link">&para;</a></h3>
+<p>Alternatively, we can find <span class="arithmatex">\(E(X^2)\)</span> by first finding <span class="arithmatex">\(E\binom{X}{2}\)</span>. The latter sounds more complicated, but actually it is simpler, since <span class="arithmatex">\(\binom{X}{2}\)</span> is the number of <strong>pairs</strong> of successful trials.</p>
+<p><strong>Why <span class="arithmatex">\(\binom{X}{2}\)</span> counts pairs of successes:</strong> If <span class="arithmatex">\(X = k\)</span> trials were successes, the number of ways to choose 2 of those <span class="arithmatex">\(k\)</span> successful trials is <span class="arithmatex">\(\binom{k}{2}\)</span> — so <span class="arithmatex">\(\binom{X}{2}\)</span> literally counts unordered pairs of trials that were both successes.</p>
+<p><strong>Creating an indicator r.v. for each pair of trials:</strong> For each pair of trials, define an indicator that is 1 if <em>both</em> trials in the pair were successes. Since trials are independent and each has success probability <span class="arithmatex">\(p\)</span>, the probability that any specific pair are both successes is <span class="arithmatex">\(p \cdot p = p^2\)</span>. There are <span class="arithmatex">\(\binom{n}{2}\)</span> such pairs, so:</p>
+<div class="arithmatex">\[E\binom{X}{2} = \binom{n}{2} p^2\]</div>
+<p><strong>Step — Connect <span class="arithmatex">\(\binom{X}{2}\)</span> to <span class="arithmatex">\(E(X^2)\)</span> and <span class="arithmatex">\(E(X)\)</span>:</strong></p>
+<div class="arithmatex">\[\binom{X}{2} = \frac{X(X-1)}{2} \implies X(X-1) = 2\binom{X}{2}\]</div>
+<p>Taking expectations and using linearity:</p>
+<div class="arithmatex">\[E(X(X-1)) = E(X^2 - X) = E(X^2) - E(X)\]</div>
+<p>So:</p>
+<div class="arithmatex">\[n(n-1)p^2 = E(X(X-1)) = E(X^2) - E(X) = E(X^2) - np\]</div>
+<p>Solving for <span class="arithmatex">\(E(X^2)\)</span>:</p>
+<div class="arithmatex">\[E(X^2) = n(n-1)p^2 + np\]</div>
+<p><strong>Step — Apply the computational variance formula again:</strong></p>
+<div class="arithmatex">\[\text{Var}(X) = E(X^2) - (EX)^2 = (n(n-1)p^2 + np) - (np)^2\]</div>
+<p>Expanding <span class="arithmatex">\((np)^2 = n^2p^2\)</span> and <span class="arithmatex">\((n(n-1)p^2 = (n^2-n)p^2 = n^2p^2 - np^2)\)</span>:</p>
+<div class="arithmatex">\[\text{Var}(X) = (n^2p^2 - np^2 + np) - n^2p^2 = np - np^2 = np(1-p)\]</div>
+<p>Same result as before: <span class="arithmatex">\(\text{Var}(X) = np(1-p)\)</span> — confirming the indicator-sum approach via a completely different route.</p>
+<blockquote>
+<p><strong>Note:</strong> Exercise 48 uses this pairs-of-trials strategy to find the variance of the Hypergeometric distribution — the same technique generalizes beyond the Binomial.</p>
+</blockquote>
 
   
     
@@ -7314,6 +7899,17 @@
 
                 
 
+  
+    <div class="backlinks-panel">
+      <div class="backlinks-title">Linked from 1 note</div>
+      <ul class="backlinks-list">
+        
+          <li>
+            <a href="../00-introduction/" class="backlink-item">Expectation</a>
+          </li>
+        
+      </ul>
+    </div>
   
 
               </article>
@@ -7340,7 +7936,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../04-random-variables/random-variables-notes/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Random Variables and Their Distributions">
+          <a href="../05-law-of-the-unconscious-statistician/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Law of the Unconscious Statistician (LOTUS)">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7350,20 +7946,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Random Variables and Their Distributions
+                Law of the Unconscious Statistician (LOTUS)
               </div>
             </div>
           </a>
         
         
           
-          <a href="connections-between-poisson-and-binomial/" class="md-footer__link md-footer__link--next" aria-label="Next: Connections Between Poisson and Binomial">
+          <a href="../07-poisson/" class="md-footer__link md-footer__link--next" aria-label="Next: Poisson Distribution">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Connections Between Poisson and Binomial
+                Poisson Distribution
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -7400,14 +7996,14 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.indexes", "navigation.top", "navigation.tracking", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.indexes", "navigation.top", "navigation.tracking", "navigation.footer", "toc.follow", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../javascripts/mathjax.js"></script>
+        <script src="../../../../javascripts/mathjax.js"></script>
       
-        <script src="../../../javascripts/resizable-sidebars.js"></script>
+        <script src="../../../../javascripts/resizable-sidebars.js"></script>
       
         <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
       
