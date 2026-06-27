@@ -28,5 +28,5 @@ Random variables also let us simplify a complex sample space. The sample space o
 - [[08-independence-of-rvs]] — Decoupled behavior and sums of independent Binomials
 - [[09-connections-between-binomial-and-hypergeometric]] — Limits and conditioning parallels
 - [[10-recap]] — Concept and formula cheatsheet
-- [[11-r]] — R programming for random variables
+- [[11-r]] — *(Empty - yet to be studied)* R programming for random variables
 - [[12-exercises]] — Solved and unsolved exercises

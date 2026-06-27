@@ -19,14 +19,14 @@ That one-number summary is the **expected value**, also called the **expectation
 ## Topics
 
 - [[01-definition-of-expectation]] — Expected value of discrete random variables
-- [[02-linearity-of-expectation]] — Linearity properties of expected values
-- [[03-geometric-and-negative-binomial]] — Expectation of Geom and NBin distributions
-- [[04-indicator-rvs-and-the-fundamental-bridge]] — Connecting probabilities and expectations
+- [[02-linearity-of-expectation]] — *(Stub - yet to be studied)* Linearity properties of expected values
+- [[03-geometric-and-negative-binomial]] — *(Stub - yet to be studied)* Expectation of Geom and NBin distributions
+- [[04-indicator-rvs-and-the-fundamental-bridge]] — *(Stub - yet to be studied)* Connecting probabilities and expectations
 - [[05-law-of-the-unconscious-statistician]] — Directly finding E(g(X)) using LOTUS
 - [[06-variance]] — Spread of random variables
 - [[07-poisson]] — Poisson PMF, properties, and paradigm
 - [[08-connections-between-poisson-and-binomial]] — Limit and conditioning relations
-- [[09-using-probability-and-expectation-to-prove-existence]] — Probabilistic existence proofs
-- [[10-recap]] — Formula and concept reference sheet
-- [[11-r]] — R functions for probability calculations
+- [[09-using-probability-and-expectation-to-prove-existence]] — *(Stub - yet to be studied)* Probabilistic existence proofs
+- [[10-recap]] — *(Stub - yet to be studied)* Formula and concept reference sheet
+- [[11-r]] — *(Stub - yet to be studied)* R functions for probability calculations
 - [[12-exercises]] — Problem solutions and attempts
