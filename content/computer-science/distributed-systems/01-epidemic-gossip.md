@@ -154,15 +154,6 @@ Random contact is sufficient for near-universal infection, provided the contact 
 
 If both conditions hold, the update propagates to near-universal coverage through pure local interaction. The randomness is not a bug — it is the feature that makes the system resilient to failures, churn, and scale. If any single node or link fails, the "epidemic" routes around it through other random contacts.
 
-### Phenomenon Metadata
-
-| Element | Purpose |
-|---|---|
-| Structural Signature | Replicated data + unstructured network + need for eventual consistency |
-| Core Invariant | Random pairwise contact is sufficient for universal dissemination |
-| Compression Handle | "Updates spread like a virus through random contact" |
-| Boundary / Failure Mode | If the network is fully connected and small, direct mail is simpler and faster |
-| Phenomenon Web | See Anti-Entropy and Rumor Mongering (the two epidemic mechanisms); see Gossip-Based Failure Detection (a later application of the same principle) |
 
 ---
 
@@ -403,19 +394,12 @@ Why you care: the choice of push vs. pull affects convergence speed at different
 
 ### Phenomenon Metadata
 
-| Element | Purpose |
-|---|---|
-| Structural Signature | Two sites comparing timestamps and adopting the newer value |
-| Core Invariant | Timestamps establish a total order on updates |
-| Compression Handle | "Push = I tell you; Pull = you tell me; Push-pull = we compare notes" |
-| Boundary / Failure Mode | Without timestamps, old updates could overwrite new ones (the "resurrection" problem) |
-| Phenomenon Web | See Mathematical Analysis of Anti-Entropy (proves $O(\log n)$ convergence); see Deleting Nodes (timestamps also solve deletion ordering) |
+---
+# Mathematical Analysis of Anti-Entropy — Enriched Notes
 
 ---
 
-## Mathematical Analysis of Anti-Entropy
-
-### Plain English: What We Are About to Prove
+## Plain English: What We Are About to Prove
 
 Before the mathematics, let us state the goal in plain English.
 
@@ -431,11 +415,15 @@ In anti-entropy, there are only two states: susceptible and infective. There is 
 
 A **round** means one cycle where every node that knows the secret tries to tell one random person. In the mathematical analysis, we simplify this: we look at one node and ask "what is the chance this node still has not heard the secret after $i$ rounds?"
 
-### The Claim
+---
+
+## The Claim
 
 Anti-entropy distributes updates in $O(\log n)$ time.
 
-### Setup
+---
+
+## Setup
 
 Let:
 - $n$ = total number of sites
@@ -443,9 +431,11 @@ Let:
 
 We analyze pull-based and push-based algorithms separately.
 
-### Pull-Based Analysis
+---
 
-**Step 1: Define the recurrence**
+## Pull-Based Analysis
+
+### Step 1: Define the Recurrence
 
 In a pull-based algorithm, a susceptible site remains susceptible after cycle $i+1$ only if it contacts another susceptible site in cycle $i+1$.
 
@@ -453,69 +443,62 @@ The probability of contacting a susceptible site is $p_i$ (by definition, a frac
 
 Therefore:
 
-$$
-p_{i+1} = p_i \cdot p_i = p_i^2
-$$
+$$p_{i+1} = p_i \cdot p_i = p_i^2$$
 
-**Step 2: Solve the recurrence**
+**Intuition — Why does it square?**
+Think of the pull model as everyone in the room who does not know the secret picking one random person to ask. For someone to *stay* ignorant, they must accidentally pick another ignorant person. If half the room is still ignorant ($p_i = 0.5$), the chance of that happening is $0.5 \times 0.5 = 0.25$. The fraction of ignorant people does not just shrink — it *squares itself* every round. This is doubly exponential decay: devastatingly fast.
+
+### Step 2: Solve the Recurrence
 
 Starting from $p_0 = 1$ (no one has the update initially, except the source which we treat separately):
 
-$$
-p_1 = p_0^2 = 1^2 = 1
-$$
+Using the continuum approximation, $p_i$ is the fraction susceptible. After cycle $i+1$, a site remains susceptible only if it contacts another susceptible site. The probability of this is $p_i$.
 
-Wait — this seems wrong. Let us be more careful. The source has the update. So initially, one site is infective and $n-1$ sites are susceptible. The probability a given non-source site is susceptible after cycle 1 is the probability it did not contact the source.
-
-Actually, the lecturer's analysis uses a continuum approximation. Let us follow that.
-
-In the continuum approximation, $p_i$ is the fraction susceptible. After cycle $i+1$, a site remains susceptible only if it contacts another susceptible site. The probability of this is $p_i$.
-
-So:
-
-$$
-p_{i+1} = p_i \cdot p_i = p_i^2
-$$
+So: $p_{i+1} = p_i^2$
 
 This gives:
 
-$$
-p_1 = p_0^2, \quad p_2 = p_1^2 = p_0^4, \quad p_3 = p_2^2 = p_0^8, \quad \ldots, \quad p_i = p_0^{2^i}
-$$
+$$p_1 = p_0^2, \quad p_2 = p_1^2 = p_0^4, \quad p_3 = p_2^2 = p_0^8, \quad \ldots, \quad p_i = p_0^{2^i}$$
 
 If $p_0 < 1$ (some sites already have the update), then $p_i \to 0$ **doubly exponentially fast**.
 
-**Step 3: Number of cycles for convergence**
+**Seeing the squaring in action (n = 1024):**
+
+| Round | Fraction still ignorant | Ignorant people (out of 1024) |
+|-------|------------------------|-------------------------------|
+| 0     | 1/2                    | 512                           |
+| 1     | 1/4                    | 256                           |
+| 2     | 1/16                   | 64                            |
+| 3     | 1/256                  | 4                             |
+| 4     | 1/65,536               | ~0                            |
+
+By round 4, the room is essentially done. The denominator sequences as $2 \to 4 \to 16 \to 256 \to 65536$: each denominator is the square of the previous one. This is the signature of $O(\log \log n)$ decay.
+
+### Step 3: Number of Cycles for Convergence
 
 We want $p_i \leq \epsilon$ for some small $\epsilon$.
 
-$$
-p_0^{2^i} \leq \epsilon
-$$
+$$p_0^{2^i} \leq \epsilon$$
 
 Taking logarithms:
 
-$$
-2^i \cdot \ln(p_0) \leq \ln(\epsilon)
-$$
+$$2^i \cdot \ln(p_0) \leq \ln(\epsilon)$$
 
 Since $\ln(p_0) < 0$:
 
-$$
-2^i \geq \frac{\ln(\epsilon)}{\ln(p_0)} = \frac{\ln(1/\epsilon)}{\ln(1/p_0)}
-$$
+$$2^i \geq \frac{\ln(\epsilon)}{\ln(p_0)} = \frac{\ln(1/\epsilon)}{\ln(1/p_0)}$$
 
 Taking logarithms again:
 
-$$
-i \geq \log_2\left(\frac{\ln(1/\epsilon)}{\ln(1/p_0)}\right)
-$$
+$$i \geq \log_2\left(\frac{\ln(1/\epsilon)}{\ln(1/p_0)}\right)$$
 
-So the number of cycles is $O(\log \log(1/\epsilon))$ for fixed $p_0$. But since $p_0$ starts near 1 and decreases, the total number of cycles to reach near-zero susceptibility is $O(\log n)$ in the discrete setting.
+So the number of cycles is $O(\log \log(1/\epsilon))$ for fixed $p_0$. In the discrete setting, the total number of cycles from the very beginning to near-zero susceptibility is $O(\log n)$.
 
-### Push-Based Analysis
+---
 
-**Step 1: Define the recurrence**
+## Push-Based Analysis
+
+### Step 1: Define the Recurrence
 
 In a push-based algorithm, a susceptible site remains susceptible after cycle $i+1$ only if **no infective site contacts it**.
 
@@ -525,50 +508,419 @@ The probability that a given infective node does **not** contact our susceptible
 
 The probability that **no** infective node contacts our susceptible node is:
 
-$$
-\left(1 - \frac{1}{n}\right)^{n(1-p_i)}
-$$
+$$\left(1 - \frac{1}{n}\right)^{n(1-p_i)}$$
 
 Therefore:
 
-$$
-p_{i+1} = p_i \cdot \left(1 - \frac{1}{n}\right)^{n(1-p_i)}
-$$
+$$p_{i+1} = p_i \cdot \left(1 - \frac{1}{n}\right)^{n(1-p_i)}$$
 
-**Step 2: Use the limit definition of $e$**
+**Intuition — Where does this formula come from?**
+For a specific ignorant person (call them Alex) to stay ignorant, every single one of the $n(1-p_i)$ informed people must *miss* Alex when they make their random call. Each informed person has a $1 - 1/n$ chance of not calling Alex. Since all their calls are independent, we multiply those probabilities together, giving the exponent. This uses the Poisson approximation of the Binomial distribution.
+
+### Step 2: Use the Limit Definition of $e$
 
 Recall that:
 
-$$
-\lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = e^{-1} \approx 0.368
-$$
+$$\lim_{n \to \infty} \left(1 - \frac{1}{n}\right)^n = e^{-1} \approx 0.368$$
 
 For large $n$:
 
-$$
-\left(1 - \frac{1}{n}\right)^{n(1-p_i)} \approx e^{-(1-p_i)}
-$$
+$$\left(1 - \frac{1}{n}\right)^{n(1-p_i)} \approx e^{-(1-p_i)}$$
 
 When $p_i$ is small (most nodes have the update), $1 - p_i \approx 1$, so:
 
-$$
-p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i
-$$
+$$p_{i+1} \approx p_i \cdot e^{-1} \approx 0.368 \cdot p_i$$
 
 This means the susceptible fraction decreases by a constant factor each cycle — **exponentially fast**, but not doubly exponentially.
 
-### Why Push Is Better at the Beginning, Pull Is Better at the End
+**Push in the late game — concrete numbers (n = 1024, 100 ignorant, 924 informed):**
+
+Each round, ignorant people survive with probability $e^{-0.924} \approx 0.397$.
+
+| Round | Ignorant people |
+|-------|----------------|
+| 0     | 100            |
+| 1     | ~37            |
+| 2     | ~14            |
+| 3     | ~5             |
+| 4     | ~2             |
+| 5     | ~1             |
+
+Compare this to Pull's 2 rounds for the same scenario. Push takes ~5 rounds. The gap grows as $n$ grows.
+
+**Why the collision problem makes Push slower at the end:**
+When 924 people each call one random person, they do not coordinate. Multiple informed people might call the same ignorant person (wasted calls), while some ignorant people receive zero calls and survive the round. This is the "Coupon Collector" problem — blindly trying to hit every target with random shots wastes a huge number of shots near the end.
+
+In Pull, the 100 ignorant people each make exactly one call. They cannot "overlap" on each other's behalf. Every single ignorant person gets exactly one attempt, and with 924 knowers in the room, each attempt has a 90% chance of success.
+
+---
+
+## The Bernoulli and Binomial Structure Inside Push and Pull
+
+Every probability calculation in this analysis is secretly built from two fundamental building blocks: the **Bernoulli trial** and the **Binomial distribution**. Understanding them removes all mystery from where the formulas come from.
+
+### What Is a Bernoulli Trial?
+
+A Bernoulli trial is any single event with exactly two outcomes: success or failure. One coin flip. One phone call. One random ask.
+
+In Push, every time an informed person makes one phone call, that is one Bernoulli trial. From Alex's perspective (Alex is ignorant):
+
+- **Failure** (bad for Alex): the caller picks Alex. Probability $= 1/N$.
+- **Success** (Alex survives): the caller picks someone else. Probability $= 1 - 1/N$.
+
+A single call is a Bernoulli trial. Alex has to survive *all* of them.
+
+### What Is a Binomial Distribution?
+
+When you stack many independent Bernoulli trials together and count how many succeed (or fail), the total follows a **Binomial distribution**. A situation is Binomial if:
+
+1. There is a fixed number of trials $n$.
+2. Each trial has only two outcomes.
+3. The probability $p$ is the same for every trial.
+
+The **expected value** (average outcome) of a Binomial distribution is simply:
+
+$$E = n \cdot p$$
+
+This is the powerful shortcut. If you know the number of trials and the probability of each, you multiply them and get the average result.
+
+### Pull Phase 1 Is a Binomial — The Full Proof
+
+In the Pull model during Phase 1:
+
+- $n = U_t$ trials (each uninformed person makes one call — one Bernoulli trial each).
+- $p = I_t / N$ (probability of hitting an informed person).
+- Only two outcomes per call: you hit a knower (learn the secret) or you don't.
+- Every person's call is independent.
+
+All three Binomial conditions are met. So the expected number of newly informed people is:
+
+$$E[\text{New Knowers}] = U_t \cdot \frac{I_t}{N}$$
+
+Now apply the Phase 1 approximation: when almost nobody knows yet, $U_t \approx N$:
+
+$$E[\text{New Knowers}] \approx N \cdot \frac{I_t}{N} = I_t$$
+
+Add these to the existing $I_t$ knowers:
+
+$$E[I_{t+1}] = I_t + I_t = 2I_t$$
+
+The $N$ cancels perfectly. This is why the doubling is not just a rough guess — it follows rigorously from the Binomial expected value formula.
+
+### Why the Same Shortcut Breaks for Push in the Late Game
+
+You might think: "Can I use $E = n \cdot p$ for Push too?" Let's try.
+
+Late game: 924 informed, 100 ignorant, $N = 1024$.
+
+- $n = 924$ calls being made.
+- $p = 100/1024 \approx 0.1$ (probability any call hits an ignorant person).
+- $E = 924 \times 0.1 = 92.4$ successful calls landing on ignorant people.
+
+If you stop here and subtract: $100 - 92.4 \approx 8$ people left. That sounds great — almost everyone informed!
+
+**But this is wrong.** The actual answer is ~40 people left. The shortcut failed by 32 people.
+
+**Why?** The shortcut $E = n \cdot p$ tells you the expected *number of successful calls*. It does not account for *who* those calls land on. Those 92.4 successful calls do not necessarily land on 92.4 different people. Some ignorant people get called twice. Some get called three times. Those extra calls are wasted. Meanwhile, other ignorant people receive zero calls and survive the round.
+
+The $E = n \cdot p$ shortcut only works cleanly when the searchers cannot overlap — i.e., when the uninformed people are the ones making the calls (Pull), because each uninformed person makes exactly one attempt and cannot accidentally make someone else's attempt for them.
+
+### The Correct Push Calculation (Poisson Approximation)
+
+Since the $n \cdot p$ shortcut fails, we go back to basics. For Alex (one specific ignorant person) to survive the round, all 924 informed people must miss him. Each informed person independently misses Alex with probability $1 - 1/N$:
+
+$$P(\text{Alex survives}) = \left(1 - \frac{1}{N}\right)^{924}$$
+
+Using the limit definition of $e$: $\left(1 - \frac{1}{N}\right)^N \approx e^{-1}$, so:
+
+$$\left(1 - \frac{1}{N}\right)^{924} = \left[\left(1 - \frac{1}{N}\right)^N\right]^{924/N} \approx e^{-924/1024} \approx e^{-0.9} \approx 0.406$$
+
+Alex has a ~40.6% chance of surviving. Since there are 100 ignorant people like Alex:
+
+$$E[\text{Survivors}] = 100 \times 0.406 \approx 40$$
+
+This is the Poisson approximation of the Binomial — used when you want the probability of *zero* successes across many trials, rather than just the average number of successes.
+
+### The Exponent Is the Number of Bullets to Dodge
+
+A common confusion: *why is the exponent 924 (the informed count) and not 100 (the ignorant count)?*
+
+The exponent represents the number of independent events Alex must survive. In Push, the 924 informed people are making the calls — so there are 924 bullets flying. Alex must dodge all 924 of them. The 100 ignorant people appear only at the very end, as a multiplier:
+
+$$E[\text{Survivors}] = \underbrace{100}_{\text{how many Alexes exist}} \times \underbrace{0.406}_{\text{Alex's personal survival rate}}$$
+
+If it were the Pull model instead, Alex would make exactly 1 call. He only faces 1 bullet. The exponent is 1. His survival probability is simply $100/1024 = 0.1$. No Poisson approximation needed — the Binomial shortcut $n \cdot p$ works directly.
+
+### Summary: When to Use Which Tool
+
+| Scenario | Tool | Why |
+|----------|------|-----|
+| Pull — how many learn per round? | Binomial $E = n \cdot p$ | Uninformed people each make one independent call. No overlap possible. |
+| Push — how many survive the round? | Poisson/survival: $(1 - 1/N)^{\text{informed}}$ | Need probability of *zero* hits on Alex across many independent callers. Overlap makes $n \cdot p$ wrong. |
+| Individual single call | Bernoulli | One trial, two outcomes. Building block for everything above. |
+
+---
+
+## The Core Insight: Many Looking for Few vs. Few Looking for Many
+
+This is the single most important intuition for understanding Push vs. Pull.
+
+| Who searches       | Who gets found       | What happens                                                                 |
+|--------------------|----------------------|------------------------------------------------------------------------------|
+| **Push** — the few informed → | the many uninformed | One flashlight per informed person. If only 3 people have flashlights, they can only light up 3 seats in a stadium of 1,000. |
+| **Pull** — the many uninformed → | the few informed | Everyone shouts "does anyone know?" If 900 people can answer, the 100 who don't know will almost certainly get a response. |
+
+**The direction of the search determines everything.**
+
+At the start, the few informed people push. The few ignorant people pull but mostly hit each other. Both are slow, but push is slightly less bad.
+
+At the end, the few remaining ignorant people pull. The world is full of answers. They cannot miss. This is where Pull's $p_i^2$ squaring becomes devastating. Push, by contrast, keeps firing random shots that mostly collide with already-informed people.
+
+---
+
+## Why Push Is Better at the Beginning, Pull Is Better at the End
 
 | Phase | Push Behavior | Pull Behavior |
-|---|---|---|
-| **Beginning** ($p_i \approx 1$, few infective) | $p_{i+1} \approx p_i \cdot e^{-0} = p_i$ (slow, almost no decrease) | $p_{i+1} = p_i^2 \approx 1$ (also slow initially, but improves rapidly) |
-| **End** ($p_i \ll 1$, many infective) | $p_{i+1} \approx p_i / e$ (steady exponential decrease) | $p_{i+1} = p_i^2$ (doubly exponential, extremely fast) |
+|-------|---------------|---------------|
+| **Beginning** ($p_i \approx 1$, few infective) | $p_{i+1} \approx p_i \cdot e^{0} = p_i$ — slow, almost no decrease | $p_{i+1} = p_i^2 \approx 1$ — also slow initially |
+| **End** ($p_i \ll 1$, many infective) | $p_{i+1} \approx p_i / e$ — steady exponential decrease | $p_{i+1} = p_i^2$ — doubly exponential, extremely fast |
 
 **The insight**: at the beginning, there are very few infective nodes. A pull-based approach asks random nodes for updates, but most nodes do not have them yet. A push-based approach at least spreads what little exists. At the end, most nodes are infective, so pull-based approaches quickly find someone with the update.
 
 **Optimal strategy**: push at the beginning, pull at the end.
 
-### Optimizing Anti-Entropy
+---
+
+## The Two-Phase Proof of $O(\log n)$ Total
+
+The full epidemic from 1 informed node to everyone informed has two distinct phases.
+
+### Phase 1: The Slow Climb — $O(\log n)$ rounds
+
+**Mental model**: the informed population is doubling each round.
+
+**The Proof (3-step framework):**
+
+**Step 1 — The Micro-Step (Expected Value per round):**
+
+Let $I_t$ = number of informed people at round $t$, $U_t$ = uninformed, $N$ = total.
+
+In Pull, every uninformed person asks one random person. The probability they hit a knower is $I_t / N$.
+
+$$E[\text{New Knowers}] = U_t \cdot \frac{I_t}{N}$$
+
+$$E[I_{t+1}] = I_t + U_t \cdot \frac{I_t}{N}$$
+
+**Step 2 — The Macro-Sequence (Why it doubles):**
+
+Early on, $I_t \ll N$, so almost everyone is still uninformed: $U_t \approx N$.
+
+$$E[I_{t+1}] \approx I_t + N \cdot \frac{I_t}{N} = I_t + I_t = 2I_t$$
+
+The $N$ cancels perfectly. Starting from $I_0 = 1$:
+
+$$I_t = 2^t$$
+
+*(This same doubling argument works for Push too — the early phase is symmetric for all three protocols.)*
+
+**Step 3 — The Boundary Condition (Solving for $t$):**
+
+Phase 1 ends when half the room knows: $I_t = N/2$.
+
+$$2^t = \frac{N}{2}$$
+$$t = \log_2(N) - 1 = O(\log N)$$
+
+**Concrete example (N = 1024):**
+
+| Round | People who know |
+|-------|----------------|
+| 0     | 1              |
+| 1     | ~2             |
+| 2     | ~4             |
+| 3     | ~8             |
+| 4     | ~16            |
+| 5     | ~32            |
+| 6     | ~64            |
+| 7     | ~128           |
+| 8     | ~256           |
+| 9     | ~512           |
+| 10    | ~1024          |
+
+10 rounds to fill a room of 1024. And $2^{10} = 1024$, so 10 rounds $= \log_2(1024)$.
+
+### Phase 2: The Fast Collapse — $O(\log \log n)$ rounds
+
+Once half the room knows, the squaring mechanism kicks in for Pull (and Push-Pull).
+
+Starting from $p_0 = 1/2$:
+
+$$p_k = \left(\frac{1}{2}\right)^{2^k}$$
+
+To reach fewer than 1 ignorant person out of $N$, we need $p_k \leq 1/N$:
+
+$$\left(\frac{1}{2}\right)^{2^k} \leq \frac{1}{N}$$
+
+Taking $\log_2$ of both sides: $-2^k \leq -\log_2 N$, so $2^k \geq \log_2 N$.
+
+Taking $\log_2$ again: $k \geq \log_2(\log_2 N)$.
+
+Therefore Phase 2 takes $O(\log \log N)$ rounds.
+
+For $N = 1{,}000{,}000$: $\log_2(\log_2(10^6)) \approx \log_2(20) \approx 4.3$ rounds.
+
+---
+
+### Appendix: The $O(\log \log N)$ Proof from First Principles (The Search-Space View)
+
+This is another way to see the same result, starting from the squaring sequence itself rather than from $p_k$.
+
+The sequence of ignorant fractions is:
+
+$$\frac{1}{2} \to \frac{1}{4} \to \frac{1}{16} \to \frac{1}{256} \to \frac{1}{65536} \ldots$$
+
+Look at just the denominators: $2 \to 4 \to 16 \to 256 \to 65536$. Each denominator is the square of the previous one:
+
+| Step $k$ | Denominator |
+|----------|-------------|
+| 1        | $2^1 = 2$   |
+| 2        | $2^2 = 4$   |
+| 3        | $4^2 = 16$  |
+| 4        | $16^2 = 256$|
+| 5        | $256^2 = 65{,}536$ |
+
+After $k$ steps, the denominator is $2^{2^k}$, so the fraction of ignorant people is:
+
+$$p_k = \frac{1}{2^{2^k}} = N_k \cdot \frac{1}{N}$$
+
+where $N_k = N^{1/2^k}$ is the remaining "problem size." This is identical to taking the square root of the problem size at each step.
+
+**Solving for $k$:** We want the fraction to drop below $1/N$ (fewer than 1 ignorant person):
+
+$$\frac{1}{2^{2^k}} \leq \frac{1}{N}$$
+
+$$2^{2^k} \geq N$$
+
+Take $\log_2$ of both sides:
+
+$$2^k \geq \log_2(N)$$
+
+Take $\log_2$ again:
+
+$$k \geq \log_2(\log_2(N))$$
+
+Therefore $k = O(\log \log N)$.
+
+**Why does taking the logarithm twice make sense?** Think of it this way. Normally, if a number halves each step, you need $\log_2(N)$ steps to reach 1 — one logarithm. Here, the *exponent* is doubling each step (the denominator goes $2^1, 2^2, 2^4, 2^8 \ldots$), so you need a logarithm to undo the outer exponent, and another logarithm to undo the inner one. Two logarithms, hence $\log \log N$.
+
+### Combining the Phases
+
+$$T_{\text{total}} = O(\log N) + O(\log \log N) = O(\log N)$$
+
+In Big O notation, we drop the smaller term. $\log \log N$ grows far slower than $\log N$, so the slow climb of Phase 1 dominates and sets the speed limit for the entire protocol.
+
+For $N = 1{,}000{,}000$: Phase 1 takes ~20 rounds, Phase 2 takes ~4 rounds. Phase 1 is the bottleneck.
+
+---
+
+## What Happens with Pure Push or Pure Pull Throughout?
+
+These cases help justify why the hybrid (Anti-Entropy) is necessary.
+
+**Pure Pull only:** Terrible at the start. With only 1 informed person out of $N$, each ignorant person has a $1/N$ chance of finding the answer. On average, $N$ calls are needed just to spread the secret once. Time complexity: $O(N)$ — linear, catastrophically slow.
+
+**Pure Push only:** Works fine at first (exponential spread), but stalls at the end. This is the Coupon Collector's Problem — to hit every last ignorant person with random shots degrades to $O(N \log N)$ total messages, wasting enormous bandwidth on redundant calls that hit already-informed nodes.
+
+**Push-Pull (Anti-Entropy):** Gets the best of both. Phase 1 uses Push's strength (spreading from the few). Phase 2 uses Pull's strength (the many can't miss). Total: $O(\log N)$ time, with the tail finishing in $O(\log \log N)$ — dramatically faster in practice even though the Big O label is the same as pure Push.
+
+---
+
+## Proof: Pure Pull Alone Is $O(N)$ at the Start
+
+**Setup:** $N = 1024$ people. 1 person knows. 1023 do not.
+
+Every ignorant person makes one random call. The chance they hit the one knower is:
+
+$$P(\text{hit the knower}) = \frac{1}{N} = \frac{1}{1024}$$
+
+Expected new knowers in Round 1:
+
+$$E[\text{New Knowers}] = U_0 \cdot \frac{I_0}{N} = 1023 \cdot \frac{1}{1024} \approx 1$$
+
+So after Round 1, roughly 1 more person knows. Now 2 know. In Round 2, roughly 2 more learn. The growth is the same as Push in Phase 1 — doubling — because the early math is symmetric (the $N$ cancels in both cases).
+
+**But what about even earlier, before doubling kicks in?** In the very first round with 1 knower, each of the 1023 ignorant people has only a $1/1024$ chance of hitting the knower. The expected value is ~1 new knower. That is fine. But this is the best case.
+
+The real problem is if you try to use *only Pull* without any Push seeding: you must wait for the random process to naturally find that first knower, and the probability of finding them is $1/N$. If no one gets lucky in Round 1, you are still stuck at 1 knower in Round 2. In the worst framing of this, the expected number of rounds before the first new knower learns is:
+
+$$E[\text{rounds to first spread}] = \frac{N}{I_0} = N$$
+
+This is the $O(N)$ worst case — linear time just to get the epidemic started. That is catastrophic for a network of millions of servers.
+
+**The fix:** seed with Push first. Even a few rounds of Push guarantees $I_t$ grows quickly, making Pull's probability $I_t/N$ large enough to be useful.
+
+---
+
+## Proof: Pure Push Alone Degrades to $O(N \log N)$ at the End
+
+**The Coupon Collector's Problem** is the classic result that explains why pure Push stalls.
+
+**Setup:** Imagine $N$ different coupons. Each round, you draw one coupon uniformly at random (with replacement). How many draws do you need to collect all $N$ coupons?
+
+This maps directly to Push: the "coupons" are the ignorant people, and each "draw" is one informed person's random call. We want every ignorant person to get called at least once.
+
+**The proof idea:** When $k$ coupons have already been collected (i.e., $k$ ignorant people have been informed), the probability that the next draw hits a new coupon (a still-ignorant person) is:
+
+$$P(\text{new}) = \frac{N - k}{N}$$
+
+The expected number of draws to get one new coupon from this state is:
+
+$$E[\text{draws}] = \frac{N}{N - k}$$
+
+Summing over all $k$ from $0$ to $N-1$ (to go from 0 collected to all $N$ collected):
+
+$$E[\text{total draws}] = \sum_{k=0}^{N-1} \frac{N}{N-k} = N \sum_{j=1}^{N} \frac{1}{j} = N \cdot H_N$$
+
+where $H_N$ is the $N$-th Harmonic number. It is known that:
+
+$$H_N \approx \ln(N)$$
+
+Therefore:
+
+$$E[\text{total draws}] \approx N \ln N = O(N \log N)$$
+
+**What this means for Push:** to guarantee the last few ignorant people get informed, you need $O(N \log N)$ total messages — far more than the $O(\log N)$ rounds of a hybrid protocol. The last ignorant person is like the last missing coupon: you keep drawing randomly, hitting people who already know, burning messages, until you finally get lucky and hit the one holdout.
+
+**Concrete example ($N = 1024$):**
+
+Pure Push needs approximately $1024 \times \ln(1024) \approx 1024 \times 6.9 \approx 7{,}000$ total messages just to cover everyone. A hybrid Push-Pull protocol covers everyone in roughly $\log_2(1024) = 10$ rounds — orders of magnitude fewer messages.
+
+---
+
+## The Three Mental Models (Carry These Forever)
+
+**Model 1 — Push (The Blind Broadcaster):** Throwing darts while blindfolded. Explosive at the start when the board is full of targets. Disastrous at the end when only a few targets remain — massive wasted effort from collisions.
+
+**Model 2 — Pull (The Sponge):** Shouting into a crowded room asking if anyone knows. Terrible at the start (finding a needle in a haystack). Unstoppable at the end — you are surrounded by answers and cannot miss.
+
+**Model 3 — Anti-Entropy (Sledgehammer + Scalpel):** Use the sledgehammer (Push) to break the wall, then the scalpel (Pull) to clean up the edges. Zero blind spots.
+
+---
+
+## The Mental Model for Proofs of Probabilistic Systems
+
+Whenever you see a randomized system, use this 3-step engine:
+
+**Step 1 — The Micro-Step:** Freeze time. Look at exactly one round. What are the odds for one individual node? (This is where you spot the Bernoulli/Binomial structure.)
+
+**Step 2 — The Macro-Sequence:** Press play. How does that single step compound over time? Are we doubling ($2^t$) or squaring ($U^2$)? Build the sequence.
+
+**Step 3 — The Boundary Condition:** Where does the phase end? Set your sequence equal to your finish line (e.g., $N/2$) and use logarithms to solve for $t$.
+
+Textbooks often start with Step 3 and throw the final $O(\log N)$ formula at you. Starting with Step 1 and building up is how you develop real, durable intuition.
+
+---
+
+## Optimizing Anti-Entropy
 
 Instead of comparing entire database contents:
 
@@ -579,23 +931,24 @@ Instead of comparing entire database contents:
 
 Checksums act as compact hashes — a 64-bit checksum uniquely identifies database contents with high probability. This avoids expensive full-database comparisons.
 
-### Intuition After the Proof
+**Intuition for timestamps:** Imagine you and a friend are collaborating on a shared note but can only message each other occasionally — and sometimes messages get lost or arrive out of order. Every time someone edits their copy, they also record *when* they did it. When you finally compare, you don't argue about the content — you check the timestamps. Whoever edited most recently wins. That is Last-Write-Wins (LWW) conflict resolution. It is the entire conflict resolution strategy for anti-entropy in one rule.
 
-The mathematics reveals a phase transition in dissemination. Push and pull are not universally better — they dominate in different regimes. The optimal protocol is **adaptive**: start with push to seed the network, then switch to pull to mop up stragglers.
+---
 
-### What Would Break Without This Analysis?
+## What Would Break Without This Analysis?
 
-If we used only pull at the beginning, dissemination would stall because almost no one has the update. If we used only push at the end, we would waste messages sending updates to nodes that already have them.
+If we used only pull at the beginning, dissemination would stall because almost no one has the update. If we used only push at the end, we would waste messages sending updates to nodes that already have them. The mathematical analysis of both phases is what tells us *precisely* when to switch, and proves the total time is $O(\log n)$.
 
-### Phenomenon Metadata
+---
 
-| Element | Purpose |
-|---|---|
-| Structural Signature | A recurrence relation for the fraction of susceptible nodes, with different recurrences for push vs. pull |
-| Core Invariant | The probability of remaining susceptible factors into independent contact probabilities |
-| Compression Handle | "Push = constant-factor decay; Pull = squaring decay; Use push early, pull late" |
-| Boundary / Failure Mode | The $e^{-1}$ approximation fails for small $n$; the $p_i^2$ recurrence assumes uniform random contact |
-| Phenomenon Web | See Rumor Mongering (adds a removed state for self-termination); see Gossip-Based Failure Detection (uses the same push/pull analysis for heartbeat propagation) |
+## Connection to Real-World Systems
+
+What you derived is the backbone of **Anti-Entropy Gossip Protocols** used in distributed databases like Apache Cassandra and Amazon DynamoDB. Thousands of servers need to synchronize data. Engineers don't use pure Push or pure Pull. They program servers to:
+
+- Push the data while the information is rare (to seed the network quickly).
+- Pull the data when the information is common (to clean up remaining nodes instantly).
+
+By combining them, all servers sync in $O(\log N)$ rounds — avoiding the stall-out of pure Push and the slow start of pure Pull. The mathematics you just worked through is the reason those systems can stay consistent across millions of machines.
 
 ---
 
