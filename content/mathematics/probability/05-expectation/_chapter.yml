@@ -1,2 +1,15 @@
 chapter: 05-expectation
 title: Expectation
+topics:
+  - definition-of-expectation
+  - linearity-of-expectation
+  - geometric-and-negative-binomial
+  - indicator-rvs-and-the-fundamental-bridge
+  - law-of-the-unconscious-statistician
+  - variance
+  - poisson
+  - connections-between-poisson-and-binomial
+  - using-probability-and-expectation-to-prove-existence
+  - recap
+  - r
+  - exercises
