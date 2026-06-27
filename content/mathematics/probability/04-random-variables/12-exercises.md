@@ -10,6 +10,9 @@ updated: '2026-06-19'
 status: draft
 difficulty: intermediate
 ---
+
+# Exercises
+
 ## Solved
 
 ### Exercise 3.Y
