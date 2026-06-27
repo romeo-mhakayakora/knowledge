@@ -6253,10 +6253,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-evolve-the-row-real-time" class="md-nav__link">
+  <a href="#option-1-evolve-the-row-the-simulation-approach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 1 — Evolve the row (real-time)
+        Option 1 — Evolve the Row (The Simulation Approach)
       
     </span>
   </a>
@@ -6264,10 +6264,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-evolve-the-matrix-fast-forward" class="md-nav__link">
+  <a href="#option-2-evolve-the-matrix-the-structural-approach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 2 — Evolve the matrix (fast-forward)
+        Option 2 — Evolve the Matrix (The Structural Approach)
       
     </span>
   </a>
@@ -6278,7 +6278,7 @@
   <a href="#why-they-are-identical" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why they are identical
+        Why They Are Identical
       
     </span>
   </a>
@@ -6287,6 +6287,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mathematical-amnesia-why-the-starting-point-gets-erased" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Mathematical Amnesia — Why the Starting Point Gets Erased
+      
+    </span>
+  </a>
   
 </li>
       
@@ -7080,10 +7091,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-evolve-the-row-real-time" class="md-nav__link">
+  <a href="#option-1-evolve-the-row-the-simulation-approach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 1 — Evolve the row (real-time)
+        Option 1 — Evolve the Row (The Simulation Approach)
       
     </span>
   </a>
@@ -7091,10 +7102,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-evolve-the-matrix-fast-forward" class="md-nav__link">
+  <a href="#option-2-evolve-the-matrix-the-structural-approach" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 2 — Evolve the matrix (fast-forward)
+        Option 2 — Evolve the Matrix (The Structural Approach)
       
     </span>
   </a>
@@ -7105,7 +7116,7 @@
   <a href="#why-they-are-identical" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why they are identical
+        Why They Are Identical
       
     </span>
   </a>
@@ -7114,6 +7125,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mathematical-amnesia-why-the-starting-point-gets-erased" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Mathematical Amnesia — Why the Starting Point Gets Erased
+      
+    </span>
+  </a>
   
 </li>
       
@@ -7192,26 +7214,35 @@
 <p>If State 3 is an isolated island with no connection to States 1 and 2:
 - <strong>Row 1</strong> (started in State 1): <span class="arithmatex">\([\ldots, \ldots, 0.00]\)</span> — the 3rd entry is permanently 0 (no path to State 3).
 - <strong>Row 3</strong> (started on Island): <span class="arithmatex">\([0.00, 0.00, 1.00]\)</span> — permanently stuck on the island.</p>
-<p>These rows are <strong>physically incapable of being identical</strong> because the lack of connecting paths prevents the transfer of probabilities. </p>
+<p>These rows are <strong>physically incapable of being identical</strong> because the lack of connecting paths prevents the transfer of probabilities.</p>
 <p>Because the rows do not converge to the same <span class="arithmatex">\(s\)</span>, there is <strong>no single universal stationary distribution</strong>. The final statistics depend on where the agent started.</p>
 <blockquote>
 <p>When a textbook demands <strong>Irreducibility</strong> before finding the stationary distribution, it is just saying: <em>"Check the map first — make sure every pool is physically connected to the same plumbing system."</em></p>
 </blockquote>
 <hr />
 <h2 id="the-two-ways-to-reach-s">The Two Ways to Reach s<a class="headerlink" href="#the-two-ways-to-reach-s" title="Permanent link">&para;</a></h2>
-<p>Do we evolve the row vector step by step, or evolve <span class="arithmatex">\(Q\)</span> first? <strong>Both give the same result:</strong></p>
-<h3 id="option-1-evolve-the-row-real-time">Option 1 — Evolve the row (real-time)<a class="headerlink" href="#option-1-evolve-the-row-real-time" title="Permanent link">&para;</a></h3>
-<p>$<span class="arithmatex">\(t \times Q = \text{Day 1 row}\)</span>$
-$<span class="arithmatex">\(\text{Day 1 row} \times Q = \text{Day 2 row}\)</span>$
-$<span class="arithmatex">\(\text{Day 2 row} \times Q = \text{Day 3 row}\)</span>$
-$<span class="arithmatex">\(\vdots\)</span>$
-$<span class="arithmatex">\(\text{Eventually} \to s\)</span>$
-You keep updating the row vector every step. Eventually it hits <span class="arithmatex">\(s\)</span> and stops changing.</p>
-<h3 id="option-2-evolve-the-matrix-fast-forward">Option 2 — Evolve the matrix (fast-forward)<a class="headerlink" href="#option-2-evolve-the-matrix-fast-forward" title="Permanent link">&para;</a></h3>
-<p>$<span class="arithmatex">\(Q^n \quad \text{for very large } n\)</span>$
-Leave your starting row completely alone. Fast-forward <span class="arithmatex">\(Q\)</span> to <span class="arithmatex">\(Q^\infty\)</span>. Because <span class="arithmatex">\(Q^\infty\)</span> is a stack of identical <span class="arithmatex">\(s\)</span> rows, any starting vector multiplied by it just returns <span class="arithmatex">\(s\)</span>.</p>
-<h3 id="why-they-are-identical">Why they are identical<a class="headerlink" href="#why-they-are-identical" title="Permanent link">&para;</a></h3>
-<p>Matrix multiplication is <strong>associative</strong>: <span class="arithmatex">\((t \times Q) \times Q = t \times (Q \times Q)\)</span>. The parentheses can move anywhere. Option 1 is <span class="arithmatex">\(((tQ)Q)Q\ldots\)</span> and Option 2 is <span class="arithmatex">\(t(QQ\ldots Q)\)</span>. Same computation, different order of operations.</p>
+<p>Do we evolve the row vector step by step, or evolve <span class="arithmatex">\(Q\)</span> first? <strong>Both give the same result.</strong></p>
+<h3 id="option-1-evolve-the-row-the-simulation-approach">Option 1 — Evolve the Row (The Simulation Approach)<a class="headerlink" href="#option-1-evolve-the-row-the-simulation-approach" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[t \times Q = \text{Day 1 row}$$
+$$\text{Day 1 row} \times Q = \text{Day 2 row}$$
+$$\text{Day 2 row} \times Q = \text{Day 3 row}$$
+$$\vdots$$
+$$\text{Eventually} \to s\]</div>
+<p>Think of this as a step-by-step walk through time. You keep updating the row vector every step, iteratively refining your belief about where the system is. Every time you multiply by <span class="arithmatex">\(Q\)</span>, you are taking one step into the future and updating your probability estimate. Eventually the vector hits <span class="arithmatex">\(s\)</span> and stops changing — the belief has fully settled.</p>
+<p><strong>Intuition:</strong> This is exactly like running a simulation — you watch the system evolve round by round until it stabilizes. The row vector at each step is your current best guess of which state you are in.</p>
+<h3 id="option-2-evolve-the-matrix-the-structural-approach">Option 2 — Evolve the Matrix (The Structural Approach)<a class="headerlink" href="#option-2-evolve-the-matrix-the-structural-approach" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[Q^n \quad \text{for very large } n\]</div>
+<p>Leave your starting row completely alone. Instead of moving a single vector through time, you are analyzing the <em>nature</em> of the transition matrix <span class="arithmatex">\(Q\)</span> itself by raising it to a massive power. Fast-forward <span class="arithmatex">\(Q\)</span> to <span class="arithmatex">\(Q^\infty\)</span>. Because <span class="arithmatex">\(Q^\infty\)</span> is a stack of identical <span class="arithmatex">\(s\)</span> rows, any starting vector multiplied by it just returns <span class="arithmatex">\(s\)</span>.</p>
+<p><strong>Intuition:</strong> This is like looking at the long-term outcome regardless of where you started. You are not simulating a path — you are asking what <span class="arithmatex">\(Q\)</span> structurally <em>becomes</em> over infinite time. No matter what your starting vector <span class="arithmatex">\(t\)</span> is, once it hits this copy-paste matrix, the result is always <span class="arithmatex">\(s\)</span>.</p>
+<h3 id="why-they-are-identical">Why They Are Identical<a class="headerlink" href="#why-they-are-identical" title="Permanent link">&para;</a></h3>
+<p>Matrix multiplication is <strong>associative</strong>: <span class="arithmatex">\((t \times Q) \times Q = t \times (Q \times Q)\)</span>. The parentheses can move anywhere. Option 1 is <span class="arithmatex">\(((tQ)Q)Q\ldots\)</span> and Option 2 is <span class="arithmatex">\(t(QQ\ldots Q)\)</span>. Same computation, different order of operations — the simulation path and the structural path are two views of exactly the same arithmetic.</p>
+<hr />
+<h2 id="the-mathematical-amnesia-why-the-starting-point-gets-erased">The Mathematical Amnesia — Why the Starting Point Gets Erased<a class="headerlink" href="#the-mathematical-amnesia-why-the-starting-point-gets-erased" title="Permanent link">&para;</a></h2>
+<p>In the short term, where you start (<span class="arithmatex">\(t\)</span>) matters significantly — the rows of <span class="arithmatex">\(Q^2\)</span> or <span class="arithmatex">\(Q^{10}\)</span> are all different. But in the long term (<span class="arithmatex">\(Q^\infty\)</span>), the internal structure of the transitions is so strong that the system eventually forgets its starting point entirely and converges to the same stable proportion <span class="arithmatex">\(s\)</span>, regardless of initial conditions.</p>
+<p>This is not just a curiosity — it is what makes Markov processes <strong>predictable over long horizons</strong>. The convergence of <span class="arithmatex">\(tQ^n \to s\)</span> regardless of <span class="arithmatex">\(t\)</span> is a foundational pillar of how we understand long-run behavior in stochastic systems, including Reinforcement Learning, where an agent's policy evaluation relies on the fact that the chain will settle into the same stationary distribution no matter which state the agent happened to start in.</p>
+<blockquote>
+<p>The amnesia is total and mathematical: not "the starting point matters less over time" but "the starting point contributes exactly zero to the limit."</p>
+</blockquote>
 
   
     
@@ -7224,7 +7255,10 @@ Leave your starting row completely alone. Fast-forward <span class="arithmatex">
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:58:59 UTC">June 24, 2026</span>
+        Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 04:58:59 UTC">June 24, 2026</span>
+      </span>
+      <span class="md-source-file__fact">
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 27, 2026 09:22:36 UTC">June 27, 2026</span>
       </span>
     
   </aside>
