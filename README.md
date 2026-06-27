@@ -1,121 +1,83 @@
-# Knowledge Management System
+# Personal Learning & Education Wiki
 
-A unified repository for lifelong learning across multiple domains. Built with MkDocs Material and GitHub Pages.
+A unified personal repository for lifelong learning and course notes across multiple academic domains. This is an **educational notes wiki**, not a software project. The notes are written in Markdown, cross-linked using wiki-style links, and compiled into a static website using **MkDocs Material** and deployed via **GitHub Pages**.
 
-**Live Site:** https://romeo-mhakayakora.github.io/knowledge/
+**Live Interactive Wiki:** [https://romeo-mhakayakora.github.io/knowledge/](https://romeo-mhakayakora.github.io/knowledge/)
 
-## Quick Start
+---
+
+## 📚 Course Shortcuts
+
+Use the links below to navigate directly to the course notes inside the repository:
+
+### 1. Mathematics
+*   [**Probability Theory**](content/mathematics/probability/) — Comprehensive study of probability spaces, random variables, expectations, named distributions, limit theorems, Markov chains, and Poisson processes.
+*   [**Linear Algebra for ML & Quantum**](content/mathematics/linear-algebra-ml-qc/) — Vector spaces, projections, SVD, PCA, Markov transitions, and quantum computing foundations.
+
+### 2. Computer Science
+*   [**Distributed Systems**](content/computer-science/distributed-systems/) — P2P networks (Napster/Gnutella), DHTs (Chord/Pastry), logical clocks, election algorithms, consistency models, CAP theorem, Paxos/Raft consensus, and Bitcoin/blockchains.
+
+### 3. Economics
+*   [**Game Theory**](content/economics/game-theory/) — Strategic interaction models, game theory proofs, Nash equilibria, and decision science.
+
+---
+
+## 🛠️ Previewing the Wiki Locally
+
+If you want to view or preview the wiki on your local machine, follow these steps:
 
 ### Prerequisites
-- Python 3.9+
-- Git
+*   Python 3.9+
+*   Git
 
-### Setup
-
+### Setup and Start Server
 ```bash
-# Clone and navigate
+# Clone the repository
 git clone https://github.com/romeo-mhakayakora/knowledge.git
 cd knowledge
 
-# Create virtual environment
+# Create and activate a Python virtual environment
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install dependencies
+# Install MkDocs and dependencies
 pip install -r requirements.txt
 
-# Preview locally
+# Run the local preview server
 mkdocs serve
 ```
 
-Visit `http://localhost:8000` to preview.
+Once the server is running, visit [**http://localhost:8000**](http://localhost:8000) in your web browser.
 
-## Directory Structure
+---
+
+## 🗂️ Repository Structure
 
 ```
 knowledge/
-├── content/                 # All learning content (markdown files)
-│   ├── mathematics/        # Domain
-│   ├── computer-science/   # Domain
-│   ├── ai/                 # Domain
-│   └── _concepts/          # Cross-domain concepts
-├── docs/                   # GitHub Pages source
-├── config/                 # Configuration files
-├── tools/                  # Build and automation scripts
-├── .github/                # GitHub workflows and templates
-└── styles/                 # Custom CSS/JS
+├── content/                 # All learning content (Markdown files)
+│   ├── mathematics/        # Probability, Linear Algebra
+│   ├── computer-science/   # Distributed Systems
+│   ├── economics/          # Game Theory
+│   ├── systems/            # Complex Systems notes
+│   └── _concepts/          # Cross-domain concept index files
+├── config/                 # YAML Configuration files
+├── tools/                  # Build, validation, and automation scripts
+├── .github/                # GitHub workflows (automated deployment to Pages)
+└── styles/                 # Custom CSS and JS stylesheets
 ```
 
-## Adding Content
+---
 
-1. **Create note in appropriate location:**
-   ```bash
-   content/[domain]/[subject]/[chapter]/note-name.md
-   ```
+## ✍️ Contribution & Standards
 
-2. **Add frontmatter:**
-   ```yaml
-   ---
-   title: Note Title
-   subject: subject-slug
-   chapter: 01-chapter-name
-   tags: [tag1, tag2]
-   date: 2026-01-15
-   updated: 2026-06-18
-   status: complete
-   difficulty: intermediate
-   ---
-   ```
+For details on note standards, file naming rules, and cross-linking using wikilinks `[[concept]]`:
+*   See [ARCHITECTURE.md](ARCHITECTURE.md) for the design philosophy.
+*   See [GOVERNANCE.md](GOVERNANCE.md) for style and writing standards.
+*   See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on formatting.
 
-3. **Write content and use wikilinks:**
-   ```markdown
-   This relates to [[concept-name]] and [[another-concept]].
-   ```
+---
 
-4. **Commit and push:**
-   ```bash
-   git add .
-   git commit -m "feat: add note on [topic]"
-   git push
-   ```
+## 📄 License
 
-GitHub Actions will automatically build and deploy.
-
-## Domains
-
-- **Mathematics:** Probability, linear algebra, optimization, analysis, statistics
-- **Computer Science:** Algorithms, operating systems, distributed systems, databases, networks
-- **AI:** Deep learning, NLP, computer vision, reinforcement learning, LLMs
-- **Economics:** Microeconomics, macroeconomics, econometrics
-- **Systems:** Complex systems, network science
-
-
-## Standards
-
-| Item | Standard |
-|------|----------|
-| File naming | `kebab-case.md` |
-| Concepts per file | One concept per file |
-| Metadata | YAML frontmatter required |
-| Cross-linking | Use wikilinks `[[concept]]` |
-| Chapter folders | Numbered: `01-name`, `02-name` |
-| Metadata files | Prefixed: `_subject.yml`, `_chapter.yml` |
-
-## Maintenance
-
-| Frequency | Task |
-|-----------|------|
-| Weekly | Review PRs, check broken links |
-| Monthly | Audit files, update index |
-| Quarterly | Archive chapters, review outcomes |
-| Annually | Full audit, update framework |
-
-## License
-
-All content is personal learning material.
-
-## See Also
-
-- [ARCHITECTURE.md](ARCHITECTURE.md) — System design and philosophy
-- [CONTRIBUTING.md](CONTRIBUTING.md) — Detailed contribution guide
-- [GOVERNANCE.md](GOVERNANCE.md) — Policies and standards
+All content consists of personal learning materials and study notes.
