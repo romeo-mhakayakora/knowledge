@@ -8768,8 +8768,9 @@ $$t = \log_2(N) - 1 = O(\log N)\]</div>
 </ul>
 <p>By combining them, all servers sync in <span class="arithmatex">\(O(\log N)\)</span> rounds — avoiding the stall-out of pure Push and the slow start of pure Pull. The mathematics you just worked through is the reason those systems can stay consistent across millions of machines.</p>
 <hr />
-<h2 id="rumor-mongering-a-complex-epidemic-with-termination">Rumor Mongering: A Complex Epidemic with Termination<a class="headerlink" href="#rumor-mongering-a-complex-epidemic-with-termination" title="Permanent link">&para;</a></h2>
-<h3 id="plain-english-why-rumor-mongering-is-different-from-anti-entropy">Plain English: Why Rumor Mongering Is Different from Anti-Entropy<a class="headerlink" href="#plain-english-why-rumor-mongering-is-different-from-anti-entropy" title="Permanent link">&para;</a></h3>
+<h1 id="rumor-mongering_1">Rumor Mongering<a class="headerlink" href="#rumor-mongering_1" title="Permanent link">&para;</a></h1>
+<hr />
+<h2 id="plain-english-why-rumor-mongering-is-different-from-anti-entropy">Plain English: Why Rumor Mongering Is Different from Anti-Entropy<a class="headerlink" href="#plain-english-why-rumor-mongering-is-different-from-anti-entropy" title="Permanent link">&para;</a></h2>
 <p>Anti-entropy never stops. Nodes keep reconciling forever. This is wasteful — once everyone has the update, why keep asking?</p>
 <p>Rumor mongering adds a third state: <strong>removed</strong>. In plain English:</p>
 <ul>
@@ -8780,62 +8781,254 @@ $$t = \log_2(N) - 1 = O(\log N)\]</div>
 <p>Think of a rumor spreading through a school. At first, everyone who hears it tells their friends. But after a while, when most people already know, you stop bothering. You become "removed." The rumor dies out naturally.</p>
 <p><strong>The risk</strong>: because people stop telling the rumor, some people at the edges of the social network might never hear it. These are the <strong>residue</strong> — the people left out.</p>
 <p><strong>The trade-off</strong>: rumor mongering is efficient (it stops on its own) but imperfect (some nodes might miss the update). Anti-entropy is inefficient (never stops) but perfect (everyone eventually gets it).</p>
-<h3 id="the-three-state-model">The Three-State Model<a class="headerlink" href="#the-three-state-model" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="the-three-state-model">The Three-State Model<a class="headerlink" href="#the-three-state-model" title="Permanent link">&para;</a></h2>
 <p>Rumor mongering introduces a <strong>removed</strong> state. The governing equations in terms of fractions are:</p>
-<div class="arithmatex">\[
-s + i + r = 1
-\]</div>
+<div class="arithmatex">\[s + i + r = 1\]</div>
 <p>where:
 - <span class="arithmatex">\(s\)</span> = fraction of susceptible nodes
 - <span class="arithmatex">\(i\)</span> = fraction of infective nodes
 - <span class="arithmatex">\(r\)</span> = fraction of removed nodes</p>
-<h3 id="the-differential-equations">The Differential Equations<a class="headerlink" href="#the-differential-equations" title="Permanent link">&para;</a></h3>
-<p><strong>Rate of decrease of susceptible nodes</strong>:</p>
-<div class="arithmatex">\[
-\frac{ds}{dt} = -s \cdot i
-\]</div>
-<p>The rate is proportional to the product of susceptible and infective fractions — more of either means faster infection.</p>
-<p><strong>Rate of change of infective nodes</strong>:</p>
-<div class="arithmatex">\[
-\frac{di}{dt} = s \cdot i - \frac{1}{k}(1 - s) \cdot i
-\]</div>
-<p>The first term <span class="arithmatex">\(s \cdot i\)</span> is the infection rate (same as above, with positive sign). The second term is the <strong>removal rate</strong>: nodes lose interest in propagating rumors. The removal rate is proportional to:
-- The fraction of non-susceptible nodes <span class="arithmatex">\((1 - s)\)</span> — the more people who already know, the less interesting the rumor becomes
-- The infective fraction <span class="arithmatex">\(i\)</span> — more infective nodes means more nodes potentially losing interest
-- A damping factor <span class="arithmatex">\(1/k\)</span> where <span class="arithmatex">\(k\)</span> controls how quickly interest fades</p>
-<h3 id="the-solution">The Solution<a class="headerlink" href="#the-solution" title="Permanent link">&para;</a></h3>
-<p>Eliminating <span class="arithmatex">\(t\)</span> and solving for <span class="arithmatex">\(i\)</span> as a function of <span class="arithmatex">\(s\)</span>:</p>
-<div class="arithmatex">\[
-i(s) = \frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s)
-\]</div>
-<p>This is derived by dividing the two differential equations:</p>
-<div class="arithmatex">\[
-\frac{di}{ds} = \frac{di/dt}{ds/dt} = \frac{si - \frac{1}{k}(1-s)i}{-si} = -1 + \frac{1-s}{ks}
-\]</div>
-<p>Integrating:</p>
-<div class="arithmatex">\[
-i(s) = -s + \frac{1}{k}(s - \ln(s)) + C
-\]</div>
-<p>Using the initial condition <span class="arithmatex">\(i(1) = 0\)</span> (when everyone is susceptible, no one is infective):</p>
-<div class="arithmatex">\[
-0 = -1 + \frac{1}{k}(1 - 0) + C \implies C = 1 - \frac{1}{k}
-\]</div>
+<p>The system is always conserved — every node is in exactly one state at any time.</p>
+<hr />
+<h2 id="the-differential-equations-where-they-come-from">The Differential Equations — Where They Come From<a class="headerlink" href="#the-differential-equations-where-they-come-from" title="Permanent link">&para;</a></h2>
+<p>Before writing any formula, ask: <strong>what causes each state to change?</strong></p>
+<p>This is the first stage of all analysis: define how each quantity changes with time. Think of it as watching a movie — you are tracking the velocity of the system at every moment.</p>
+<h3 id="inflow-equals-outflow-the-balance-principle">Inflow equals outflow — the balance principle<a class="headerlink" href="#inflow-equals-outflow-the-balance-principle" title="Permanent link">&para;</a></h3>
+<p>In any natural system at steady state, the rate of things flowing <em>in</em> equals the rate of things flowing <em>out</em>. When these rates are unequal, the quantity is either accumulating or depleting. For the infective population <span class="arithmatex">\(i\)</span>, the rate of change is simply:</p>
+<div class="arithmatex">\[\frac{di}{dt} = \text{(rate flowing in)} - \text{(rate flowing out)}\]</div>
+<p>This is not a trick or a formula to memorize. It is just conservation of flow written down.</p>
+<h3 id="why-the-interaction-term-is-s-times-i-mass-action">Why the interaction term is <span class="arithmatex">\(s \times i\)</span> — Mass Action<a class="headerlink" href="#why-the-interaction-term-is-s-times-i-mass-action" title="Permanent link">&para;</a></h3>
+<p>The inflow to <span class="arithmatex">\(i\)</span> comes from susceptible nodes meeting infective nodes and getting infected. But why is the rate <span class="arithmatex">\(s \times i\)</span> and not something else?</p>
+<p>This comes from <strong>Mass Action Kinetics</strong> — a principle from chemistry that says: the rate of a reaction is proportional to the product of the concentrations of the reacting species.</p>
+<p>Think of it combinatorially. If you have <span class="arithmatex">\(s\)</span> susceptible nodes and <span class="arithmatex">\(i\)</span> infective nodes floating around the network, the total number of possible pairings between them is <span class="arithmatex">\(s \times i\)</span>. Every one of those pairings is a chance for an infection to happen. More susceptible nodes means more targets. More infective nodes means more spreaders. The product captures both simultaneously.</p>
+<p>With <span class="arithmatex">\(\beta = 1\)</span> (normalising so every contact succeeds):</p>
+<div class="arithmatex">\[\text{Rate of susceptible} \to \text{infective} = s \cdot i\]</div>
+<p>Setting <span class="arithmatex">\(\beta = 1\)</span> removes the randomness of "failed" transmissions and reduces the model to pure threshold logic: the spread is determined entirely by the current counts of <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(i\)</span>.</p>
+<h3 id="rate-of-decrease-of-susceptible-nodes">Rate of decrease of susceptible nodes<a class="headerlink" href="#rate-of-decrease-of-susceptible-nodes" title="Permanent link">&para;</a></h3>
+<p>Every time a susceptible node meets an infective node, it leaves the susceptible pool. So:</p>
+<div class="arithmatex">\[\frac{ds}{dt} = -s \cdot i\]</div>
+<p>The minus sign: susceptibles are leaving, not arriving.</p>
+<h3 id="rate-of-change-of-infective-nodes">Rate of change of infective nodes<a class="headerlink" href="#rate-of-change-of-infective-nodes" title="Permanent link">&para;</a></h3>
+<p>Infective nodes gain members from susceptibles (inflow) and lose members to the removed state (outflow):</p>
+<div class="arithmatex">\[\frac{di}{dt} = s \cdot i - \frac{1}{k}(1 - s) \cdot i\]</div>
+<p><strong>The inflow</strong> <span class="arithmatex">\(s \cdot i\)</span>: the same mass action term — susceptibles becoming infective.</p>
+<p><strong>The outflow</strong> <span class="arithmatex">\(\frac{1}{k}(1-s) \cdot i\)</span>: nodes losing interest and becoming removed. Why is the removal rate proportional to <span class="arithmatex">\((1-s)\)</span>?</p>
+<p>Because <span class="arithmatex">\(1 - s\)</span> is the fraction of nodes that already know the rumor. The more people who already know it, the less interesting the rumor becomes when you try to spread it — you keep hitting people who say "I already know." As this fraction grows, infective nodes get discouraged and stop spreading. The constant <span class="arithmatex">\(\frac{1}{k}\)</span> controls how quickly this discouragement kicks in. Large <span class="arithmatex">\(k\)</span> = slow removal. Small <span class="arithmatex">\(k\)</span> = fast removal.</p>
+<hr />
+<h2 id="from-time-to-state-space-the-two-stage-method">From Time to State Space — The Two-Stage Method<a class="headerlink" href="#from-time-to-state-space-the-two-stage-method" title="Permanent link">&para;</a></h2>
+<p>Here is the core methodology for solving this kind of system. Think of it in two stages.</p>
+<p><strong>Stage 1 — Watch the movie (temporal dynamics).</strong>
+Write down how each quantity changes with time: <span class="arithmatex">\(ds/dt\)</span> and <span class="arithmatex">\(di/dt\)</span>. This tells you the <em>velocity</em> of the system at every moment. It answers: "how fast is each population changing right now?"</p>
+<p><strong>Stage 2 — Take the photograph (state-space trajectory).</strong>
+Divide <span class="arithmatex">\(di/dt\)</span> by <span class="arithmatex">\(ds/dt\)</span> using the chain rule to eliminate time entirely:</p>
+<div class="arithmatex">\[\frac{di}{ds} = \frac{di/dt}{ds/dt}\]</div>
+<p>This gives you the <em>path</em> the system traces through the <span class="arithmatex">\((s, i)\)</span> plane — the trajectory — regardless of how fast or slow the transmission happens. You are no longer asking "how fast?" You are asking "what path does the system follow, and where does it end up?"</p>
+<p>This is a profound shift: the trajectory is an <strong>invariant</strong> of the system. It does not matter whether the network runs on a supercomputer or on slow hardware. The state <span class="arithmatex">\((s, i)\)</span> will always travel along the same curve.</p>
+<hr />
+<h2 id="deriving-is-the-full-chain-rule-proof">Deriving <span class="arithmatex">\(i(s)\)</span> — The Full Chain Rule Proof<a class="headerlink" href="#deriving-is-the-full-chain-rule-proof" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-form-the-ratio">Step 1 — Form the ratio<a class="headerlink" href="#step-1-form-the-ratio" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\frac{di}{ds} = \frac{di/dt}{ds/dt} = \frac{si - \frac{1}{k}(1-s)i}{-si}\]</div>
+<h3 id="step-2-cancel-i-valid-while-i-neq-0-ie-while-the-epidemic-is-active">Step 2 — Cancel <span class="arithmatex">\(i\)</span> (valid while <span class="arithmatex">\(i \neq 0\)</span>, i.e. while the epidemic is active)<a class="headerlink" href="#step-2-cancel-i-valid-while-i-neq-0-ie-while-the-epidemic-is-active" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\frac{di}{ds} = \frac{s - \frac{1}{k}(1-s)}{-s}\]</div>
+<h3 id="step-3-split-and-simplify">Step 3 — Split and simplify<a class="headerlink" href="#step-3-split-and-simplify" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\frac{di}{ds} = -1 + \frac{1-s}{ks}\]</div>
+<p>Rewrite <span class="arithmatex">\(\frac{1-s}{ks} = \frac{1}{ks} - \frac{1}{k}\)</span>:</p>
+<div class="arithmatex">\[\frac{di}{ds} = -1 - \frac{1}{k} + \frac{1}{ks}\]</div>
+<h3 id="step-4-integrate-both-sides-with-respect-to-s">Step 4 — Integrate both sides with respect to <span class="arithmatex">\(s\)</span><a class="headerlink" href="#step-4-integrate-both-sides-with-respect-to-s" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\int di = \int \left(-1 - \frac{1}{k} + \frac{1}{ks}\right) ds\]</div>
+<p>Term by term:
+- <span class="arithmatex">\(\int -1 \, ds = -s\)</span>
+- <span class="arithmatex">\(\int -\frac{1}{k} \, ds = -\frac{s}{k}\)</span>
+- <span class="arithmatex">\(\int \frac{1}{ks} \, ds = \frac{1}{k} \ln(s)\)</span></p>
+<p>Combining:</p>
+<div class="arithmatex">\[i(s) = -s - \frac{s}{k} + \frac{1}{k}\ln(s) + C = -\frac{k+1}{k}s + \frac{1}{k}\ln(s) + C\]</div>
+<h3 id="step-5-apply-the-initial-condition">Step 5 — Apply the initial condition<a class="headerlink" href="#step-5-apply-the-initial-condition" title="Permanent link">&para;</a></h3>
+<p>At the start: <span class="arithmatex">\(s = 1\)</span> (everyone susceptible), <span class="arithmatex">\(i = 0\)</span> (no one yet infective):</p>
+<div class="arithmatex">\[0 = -\frac{k+1}{k}(1) + \frac{1}{k}\ln(1) + C\]</div>
+<p>Since <span class="arithmatex">\(\ln(1) = 0\)</span>:</p>
+<div class="arithmatex">\[C = \frac{k+1}{k}\]</div>
+<h3 id="step-6-the-final-trajectory">Step 6 — The final trajectory<a class="headerlink" href="#step-6-the-final-trajectory" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[\boxed{i(s) = \frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s)}\]</div>
+<p>This curve is the complete life story of the rumor. Plot <span class="arithmatex">\(i\)</span> on the vertical axis and <span class="arithmatex">\(s\)</span> on the horizontal axis. The system starts at <span class="arithmatex">\((s=1, i=0)\)</span> — everyone susceptible, no one yet spreading — travels along this curve as the rumor spreads, reaches a peak, and then declines back to <span class="arithmatex">\(i=0\)</span> as the rumor dies out.</p>
+<hr />
+<h2 id="why-eulers-number-e-appears">Why Euler's Number <span class="arithmatex">\(e\)</span> Appears<a class="headerlink" href="#why-eulers-number-e-appears" title="Permanent link">&para;</a></h2>
+<p>The number <span class="arithmatex">\(e \approx 2.718\)</span> shows up in both the residue approximation and the traffic formula. It is not a coincidence.</p>
+<p><span class="arithmatex">\(e\)</span> is the mathematical constant of <strong>continuous compounding</strong> — it describes any process that grows or decays at a rate proportional to its current size. When you break a process into an infinite number of tiny independent steps, the result converges to <span class="arithmatex">\(e\)</span>.</p>
+<p>In this context: you are not sending one giant update. You are sending many small, independent gossip messages. Each one is a tiny trial. The probability that a node survives all of them (misses all messages) is:</p>
+<div class="arithmatex">\[\left(1 - \frac{1}{n}\right)^{nm}\]</div>
+<p>As <span class="arithmatex">\(n \to \infty\)</span>, the term <span class="arithmatex">\(\left(1 - \frac{1}{n}\right)^n \to e^{-1}\)</span> by the fundamental definition of <span class="arithmatex">\(e\)</span>. This is the bridge from discrete independent trials to the exponential function. The result is that all residue and traffic relationships end up expressed in terms of <span class="arithmatex">\(e\)</span>.</p>
+<hr />
+<h2 id="the-residue-problem">The Residue Problem<a class="headerlink" href="#the-residue-problem" title="Permanent link">&para;</a></h2>
+<p>When the epidemic ends, <span class="arithmatex">\(i = 0\)</span> — no infective nodes remain. Setting <span class="arithmatex">\(i(s) = 0\)</span>:</p>
+<div class="arithmatex">\[\frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s) = 0\]</div>
+<p>This is a <strong>transcendental equation</strong> — <span class="arithmatex">\(s\)</span> appears both linearly and inside a logarithm. There is no algebraic closed form. But we can find an approximation.</p>
+<h3 id="deriving-the-approximation-s-approx-e-k1">Deriving the approximation <span class="arithmatex">\(s \approx e^{-(k+1)}\)</span><a class="headerlink" href="#deriving-the-approximation-s-approx-e-k1" title="Permanent link">&para;</a></h3>
+<p><strong>Step 1 — Clear the denominators</strong> (multiply through by <span class="arithmatex">\(k\)</span>):</p>
+<div class="arithmatex">\[(k+1)(1 - s) + \ln(s) = 0\]</div>
+<p><strong>Step 2 — Expand and rearrange</strong>:</p>
+<div class="arithmatex">\[(k+1) - (k+1)s + \ln(s) = 0\]</div>
+<div class="arithmatex">\[\ln(s) = (k+1)s - (k+1) = (k+1)(s - 1)\]</div>
+<p><strong>Step 3 — Exponentiate both sides</strong>:</p>
+<div class="arithmatex">\[s = e^{(k+1)(s-1)}\]</div>
+<p><strong>Step 4 — Apply the approximation.</strong>
+In a successful protocol, the residue <span class="arithmatex">\(s\)</span> is small — only a tiny fraction of nodes are missed. If <span class="arithmatex">\(s\)</span> is small, then <span class="arithmatex">\(s - 1 \approx -1\)</span>. Substituting:</p>
+<div class="arithmatex">\[s \approx e^{(k+1)(-1)} = e^{-(k+1)}\]</div>
+<p><strong>What this tells you:</strong>
+The residue shrinks <em>exponentially</em> as <span class="arithmatex">\(k\)</span> grows. Doubling <span class="arithmatex">\(k\)</span> does not halve the residue — it squares it. A small increase in <span class="arithmatex">\(k\)</span> (allowing the rumor to live longer) yields a dramatic reduction in missed nodes.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>Residue <span class="arithmatex">\(s \approx e^{-(k+1)}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(e^{-2} \approx 0.135\)</span> (13.5% missed)</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(e^{-3} \approx 0.050\)</span> (5% missed)</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(e^{-6} \approx 0.002\)</span> (0.2% missed)</td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(e^{-11} \approx 0.00002\)</span> (tiny)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-lifecycle-of-the-curve">The lifecycle of the curve<a class="headerlink" href="#the-lifecycle-of-the-curve" title="Permanent link">&para;</a></h3>
+<p>The <span class="arithmatex">\(i(s)\)</span> curve tells the complete story in three acts:</p>
+<p><strong>Growth phase</strong> (early, <span class="arithmatex">\(s \approx 1\)</span>): Many susceptibles, mass action drives rapid spread. The infective population rises fast.</p>
+<p><strong>Peak</strong>: The system hits its maximum number of active spreaders. This is the moment of highest bandwidth usage in your network.</p>
+<p><strong>Decline phase</strong> (late, <span class="arithmatex">\(s \ll 1\)</span>): Few susceptibles remain. The removal term <span class="arithmatex">\(\frac{1}{k}(1-s)i\)</span> dominates. Infective population crashes. The nodes left behind — the ones the rumor never reached — are the residue.</p>
+<hr />
+<h2 id="residue-and-traffic-the-fundamental-trade-off">Residue and Traffic — The Fundamental Trade-off<a class="headerlink" href="#residue-and-traffic-the-fundamental-trade-off" title="Permanent link">&para;</a></h2>
+<h3 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Residue</strong>: sites that remain susceptible after the epidemic ends — nodes that never received the update.</li>
+<li><strong>Traffic</strong>: average number of messages sent per site.</li>
+</ul>
+<h3 id="the-exponential-relationship">The exponential relationship<a class="headerlink" href="#the-exponential-relationship" title="Permanent link">&para;</a></h3>
+<p>Suppose each site sends <span class="arithmatex">\(m\)</span> updates. With <span class="arithmatex">\(n\)</span> sites, total updates <span class="arithmatex">\(= nm\)</span>.</p>
+<p>The probability that a given site misses all <span class="arithmatex">\(nm\)</span> updates (every message failed to reach it) is:</p>
+<div class="arithmatex">\[s = \left(1 - \frac{1}{n}\right)^{nm}\]</div>
+<p><strong>Why this formula?</strong> Each of the <span class="arithmatex">\(nm\)</span> messages independently has a <span class="arithmatex">\(1/n\)</span> probability of landing on our target site. So the probability of missing any one specific message is <span class="arithmatex">\(1 - 1/n\)</span>. To miss all <span class="arithmatex">\(nm\)</span> of them, multiply: <span class="arithmatex">\((1 - 1/n)^{nm}\)</span>.</p>
+<p><strong>Applying Euler's number</strong> — for large <span class="arithmatex">\(n\)</span>:</p>
+<div class="arithmatex">\[\left(1 - \frac{1}{n}\right)^n \approx e^{-1}\]</div>
 <p>So:</p>
-<div class="arithmatex">\[
-i(s) = -s + \frac{s}{k} - \frac{\ln(s)}{k} + 1 - \frac{1}{k} = \frac{k+1}{k}(1-s) + \frac{1}{k}\ln(s)
-\]</div>
-<h3 id="the-residue-problem">The Residue Problem<a class="headerlink" href="#the-residue-problem" title="Permanent link">&para;</a></h3>
-<p>When the epidemic ends, <span class="arithmatex">\(i(s) = 0\)</span> (no infective nodes remain). Solving:</p>
-<div class="arithmatex">\[
-\frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s) = 0
-\]</div>
-<p>For large <span class="arithmatex">\(k\)</span> (slow damping), <span class="arithmatex">\(s \approx e^{-(k+1)}\)</span>, which decreases exponentially with <span class="arithmatex">\(k\)</span>. But for small <span class="arithmatex">\(k\)</span>, a significant fraction of nodes remain susceptible — this is the <strong>residue</strong>.</p>
-<p>The residue represents nodes that never received the update. This is the fundamental trade-off: rumor mongering terminates, but it does not guarantee universal delivery.</p>
-<h3 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h3>
-<p>The <span class="arithmatex">\(i(s)\)</span> curve shows that infective nodes peak and then decline. The peak occurs because early on, many susceptible nodes mean rapid growth. Later, as susceptibles dwindle and removal kicks in, the infective population crashes. The nodes left behind — the residue — are the price of self-termination.</p>
-<h3 id="what-would-break-without-removal">What Would Break Without Removal?<a class="headerlink" href="#what-would-break-without-removal" title="Permanent link">&para;</a></h3>
-<p>Without the removal term <span class="arithmatex">\(\frac{1}{k}(1-s)i\)</span>, the model reduces to anti-entropy: infective nodes never stop propagating, and eventually <span class="arithmatex">\(s \to 0\)</span>. But the protocol never terminates, wasting bandwidth forever.</p>
-<h3 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[s \approx \left(e^{-1}\right)^m = e^{-m}\]</div>
+<div class="arithmatex">\[\boxed{s = e^{-m}}\]</div>
+<h3 id="what-this-means">What this means<a class="headerlink" href="#what-this-means" title="Permanent link">&para;</a></h3>
+<p>To achieve residue <span class="arithmatex">\(s\)</span>, you need traffic <span class="arithmatex">\(m = \ln(1/s)\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Desired residue <span class="arithmatex">\(s\)</span></th>
+<th>Messages per site <span class="arithmatex">\(m = \ln(1/s)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^{-3}\)</span> (1 in 1000 missed)</td>
+<td><span class="arithmatex">\(\approx 6.9\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-6}\)</span> (1 in a million missed)</td>
+<td><span class="arithmatex">\(\approx 13.8\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-9}\)</span> (1 in a billion missed)</td>
+<td><span class="arithmatex">\(\approx 20.7\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The relationship is remarkably efficient: a small increase in traffic yields a dramatic decrease in residue. And because this relationship is <em>logarithmic</em>, you do not need to double your traffic to double your reliability — you only need to add a few more messages per site.</p>
+<p><strong>The cost of perfection is cheap.</strong> To go from "1 in a million missed" to "1 in a billion missed," you only need to send 7 more messages per site.</p>
+<h3 id="the-two-mathematical-lenses-for-your-protocol">The two mathematical lenses for your protocol<a class="headerlink" href="#the-two-mathematical-lenses-for-your-protocol" title="Permanent link">&para;</a></h3>
+<p>You now have two complementary ways to analyse rumor mongering:</p>
+<table>
+<thead>
+<tr>
+<th>View</th>
+<th>Formula</th>
+<th>What it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Dynamical</strong> (SIR)</td>
+<td><span class="arithmatex">\(i(s) = \frac{k+1}{k}(1-s) + \frac{1}{k}\ln(s)\)</span></td>
+<td>What path does the system follow? When is peak load?</td>
+</tr>
+<tr>
+<td><strong>Probabilistic</strong></td>
+<td><span class="arithmatex">\(s = e^{-m}\)</span></td>
+<td>How much traffic is needed to hit a target coverage?</td>
+</tr>
+</tbody>
+</table>
+<p>The dynamical view watches the movie. The probabilistic view gives you the engineering number.</p>
+<hr />
+<h2 id="the-two-key-mathematical-concepts-behind-everything">The Two Key Mathematical Concepts Behind Everything<a class="headerlink" href="#the-two-key-mathematical-concepts-behind-everything" title="Permanent link">&para;</a></h2>
+<h3 id="1-mass-action-kinetics">1. Mass Action Kinetics<a class="headerlink" href="#1-mass-action-kinetics" title="Permanent link">&para;</a></h3>
+<p>Every interaction term in this model (<span class="arithmatex">\(s \cdot i\)</span>) comes from Mass Action. The rule is: the rate of interaction between two populations is proportional to the product of their sizes.</p>
+<p>Intuitively: if you have <span class="arithmatex">\(s\)</span> susceptible nodes and <span class="arithmatex">\(i\)</span> infective nodes, the number of possible pairings between them is <span class="arithmatex">\(s \times i\)</span>. Each pairing is a chance for a transmission. More of either group means more chances.</p>
+<p>This is what makes the model work at any scale — whether you have 100 nodes or 100 million, the interaction rate scales predictably.</p>
+<h3 id="2-eulers-number-e">2. Euler's Number <span class="arithmatex">\(e\)</span><a class="headerlink" href="#2-eulers-number-e" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(e\)</span> appears whenever you have a process made of many tiny independent steps that compound continuously. In this model:
+- Each gossip message is an independent trial.
+- Many such trials compound.
+- The limit of <span class="arithmatex">\((1 - 1/n)^n\)</span> as <span class="arithmatex">\(n \to \infty\)</span> is <span class="arithmatex">\(e^{-1}\)</span>.</p>
+<p>This is why residue and traffic are both expressed as exponentials of <span class="arithmatex">\(e\)</span>. The exponential function is the mathematical shape of "independent compounding events."</p>
+<hr />
+<h2 id="combining-anti-entropy-with-rumor-mongering">Combining Anti-Entropy with Rumor Mongering<a class="headerlink" href="#combining-anti-entropy-with-rumor-mongering" title="Permanent link">&para;</a></h2>
+<p>Rumor mongering alone can miss sites. The solution is a hybrid:</p>
+<ol>
+<li><strong>Run rumor mongering first</strong> for rapid initial dissemination. The exponential growth phase seeds the network quickly.</li>
+<li><strong>After a timeout, run slow background anti-entropy</strong>. This is the cleanup crew — thorough but not fast. It finds the residue nodes that rumor mongering missed.</li>
+<li><strong>If two sites discover a missing update, start a "hot rumor" locally.</strong> This turns an anti-entropy discovery into a new push event, dynamically boosting gossip intensity exactly where it is needed.</li>
+</ol>
+<p>Xerox Clearinghouse used this hybrid approach. The core logic has survived into every major distributed database in production today — Cassandra, DynamoDB, and blockchain P2P networks all use variants of this exact combination.</p>
+<p><strong>Why it survived:</strong> The logarithmic cost <span class="arithmatex">\(m = \ln(1/s)\)</span> means that even as your network grows from 1,000 to 1,000,000 nodes, you only need a marginal increase in per-site messages to maintain the same reliability. The architecture scales without requiring proportional increases in bandwidth.</p>
+<p>The foundational paper behind all of this is: <strong>Demers et al., "Epidemic Algorithms for Replicated Database Maintenance," 1987 (Xerox PARC)</strong> — the paper that introduced push rumor mongering and pull anti-entropy together and proved the residue/traffic trade-off.</p>
+<hr />
+<h2 id="deleting-nodes-and-death-certificates">Deleting Nodes and Death Certificates<a class="headerlink" href="#deleting-nodes-and-death-certificates" title="Permanent link">&para;</a></h2>
+<h3 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h3>
+<p>If a node deletes data, how do we ensure the deletion propagates? And how do we prevent <strong>resurrection</strong> — an old update reappearing and recreating deleted data?</p>
+<p>Without handling this, a "zombie" update sitting in a slow or partitioned node could re-enter the network and restore data that was already deleted. The gossip protocol, designed to propagate knowledge, will happily spread the resurrection.</p>
+<h3 id="death-certificates">Death Certificates<a class="headerlink" href="#death-certificates" title="Permanent link">&para;</a></h3>
+<p>Treat deletion as an update: issue a <strong>death certificate</strong> with a timestamp. Death certificates propagate via rumor mongering or anti-entropy — exactly like any other update.</p>
+<p>When a death certificate meets a later update for the same item, the timestamps decide who wins. The newer one wins. If the certificate is newer, the data dies. If the data is newer, the deletion is overridden (correct — the data was legitimately updated after the deletion).</p>
+<h3 id="when-to-discard-death-certificates">When to Discard Death Certificates?<a class="headerlink" href="#when-to-discard-death-certificates" title="Permanent link">&para;</a></h3>
+<p>You cannot keep death certificates forever — that would bloat the system with tombstones for data long gone.</p>
+<p>Define a time threshold. If a death certificate is older than the maximum time it takes to propagate updates to all sites, it can be deleted. But some <strong>retention sites</strong> should keep death certificates longer, to catch late-arriving old updates.</p>
+<p>Think of retention sites as the immune memory of the network — they remember the deletion long after everyone else has forgotten it, ensuring zombie updates hit a wall even if they show up very late.</p>
+<h3 id="dormant-death-certificates">Dormant Death Certificates<a class="headerlink" href="#dormant-death-certificates" title="Permanent link">&para;</a></h3>
+<p>Keep death certificates at only a few nodes in a dormant state. If a dormant certificate collides with an update that tries to resurrect deleted data, activate it and propagate it as a hot rumor.</p>
+<p><strong>Problem</strong>: what if a dormant certificate wakes up and meets an obsolete update — one that is old and harmless?</p>
+<p><strong>Solution</strong> — use <strong>two timestamps</strong>:
+- <strong>Original timestamp</strong>: the "true" age of the deletion. Used to cancel updates. Any update older than this timestamp loses.
+- <strong>Activation timestamp</strong>: used for garbage collection. Even if a certificate gets reactivated, the system still has a way to eventually prune it once it is truly ancient, preventing infinite memory growth.</p>
+<p><strong>Version numbers</strong> for updates prevent legitimate updates from being cancelled by stale death certificates — if the update has a higher version than the death certificate, it wins.</p>
+<h3 id="why-death-certificates-are-just-the-residue-problem-in-disguise">Why death certificates are just the residue problem in disguise<a class="headerlink" href="#why-death-certificates-are-just-the-residue-problem-in-disguise" title="Permanent link">&para;</a></h3>
+<p>The residue problem says: some nodes will never receive an update. Death certificates are the same problem applied to deletions. A node that missed the death certificate will try to resurrect deleted data when it reconnects. The hybrid protocol (rumor mongering + anti-entropy) is what ensures death certificates eventually reach every node — and retention sites exist precisely because the residue is never exactly zero.</p>
+<hr />
+<h2 id="the-two-stage-proof-method-summary-mental-model">The Two-Stage Proof Method — Summary Mental Model<a class="headerlink" href="#the-two-stage-proof-method-summary-mental-model" title="Permanent link">&para;</a></h2>
+<p>Every time you see a coupled differential equation system like this, run this two-stage engine:</p>
+<p><strong>Stage 1 — Temporal dynamics (the movie):</strong>
+Write <span class="arithmatex">\(ds/dt\)</span> and <span class="arithmatex">\(di/dt\)</span> by asking "what causes each population to grow and what causes it to shrink?" Use mass action for any interaction between two populations.</p>
+<p><strong>Stage 2 — State-space trajectory (the photograph):</strong>
+Divide <span class="arithmatex">\(di/dt\)</span> by <span class="arithmatex">\(ds/dt\)</span> using the chain rule. Integrate. Apply the initial condition. You now have the invariant curve <span class="arithmatex">\(i(s)\)</span> — the path the system must follow regardless of speed.</p>
+<p>Set <span class="arithmatex">\(i(s) = 0\)</span> to find the residue. Approximate for large or small <span class="arithmatex">\(k\)</span> to get tractable closed forms.</p>
+<p>This method removes time from the picture entirely, revealing the shape of the system's behavior — not just its velocity at one moment.</p>
+<hr />
+<h2 id="phenomenon-metadata_4">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_4" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -8846,145 +9039,34 @@ i(s) = -s + \frac{s}{k} - \frac{\ln(s)}{k} + 1 - \frac{1}{k} = \frac{k+1}{k}(1-s
 <tbody>
 <tr>
 <td>Structural Signature</td>
-<td>Three-state epidemic with a damping/removal term</td>
+<td>Three-state epidemic with a damping/removal term proportional to <span class="arithmatex">\((1-s)\)</span></td>
 </tr>
 <tr>
 <td>Core Invariant</td>
-<td>The removal rate is proportional to the product of infective fraction and non-susceptible fraction</td>
+<td><span class="arithmatex">\(i(s) = \frac{k+1}{k}(1-s) + \frac{1}{k}\ln(s)\)</span> — the trajectory in state space</td>
 </tr>
 <tr>
 <td>Compression Handle</td>
-<td>"Rumors get old and die; some nodes never hear them"</td>
+<td>"Rumors get old and die; some nodes never hear them; <span class="arithmatex">\(s = e^{-m}\)</span> tells you the price"</td>
+</tr>
+<tr>
+<td>Key Mathematical Tools</td>
+<td>Mass action kinetics (<span class="arithmatex">\(s \times i\)</span>); Euler's number (<span class="arithmatex">\(e\)</span>); chain rule elimination of time</td>
 </tr>
 <tr>
 <td>Boundary / Failure Mode</td>
 <td>Small <span class="arithmatex">\(k\)</span> (fast damping) leaves large residue; large <span class="arithmatex">\(k\)</span> wastes bandwidth before termination</td>
 </tr>
 <tr>
-<td>Phenomenon Web</td>
-<td>See Anti-Entropy (no removal, no residue, no termination); see Residue and Traffic (the quantitative trade-off)</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="residue-and-traffic-the-fundamental-trade-off">Residue and Traffic: The Fundamental Trade-off<a class="headerlink" href="#residue-and-traffic-the-fundamental-trade-off" title="Permanent link">&para;</a></h2>
-<h3 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Residue</strong>: sites that remain susceptible after the epidemic ends.</li>
-<li><strong>Traffic</strong>: average number of messages sent per site.</li>
-</ul>
-<h3 id="the-exponential-relationship">The Exponential Relationship<a class="headerlink" href="#the-exponential-relationship" title="Permanent link">&para;</a></h3>
-<p>Suppose each site sends <span class="arithmatex">\(m\)</span> updates. With <span class="arithmatex">\(n\)</span> sites, total updates = <span class="arithmatex">\(nm\)</span>.</p>
-<p>The probability that a given site misses all <span class="arithmatex">\(nm\)</span> updates (remains susceptible) is:</p>
-<div class="arithmatex">\[
-s = \left(1 - \frac{1}{n}\right)^{nm}
-\]</div>
-<p>For large <span class="arithmatex">\(n\)</span>:</p>
-<div class="arithmatex">\[
-\left(1 - \frac{1}{n}\right)^n \approx e^{-1}
-\]</div>
-<p>So:</p>
-<div class="arithmatex">\[
-s \approx (e^{-1})^m = e^{-m}
-\]</div>
-<p>This is the <strong>fundamental relationship</strong>: residue decreases exponentially with traffic.</p>
-<div class="arithmatex">\[
-s = e^{-m}
-\]</div>
-<h3 id="implications">Implications<a class="headerlink" href="#implications" title="Permanent link">&para;</a></h3>
-<ul>
-<li>To achieve residue <span class="arithmatex">\(s\)</span>, you need traffic <span class="arithmatex">\(m = \ln(1/s)\)</span>.</li>
-<li>For <span class="arithmatex">\(s = 10^{-6}\)</span> (one in a million nodes missed), <span class="arithmatex">\(m \approx 13.8\)</span> messages per site.</li>
-<li>For <span class="arithmatex">\(s = 10^{-9}\)</span>, <span class="arithmatex">\(m \approx 20.7\)</span> messages per site.</li>
-</ul>
-<p>The relationship is remarkably efficient: a small increase in traffic yields a dramatic decrease in residue.</p>
-<h3 id="combining-anti-entropy-with-rumor-mongering">Combining Anti-Entropy with Rumor Mongering<a class="headerlink" href="#combining-anti-entropy-with-rumor-mongering" title="Permanent link">&para;</a></h3>
-<p>Rumor mongering alone can miss sites. The solution:</p>
-<ol>
-<li>Run rumor mongering for rapid initial dissemination.</li>
-<li>After a timeout, run a slow background anti-entropy protocol.</li>
-<li>If two sites discover a missing update, they can start a "hot rumor" locally.</li>
-</ol>
-<p>Xerox Clearinghouse used this hybrid approach, along with some direct mail for critical redistributions.</p>
-<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Structural Signature</td>
-<td>An exponential trade-off between message count and missed-node probability</td>
-</tr>
-<tr>
-<td>Core Invariant</td>
-<td>Each message is an independent trial with success probability <span class="arithmatex">\(1/n\)</span>; the miss probability is the product over all trials</td>
-</tr>
-<tr>
-<td>Compression Handle</td>
-<td>"13 messages per node = one-in-a-million chance of missing"</td>
-</tr>
-<tr>
-<td>Boundary / Failure Mode</td>
-<td>The independence assumption fails if contact patterns are correlated (e.g., spatial locality)</td>
+<td>Foundational Paper</td>
+<td>Demers et al. 1987 — Epidemic Algorithms for Replicated Database Maintenance</td>
 </tr>
 <tr>
 <td>Phenomenon Web</td>
-<td>See Anti-Entropy (guarantees zero residue but infinite traffic); see Spatial Distribution (correlated contact breaks independence)</td>
+<td>Anti-Entropy (no removal, no residue, no termination); Residue and Traffic (exponential trade-off); Death Certificates (residue problem applied to deletions)</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="deleting-nodes-and-death-certificates">Deleting Nodes and Death Certificates<a class="headerlink" href="#deleting-nodes-and-death-certificates" title="Permanent link">&para;</a></h2>
-<h3 id="the-problem">The Problem<a class="headerlink" href="#the-problem" title="Permanent link">&para;</a></h3>
-<p>If a node deletes data, how do we ensure the deletion propagates? And how do we prevent "resurrection" — an old update reappearing and recreating deleted data?</p>
-<h3 id="death-certificates">Death Certificates<a class="headerlink" href="#death-certificates" title="Permanent link">&para;</a></h3>
-<p>Treat deletion as an update: issue a <strong>death certificate</strong> with a timestamp. Death certificates propagate via rumor mongering or anti-entropy.</p>
-<p>When a death certificate meets a later update for the same item, the update is cancelled (the item stays deleted).</p>
-<h3 id="when-to-discard-death-certificates">When to Discard Death Certificates?<a class="headerlink" href="#when-to-discard-death-certificates" title="Permanent link">&para;</a></h3>
-<p>Define a time threshold. If a death certificate is older than the time it takes to propagate updates to all sites, it can be deleted. But some <strong>retention sites</strong> should keep death certificates longer, to catch late-arriving old updates.</p>
-<h3 id="dormant-death-certificates">Dormant Death Certificates<a class="headerlink" href="#dormant-death-certificates" title="Permanent link">&para;</a></h3>
-<p>Keep death certificates at only a few nodes. If a dormant certificate collides with an update, activate it and propagate.</p>
-<p><strong>Problem</strong>: what if a dormant certificate meets an obsolete update?</p>
-<p><strong>Solution</strong>: use <strong>two timestamps</strong>:
-- <strong>Original timestamp</strong>: used to cancel updates
-- <strong>Activation timestamp</strong>: used to eventually discard the reactivated certificate</p>
-<p>Version numbers for updates prevent legitimate updates from being cancelled by stale death certificates.</p>
-<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>Element</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Structural Signature</td>
-<td>A deletion must propagate like an update, but old updates must not resurrect deleted data</td>
-</tr>
-<tr>
-<td>Core Invariant</td>
-<td>Timestamps establish causal ordering between deletions and updates</td>
-</tr>
-<tr>
-<td>Compression Handle</td>
-<td>"Deletion is an update with a death certificate; keep some certificates dormant as insurance"</td>
-</tr>
-<tr>
-<td>Boundary / Failure Mode</td>
-<td>Without version numbers, a late old update can cancel a legitimate new update</td>
-</tr>
-<tr>
-<td>Phenomenon Web</td>
-<td>See Anti-Entropy (the mechanism that propagates death certificates); see Rumor Mongering (can leave death certificate residue)</td>
-</tr>
-</tbody>
-</table>
-<hr />
 <h2 id="spatial-distribution-and-convergence-time">Spatial Distribution and Convergence Time<a class="headerlink" href="#spatial-distribution-and-convergence-time" title="Permanent link">&para;</a></h2>
 <h3 id="the-problem_1">The Problem<a class="headerlink" href="#the-problem_1" title="Permanent link">&para;</a></h3>
 <p>So far we assumed uniform random contact. But in real networks, message latency depends on distance. What if nodes can only contact neighbors?</p>
@@ -9016,7 +9098,7 @@ s = e^{-m}
 <p>The <strong>inverse-square law</strong> (<span class="arithmatex">\(\alpha = 2\)</span>) is the critical boundary. This is analogous to results in random graph theory and wireless network capacity.</p>
 <h3 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link">&para;</a></h3>
 <p>If you can occasionally make long-distance contacts, the network "shrinks" dramatically. The <span class="arithmatex">\(O(\log n)\)</span> result for uniform contact is because each long-distance contact can jump across the network, bypassing many hops. When <span class="arithmatex">\(\alpha &gt; 2\)</span>, long-distance contacts are too rare to help, and the network behaves like a local graph.</p>
-<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_5">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_5" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -9067,7 +9149,7 @@ s = e^{-m}
 <li><strong>Bandwidth scales linearly</strong>: total network load is <span class="arithmatex">\(O(n)\)</span>, not <span class="arithmatex">\(O(n^2)\)</span>.</li>
 <li><strong>Accurate detection with known mistake probability</strong>: if clock drift is negligible, failures are detected with a quantifiable error rate.</li>
 </ol>
-<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_6">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -9131,7 +9213,7 @@ T_{\text{cleanup}} = 2 \times T_{\text{fail}}
 <h3 id="scouting-report_2">Scouting Report<a class="headerlink" href="#scouting-report_2" title="Permanent link">&para;</a></h3>
 <p>What to look for: nodes exchanging heartbeat counters via random pairwise contact, with timeout-based failure declaration.</p>
 <p>Why you care: this is the canonical gossip-based failure detector, used in Cassandra, Dynamo, and many other systems.</p>
-<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_7">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_7" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -9221,14 +9303,14 @@ T_{\text{gossip}} = \frac{8n}{B}
 \text{Detection time} = O(n \log n)
 \]</div>
 <p>This is the key scalability result: detection time grows near-linearly with the number of members.</p>
-<h3 id="intuition-after-the-proof_1">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof_1" title="Permanent link">&para;</a></h3>
+<h3 id="intuition-after-the-proof">Intuition After the Proof<a class="headerlink" href="#intuition-after-the-proof" title="Permanent link">&para;</a></h3>
 <p>The <span class="arithmatex">\(O(n \log n)\)</span> result comes from two factors:
 1. <strong>Logarithmic rounds</strong>: epidemic propagation needs <span class="arithmatex">\(O(\log n)\)</span> rounds to reach all nodes.
 2. <strong>Linear gossip interval</strong>: to keep bandwidth per node constant, the time between gossips must grow linearly with <span class="arithmatex">\(n\)</span> (because each message carries <span class="arithmatex">\(O(n)\)</span> state).</p>
 <p>The product gives <span class="arithmatex">\(O(n \log n)\)</span> detection time. This is the price of scalability: you cannot detect failures instantly in a large system with bounded bandwidth.</p>
 <h3 id="what-would-break-without-this-analysis_1">What Would Break Without This Analysis?<a class="headerlink" href="#what-would-break-without-this-analysis_1" title="Permanent link">&para;</a></h3>
 <p>If <span class="arithmatex">\(T_{\text{gossip}}\)</span> were fixed (not scaled with <span class="arithmatex">\(n\)</span>), bandwidth would grow as <span class="arithmatex">\(O(n^2)\)</span> — each node sends at fixed rate, but message size grows with <span class="arithmatex">\(n\)</span>. The system would collapse under its own communication overhead.</p>
-<h3 id="phenomenon-metadata_10">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_10" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_8">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_8" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -9284,7 +9366,7 @@ T_{\text{gossip}} = \frac{8n}{B}
 <li>With 10% message loss, the price in detection time is small.</li>
 </ul>
 <p>The protocol is robust because gossip is randomized: lost messages are compensated by future gossips.</p>
-<h3 id="phenomenon-metadata_11">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_11" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_9">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_9" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -9341,7 +9423,7 @@ p(t) = \frac{t^2}{20^2}
 <h3 id="the-broadcast-storm-problem">The Broadcast Storm Problem<a class="headerlink" href="#the-broadcast-storm-problem" title="Permanent link">&para;</a></h3>
 <p>If many nodes are unreachable, the expected time to the next broadcast shrinks toward 20 seconds. The concern is that many nodes might broadcast simultaneously, creating a storm.</p>
 <p>The paper shows that for <span class="arithmatex">\(n = 1000\)</span>, the probability that more than 20 members broadcast at once is less than <span class="arithmatex">\(10^{-5}\)</span>. This is because smaller partitions have fewer prospective senders, offsetting the increased individual broadcast probability.</p>
-<h3 id="phenomenon-metadata_12">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_12" title="Permanent link">&para;</a></h3>
+<h3 id="phenomenon-metadata_10">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_10" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
@@ -9394,7 +9476,7 @@ p(t) = \frac{t^2}{20^2}
 <p><strong>Misrecognized signature</strong>: you see "failure detection" and assume it handles malicious nodes.</p>
 <p><strong>The trap</strong>: the gossip-based failure detector assumes <strong>fail-stop</strong> — nodes do not lie about their heartbeats. A Byzantine node could forge heartbeats for other nodes, causing false negatives (failed nodes appear alive) or false positives (alive nodes appear failed).</p>
 <p><strong>Concrete counterexample</strong>: a compromised node could send gossips claiming a failed node is still alive, keeping it in membership lists indefinitely.</p>
-<h2 id="phenomenon-metadata_13">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_13" title="Permanent link">&para;</a></h2>
+<h2 id="phenomenon-metadata_11">Phenomenon Metadata<a class="headerlink" href="#phenomenon-metadata_11" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -9440,7 +9522,7 @@ p(t) = \frac{t^2}{20^2}
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 24, 2026 18:30:52 UTC">June 24, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 27, 2026 06:42:30 UTC">June 27, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 28, 2026 08:43:39 UTC">June 28, 2026</span>
       </span>
     
   </aside>
