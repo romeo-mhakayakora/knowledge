@@ -951,10 +951,11 @@ What you derived is the backbone of **Anti-Entropy Gossip Protocols** used in di
 By combining them, all servers sync in $O(\log N)$ rounds — avoiding the stall-out of pure Push and the slow start of pure Pull. The mathematics you just worked through is the reason those systems can stay consistent across millions of machines.
 
 ---
+# Rumor Mongering 
 
-## Rumor Mongering: A Complex Epidemic with Termination
+---
 
-### Plain English: Why Rumor Mongering Is Different from Anti-Entropy
+## Plain English: Why Rumor Mongering Is Different from Anti-Entropy
 
 Anti-entropy never stops. Nodes keep reconciling forever. This is wasteful — once everyone has the update, why keep asking?
 
@@ -970,166 +971,293 @@ Think of a rumor spreading through a school. At first, everyone who hears it tel
 
 **The trade-off**: rumor mongering is efficient (it stops on its own) but imperfect (some nodes might miss the update). Anti-entropy is inefficient (never stops) but perfect (everyone eventually gets it).
 
-### The Three-State Model
+---
+
+## The Three-State Model
 
 Rumor mongering introduces a **removed** state. The governing equations in terms of fractions are:
 
-$$
-s + i + r = 1
-$$
+$$s + i + r = 1$$
 
 where:
 - $s$ = fraction of susceptible nodes
 - $i$ = fraction of infective nodes
 - $r$ = fraction of removed nodes
 
-### The Differential Equations
-
-**Rate of decrease of susceptible nodes**:
-
-$$
-\frac{ds}{dt} = -s \cdot i
-$$
-
-The rate is proportional to the product of susceptible and infective fractions — more of either means faster infection.
-
-**Rate of change of infective nodes**:
-
-$$
-\frac{di}{dt} = s \cdot i - \frac{1}{k}(1 - s) \cdot i
-$$
-
-The first term $s \cdot i$ is the infection rate (same as above, with positive sign). The second term is the **removal rate**: nodes lose interest in propagating rumors. The removal rate is proportional to:
-- The fraction of non-susceptible nodes $(1 - s)$ — the more people who already know, the less interesting the rumor becomes
-- The infective fraction $i$ — more infective nodes means more nodes potentially losing interest
-- A damping factor $1/k$ where $k$ controls how quickly interest fades
-
-### The Solution
-
-Eliminating $t$ and solving for $i$ as a function of $s$:
-
-$$
-i(s) = \frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s)
-$$
-
-This is derived by dividing the two differential equations:
-
-$$
-\frac{di}{ds} = \frac{di/dt}{ds/dt} = \frac{si - \frac{1}{k}(1-s)i}{-si} = -1 + \frac{1-s}{ks}
-$$
-
-Integrating:
-
-$$
-i(s) = -s + \frac{1}{k}(s - \ln(s)) + C
-$$
-
-Using the initial condition $i(1) = 0$ (when everyone is susceptible, no one is infective):
-
-$$
-0 = -1 + \frac{1}{k}(1 - 0) + C \implies C = 1 - \frac{1}{k}
-$$
-
-So:
-
-$$
-i(s) = -s + \frac{s}{k} - \frac{\ln(s)}{k} + 1 - \frac{1}{k} = \frac{k+1}{k}(1-s) + \frac{1}{k}\ln(s)
-$$
-
-### The Residue Problem
-
-When the epidemic ends, $i(s) = 0$ (no infective nodes remain). Solving:
-
-$$
-\frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s) = 0
-$$
-
-For large $k$ (slow damping), $s \approx e^{-(k+1)}$, which decreases exponentially with $k$. But for small $k$, a significant fraction of nodes remain susceptible — this is the **residue**.
-
-The residue represents nodes that never received the update. This is the fundamental trade-off: rumor mongering terminates, but it does not guarantee universal delivery.
-
-### Intuition After the Proof
-
-The $i(s)$ curve shows that infective nodes peak and then decline. The peak occurs because early on, many susceptible nodes mean rapid growth. Later, as susceptibles dwindle and removal kicks in, the infective population crashes. The nodes left behind — the residue — are the price of self-termination.
-
-### What Would Break Without Removal?
-
-Without the removal term $\frac{1}{k}(1-s)i$, the model reduces to anti-entropy: infective nodes never stop propagating, and eventually $s \to 0$. But the protocol never terminates, wasting bandwidth forever.
-
-### Phenomenon Metadata
-
-| Element | Purpose |
-|---|---|
-| Structural Signature | Three-state epidemic with a damping/removal term |
-| Core Invariant | The removal rate is proportional to the product of infective fraction and non-susceptible fraction |
-| Compression Handle | "Rumors get old and die; some nodes never hear them" |
-| Boundary / Failure Mode | Small $k$ (fast damping) leaves large residue; large $k$ wastes bandwidth before termination |
-| Phenomenon Web | See Anti-Entropy (no removal, no residue, no termination); see Residue and Traffic (the quantitative trade-off) |
+The system is always conserved — every node is in exactly one state at any time.
 
 ---
 
-## Residue and Traffic: The Fundamental Trade-off
+## The Differential Equations — Where They Come From
+
+Before writing any formula, ask: **what causes each state to change?**
+
+This is the first stage of all analysis: define how each quantity changes with time. Think of it as watching a movie — you are tracking the velocity of the system at every moment.
+
+### Inflow equals outflow — the balance principle
+
+In any natural system at steady state, the rate of things flowing *in* equals the rate of things flowing *out*. When these rates are unequal, the quantity is either accumulating or depleting. For the infective population $i$, the rate of change is simply:
+
+$$\frac{di}{dt} = \text{(rate flowing in)} - \text{(rate flowing out)}$$
+
+This is not a trick or a formula to memorize. It is just conservation of flow written down.
+
+### Why the interaction term is $s \times i$ — Mass Action
+
+The inflow to $i$ comes from susceptible nodes meeting infective nodes and getting infected. But why is the rate $s \times i$ and not something else?
+
+This comes from **Mass Action Kinetics** — a principle from chemistry that says: the rate of a reaction is proportional to the product of the concentrations of the reacting species.
+
+Think of it combinatorially. If you have $s$ susceptible nodes and $i$ infective nodes floating around the network, the total number of possible pairings between them is $s \times i$. Every one of those pairings is a chance for an infection to happen. More susceptible nodes means more targets. More infective nodes means more spreaders. The product captures both simultaneously.
+
+With $\beta = 1$ (normalising so every contact succeeds):
+
+$$\text{Rate of susceptible} \to \text{infective} = s \cdot i$$
+
+Setting $\beta = 1$ removes the randomness of "failed" transmissions and reduces the model to pure threshold logic: the spread is determined entirely by the current counts of $s$ and $i$.
+
+### Rate of decrease of susceptible nodes
+
+Every time a susceptible node meets an infective node, it leaves the susceptible pool. So:
+
+$$\frac{ds}{dt} = -s \cdot i$$
+
+The minus sign: susceptibles are leaving, not arriving.
+
+### Rate of change of infective nodes
+
+Infective nodes gain members from susceptibles (inflow) and lose members to the removed state (outflow):
+
+$$\frac{di}{dt} = s \cdot i - \frac{1}{k}(1 - s) \cdot i$$
+
+**The inflow** $s \cdot i$: the same mass action term — susceptibles becoming infective.
+
+**The outflow** $\frac{1}{k}(1-s) \cdot i$: nodes losing interest and becoming removed. Why is the removal rate proportional to $(1-s)$?
+
+Because $1 - s$ is the fraction of nodes that already know the rumor. The more people who already know it, the less interesting the rumor becomes when you try to spread it — you keep hitting people who say "I already know." As this fraction grows, infective nodes get discouraged and stop spreading. The constant $\frac{1}{k}$ controls how quickly this discouragement kicks in. Large $k$ = slow removal. Small $k$ = fast removal.
+
+---
+
+## From Time to State Space — The Two-Stage Method
+
+Here is the core methodology for solving this kind of system. Think of it in two stages.
+
+**Stage 1 — Watch the movie (temporal dynamics).**
+Write down how each quantity changes with time: $ds/dt$ and $di/dt$. This tells you the *velocity* of the system at every moment. It answers: "how fast is each population changing right now?"
+
+**Stage 2 — Take the photograph (state-space trajectory).**
+Divide $di/dt$ by $ds/dt$ using the chain rule to eliminate time entirely:
+
+$$\frac{di}{ds} = \frac{di/dt}{ds/dt}$$
+
+This gives you the *path* the system traces through the $(s, i)$ plane — the trajectory — regardless of how fast or slow the transmission happens. You are no longer asking "how fast?" You are asking "what path does the system follow, and where does it end up?"
+
+This is a profound shift: the trajectory is an **invariant** of the system. It does not matter whether the network runs on a supercomputer or on slow hardware. The state $(s, i)$ will always travel along the same curve.
+
+---
+
+## Deriving $i(s)$ — The Full Chain Rule Proof
+
+### Step 1 — Form the ratio
+
+$$\frac{di}{ds} = \frac{di/dt}{ds/dt} = \frac{si - \frac{1}{k}(1-s)i}{-si}$$
+
+### Step 2 — Cancel $i$ (valid while $i \neq 0$, i.e. while the epidemic is active)
+
+$$\frac{di}{ds} = \frac{s - \frac{1}{k}(1-s)}{-s}$$
+
+### Step 3 — Split and simplify
+
+$$\frac{di}{ds} = -1 + \frac{1-s}{ks}$$
+
+Rewrite $\frac{1-s}{ks} = \frac{1}{ks} - \frac{1}{k}$:
+
+$$\frac{di}{ds} = -1 - \frac{1}{k} + \frac{1}{ks}$$
+
+### Step 4 — Integrate both sides with respect to $s$
+
+$$\int di = \int \left(-1 - \frac{1}{k} + \frac{1}{ks}\right) ds$$
+
+Term by term:
+- $\int -1 \, ds = -s$
+- $\int -\frac{1}{k} \, ds = -\frac{s}{k}$
+- $\int \frac{1}{ks} \, ds = \frac{1}{k} \ln(s)$
+
+Combining:
+
+$$i(s) = -s - \frac{s}{k} + \frac{1}{k}\ln(s) + C = -\frac{k+1}{k}s + \frac{1}{k}\ln(s) + C$$
+
+### Step 5 — Apply the initial condition
+
+At the start: $s = 1$ (everyone susceptible), $i = 0$ (no one yet infective):
+
+$$0 = -\frac{k+1}{k}(1) + \frac{1}{k}\ln(1) + C$$
+
+Since $\ln(1) = 0$:
+
+$$C = \frac{k+1}{k}$$
+
+### Step 6 — The final trajectory
+
+$$\boxed{i(s) = \frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s)}$$
+
+This curve is the complete life story of the rumor. Plot $i$ on the vertical axis and $s$ on the horizontal axis. The system starts at $(s=1, i=0)$ — everyone susceptible, no one yet spreading — travels along this curve as the rumor spreads, reaches a peak, and then declines back to $i=0$ as the rumor dies out.
+
+---
+
+## Why Euler's Number $e$ Appears
+
+The number $e \approx 2.718$ shows up in both the residue approximation and the traffic formula. It is not a coincidence.
+
+$e$ is the mathematical constant of **continuous compounding** — it describes any process that grows or decays at a rate proportional to its current size. When you break a process into an infinite number of tiny independent steps, the result converges to $e$.
+
+In this context: you are not sending one giant update. You are sending many small, independent gossip messages. Each one is a tiny trial. The probability that a node survives all of them (misses all messages) is:
+
+$$\left(1 - \frac{1}{n}\right)^{nm}$$
+
+As $n \to \infty$, the term $\left(1 - \frac{1}{n}\right)^n \to e^{-1}$ by the fundamental definition of $e$. This is the bridge from discrete independent trials to the exponential function. The result is that all residue and traffic relationships end up expressed in terms of $e$.
+
+---
+
+## The Residue Problem
+
+When the epidemic ends, $i = 0$ — no infective nodes remain. Setting $i(s) = 0$:
+
+$$\frac{k+1}{k}(1 - s) + \frac{1}{k}\ln(s) = 0$$
+
+This is a **transcendental equation** — $s$ appears both linearly and inside a logarithm. There is no algebraic closed form. But we can find an approximation.
+
+### Deriving the approximation $s \approx e^{-(k+1)}$
+
+**Step 1 — Clear the denominators** (multiply through by $k$):
+
+$$(k+1)(1 - s) + \ln(s) = 0$$
+
+**Step 2 — Expand and rearrange**:
+
+$$(k+1) - (k+1)s + \ln(s) = 0$$
+
+$$\ln(s) = (k+1)s - (k+1) = (k+1)(s - 1)$$
+
+**Step 3 — Exponentiate both sides**:
+
+$$s = e^{(k+1)(s-1)}$$
+
+**Step 4 — Apply the approximation.**
+In a successful protocol, the residue $s$ is small — only a tiny fraction of nodes are missed. If $s$ is small, then $s - 1 \approx -1$. Substituting:
+
+$$s \approx e^{(k+1)(-1)} = e^{-(k+1)}$$
+
+**What this tells you:**
+The residue shrinks *exponentially* as $k$ grows. Doubling $k$ does not halve the residue — it squares it. A small increase in $k$ (allowing the rumor to live longer) yields a dramatic reduction in missed nodes.
+
+| $k$ | Residue $s \approx e^{-(k+1)}$ |
+|-----|-------------------------------|
+| 1   | $e^{-2} \approx 0.135$ (13.5% missed) |
+| 2   | $e^{-3} \approx 0.050$ (5% missed)    |
+| 5   | $e^{-6} \approx 0.002$ (0.2% missed)  |
+| 10  | $e^{-11} \approx 0.00002$ (tiny)      |
+
+### The lifecycle of the curve
+
+The $i(s)$ curve tells the complete story in three acts:
+
+**Growth phase** (early, $s \approx 1$): Many susceptibles, mass action drives rapid spread. The infective population rises fast.
+
+**Peak**: The system hits its maximum number of active spreaders. This is the moment of highest bandwidth usage in your network.
+
+**Decline phase** (late, $s \ll 1$): Few susceptibles remain. The removal term $\frac{1}{k}(1-s)i$ dominates. Infective population crashes. The nodes left behind — the ones the rumor never reached — are the residue.
+
+---
+
+## Residue and Traffic — The Fundamental Trade-off
 
 ### Definitions
 
-- **Residue**: sites that remain susceptible after the epidemic ends.
+- **Residue**: sites that remain susceptible after the epidemic ends — nodes that never received the update.
 - **Traffic**: average number of messages sent per site.
 
-### The Exponential Relationship
+### The exponential relationship
 
-Suppose each site sends $m$ updates. With $n$ sites, total updates = $nm$.
+Suppose each site sends $m$ updates. With $n$ sites, total updates $= nm$.
 
-The probability that a given site misses all $nm$ updates (remains susceptible) is:
+The probability that a given site misses all $nm$ updates (every message failed to reach it) is:
 
-$$
-s = \left(1 - \frac{1}{n}\right)^{nm}
-$$
+$$s = \left(1 - \frac{1}{n}\right)^{nm}$$
 
-For large $n$:
+**Why this formula?** Each of the $nm$ messages independently has a $1/n$ probability of landing on our target site. So the probability of missing any one specific message is $1 - 1/n$. To miss all $nm$ of them, multiply: $(1 - 1/n)^{nm}$.
 
-$$
-\left(1 - \frac{1}{n}\right)^n \approx e^{-1}
-$$
+**Applying Euler's number** — for large $n$:
+
+$$\left(1 - \frac{1}{n}\right)^n \approx e^{-1}$$
 
 So:
 
-$$
-s \approx (e^{-1})^m = e^{-m}
-$$
+$$s \approx \left(e^{-1}\right)^m = e^{-m}$$
 
-This is the **fundamental relationship**: residue decreases exponentially with traffic.
+$$\boxed{s = e^{-m}}$$
 
-$$
-s = e^{-m}
-$$
+### What this means
 
-### Implications
+To achieve residue $s$, you need traffic $m = \ln(1/s)$.
 
-- To achieve residue $s$, you need traffic $m = \ln(1/s)$.
-- For $s = 10^{-6}$ (one in a million nodes missed), $m \approx 13.8$ messages per site.
-- For $s = 10^{-9}$, $m \approx 20.7$ messages per site.
+| Desired residue $s$ | Messages per site $m = \ln(1/s)$ |
+|---------------------|----------------------------------|
+| $10^{-3}$ (1 in 1000 missed) | $\approx 6.9$ |
+| $10^{-6}$ (1 in a million missed) | $\approx 13.8$ |
+| $10^{-9}$ (1 in a billion missed) | $\approx 20.7$ |
 
-The relationship is remarkably efficient: a small increase in traffic yields a dramatic decrease in residue.
+The relationship is remarkably efficient: a small increase in traffic yields a dramatic decrease in residue. And because this relationship is *logarithmic*, you do not need to double your traffic to double your reliability — you only need to add a few more messages per site.
 
-### Combining Anti-Entropy with Rumor Mongering
+**The cost of perfection is cheap.** To go from "1 in a million missed" to "1 in a billion missed," you only need to send 7 more messages per site.
 
-Rumor mongering alone can miss sites. The solution:
+### The two mathematical lenses for your protocol
 
-1. Run rumor mongering for rapid initial dissemination.
-2. After a timeout, run a slow background anti-entropy protocol.
-3. If two sites discover a missing update, they can start a "hot rumor" locally.
+You now have two complementary ways to analyse rumor mongering:
 
-Xerox Clearinghouse used this hybrid approach, along with some direct mail for critical redistributions.
+| View | Formula | What it answers |
+|------|---------|-----------------|
+| **Dynamical** (SIR) | $i(s) = \frac{k+1}{k}(1-s) + \frac{1}{k}\ln(s)$ | What path does the system follow? When is peak load? |
+| **Probabilistic** | $s = e^{-m}$ | How much traffic is needed to hit a target coverage? |
 
-### Phenomenon Metadata
+The dynamical view watches the movie. The probabilistic view gives you the engineering number.
 
-| Element | Purpose |
-|---|---|
-| Structural Signature | An exponential trade-off between message count and missed-node probability |
-| Core Invariant | Each message is an independent trial with success probability $1/n$; the miss probability is the product over all trials |
-| Compression Handle | "13 messages per node = one-in-a-million chance of missing" |
-| Boundary / Failure Mode | The independence assumption fails if contact patterns are correlated (e.g., spatial locality) |
-| Phenomenon Web | See Anti-Entropy (guarantees zero residue but infinite traffic); see Spatial Distribution (correlated contact breaks independence) |
+---
+
+## The Two Key Mathematical Concepts Behind Everything
+
+### 1. Mass Action Kinetics
+
+Every interaction term in this model ($s \cdot i$) comes from Mass Action. The rule is: the rate of interaction between two populations is proportional to the product of their sizes.
+
+Intuitively: if you have $s$ susceptible nodes and $i$ infective nodes, the number of possible pairings between them is $s \times i$. Each pairing is a chance for a transmission. More of either group means more chances.
+
+This is what makes the model work at any scale — whether you have 100 nodes or 100 million, the interaction rate scales predictably.
+
+### 2. Euler's Number $e$
+
+$e$ appears whenever you have a process made of many tiny independent steps that compound continuously. In this model:
+- Each gossip message is an independent trial.
+- Many such trials compound.
+- The limit of $(1 - 1/n)^n$ as $n \to \infty$ is $e^{-1}$.
+
+This is why residue and traffic are both expressed as exponentials of $e$. The exponential function is the mathematical shape of "independent compounding events."
+
+---
+
+## Combining Anti-Entropy with Rumor Mongering
+
+Rumor mongering alone can miss sites. The solution is a hybrid:
+
+1. **Run rumor mongering first** for rapid initial dissemination. The exponential growth phase seeds the network quickly.
+2. **After a timeout, run slow background anti-entropy**. This is the cleanup crew — thorough but not fast. It finds the residue nodes that rumor mongering missed.
+3. **If two sites discover a missing update, start a "hot rumor" locally.** This turns an anti-entropy discovery into a new push event, dynamically boosting gossip intensity exactly where it is needed.
+
+Xerox Clearinghouse used this hybrid approach. The core logic has survived into every major distributed database in production today — Cassandra, DynamoDB, and blockchain P2P networks all use variants of this exact combination.
+
+**Why it survived:** The logarithmic cost $m = \ln(1/s)$ means that even as your network grows from 1,000 to 1,000,000 nodes, you only need a marginal increase in per-site messages to maintain the same reliability. The architecture scales without requiring proportional increases in bandwidth.
+
+The foundational paper behind all of this is: **Demers et al., "Epidemic Algorithms for Replicated Database Maintenance," 1987 (Xerox PARC)** — the paper that introduced push rumor mongering and pull anti-entropy together and proved the residue/traffic trade-off.
 
 ---
 
@@ -1137,41 +1265,70 @@ Xerox Clearinghouse used this hybrid approach, along with some direct mail for c
 
 ### The Problem
 
-If a node deletes data, how do we ensure the deletion propagates? And how do we prevent "resurrection" — an old update reappearing and recreating deleted data?
+If a node deletes data, how do we ensure the deletion propagates? And how do we prevent **resurrection** — an old update reappearing and recreating deleted data?
+
+Without handling this, a "zombie" update sitting in a slow or partitioned node could re-enter the network and restore data that was already deleted. The gossip protocol, designed to propagate knowledge, will happily spread the resurrection.
 
 ### Death Certificates
 
-Treat deletion as an update: issue a **death certificate** with a timestamp. Death certificates propagate via rumor mongering or anti-entropy.
+Treat deletion as an update: issue a **death certificate** with a timestamp. Death certificates propagate via rumor mongering or anti-entropy — exactly like any other update.
 
-When a death certificate meets a later update for the same item, the update is cancelled (the item stays deleted).
+When a death certificate meets a later update for the same item, the timestamps decide who wins. The newer one wins. If the certificate is newer, the data dies. If the data is newer, the deletion is overridden (correct — the data was legitimately updated after the deletion).
 
 ### When to Discard Death Certificates?
 
-Define a time threshold. If a death certificate is older than the time it takes to propagate updates to all sites, it can be deleted. But some **retention sites** should keep death certificates longer, to catch late-arriving old updates.
+You cannot keep death certificates forever — that would bloat the system with tombstones for data long gone.
+
+Define a time threshold. If a death certificate is older than the maximum time it takes to propagate updates to all sites, it can be deleted. But some **retention sites** should keep death certificates longer, to catch late-arriving old updates.
+
+Think of retention sites as the immune memory of the network — they remember the deletion long after everyone else has forgotten it, ensuring zombie updates hit a wall even if they show up very late.
 
 ### Dormant Death Certificates
 
-Keep death certificates at only a few nodes. If a dormant certificate collides with an update, activate it and propagate.
+Keep death certificates at only a few nodes in a dormant state. If a dormant certificate collides with an update that tries to resurrect deleted data, activate it and propagate it as a hot rumor.
 
-**Problem**: what if a dormant certificate meets an obsolete update?
+**Problem**: what if a dormant certificate wakes up and meets an obsolete update — one that is old and harmless?
 
-**Solution**: use **two timestamps**:
-- **Original timestamp**: used to cancel updates
-- **Activation timestamp**: used to eventually discard the reactivated certificate
+**Solution** — use **two timestamps**:
+- **Original timestamp**: the "true" age of the deletion. Used to cancel updates. Any update older than this timestamp loses.
+- **Activation timestamp**: used for garbage collection. Even if a certificate gets reactivated, the system still has a way to eventually prune it once it is truly ancient, preventing infinite memory growth.
 
-Version numbers for updates prevent legitimate updates from being cancelled by stale death certificates.
+**Version numbers** for updates prevent legitimate updates from being cancelled by stale death certificates — if the update has a higher version than the death certificate, it wins.
 
-### Phenomenon Metadata
+### Why death certificates are just the residue problem in disguise
+
+The residue problem says: some nodes will never receive an update. Death certificates are the same problem applied to deletions. A node that missed the death certificate will try to resurrect deleted data when it reconnects. The hybrid protocol (rumor mongering + anti-entropy) is what ensures death certificates eventually reach every node — and retention sites exist precisely because the residue is never exactly zero.
+
+---
+
+## The Two-Stage Proof Method — Summary Mental Model
+
+Every time you see a coupled differential equation system like this, run this two-stage engine:
+
+**Stage 1 — Temporal dynamics (the movie):**
+Write $ds/dt$ and $di/dt$ by asking "what causes each population to grow and what causes it to shrink?" Use mass action for any interaction between two populations.
+
+**Stage 2 — State-space trajectory (the photograph):**
+Divide $di/dt$ by $ds/dt$ using the chain rule. Integrate. Apply the initial condition. You now have the invariant curve $i(s)$ — the path the system must follow regardless of speed.
+
+Set $i(s) = 0$ to find the residue. Approximate for large or small $k$ to get tractable closed forms.
+
+This method removes time from the picture entirely, revealing the shape of the system's behavior — not just its velocity at one moment.
+
+---
+
+## Phenomenon Metadata
 
 | Element | Purpose |
 |---|---|
-| Structural Signature | A deletion must propagate like an update, but old updates must not resurrect deleted data |
-| Core Invariant | Timestamps establish causal ordering between deletions and updates |
-| Compression Handle | "Deletion is an update with a death certificate; keep some certificates dormant as insurance" |
-| Boundary / Failure Mode | Without version numbers, a late old update can cancel a legitimate new update |
-| Phenomenon Web | See Anti-Entropy (the mechanism that propagates death certificates); see Rumor Mongering (can leave death certificate residue) |
+| Structural Signature | Three-state epidemic with a damping/removal term proportional to $(1-s)$ |
+| Core Invariant | $i(s) = \frac{k+1}{k}(1-s) + \frac{1}{k}\ln(s)$ — the trajectory in state space |
+| Compression Handle | "Rumors get old and die; some nodes never hear them; $s = e^{-m}$ tells you the price" |
+| Key Mathematical Tools | Mass action kinetics ($s \times i$); Euler's number ($e$); chain rule elimination of time |
+| Boundary / Failure Mode | Small $k$ (fast damping) leaves large residue; large $k$ wastes bandwidth before termination |
+| Foundational Paper | Demers et al. 1987 — Epidemic Algorithms for Replicated Database Maintenance |
+| Phenomenon Web | Anti-Entropy (no removal, no residue, no termination); Residue and Traffic (exponential trade-off); Death Certificates (residue problem applied to deletions) |
 
----
 
 ## Spatial Distribution and Convergence Time
 
