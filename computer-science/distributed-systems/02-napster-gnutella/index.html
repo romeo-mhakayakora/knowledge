@@ -8174,11 +8174,11 @@
     subgraph Centralized_Index["Centralized Index (Napster Server / Broker)"]
         S[Napster Server]
     end
-    C1[Client A] --&gt;|1\. login + share file list| S
-    C2[Client B] --&gt;|2\. search query| S
-    S --&gt;|3\. IP of Client A| C2
-    C2 -. 4\. direct TCP connection .-&gt; C1
-    C1 == 5\. file transfer ==&gt; C2</code></pre>
+    C1[Client A] --&gt;|"1: login + share file list"| S
+    C2[Client B] --&gt;|"2: search query"| S
+    S --&gt;|"3: IP of Client A"| C2
+    C2 -.-&gt;|"4: direct TCP connection"| C1
+    C1 ==&gt;|"5: file transfer"| C2</code></pre>
 <p><strong>Intuition:</strong> the server never touches the actual song data — it only acts as a <em>broker</em> (matchmaker). It knows <em>who has what</em> and <em>who is asking</em>, but the bytes of the mp3 flow peer-to-peer. This hybrid design is efficient (the server isn't a bandwidth bottleneck for file transfer) but, as we'll see, it is a <strong>single point of legal failure</strong>: the server has a complete, centralized record of who shared what with whom.</p>
 <p>The Napster server ran on a small set of fixed ports: <strong>7777, 8888, 8875</strong> (and 948 by some accounts). This predictability is precisely what later let universities block Napster outright — they simply closed these ports at the firewall.</p>
 <h3 id="23-the-napster-message-format">2.3 The Napster Message Format<a class="headerlink" href="#23-the-napster-message-format" title="Permanent link">&para;</a></h3>
@@ -8552,7 +8552,7 @@
         Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
       </span>
       <span class="md-source-file__fact">
-        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 30, 2026 06:33:46 UTC">June 30, 2026</span>
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 30, 2026 06:36:43 UTC">June 30, 2026</span>
       </span>
     
   </aside>
