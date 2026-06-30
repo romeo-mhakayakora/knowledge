@@ -1,4 +1,3 @@
-
 # First and Second Generation Peer-to-Peer Networks: Napster and Gnutella
 
 *Lecture notes — Smruti R. Sarangi, IIT Delhi*
@@ -68,11 +67,11 @@ flowchart TB
     subgraph Centralized_Index["Centralized Index (Napster Server / Broker)"]
         S[Napster Server]
     end
-    C1[Client A] -->|1\. login + share file list| S
-    C2[Client B] -->|2\. search query| S
-    S -->|3\. IP of Client A| C2
-    C2 -. 4\. direct TCP connection .-> C1
-    C1 == 5\. file transfer ==> C2
+    C1[Client A] -->|"1: login + share file list"| S
+    C2[Client B] -->|"2: search query"| S
+    S -->|"3: IP of Client A"| C2
+    C2 -.->|"4: direct TCP connection"| C1
+    C1 ==>|"5: file transfer"| C2
 ```
 
 **Intuition:** the server never touches the actual song data — it only acts as a *broker* (matchmaker). It knows *who has what* and *who is asking*, but the bytes of the mp3 flow peer-to-peer. This hybrid design is efficient (the server isn't a bandwidth bottleneck for file transfer) but, as we'll see, it is a **single point of legal failure**: the server has a complete, centralized record of who shared what with whom.
