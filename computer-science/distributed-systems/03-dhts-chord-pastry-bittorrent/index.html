@@ -25,7 +25,7 @@
     
     
       
-        <title>03 dhts chord pastry bittorrent - Knowledge</title>
+        <title>Distributed Hash Tables and Pastry - Knowledge</title>
       
     
     
@@ -61,14 +61,14 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="03 dhts chord pastry bittorrent - Knowledge" />
+<meta property="og:title" content="Distributed Hash Tables and Pastry - Knowledge" />
 <meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="03 dhts chord pastry bittorrent - Knowledge" />
+<meta property="twitter:title" content="Distributed Hash Tables and Pastry - Knowledge" />
 <meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/computer-science/distributed-systems/03-dhts-chord-pastry-bittorrent.png" />
 </head>
   
@@ -87,6 +87,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#distributed-hash-tables-and-pastry" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -120,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              03 dhts chord pastry bittorrent
+              Distributed Hash Tables and Pastry
             
           </span>
         </div>
@@ -816,6 +821,26 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Distributed Hash Tables and Pastry
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -824,7 +849,7 @@
   <span class="md-ellipsis">
     
   
-    03 dhts chord pastry bittorrent
+    Distributed Hash Tables and Pastry
   
 
     
@@ -833,6 +858,36 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -7283,6 +7338,27 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Table of Contents
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -7305,9 +7381,503 @@
   
 
 
-  <h1>03 dhts chord pastry bittorrent</h1>
+<h1 id="distributed-hash-tables-and-pastry">Distributed Hash Tables and Pastry<a class="headerlink" href="#distributed-hash-tables-and-pastry" title="Permanent link">&para;</a></h1>
+<p><em>Lecture notes — Smruti R. Sarangi, IIT Delhi</em>
+<em>Source paper: Rowstron &amp; Druschel, "Pastry: Scalable, Decentralized Object Location and Routing for Large-Scale Peer-to-Peer Systems," Middleware 2001</em></p>
+<blockquote>
+<p><strong>Structure:</strong> Part I covers every concept and algorithm cleanly, with intuition and no proofs. Part II contains all the mathematics. Read Part I to understand the system; go to Part II when you want to derive the numbers.</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
+<p><strong>Part I — Concepts and Intuition</strong></p>
+<ul>
+<li><a href="#1-from-napster-to-dhts-the-motivation">1. From Napster to DHTs: The Motivation</a></li>
+<li><a href="#2-what-is-a-hash-table-what-is-a-distributed-hash-table">2. What Is a Hash Table? What Is a Distributed Hash Table?</a></li>
+<li><a href="#21-normal-hash-tables">2.1 Normal Hash Tables</a></li>
+<li><a href="#22-why-dhts-the-scale-problem">2.2 Why DHTs? The Scale Problem</a></li>
+<li><a href="#23-advantages-of-dhts">2.3 Advantages of DHTs</a></li>
+<li><a href="#3-the-core-idea-mapping-files-and-nodes-to-the-same-space">3. The Core Idea: Mapping Files and Nodes to the Same Space</a></li>
+<li><a href="#31-the-problem-of-finding-who-owns-what">3.1 The Problem of Finding Who Owns What</a></li>
+<li><a href="#32-the-ring-organizing-the-id-space">3.2 The Ring: Organizing the ID Space</a></li>
+<li><a href="#33-the-fundamental-rule-of-dht-storage">3.3 The Fundamental Rule of DHT Storage</a></li>
+<li><a href="#4-pastry-design-and-overview">4. Pastry: Design and Overview</a></li>
+<li><a href="#41-node-ids-and-the-ring">4.1 Node IDs and the Ring</a></li>
+<li><a href="#42-the-three-data-structures-of-a-pastry-node">4.2 The Three Data Structures of a Pastry Node</a></li>
+<li><a href="#5-prefix-based-routing-the-core-algorithm">5. Prefix-Based Routing: The Core Algorithm</a></li>
+<li><a href="#51-the-intuition-narrowing-down-digit-by-digit">5.1 The Intuition: Narrowing Down Digit by Digit</a></li>
+<li><a href="#52-the-routing-table-in-detail">5.2 The Routing Table in Detail</a></li>
+<li><a href="#53-the-leaf-set-the-endgame">5.3 The Leaf Set: The Endgame</a></li>
+<li><a href="#54-the-neighborhood-set-locality">5.4 The Neighborhood Set: Locality</a></li>
+<li><a href="#55-the-full-routing-algorithm">5.5 The Full Routing Algorithm</a></li>
+<li><a href="#56-performance-and-reliability">5.6 Performance and Reliability</a></li>
+<li><a href="#6-node-arrival-joining-the-ring">6. Node Arrival: Joining the Ring</a></li>
+<li><a href="#61-the-join-procedure">6.1 The Join Procedure</a></li>
+<li><a href="#62-initializing-the-three-tables">6.2 Initializing the Three Tables</a></li>
+<li><a href="#63-maintaining-locality-on-join">6.3 Maintaining Locality on Join</a></li>
+<li><a href="#7-node-departure-and-failure-keeping-the-ring-alive">7. Node Departure and Failure: Keeping the Ring Alive</a></li>
+<li><a href="#71-graceful-vs-non-graceful-departure">7.1 Graceful vs Non-Graceful Departure</a></li>
+<li><a href="#72-redundancy-why-store-at-neighbors">7.2 Redundancy: Why Store at Neighbors?</a></li>
+<li><a href="#73-repairing-the-leaf-set">7.3 Repairing the Leaf Set</a></li>
+<li><a href="#74-repairing-the-routing-table">7.4 Repairing the Routing Table</a></li>
+<li><a href="#75-repairing-the-neighborhood-set">7.5 Repairing the Neighborhood Set</a></li>
+<li><a href="#8-tolerating-byzantine-failures">8. Tolerating Byzantine Failures</a></li>
+<li><a href="#9-experimental-results">9. Experimental Results</a></li>
+</ul>
+<p><strong>Part II — Proofs and Mathematical Derivations</strong></p>
+<ul>
+<li><a href="#p1-why-olog_2b-n-steps-suffice-the-prefix-match-convergence-proof">P1. Why <span class="arithmatex">\(O(\log_{2^b} N)\)</span> Steps Suffice: The Prefix-Match Convergence Proof</a></li>
+<li><a href="#p2-maintaining-locality-on-join-the-induction-argument">P2. Maintaining Locality on Join: The Induction Argument</a></li>
+</ul>
+<hr />
+<h1 id="part-i-concepts-and-intuition">Part I — Concepts and Intuition<a class="headerlink" href="#part-i-concepts-and-intuition" title="Permanent link">&para;</a></h1>
+<h2 id="1-from-napster-to-dhts-the-motivation">1. From Napster to DHTs: The Motivation<a class="headerlink" href="#1-from-napster-to-dhts-the-motivation" title="Permanent link">&para;</a></h2>
+<p>Before DHTs, the P2P generations looked like this:</p>
+<table>
+<thead>
+<tr>
+<th>Generation</th>
+<th>System</th>
+<th>Search Mechanism</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1st</td>
+<td>Napster</td>
+<td>Central server index</td>
+<td>Single point of failure — legal and technical</td>
+</tr>
+<tr>
+<td>2nd</td>
+<td>Gnutella</td>
+<td>Broadcast query to graph neighbors (TTL-bounded)</td>
+<td>Floods the network; <span class="arithmatex">\(O(N)\)</span> messages in the worst case</td>
+</tr>
+<tr>
+<td>3rd</td>
+<td>DHTs (Pastry, Chord, Tapestry…)</td>
+<td>Structured routing via a hash ring</td>
+<td><span class="arithmatex">\(O(\log N)\)</span> messages, fully decentralized</td>
+</tr>
+</tbody>
+</table>
+<p>The core question motivating the 3rd generation: <em>can we find where a file is stored in <span class="arithmatex">\(O(\log N)\)</span> messages, without any central server and without flooding?</em></p>
+<p>The answer is yes — by storing information cleverly, so that the location of any piece of data can be <em>computed</em>, not searched for.</p>
+<hr />
+<h2 id="2-what-is-a-hash-table-what-is-a-distributed-hash-table">2. What Is a Hash Table? What Is a Distributed Hash Table?<a class="headerlink" href="#2-what-is-a-hash-table-what-is-a-distributed-hash-table" title="Permanent link">&para;</a></h2>
+<h3 id="21-normal-hash-tables">2.1 Normal Hash Tables<a class="headerlink" href="#21-normal-hash-tables" title="Permanent link">&para;</a></h3>
+<p>A hash table is a dictionary storing <strong>key–value pairs</strong>. Supply the key, get the value back.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>What it does</th>
+<th>Time complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>insert(key, value)</code></td>
+<td>Store the pair</td>
+<td><span class="arithmatex">\(\approx \Theta(1)\)</span></td>
+</tr>
+<tr>
+<td><code>lookup(key)</code></td>
+<td>Return value, or null</td>
+<td><span class="arithmatex">\(\approx \Theta(1)\)</span></td>
+</tr>
+<tr>
+<td><code>delete(key)</code></td>
+<td>Remove the pair</td>
+<td><span class="arithmatex">\(\approx \Theta(1)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>A good hash function maps keys to unique locations to minimize collisions. Collisions are resolved via <strong>chaining</strong> (each slot is a linked list) or <strong>rehashing</strong> (probe alternative slots).</p>
+<h3 id="22-why-dhts-the-scale-problem">2.2 Why DHTs? The Scale Problem<a class="headerlink" href="#22-why-dhts-the-scale-problem" title="Permanent link">&para;</a></h3>
+<p>A single machine's hash table cannot hold web-scale data. Consider two concrete examples:</p>
+<p><strong>Banking (fits on one machine):</strong>
+- 0.1 billion customers × 8 KB per customer = <strong>0.8 TB</strong> — a modern laptop handles this.</p>
+<p><strong>Music sharing (does not fit):</strong>
+- 0.1 billion users × 100 songs × 5 MB per song = <strong>50 petabytes</strong> — orders of magnitude larger, geographically distributed, and the system must survive regional outages.</p>
+<p>The key transition: for web-scale data, a single machine is not just impractical — it's architecturally wrong. Facebook, LinkedIn, Google, Netflix, and Amazon are all built on DHT-like technology.</p>
+<h3 id="23-advantages-of-dhts">2.3 Advantages of DHTs<a class="headerlink" href="#23-advantages-of-dhts" title="Permanent link">&para;</a></h3>
+<p>DHTs solve four problems simultaneously:</p>
+<p><strong>Scale</strong> — key-value pairs are distributed across thousands of machines; the system grows by simply adding nodes.</p>
+<p><strong>Fault tolerance</strong> — data is replicated; a regional outage (e.g., a power cut in one data center) does not take down the system.</p>
+<p><strong>Elastic load balancing</strong> — different keys hash to different nodes, spreading user requests naturally. Adding nodes during peak load (Diwali, Thanksgiving, Christmas) and removing them afterward is straightforward.</p>
+<p><strong>Reduced legal liability</strong> — in P2P contexts, with no central server knowing about all transfers, legal exposure is diffuse (though transferring unlicensed content remains illegal regardless).</p>
+<p>Major DHT proposals: <strong>Pastry</strong>, <strong>Chord</strong>, <strong>Tapestry</strong>, <strong>CAN</strong>, <strong>Fawn</strong>.</p>
+<hr />
+<h2 id="3-the-core-idea-mapping-files-and-nodes-to-the-same-space">3. The Core Idea: Mapping Files and Nodes to the Same Space<a class="headerlink" href="#3-the-core-idea-mapping-files-and-nodes-to-the-same-space" title="Permanent link">&para;</a></h2>
+<h3 id="31-the-problem-of-finding-who-owns-what">3.1 The Problem of Finding Who Owns What<a class="headerlink" href="#31-the-problem-of-finding-who-owns-what" title="Permanent link">&para;</a></h3>
+<p>Imagine node <span class="arithmatex">\(Q\)</span> has file <span class="arithmatex">\(F_1\)</span>. It wants to tell the rest of the network "I have <span class="arithmatex">\(F_1\)</span>" — not by broadcasting (expensive), but by storing that information at some node <span class="arithmatex">\(E\)</span> that anyone can find just by computing.</p>
+<p>The question is: <strong>where should <span class="arithmatex">\(Q\)</span> store the information "I have <span class="arithmatex">\(F_1\)</span>"?</strong> And how can any other node <span class="arithmatex">\(A\)</span> find <span class="arithmatex">\(E\)</span> without knowing the network topology?</p>
+<p>The answer: use a <strong>hash function</strong> to map both file names and node identities into the same numerical space, then define a rule for who is responsible for what.</p>
+<h3 id="32-the-ring-organizing-the-id-space">3.2 The Ring: Organizing the ID Space<a class="headerlink" href="#32-the-ring-organizing-the-id-space" title="Permanent link">&para;</a></h3>
+<p>Take an <span class="arithmatex">\(m\)</span>-bit hash space: integers from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(2^m - 1\)</span>, arranged conceptually as a circle (ring). Both nodes and objects (files/keys) get mapped into this space:</p>
+<ul>
+<li>Each node gets a <strong>node ID</strong>: computed as the cryptographic hash of its IP address or public key.</li>
+<li>Each object/file gets an <strong>object ID</strong>: computed as the cryptographic hash of its name/content.</li>
+</ul>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Ring["ID Space: 0 → 2^m − 1 (circular)"]
+        N1((Node A)) --- N2((Node B)) --- N3((Node E)) --- N4((Node C)) --- N1
+        F1[/Object: F1\] -. "closest node: E" .-&gt; N3
+        F2[/Object: F2\] -. "closest node: B" .-&gt; N2
+    end</code></pre>
+<p>Nodes are arranged in <strong>ascending order of node ID</strong> around the ring. This is a virtual/conceptual arrangement — not a physical network topology.</p>
+<h3 id="33-the-fundamental-rule-of-dht-storage">3.3 The Fundamental Rule of DHT Storage<a class="headerlink" href="#33-the-fundamental-rule-of-dht-storage" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>The rule:</strong> information about an object is stored at the node whose node ID is <strong>numerically closest</strong> to the object's hash value.</p>
+</blockquote>
+<p>So:
+- To <strong>store</strong> information about <span class="arithmatex">\(F_1\)</span>: hash <span class="arithmatex">\(F_1\)</span>, find the closest node on the ring, send "I have <span class="arithmatex">\(F_1\)</span>" to that node.
+- To <strong>look up</strong> <span class="arithmatex">\(F_1\)</span>: hash <span class="arithmatex">\(F_1\)</span>, route a query to the closest node on the ring, receive back "node <span class="arithmatex">\(Q\)</span> has it."</p>
+<p>This is beautiful because the mapping is entirely deterministic — anyone can compute where to send a query without consulting any central directory. The hash function is public and agreed upon by all participants.</p>
+<p><strong>Why use the same hash space for both?</strong> If IP addresses were mapped directly to file IDs, IP address clusters (entire universities, ISPs) might map to the same region of the file ID space, overloading some nodes. Hashing both independently achieves a much more uniform distribution.</p>
+<hr />
+<h2 id="4-pastry-design-and-overview">4. Pastry: Design and Overview<a class="headerlink" href="#4-pastry-design-and-overview" title="Permanent link">&para;</a></h2>
+<p>Pastry is a concrete DHT design by Rowstron and Druschel (Middleware 2001). It is a <strong>scalable distributed object location service</strong> using a ring-based overlay that accounts for network locality and automatically adapts to node arrivals, departures, and failures.</p>
+<p>Applications built on top of Pastry: <strong>PAST</strong> (large-scale distributed file storage) and <strong>SCRIBE</strong> (scalable publish/subscribe system).</p>
+<h3 id="41-node-ids-and-the-ring">4.1 Node IDs and the Ring<a class="headerlink" href="#41-node-ids-and-the-ring" title="Permanent link">&para;</a></h3>
+<p>Every node gets a unique <strong>128-bit node ID</strong>, generated by:
+- Computing <code>SHA(IP address)</code> or using the node's public key, then taking the lower 128 bits.</p>
+<p>With <span class="arithmatex">\(b = 4\)</span> (the standard choice), each 128-bit ID is represented as <strong>32 hexadecimal digits</strong> (since 1 hex digit = 4 bits, 128 / 4 = 32). All node IDs and keys are treated as base-<span class="arithmatex">\(2^b = 16\)</span> numbers.</p>
+<p><strong>Key parameters:</strong>
+- <span class="arithmatex">\(b = 4\)</span>: bits per digit (so base = <span class="arithmatex">\(2^b = 16\)</span>, i.e. hexadecimal).
+- <span class="arithmatex">\(L\)</span>: leaf set size (typically 16 or 32).
+- <span class="arithmatex">\(M\)</span>: neighborhood set size (typically <span class="arithmatex">\(2^{b+1} = 32\)</span>).</p>
+<p><strong>Pastry's headline guarantee:</strong> routing completes in <span class="arithmatex">\(\lceil \log_{2^b}(N) \rceil\)</span> steps. With <span class="arithmatex">\(b=4\)</span> and <span class="arithmatex">\(N=1{,}000{,}000\)</span> nodes: <span class="arithmatex">\(\log_{16}(10^6) = \log_{16}(16^5) = 5\)</span> steps. Five hops to find anything among a million nodes.</p>
+<p><strong>Fault tolerance guarantee:</strong> delivery is guaranteed unless <span class="arithmatex">\(L/2\)</span> nodes with adjacent node IDs fail simultaneously.</p>
+<h3 id="42-the-three-data-structures-of-a-pastry-node">4.2 The Three Data Structures of a Pastry Node<a class="headerlink" href="#42-the-three-data-structures-of-a-pastry-node" title="Permanent link">&para;</a></h3>
+<p>Every Pastry node maintains three tables:</p>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>What it contains</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Routing table</strong> <span class="arithmatex">\(\mathcal{R}\)</span></td>
+<td>32 rows × 15 columns; each cell = IP of a node with a specific prefix match</td>
+<td>Prefix-based long-distance routing</td>
+</tr>
+<tr>
+<td><strong>Leaf set</strong> <span class="arithmatex">\(\mathcal{L}\)</span></td>
+<td><span class="arithmatex">\(L/2\)</span> closest larger node IDs + <span class="arithmatex">\(L/2\)</span> closest smaller node IDs</td>
+<td>Guaranteed final delivery to the numerically closest node</td>
+</tr>
+<tr>
+<td><strong>Neighborhood set</strong> <span class="arithmatex">\(\mathcal{M}\)</span></td>
+<td><span class="arithmatex">\(M\)</span> nodes geographically/topologically close</td>
+<td>Maintains network locality</td>
+</tr>
+</tbody>
+</table>
+<p>These three serve completely different roles: the routing table does the fast long-distance travel; the leaf set does the precise final delivery; the neighborhood set maintains physical proximity for efficiency. Understanding all three is essential.</p>
+<hr />
+<h2 id="5-prefix-based-routing-the-core-algorithm">5. Prefix-Based Routing: The Core Algorithm<a class="headerlink" href="#5-prefix-based-routing-the-core-algorithm" title="Permanent link">&para;</a></h2>
+<h3 id="51-the-intuition-narrowing-down-digit-by-digit">5.1 The Intuition: Narrowing Down Digit by Digit<a class="headerlink" href="#51-the-intuition-narrowing-down-digit-by-digit" title="Permanent link">&para;</a></h3>
+<p>Here is the central insight of Pastry's routing, explained from first principles.</p>
+<p>Suppose you want to find the node closest to hash value <code>F E 3 6 ...</code> (in hex). You are currently at some node and need to get progressively closer on the ring. The trick Pastry uses: <strong>match one more hex digit of the key at each hop</strong>.</p>
+<p>Imagine the 32-digit hex key <code>F E 3 6 A 2 ...</code>. At the first node:
+- If your node ID starts with <code>F</code>, great — you already share 1 digit.
+- Look for a neighbor whose ID starts with <code>F E</code> (matching 2 digits).
+- Forward the query there.</p>
+<p>At the next node (starting with <code>F E</code>):
+- Look for a neighbor starting with <code>F E 3</code>.
+- Forward there.</p>
+<p>Each hop increases the shared prefix by one digit. After <span class="arithmatex">\(k\)</span> hops, the query is at a node matching <span class="arithmatex">\(k\)</span> hex digits of the key — which means it is exponentially closer in the ID space. This is exactly like binary search, but in base 16: each step eliminates <span class="arithmatex">\(15/16\)</span> of the remaining search space.</p>
+<pre class="mermaid"><code>flowchart LR
+    A["Node: A7... \n(0 digits match key FE36...)"] --&gt;|"forward: find FE"| B["Node: FE... \n(1 digit matches)"]
+    B --&gt;|"forward: find FE3"| C["Node: FE3... \n(2 digits match)"]
+    C --&gt;|"forward: find FE36"| D["Node: FE36... \n(3 digits match)"]
+    D --&gt;|"leaf set lookup"| E["Node: FE36A2... \n(closest — done)"]</code></pre>
+<p><strong>The key abstraction:</strong> routing in Pastry is not happening at Layer 3 (the IP network layer). It's happening at the <strong>application layer</strong>, over the P2P overlay network. Each "hop" is one message forwarded between Pastry peers over an existing TCP connection.</p>
+<h3 id="52-the-routing-table-in-detail">5.2 The Routing Table in Detail<a class="headerlink" href="#52-the-routing-table-in-detail" title="Permanent link">&para;</a></h3>
+<p>The routing table <span class="arithmatex">\(\mathcal{R}\)</span> is a <span class="arithmatex">\(32 \times 15\)</span> matrix (with <span class="arithmatex">\(b=4\)</span>, base 16).</p>
+<p><strong>Why 32 rows?</strong> A node ID is 128 bits = 32 hex digits. At most, you need to match all 32 digits, one per hop.</p>
+<p><strong>Why 15 columns?</strong> At row <span class="arithmatex">\(i\)</span>, you already share <span class="arithmatex">\((i-1)\)</span> digits with the key. The <span class="arithmatex">\(i\)</span>-th digit of the key is some hex value <span class="arithmatex">\(d \in \{0, 1, \ldots, F\}\)</span>. Since your own <span class="arithmatex">\(i\)</span>-th digit already accounts for one value, there are <span class="arithmatex">\(2^b - 1 = 15\)</span> other possible values to cover.</p>
+<p><strong>What each cell contains:</strong> <span class="arithmatex">\(\mathcal{R}[i][d]\)</span> holds the IP address of a node that shares the first <span class="arithmatex">\((i-1)\)</span> digits of <em>your</em> node ID, but whose <span class="arithmatex">\(i\)</span>-th digit is <span class="arithmatex">\(d\)</span>. If you find a cell where <span class="arithmatex">\(d\)</span> matches the <span class="arithmatex">\(i\)</span>-th digit of the key, that node shares one more digit of the key than you do — forward there.</p>
+<p><strong>Mnemonic:</strong> Row <span class="arithmatex">\(i\)</span> answers "given that I match <span class="arithmatex">\((i-1)\)</span> digits, where can I find a node matching <span class="arithmatex">\(i\)</span> digits for each possible next digit?"</p>
+<h3 id="53-the-leaf-set-the-endgame">5.3 The Leaf Set: The Endgame<a class="headerlink" href="#53-the-leaf-set-the-endgame" title="Permanent link">&para;</a></h3>
+<p>The leaf set <span class="arithmatex">\(\mathcal{L}\)</span> contains:
+- <span class="arithmatex">\(L/2\)</span> nodes with numerically closest <strong>larger</strong> node IDs (clockwise neighbors on the ring).
+- <span class="arithmatex">\(L/2\)</span> nodes with numerically closest <strong>smaller</strong> node IDs (counter-clockwise neighbors).</p>
+<p><strong>Why the leaf set matters:</strong> prefix routing gets you <em>close</em> to the target, but not necessarily to the single numerically closest node. The leaf set is what guarantees precision at the end. Once the key's hash falls within the range of the current node's leaf set, the node has a perfect local view of that region of the ring and can identify the single closest node with certainty.</p>
+<p><strong>Intuition:</strong> think of the leaf set as your "known neighborhood" on the ring. The routing table takes you to the right neighborhood; the leaf set finds the exact address within it.</p>
+<p><strong>Fault tolerance via the leaf set:</strong> if <span class="arithmatex">\(L/2\)</span> nodes in the leaf set are still alive, the message can always be passed to <em>some</em> neighbor — even if some have failed. This is the basis of Pastry's failure tolerance guarantee.</p>
+<p><strong>Why <span class="arithmatex">\(L &gt; 2\)</span>?</strong> If <span class="arithmatex">\(L = 2\)</span> (only one neighbor on each side), a single node failure on one side leaves you with no fallback. Having <span class="arithmatex">\(L = 16\)</span> or <span class="arithmatex">\(L = 32\)</span> gives you <span class="arithmatex">\(L/2 - 1\)</span> redundant fallbacks per side — much more robust.</p>
+<p><strong>The critical question: how does a node know who its <span class="arithmatex">\(L/2\)</span> immediate ring neighbors are?</strong></p>
+<p>This seems circular — to know your ring neighbors, you'd need to know the whole ring. Pastry solves it via the join procedure (Section 6): when node <span class="arithmatex">\(X\)</span> joins, it routes toward its own node ID. Every node <span class="arithmatex">\(B_i\)</span> along that path shares <span class="arithmatex">\(i\)</span> digits of prefix with <span class="arithmatex">\(X\)</span> and is therefore progressively closer on the ring. <span class="arithmatex">\(X\)</span> adds all of these path nodes to its leaf set. Because the routing path takes <span class="arithmatex">\(O(\log N)\)</span> hops, the leaf set ends up with <span class="arithmatex">\(O(\log N)\)</span> nodes that are <strong>well-distributed</strong> around the ring — not just the immediate neighbors, but also a spread of nodes at varying distances. This distribution is what makes the fast <span class="arithmatex">\(O(\log N)\)</span> routing work in practice.</p>
+<p><strong>The <span class="arithmatex">\(O(N)\)</span> baseline — why distributed connections matter:</strong></p>
+<p>To see why you need well-distributed leaf set entries, consider the degenerate case: each node knows <em>only</em> its immediate left and right ring neighbors (leaf set size 2, nothing else). Routing works — you'll always find the closest node eventually — but how many hops does it take?</p>
+<p>With only immediate neighbors, routing from node <span class="arithmatex">\(A\)</span> to a target near node <span class="arithmatex">\(E\)</span> means hopping one step at a time around the ring: <span class="arithmatex">\(A \to\)</span> next <span class="arithmatex">\(\to\)</span> next <span class="arithmatex">\(\to \cdots \to E\)</span>. This is <span class="arithmatex">\(O(N)\)</span> hops — linear in the number of nodes, catastrophically slow for large networks.</p>
+<p>Pastry's routing table and well-distributed leaf set act like long-range "shortcuts": instead of stepping one node at a time, you can jump to a node that is already halfway across the ring (in ID space), then a quarter of the way, then an eighth — a classic halving-the-distance strategy that gives <span class="arithmatex">\(O(\log N)\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Connectivity</th>
+<th>Routing time</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Only immediate neighbors</td>
+<td><span class="arithmatex">\(O(N)\)</span></td>
+<td>Must step one node at a time</td>
+</tr>
+<tr>
+<td>Well-distributed (Pastry)</td>
+<td><span class="arithmatex">\(O(\log_{2^b} N)\)</span></td>
+<td>Long-range jumps halve the search space each hop</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54-the-neighborhood-set-locality">5.4 The Neighborhood Set: Locality<a class="headerlink" href="#54-the-neighborhood-set-locality" title="Permanent link">&para;</a></h3>
+<p>The neighborhood set <span class="arithmatex">\(\mathcal{M}\)</span> contains <span class="arithmatex">\(M \approx 2^{b+1}\)</span> nodes that are <strong>geographically or topologically close</strong> to the current node — e.g., nodes in the same data center, same ISP, or nearby in latency.</p>
+<p><strong>What it's for:</strong> locality. When initializing a new node, the neighborhood set seeds the routing table with nearby nodes, so that early routing hops don't unnecessarily cross the globe. It is <em>not</em> about closeness in the ID space — it's about closeness in the physical network.</p>
+<p><strong>Key distinction:</strong> the leaf set tracks proximity in the <em>ID space</em> (who is numerically close on the ring); the neighborhood set tracks proximity in the <em>physical network</em> (who is geographically/latency-close). A node might be your physical neighbor but have a node ID far from yours — that's normal.</p>
+<h3 id="55-the-full-routing-algorithm">5.5 The Full Routing Algorithm<a class="headerlink" href="#55-the-full-routing-algorithm" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Input:  key K, routing table R, hash of key D
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Output: value V
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>if L_{-L/2} ≤ D ≤ L_{L/2}  then
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    // Key is within the leaf set range — we know exactly who&#39;s closest
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    forward K to leaf L_i minimizing |L_i − K|
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>else
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    l ← length of common prefix between D and my node ID
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    if R(l+1, D_{l+1}) ≠ null  then
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        // Normal case: forward to a node matching one more digit
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        forward to R(l+1, D_{l+1})
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    else
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        // Rare case: no routing table entry for the next digit
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        // Fall back: find any known node that is at least as close
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        // in prefix length but numerically closer to D
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        forward to T ∈ (L ∪ R ∪ M) such that:
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            prefix(T, K) ≥ l   AND   |T − K| &lt; |nodeId − K|
+</code></pre></div>
+<p><strong>Three cases, in plain English:</strong></p>
+<ol>
+<li>
+<p><strong>Leaf set hit</strong> (most precise): the key is in your immediate neighborhood on the ring. You have a complete picture — send directly to the closest node.</p>
+</li>
+<li>
+<p><strong>Routing table hit</strong> (normal case): look at the <span class="arithmatex">\((l+1)\)</span>-th row, the column corresponding to the next digit of the key. If that cell is populated, forward there — the next node shares one more digit.</p>
+</li>
+<li>
+<p><strong>Routing table miss</strong> (rare): your routing table has a gap. Scan all three data structures (<span class="arithmatex">\(\mathcal{L}\)</span>, <span class="arithmatex">\(\mathcal{R}\)</span>, <span class="arithmatex">\(\mathcal{M}\)</span>) for any node that both (a) matches at least as many prefix digits as you do and (b) is numerically closer to the target. Forward there. Progress is still guaranteed — each hop strictly decreases the distance.</p>
+</li>
+</ol>
+<h3 id="56-performance-and-reliability">5.6 Performance and Reliability<a class="headerlink" href="#56-performance-and-reliability" title="Permanent link">&para;</a></h3>
+<p><strong>Routing complexity:</strong> <span class="arithmatex">\(O(\log_{2^b} N)\)</span> hops. With <span class="arithmatex">\(b=4\)</span> and <span class="arithmatex">\(N=100{,}000\)</span>: <span class="arithmatex">\(\log_{16}(100{,}000) \approx 4\)</span> hops. Experimentally confirmed:</p>
+<table>
+<thead>
+<tr>
+<th>Hop count</th>
+<th>Fraction of lookups</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2 hops</td>
+<td>1.5%</td>
+</tr>
+<tr>
+<td>3 hops</td>
+<td>16.4%</td>
+</tr>
+<tr>
+<td>4 hops</td>
+<td>64%</td>
+</tr>
+<tr>
+<td>5 hops</td>
+<td>17%</td>
+</tr>
+</tbody>
+</table>
+<p>Average: ~4 hops for 100,000 nodes (2.5 hops for 1,000 nodes). With a complete routing table, hop count would be 30% lower.</p>
+<p><strong>Why so fast?</strong> Each hop increases the prefix match by one base-<span class="arithmatex">\(2^b\)</span> digit. That means each hop reduces the search space by a factor of <span class="arithmatex">\(2^b = 16\)</span>. The number of hops needed to reduce a space of <span class="arithmatex">\(N\)</span> to 1 is <span class="arithmatex">\(\log_{16}(N)\)</span> — logarithmic search by construction.</p>
+<hr />
+<h2 id="6-node-arrival-joining-the-ring">6. Node Arrival: Joining the Ring<a class="headerlink" href="#6-node-arrival-joining-the-ring" title="Permanent link">&para;</a></h2>
+<h3 id="61-the-join-procedure">6.1 The Join Procedure<a class="headerlink" href="#61-the-join-procedure" title="Permanent link">&para;</a></h3>
+<p>When node <span class="arithmatex">\(X\)</span> wants to join:</p>
+<ol>
+<li><span class="arithmatex">\(X\)</span> locates a <strong>nearby</strong> node <span class="arithmatex">\(A\)</span> (bootstrapping). <span class="arithmatex">\(A\)</span> can be found via <strong>expanding ring multicast</strong>: <span class="arithmatex">\(X\)</span> broadcasts a "who is near me?" message with TTL=1, then TTL=2, expanding the search radius until it finds at least one responsive Pastry node. This avoids flooding the whole network while still guaranteeing discovery of a nearby peer.</li>
+<li><span class="arithmatex">\(X\)</span> routes a <strong>join message</strong> through the network toward the node <span class="arithmatex">\(Z\)</span> whose node ID is numerically closest to <span class="arithmatex">\(X\)</span>'s own node ID.</li>
+<li>Every node on the path from <span class="arithmatex">\(A\)</span> to <span class="arithmatex">\(Z\)</span> sends its routing table to <span class="arithmatex">\(X\)</span>.</li>
+<li><span class="arithmatex">\(X\)</span> uses all this information to initialize its three tables.</li>
+<li><span class="arithmatex">\(X\)</span> transmits its state to all nodes in <span class="arithmatex">\(\mathcal{L} \cup \mathcal{R} \cup \mathcal{M}\)</span> so they can update their own tables.</li>
+</ol>
+<pre class="mermaid"><code>sequenceDiagram
+    participant X as New Node X
+    participant A as Nearby Node A
+    participant Bi as Path Nodes B₁…Bₙ
+    participant Z as Closest Node Z
 
-<p>03-dhts-chord-pastry-bittorrent</p>
+    X-&gt;&gt;A: join message (route toward X's node ID)
+    A-&gt;&gt;Bi: forward join message
+    Bi-&gt;&gt;Z: forward join message
+    A--&gt;&gt;X: send routing table row 1
+    Bi--&gt;&gt;X: send routing table rows 2…n
+    Z--&gt;&gt;X: send leaf set
+    X-&gt;&gt;Z: update: I have arrived</code></pre>
+<h3 id="62-initializing-the-three-tables">6.2 Initializing the Three Tables<a class="headerlink" href="#62-initializing-the-three-tables" title="Permanent link">&para;</a></h3>
+<p><strong>Neighborhood set:</strong> <span class="arithmatex">\(A\)</span> is physically close to <span class="arithmatex">\(X\)</span> (that's how <span class="arithmatex">\(X\)</span> found it). So <span class="arithmatex">\(X\)</span> simply copies <span class="arithmatex">\(A\)</span>'s neighborhood set. Geographic proximity is inherited.</p>
+<p><strong>Leaf set:</strong> <span class="arithmatex">\(Z\)</span> is the closest node to <span class="arithmatex">\(X\)</span> in the ID space. <span class="arithmatex">\(X\)</span> copies <span class="arithmatex">\(Z\)</span>'s leaf set and adjusts it around its own position — these are the nodes immediately adjacent to <span class="arithmatex">\(X\)</span> on the ring.</p>
+<p><strong>Routing table:</strong> this is the clever part. Each node <span class="arithmatex">\(B_i\)</span> on the path from <span class="arithmatex">\(A\)</span> to <span class="arithmatex">\(Z\)</span> has exactly <span class="arithmatex">\(i\)</span> digits of its prefix matching <span class="arithmatex">\(X\)</span>'s ID (because each step of routing increases the prefix match by one). So <span class="arithmatex">\(B_i\)</span>'s <span class="arithmatex">\((i+1)\)</span>-th routing table row already covers nodes sharing <span class="arithmatex">\(i\)</span> digits with <span class="arithmatex">\(X\)</span> — exactly what <span class="arithmatex">\(X\)</span> needs for its <span class="arithmatex">\((i+1)\)</span>-th row. <span class="arithmatex">\(X\)</span> copies row <span class="arithmatex">\(i+1\)</span> from <span class="arithmatex">\(B_i\)</span>'s table. The first row (no prefix match needed) comes from <span class="arithmatex">\(A\)</span>.</p>
+<p><strong>Why this is efficient:</strong> <span class="arithmatex">\(X\)</span> does not need to contact the entire network. It only contacts the <span class="arithmatex">\(O(\log N)\)</span> nodes along the routing path, and each contributes exactly the right row of the routing table.</p>
+<h3 id="63-maintaining-locality-on-join">6.3 Maintaining Locality on Join<a class="headerlink" href="#63-maintaining-locality-on-join" title="Permanent link">&para;</a></h3>
+<p><strong>The induction argument (intuition, not proof):</strong> assume every existing node already has a well-localized routing table — i.e., all its routing table entries point to nearby nodes. When <span class="arithmatex">\(X\)</span> joins:</p>
+<ul>
+<li><span class="arithmatex">\(X\)</span> starts from <span class="arithmatex">\(A\)</span>, which is geographically close.</li>
+<li>The routing path <span class="arithmatex">\(A \to B_1 \to \cdots \to Z\)</span> stays "fairly close" to <span class="arithmatex">\(X\)</span> throughout, because each <span class="arithmatex">\(B_i\)</span> was close to <span class="arithmatex">\(A\)</span> (by the induction assumption applied to <span class="arithmatex">\(B_i\)</span>'s own routing table).</li>
+<li>Since <span class="arithmatex">\(X\)</span> copies row <span class="arithmatex">\(i+1\)</span> from <span class="arithmatex">\(B_i\)</span>, and <span class="arithmatex">\(B_i\)</span> is fairly close, <span class="arithmatex">\(X\)</span>'s row <span class="arithmatex">\(i+1\)</span> also points to nearby nodes.</li>
+<li>Therefore <span class="arithmatex">\(X\)</span> inherits locality.</li>
+</ul>
+<p>The induction base case holds trivially: when the network has one node, the property is vacuously true. New joins preserve it. <strong>Induction hypothesis proved.</strong></p>
+<hr />
+<h2 id="7-node-departure-and-failure-keeping-the-ring-alive">7. Node Departure and Failure: Keeping the Ring Alive<a class="headerlink" href="#7-node-departure-and-failure-keeping-the-ring-alive" title="Permanent link">&para;</a></h2>
+<h3 id="71-graceful-vs-non-graceful-departure">7.1 Graceful vs Non-Graceful Departure<a class="headerlink" href="#71-graceful-vs-non-graceful-departure" title="Permanent link">&para;</a></h3>
+<p>A node can leave the network in two fundamentally different ways:</p>
+<ul>
+<li><strong>Graceful departure</strong>: the node knows it is leaving. It can notify its neighbors, transfer its stored records to the next-closest node, and update routing tables. This is clean but rare in practice — machines crash, connections drop, users close applications without warning.</li>
+<li><strong>Non-graceful departure (failure)</strong>: the node simply disappears. No notification, no data transfer. This is the common case and the one the protocol must be designed for.</li>
+</ul>
+<p>Pastry's design is specifically built around the assumption that departures are usually non-graceful. The redundancy mechanism below is the answer.</p>
+<h3 id="72-redundancy-why-store-at-neighbors">7.2 Redundancy: Why Store at Neighbors?<a class="headerlink" href="#72-redundancy-why-store-at-neighbors" title="Permanent link">&para;</a></h3>
+<p>Suppose node <span class="arithmatex">\(X\)</span> holds the record "node <span class="arithmatex">\(Q\)</span> has file <span class="arithmatex">\(F_1\)</span>." If <span class="arithmatex">\(X\)</span> fails without warning — which is the common case — that record is lost. The next query for <span class="arithmatex">\(F_1\)</span> will route to <span class="arithmatex">\(Y\)</span> (the next closest node), which knows nothing.</p>
+<p><strong>The fix: each node stores a copy of what its neighbors would normally store.</strong> Specifically, every node stores the key-value records that would belong to the <span class="arithmatex">\(L/2\)</span> nodes to its immediate left and right on the ring.</p>
+<p><strong>Careful: this is not a full replication of everyone's data.</strong> Node <span class="arithmatex">\(Y\)</span> only stores <em>what would be stored at <span class="arithmatex">\(X\)</span> by the DHT rule</em>, not what <span class="arithmatex">\(X\)</span> itself happens to hold for other reasons. This keeps the storage overhead bounded.</p>
+<p><strong>Why <span class="arithmatex">\(L/2\)</span> copies?</strong> The failure guarantee says delivery is possible unless <span class="arithmatex">\(L/2\)</span> adjacent nodes fail simultaneously. With <span class="arithmatex">\(L/2\)</span> redundant copies distributed around the neighborhood, you need to lose all of them at once before data becomes unavailable.</p>
+<h3 id="73-repairing-the-leaf-set">7.3 Repairing the Leaf Set<a class="headerlink" href="#73-repairing-the-leaf-set" title="Permanent link">&para;</a></h3>
+<p>Nodes might fail or leave without notice. When node <span class="arithmatex">\(\mathcal{L}_{-k}\)</span> (a leaf at position <span class="arithmatex">\(-k\)</span>, where <span class="arithmatex">\(-L/2 &lt; k &lt; 0\)</span>) is detected as failed:</p>
+<ol>
+<li>Contact the furthest-away leaf on the same side: <span class="arithmatex">\(\mathcal{L}_{-L/2}\)</span>.</li>
+<li>Get its leaf set.</li>
+<li>Merge the received leaf set with your own.</li>
+<li>For any new nodes discovered, <strong>ping them</strong> to verify they are actually alive before adding them.</li>
+</ol>
+<p><strong>Why ping?</strong> The received leaf set might itself be stale. A node that appears in <span class="arithmatex">\(\mathcal{L}_{-L/2}\)</span>'s leaf set might also have failed. Always verify before trusting.</p>
+<p><strong>Keep-alive messages:</strong> every Pastry node periodically sends heartbeat messages to all nodes it is connected to. This gives early warning of failures, so repair can happen proactively rather than reactively.</p>
+<h3 id="74-repairing-the-routing-table">7.4 Repairing the Routing Table<a class="headerlink" href="#74-repairing-the-routing-table" title="Permanent link">&para;</a></h3>
+<p>When routing table entry <span class="arithmatex">\(\mathcal{R}(l, d)\)</span> fails:</p>
+<ol>
+<li><strong>Try a lateral replacement:</strong> contact <span class="arithmatex">\(\mathcal{R}(l, d')\)</span> for some <span class="arithmatex">\(d' \neq d\)</span> (a different node in the same row, i.e., one that shares the same prefix length). Ask it for a node at the same position.</li>
+<li><strong>If no lateral replacement works, look further:</strong> ask <span class="arithmatex">\(\mathcal{R}(l+1, d')\)</span> — a node with an even longer prefix match. It likely has richer knowledge of that region of the ring.</li>
+</ol>
+<p><strong>Intuition:</strong> nodes with longer shared prefixes tend to know more about the detailed structure of that ID region — they're "deeper" into the same neighborhood of the ring.</p>
+<h3 id="75-repairing-the-neighborhood-set">7.5 Repairing the Neighborhood Set<a class="headerlink" href="#75-repairing-the-neighborhood-set" title="Permanent link">&para;</a></h3>
+<p>The neighborhood set requires a different repair strategy because it tracks physical proximity, not ID proximity:</p>
+<ol>
+<li>Each node <strong>periodically pings</strong> all nodes in its neighborhood set.</li>
+<li>If a neighbor is found dead, contact the <em>remaining</em> neighbors and ask for <em>their</em> neighborhood sets.</li>
+<li>Merge, verify, and repair.</li>
+</ol>
+<p><strong>Why go to neighbors?</strong> If your geographic neighbor is dead, your other geographic neighbors are likely to know about nearby nodes — they share the same physical region.</p>
+<hr />
+<h2 id="8-tolerating-byzantine-failures">8. Tolerating Byzantine Failures<a class="headerlink" href="#8-tolerating-byzantine-failures" title="Permanent link">&para;</a></h2>
+<p>Byzantine failures — where nodes lie, corrupt messages, or behave maliciously — require additional mechanisms beyond fail-stop handling:</p>
+<ul>
+<li><strong>Multiple entries per routing table cell</strong>: store several alternative nodes per cell so a single malicious/incorrect entry can be detected and bypassed.</li>
+<li><strong>Randomize the routing strategy</strong>: don't always take the same route; randomization makes it harder for an adversary to reliably intercept queries.</li>
+<li><strong>Periodic IP broadcasts and expanding-ring multicasts</strong>: reconnect network components that may have become disconnected due to failures or attacks.</li>
+</ul>
+<hr />
+<h2 id="9-experimental-results">9. Experimental Results<a class="headerlink" href="#9-experimental-results" title="Permanent link">&para;</a></h2>
+<p><strong>Simulation setup:</strong> 100,000 nodes, each running a Java-based VM, each assigned coordinates in a Euclidean plane (to model geographic distances).</p>
+<p><strong>Key findings:</strong></p>
+<ul>
+<li>Hop count grows <strong>linearly with <span class="arithmatex">\(\log N\)</span></strong> — confirming the <span class="arithmatex">\(O(\log_{2^b} N)\)</span> prediction.</li>
+<li>At 1,000 nodes: ~2.5 hops average.</li>
+<li>At 100,000 nodes: ~4 hops average.</li>
+<li>With a complete routing table (no missing entries): hop count would be <strong>30% lower</strong>.</li>
+<li>Hop count distribution for 100,000 nodes and 200,000 lookups: 64% of queries complete in exactly 4 hops.</li>
+</ul>
+<hr />
+<h1 id="part-ii-proofs-and-mathematical-derivations">Part II — Proofs and Mathematical Derivations<a class="headerlink" href="#part-ii-proofs-and-mathematical-derivations" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Read this after Part I. All notation defined here is consistent with Part I.</p>
+</blockquote>
+<h2 id="p1-why-olog_2b-n-steps-suffice-the-prefix-match-convergence-proof">P1. Why <span class="arithmatex">\(O(\log_{2^b} N)\)</span> Steps Suffice: The Prefix-Match Convergence Proof<a class="headerlink" href="#p1-why-olog_2b-n-steps-suffice-the-prefix-match-convergence-proof" title="Permanent link">&para;</a></h2>
+<p><strong>What we want to show:</strong> after <span class="arithmatex">\(m = c + \log_{16}(N)\)</span> hops (with <span class="arithmatex">\(c\)</span> a small constant), it is virtually certain that no other node exists that shares more than <span class="arithmatex">\(m\)</span> hex digits of prefix with the key. This means routing <em>must</em> have converged — there's no one further to forward to.</p>
+<p><strong>Setup (with <span class="arithmatex">\(b=4\)</span>, base <span class="arithmatex">\(= 2^b = 16\)</span>):</strong></p>
+<p>The probability that two randomly hashed IDs share the same first hex digit is <span class="arithmatex">\(1/16\)</span> (each digit is uniformly distributed). The probability they share the first <span class="arithmatex">\(m\)</span> digits is <span class="arithmatex">\(16^{-m}\)</span>.</p>
+<p>Therefore, the probability that a specific node does <strong>not</strong> share a prefix of length <span class="arithmatex">\(m\)</span> with the key is <span class="arithmatex">\(1 - 16^{-m}\)</span>.</p>
+<p>With <span class="arithmatex">\(N\)</span> nodes (all independent):</p>
+<div class="arithmatex">\[P(\text{no node shares a prefix of length } m \text{ with the key}) = (1 - 16^{-m})^N\]</div>
+<p><strong>Setting <span class="arithmatex">\(m = c + \log_{16}(N)\)</span>:</strong></p>
+<div class="arithmatex">\[P = (1 - 16^{-m})^N = (1 - 16^{-c} \cdot 16^{-\log_{16}(N)})^N = \left(1 - \frac{16^{-c}}{N}\right)^N\]</div>
+<p>Let <span class="arithmatex">\(\lambda = 16^{-c}\)</span>. Rewrite:</p>
+<div class="arithmatex">\[P = \left(1 - \frac{\lambda}{N}\right)^N = \left[\left(1 - \frac{\lambda}{N}\right)^{N/\lambda}\right]^\lambda\]</div>
+<p>Applying the standard limit <span class="arithmatex">\(\lim_{N \to \infty}(1 - \lambda/N)^{N/\lambda} = e^{-1}\)</span>:</p>
+<div class="arithmatex">\[\boxed{P = e^{-\lambda} = e^{-16^{-c}}}\]</div>
+<p><strong>Reading the result:</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(c\)</span></th>
+<th><span class="arithmatex">\(\lambda = 16^{-c}\)</span></th>
+<th><span class="arithmatex">\(P = e^{-\lambda}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td><span class="arithmatex">\(e^{-1} \approx 0.37\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1/16 \approx 0.063\)</span></td>
+<td><span class="arithmatex">\(\approx 0.94\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(1/256 \approx 0.004\)</span></td>
+<td><span class="arithmatex">\(\approx 0.996\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(\approx 2.4\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(\approx 0.9998\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>By <span class="arithmatex">\(c = 2\)</span>: the probability that <em>any</em> node in the entire network shares more than <span class="arithmatex">\(m = 2 + \log_{16}(N)\)</span> digits of prefix with the key is essentially zero. So after <span class="arithmatex">\(2 + \log_{16}(N)\)</span> hops, prefix routing has converged with near certainty.</p>
+<p><strong>The <span class="arithmatex">\(O(\log N)\)</span> conclusion:</strong></p>
+<div class="arithmatex">\[\text{routing hops} \leq m = c + \log_{16}(N) = O(\log_{16}(N)) = O(\log_{2^b}(N))\]</div>
+<p><strong>Worked example</strong> with <span class="arithmatex">\(N = 1{,}000{,}000\)</span>:</p>
+<div class="arithmatex">\[\log_{16}(10^6) = \log_{16}(16^5) = 5\]</div>
+<p>So <span class="arithmatex">\(m = c + 5 \approx 7\)</span> hops at most — even for a million-node network.</p>
+<p><strong>Why does the search space shrink exponentially per hop?</strong> Each hex digit of the key occupies 4 bits. Matching one more digit means you have narrowed the target region of the ring by a factor of <span class="arithmatex">\(16 = 2^4\)</span>. After <span class="arithmatex">\(k\)</span> matched digits, you are looking at a region of size <span class="arithmatex">\(N / 16^k\)</span>. Setting <span class="arithmatex">\(N / 16^k = 1\)</span> gives <span class="arithmatex">\(k = \log_{16}(N)\)</span> — exactly the number of routing hops needed.</p>
+<hr />
+<h2 id="p2-maintaining-locality-on-join-the-induction-argument">P2. Maintaining Locality on Join: The Induction Argument<a class="headerlink" href="#p2-maintaining-locality-on-join-the-induction-argument" title="Permanent link">&para;</a></h2>
+<p><strong>Claim:</strong> if all existing nodes have well-localized routing tables (all entries point to nearby nodes), then when a new node <span class="arithmatex">\(X\)</span> joins using the Pastry join procedure, <span class="arithmatex">\(X\)</span>'s routing table is also well-localized.</p>
+<p><strong>Proof by induction on the join order:</strong></p>
+<p><strong>Base case:</strong> a network with one node trivially satisfies the property (no routing table entries to worry about).</p>
+<p><strong>Inductive step:</strong> assume all existing nodes have well-localized routing tables. Node <span class="arithmatex">\(X\)</span> joins via nearby node <span class="arithmatex">\(A\)</span>.</p>
+<p>The join message routes from <span class="arithmatex">\(A\)</span> toward <span class="arithmatex">\(Z\)</span> (the node closest to <span class="arithmatex">\(X\)</span>'s node ID). Let <span class="arithmatex">\(B_i\)</span> be the <span class="arithmatex">\(i\)</span>-th node along this path. By the routing protocol, <span class="arithmatex">\(B_i\)</span> shares <span class="arithmatex">\(i\)</span> digits of prefix with <span class="arithmatex">\(X\)</span>.</p>
+<p>The induction assumption says <span class="arithmatex">\(B_i\)</span>'s routing table is well-localized — all its entries point to nearby nodes.</p>
+<p><span class="arithmatex">\(X\)</span> copies row <span class="arithmatex">\(i+1\)</span> of its routing table from <span class="arithmatex">\(B_i\)</span>'s row <span class="arithmatex">\(i+1\)</span>. We need to show those entries are near to <span class="arithmatex">\(X\)</span>:</p>
+<ul>
+<li><span class="arithmatex">\(B_i\)</span> shares <span class="arithmatex">\(i\)</span> prefix digits with <span class="arithmatex">\(X\)</span>.</li>
+<li><span class="arithmatex">\(B_i\)</span> was reached from <span class="arithmatex">\(A\)</span>, which is geographically close to <span class="arithmatex">\(X\)</span>.</li>
+<li>Each routing step stays "in the neighborhood" because the induction assumption guarantees <span class="arithmatex">\(B_i\)</span>'s entries point to nearby nodes.</li>
+<li>Since <span class="arithmatex">\(B_i\)</span> is close to <span class="arithmatex">\(X\)</span> (transitively via <span class="arithmatex">\(A\)</span>), <span class="arithmatex">\(B_i\)</span>'s row <span class="arithmatex">\(i+1\)</span> entries are also close to <span class="arithmatex">\(X\)</span>.</li>
+</ul>
+<p>Therefore <span class="arithmatex">\(X\)</span>'s row <span class="arithmatex">\(i+1\)</span> is populated with nearby nodes — locality is preserved.</p>
+<p>Since this holds for all rows <span class="arithmatex">\(i = 1, \ldots, 32\)</span>, <span class="arithmatex">\(X\)</span>'s entire routing table is well-localized.</p>
+<p><strong>Induction hypothesis proved.</strong> <span class="arithmatex">\(\square\)</span></p>
+<p><strong>The practical consequence:</strong> locality is not an accident. The join procedure is explicitly designed so that routing-table rows are obtained from nodes that are simultaneously (a) ID-space-close (sharing prefix digits) and (b) network-space-close (reachable via short physical hops). The two notions of closeness are coupled by the join path, which ensures each <span class="arithmatex">\(B_i\)</span> is both.</p>
 
   
     
@@ -7320,7 +7890,10 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 3, 2026 06:26:25 UTC">July 3, 2026</span>
+        Created <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 3, 2026 06:26:25 UTC">July 3, 2026</span>
+      </span>
+      <span class="md-source-file__fact">
+        · Updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 3, 2026 06:27:15 UTC">July 3, 2026</span>
       </span>
     
   </aside>
