@@ -1,8 +1,0 @@
-title: 'DHTs: Chord, Pastry, and BitTorrent'
-chapter: 03-dhts-chord-pastry-bittorrent
-description: Structured peer-to-peer overlays, consistent hashing, finger tables,
-  prefix routing, and parallel transfer protocols.
-topics:
-- chord-protocol
-- pastry-protocol
-- bittorrent-protocol
