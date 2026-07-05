@@ -1,5 +1,5 @@
 ---
-title: Bitcoin and Blockchains
+title: "Bitcoin and Blockchains"
 ---
 
 # Bitcoin and Blockchains

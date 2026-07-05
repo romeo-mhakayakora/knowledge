@@ -1,5 +1,5 @@
 ---
-title: Distributed Leader Election
+title: "Distributed Leader Election"
 ---
 
 # Distributed Leader Election

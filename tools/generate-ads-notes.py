@@ -14,7 +14,7 @@ subject_meta = {
     "chapters": [
         "01-epidemic-gossip",
         "02-napster-gnutella",
-        "03-dhts-chord-pastry-bittorrent",
+        "03-dhts",
         "04-logical-clocks-mutual-exclusion",
         "05-distributed-leader-election",
         "06-dmst-flp",
@@ -303,158 +303,991 @@ graph TD
             }
         }
     },
-    "03-dhts-chord-pastry-bittorrent": {
-        "title": "DHTs: Chord, Pastry, and BitTorrent",
-        "description": "Structured peer-to-peer overlays, consistent hashing, finger tables, prefix routing, and parallel transfer protocols.",
+    "03-dhts": {
+        "title": "DHTs: Pastry and Freenet",
+        "description": "Structured peer-to-peer overlays, prefix matching, and adaptive anonymous datastores.",
         "topics": {
-            "chord-protocol": {
-                "title": "The Chord DHT Protocol",
-                "content": """# The Chord DHT Protocol
+            "01-pastry": {
+                "title": "The Pastry DHT Protocol",
+                "content": """# Distributed Hash Tables and Pastry
 
-Chord is a classic **Structured Peer-to-Peer** protocol implementing a Distributed Hash Table (DHT). It guarantees that finding a key in a network of $N$ nodes requires at most $O(\\log N)$ messages.
+*Lecture notes — Smruti R. Sarangi, IIT Delhi*
+*Source paper: Rowstron & Druschel, "Pastry: Scalable, Decentralized Object Location and Routing for Large-Scale Peer-to-Peer Systems," Middleware 2001*
+
+> **Structure:** Part I covers every concept and algorithm cleanly, with intuition and no proofs. Part II contains all the mathematics. Read Part I to understand the system; go to Part II when you want to derive the numbers.
 
 ---
 
-## 1. Consistent Hashing and Identifier Ring
+## Table of Contents
 
-Chord maps both nodes and keys into an $m$-bit identifier space using a cryptographic hash function (like SHA-1). The space is organized as a modulo-$2^m$ circle known as the **Chord Ring**.
+**Part I — Concepts and Intuition**
 
-*   **Node ID**: Hash of node's IP address.
-*   **Key ID**: Hash of the data key.
-*   **Successor Node**: Key $k$ is assigned to the first node whose ID is equal to or greater than $k$ in the ring. This node is called $\\text{successor}(k)$.
+- [1. From Napster to DHTs: The Motivation](#1-from-napster-to-dhts-the-motivation)
+- [2. What Is a Hash Table? What Is a Distributed Hash Table?](#2-what-is-a-hash-table-what-is-a-distributed-hash-table)
+  - [2.1 Normal Hash Tables](#21-normal-hash-tables)
+  - [2.2 Why DHTs? The Scale Problem](#22-why-dhts-the-scale-problem)
+  - [2.3 Advantages of DHTs](#23-advantages-of-dhts)
+- [3. The Core Idea: Mapping Files and Nodes to the Same Space](#3-the-core-idea-mapping-files-and-nodes-to-the-same-space)
+  - [3.1 The Problem of Finding Who Owns What](#31-the-problem-of-finding-who-owns-what)
+  - [3.2 The Ring: Organizing the ID Space](#32-the-ring-organizing-the-id-space)
+  - [3.3 The Fundamental Rule of DHT Storage](#33-the-fundamental-rule-of-dht-storage)
+- [4. Pastry: Design and Overview](#4-pastry-design-and-overview)
+  - [4.1 Node IDs and the Ring](#41-node-ids-and-the-ring)
+  - [4.2 The Three Data Structures of a Pastry Node](#42-the-three-data-structures-of-a-pastry-node)
+- [5. Prefix-Based Routing: The Core Algorithm](#5-prefix-based-routing-the-core-algorithm)
+  - [5.1 The Intuition: Narrowing Down Digit by Digit](#51-the-intuition-narrowing-down-digit-by-digit)
+  - [5.2 The Routing Table in Detail](#52-the-routing-table-in-detail)
+  - [5.3 The Leaf Set: The Endgame](#53-the-leaf-set-the-endgame)
+  - [5.4 The Neighborhood Set: Locality](#54-the-neighborhood-set-locality)
+  - [5.5 The Full Routing Algorithm](#55-the-full-routing-algorithm)
+  - [5.6 Performance and Reliability](#56-performance-and-reliability)
+- [6. Node Arrival: Joining the Ring](#6-node-arrival-joining-the-ring)
+  - [6.1 The Join Procedure](#61-the-join-procedure)
+  - [6.2 Initializing the Three Tables](#62-initializing-the-three-tables)
+  - [6.3 Maintaining Locality on Join](#63-maintaining-locality-on-join)
+- [7. Node Departure and Failure: Keeping the Ring Alive](#7-node-departure-and-failure-keeping-the-ring-alive)
+  - [7.1 Graceful vs Non-Graceful Departure](#71-graceful-vs-non-graceful-departure)
+  - [7.2 Redundancy: Why Store at Neighbors?](#72-redundancy-why-store-at-neighbors)
+  - [7.3 Repairing the Leaf Set](#73-repairing-the-leaf-set)
+  - [7.4 Repairing the Routing Table](#74-repairing-the-routing-table)
+  - [7.5 Repairing the Neighborhood Set](#75-repairing-the-neighborhood-set)
+- [8. Tolerating Byzantine Failures](#8-tolerating-byzantine-failures)
+- [9. Experimental Results](#9-experimental-results)
+
+**Part II — Proofs and Mathematical Derivations**
+
+- [P1. Why $O(\log_{2^b} N)$ Steps Suffice: The Prefix-Match Convergence Proof](#p1-why-olog_2b-n-steps-suffice-the-prefix-match-convergence-proof)
+- [P2. Maintaining Locality on Join: The Induction Argument](#p2-maintaining-locality-on-join-the-induction-argument)
+
+---
+
+# Part I — Concepts and Intuition
+
+## 1. From Napster to DHTs: The Motivation
+
+Before DHTs, the P2P generations looked like this:
+
+| Generation | System | Search Mechanism | Weakness |
+|---|---|---|---|
+| 1st | Napster | Central server index | Single point of failure — legal and technical |
+| 2nd | Gnutella | Broadcast query to graph neighbors (TTL-bounded) | Floods the network; $O(N)$ messages in the worst case |
+| 3rd | DHTs (Pastry, Chord, Tapestry…) | Structured routing via a hash ring | $O(\log N)$ messages, fully decentralized |
+
+The core question motivating the 3rd generation: *can we find where a file is stored in $O(\log N)$ messages, without any central server and without flooding?*
+
+The answer is yes — by storing information cleverly, so that the location of any piece of data can be *computed*, not searched for.
+
+---
+
+## 2. What Is a Hash Table? What Is a Distributed Hash Table?
+
+### 2.1 Normal Hash Tables
+
+A hash table is a dictionary storing **key–value pairs**. Supply the key, get the value back.
+
+| Operation | What it does | Time complexity |
+|---|---|---|
+| `insert(key, value)` | Store the pair | $\approx \Theta(1)$ |
+| `lookup(key)` | Return value, or null | $\approx \Theta(1)$ |
+| `delete(key)` | Remove the pair | $\approx \Theta(1)$ |
+
+A good hash function maps keys to unique locations to minimize collisions. Collisions are resolved via **chaining** (each slot is a linked list) or **rehashing** (probe alternative slots).
+
+### 2.2 Why DHTs? The Scale Problem
+
+A single machine's hash table cannot hold web-scale data. Consider two concrete examples:
+
+**Banking (fits on one machine):**
+- 0.1 billion customers × 8 KB per customer = **0.8 TB** — a modern laptop handles this.
+
+**Music sharing (does not fit):**
+- 0.1 billion users × 100 songs × 5 MB per song = **50 petabytes** — orders of magnitude larger, geographically distributed, and the system must survive regional outages.
+
+The key transition: for web-scale data, a single machine is not just impractical — it's architecturally wrong. Facebook, LinkedIn, Google, Netflix, and Amazon are all built on DHT-like technology.
+
+### 2.3 Advantages of DHTs
+
+DHTs solve four problems simultaneously:
+
+**Scale** — key-value pairs are distributed across thousands of machines; the system grows by simply adding nodes.
+
+**Fault tolerance** — data is replicated; a regional outage (e.g., a power cut in one data center) does not take down the system.
+
+**Elastic load balancing** — different keys hash to different nodes, spreading user requests naturally. Adding nodes during peak load (Diwali, Thanksgiving, Christmas) and removing them afterward is straightforward.
+
+**Reduced legal liability** — in P2P contexts, with no central server knowing about all transfers, legal exposure is diffuse (though transferring unlicensed content remains illegal regardless).
+
+Major DHT proposals: **Pastry**, **Chord**, **Tapestry**, **CAN**, **Fawn**.
+
+---
+
+## 3. The Core Idea: Mapping Files and Nodes to the Same Space
+
+### 3.1 The Problem of Finding Who Owns What
+
+Imagine node $Q$ has file $F_1$. It wants to tell the rest of the network "I have $F_1$" — not by broadcasting (expensive), but by storing that information at some node $E$ that anyone can find just by computing.
+
+The question is: **where should $Q$ store the information "I have $F_1$"?** And how can any other node $A$ find $E$ without knowing the network topology?
+
+The answer: use a **hash function** to map both file names and node identities into the same numerical space, then define a rule for who is responsible for what.
+
+### 3.2 The Ring: Organizing the ID Space
+
+Take an $m$-bit hash space: integers from $0$ to $2^m - 1$, arranged conceptually as a circle (ring). Both nodes and objects (files/keys) get mapped into this space:
+
+- Each node gets a **node ID**: computed as the cryptographic hash of its IP address or public key.
+- Each object/file gets an **object ID**: computed as the cryptographic hash of its name/content.
 
 ```mermaid
-graph LR
-    N0((Node 0)) --- N1((Node 1))
-    N1 --- N3((Node 3))
-    N3 --- N8((Node 8))
-    N8 --- N14((Node 14))
-    N14 --- N0
-    style N0 fill:#f9f,stroke:#333
-    style N3 fill:#ccf,stroke:#333
-    style N8 fill:#ccf,stroke:#333
+flowchart LR
+    subgraph Ring["ID Space: 0 → 2^m − 1 (circular)"]
+        N1((Node A)) --- N2((Node B)) --- N3((Node E)) --- N4((Node C)) --- N1
+        F1[/Object: F1\] -. "closest node: E" .-> N3
+        F2[/Object: F2\] -. "closest node: B" .-> N2
+    end
 ```
 
-For example, on an $m=4$ ring (sizes $0-15$), key $k=5$ would be stored at node $N=8$ if the active nodes are $0, 1, 3, 8, 14$.
+Nodes are arranged in **ascending order of node ID** around the ring. This is a virtual/conceptual arrangement — not a physical network topology.
+
+### 3.3 The Fundamental Rule of DHT Storage
+
+> **The rule:** information about an object is stored at the node whose node ID is **numerically closest** to the object's hash value.
+
+So:
+- To **store** information about $F_1$: hash $F_1$, find the closest node on the ring, send "I have $F_1$" to that node.
+- To **look up** $F_1$: hash $F_1$, route a query to the closest node on the ring, receive back "node $Q$ has it."
+
+This is beautiful because the mapping is entirely deterministic — anyone can compute where to send a query without consulting any central directory. The hash function is public and agreed upon by all participants.
+
+**Why use the same hash space for both?** If IP addresses were mapped directly to file IDs, IP address clusters (entire universities, ISPs) might map to the same region of the file ID space, overloading some nodes. Hashing both independently achieves a much more uniform distribution.
 
 ---
 
-## 2. Chord Finger Table Routing
+## 4. Pastry: Design and Overview
 
-To avoid routing hops of $O(N)$ around the ring, each node $n$ maintains a routing table called the **Finger Table** with at most $m$ entries. The $i$-th entry of node $n$'s finger table points to:
+Pastry is a concrete DHT design by Rowstron and Druschel (Middleware 2001). It is a **scalable distributed object location service** using a ring-based overlay that accounts for network locality and automatically adapts to node arrivals, departures, and failures.
 
-$$\\text{Finger}[i] = \\text{successor}((n + 2^{i-1}) \\pmod{2^m})$$
+Applications built on top of Pastry: **PAST** (large-scale distributed file storage) and **SCRIBE** (scalable publish/subscribe system).
 
-### 2.1 Finger Table Example (Node 0, $m=4$)
-For node $n=0$ on a ring with active nodes $\{0, 1, 3, 8, 14\}$:
+### 4.1 Node IDs and the Ring
 
-| Index $i$ | Formula $n + 2^{i-1}$ | Target successor | Finger Node |
-| :---: | :---: | :---: | :---: |
-| 1 | $0 + 1 = 1$ | $\\text{successor}(1)$ | **1** |
-| 2 | $0 + 2 = 2$ | $\\text{successor}(2)$ | **3** |
-| 3 | $0 + 4 = 4$ | $\\text{successor}(4)$ | **8** |
-| 4 | $0 + 8 = 8$ | $\\text{successor}(8)$ | **8** |
+Every node gets a unique **128-bit node ID**, generated by:
+- Computing `SHA(IP address)` or using the node's public key, then taking the lower 128 bits.
 
-### 2.2 Routing Algorithm
-When node $n$ queries for key $k$:
-1.  Check if $k$ lies between $n$ and $\\text{successor}(n)$. If so, return $\\text{successor}(n)$.
-2.  Otherwise, search the finger table for the closest predecessor node $n'$ to $k$.
-3.  Forward the query to $n'$. The distance to the key is halved in each hop, yielding $O(\\log N)$ lookup time.
+With $b = 4$ (the standard choice), each 128-bit ID is represented as **32 hexadecimal digits** (since 1 hex digit = 4 bits, 128 / 4 = 32). All node IDs and keys are treated as base-$2^b = 16$ numbers.
+
+**Key parameters:**
+- $b = 4$: bits per digit (so base = $2^b = 16$, i.e. hexadecimal).
+- $L$: leaf set size (typically 16 or 32).
+- $M$: neighborhood set size (typically $2^{b+1} = 32$).
+
+**Pastry's headline guarantee:** routing completes in $\lceil \log_{2^b}(N) \rceil$ steps. With $b=4$ and $N=1{,}000{,}000$ nodes: $\log_{16}(10^6) = \log_{16}(16^5) = 5$ steps. Five hops to find anything among a million nodes.
+
+**Fault tolerance guarantee:** delivery is guaranteed unless $L/2$ nodes with adjacent node IDs fail simultaneously.
+
+### 4.2 The Three Data Structures of a Pastry Node
+
+Every Pastry node maintains three tables:
+
+| Table | What it contains | Purpose |
+|---|---|---|
+| **Routing table** $\mathcal{R}$ | 32 rows × 15 columns; each cell = IP of a node with a specific prefix match | Prefix-based long-distance routing |
+| **Leaf set** $\mathcal{L}$ | $L/2$ closest larger node IDs + $L/2$ closest smaller node IDs | Guaranteed final delivery to the numerically closest node |
+| **Neighborhood set** $\mathcal{M}$ | $M$ nodes geographically/topologically close | Maintains network locality |
+
+These three serve completely different roles: the routing table does the fast long-distance travel; the leaf set does the precise final delivery; the neighborhood set maintains physical proximity for efficiency. Understanding all three is essential.
 
 ---
 
-## 3. Node Joins and Stabilization
+## 5. Prefix-Based Routing: The Core Algorithm
 
-To maintain correct pointers under network churn, Chord nodes run a periodic **Stabilization** protocol:
+### 5.1 The Intuition: Narrowing Down Digit by Digit
 
-1.  **stabilize()**: Node $n$ queries its successor for its predecessor $p$. If $p$ lies between $n$ and successor, $n$ updates its successor to $p$.
-2.  **notify()**: Node $n$ tells its successor about its existence. If successor's predecessor is empty or $n$ is closer, successor updates predecessor to $n$.
+Here is the central insight of Pastry's routing, explained from first principles.
+
+Suppose you want to find the node closest to hash value `F E 3 6 ...` (in hex). You are currently at some node and need to get progressively closer on the ring. The trick Pastry uses: **match one more hex digit of the key at each hop**.
+
+Imagine the 32-digit hex key `F E 3 6 A 2 ...`. At the first node:
+- If your node ID starts with `F`, great — you already share 1 digit.
+- Look for a neighbor whose ID starts with `F E` (matching 2 digits).
+- Forward the query there.
+
+At the next node (starting with `F E`):
+- Look for a neighbor starting with `F E 3`.
+- Forward there.
+
+Each hop increases the shared prefix by one digit. After $k$ hops, the query is at a node matching $k$ hex digits of the key — which means it is exponentially closer in the ID space. This is exactly like binary search, but in base 16: each step eliminates $15/16$ of the remaining search space.
+
+```mermaid
+flowchart LR
+    A["Node: A7... \n(0 digits match key FE36...)"] -->|"forward: find FE"| B["Node: FE... \n(1 digit matches)"]
+    B -->|"forward: find FE3"| C["Node: FE3... \n(2 digits match)"]
+    C -->|"forward: find FE36"| D["Node: FE36... \n(3 digits match)"]
+    D -->|"leaf set lookup"| E["Node: FE36A2... \n(closest — done)"]
+```
+
+**The key abstraction:** routing in Pastry is not happening at Layer 3 (the IP network layer). It's happening at the **application layer**, over the P2P overlay network. Each "hop" is one message forwarded between Pastry peers over an existing TCP connection.
+
+### 5.2 The Routing Table in Detail
+
+The routing table $\mathcal{R}$ is a $32 \times 15$ matrix (with $b=4$, base 16).
+
+**Why 32 rows?** A node ID is 128 bits = 32 hex digits. At most, you need to match all 32 digits, one per hop.
+
+**Why 15 columns?** At row $i$, you already share $(i-1)$ digits with the key. The $i$-th digit of the key is some hex value $d \in \{0, 1, \ldots, F\}$. Since your own $i$-th digit already accounts for one value, there are $2^b - 1 = 15$ other possible values to cover.
+
+**What each cell contains:** $\mathcal{R}[i][d]$ holds the IP address of a node that shares the first $(i-1)$ digits of *your* node ID, but whose $i$-th digit is $d$. If you find a cell where $d$ matches the $i$-th digit of the key, that node shares one more digit of the key than you do — forward there.
+
+**Mnemonic:** Row $i$ answers "given that I match $(i-1)$ digits, where can I find a node matching $i$ digits for each possible next digit?"
+
+### 5.3 The Leaf Set: The Endgame
+
+The leaf set $\mathcal{L}$ contains:
+- $L/2$ nodes with numerically closest **larger** node IDs (clockwise neighbors on the ring).
+- $L/2$ nodes with numerically closest **smaller** node IDs (counter-clockwise neighbors).
+
+**Why the leaf set matters:** prefix routing gets you *close* to the target, but not necessarily to the single numerically closest node. The leaf set is what guarantees precision at the end. Once the key's hash falls within the range of the current node's leaf set, the node has a perfect local view of that region of the ring and can identify the single closest node with certainty.
+
+**Intuition:** think of the leaf set as your "known neighborhood" on the ring. The routing table takes you to the right neighborhood; the leaf set finds the exact address within it.
+
+**Fault tolerance via the leaf set:** if $L/2$ nodes in the leaf set are still alive, the message can always be passed to *some* neighbor — even if some have failed. This is the basis of Pastry's failure tolerance guarantee.
+
+**Why $L > 2$?** If $L = 2$ (only one neighbor on each side), a single node failure on one side leaves you with no fallback. Having $L = 16$ or $L = 32$ gives you $L/2 - 1$ redundant fallbacks per side — much more robust.
+
+**The critical question: how does a node know who its $L/2$ immediate ring neighbors are?**
+
+This seems circular — to know your ring neighbors, you'd need to know the whole ring. Pastry solves it via the join procedure (Section 6): when node $X$ joins, it routes toward its own node ID. Every node $B_i$ along that path shares $i$ digits of prefix with $X$ and is therefore progressively closer on the ring. $X$ adds all of these path nodes to its leaf set. Because the routing path takes $O(\log N)$ hops, the leaf set ends up with $O(\log N)$ nodes that are **well-distributed** around the ring — not just the immediate neighbors, but also a spread of nodes at varying distances. This distribution is what makes the fast $O(\log N)$ routing work in practice.
+
+**The $O(N)$ baseline — why distributed connections matter:**
+
+To see why you need well-distributed leaf set entries, consider the degenerate case: each node knows *only* its immediate left and right ring neighbors (leaf set size 2, nothing else). Routing works — you'll always find the closest node eventually — but how many hops does it take?
+
+With only immediate neighbors, routing from node $A$ to a target near node $E$ means hopping one step at a time around the ring: $A \to$ next $\to$ next $\to \cdots \to E$. This is $O(N)$ hops — linear in the number of nodes, catastrophically slow for large networks.
+
+Pastry's routing table and well-distributed leaf set act like long-range "shortcuts": instead of stepping one node at a time, you can jump to a node that is already halfway across the ring (in ID space), then a quarter of the way, then an eighth — a classic halving-the-distance strategy that gives $O(\log N)$.
+
+| Connectivity | Routing time | Why |
+|---|---|---|
+| Only immediate neighbors | $O(N)$ | Must step one node at a time |
+| Well-distributed (Pastry) | $O(\log_{2^b} N)$ | Long-range jumps halve the search space each hop |
+
+### 5.4 The Neighborhood Set: Locality
+
+The neighborhood set $\mathcal{M}$ contains $M \approx 2^{b+1}$ nodes that are **geographically or topologically close** to the current node — e.g., nodes in the same data center, same ISP, or nearby in latency.
+
+**What it's for:** locality. When initializing a new node, the neighborhood set seeds the routing table with nearby nodes, so that early routing hops don't unnecessarily cross the globe. It is *not* about closeness in the ID space — it's about closeness in the physical network.
+
+**Key distinction:** the leaf set tracks proximity in the *ID space* (who is numerically close on the ring); the neighborhood set tracks proximity in the *physical network* (who is geographically/latency-close). A node might be your physical neighbor but have a node ID far from yours — that's normal.
+
+### 5.5 The Full Routing Algorithm
+
+```
+Input:  key K, routing table R, hash of key D
+Output: value V
+
+if L_{-L/2} ≤ D ≤ L_{L/2}  then
+    // Key is within the leaf set range — we know exactly who's closest
+    forward K to leaf L_i minimizing |L_i − K|
+
+else
+    l ← length of common prefix between D and my node ID
+    if R(l+1, D_{l+1}) ≠ null  then
+        // Normal case: forward to a node matching one more digit
+        forward to R(l+1, D_{l+1})
+    else
+        // Rare case: no routing table entry for the next digit
+        // Fall back: find any known node that is at least as close
+        // in prefix length but numerically closer to D
+        forward to T ∈ (L ∪ R ∪ M) such that:
+            prefix(T, K) ≥ l   AND   |T − K| < |nodeId − K|
+```
+
+**Three cases, in plain English:**
+
+1. **Leaf set hit** (most precise): the key is in your immediate neighborhood on the ring. You have a complete picture — send directly to the closest node.
+
+2. **Routing table hit** (normal case): look at the $(l+1)$-th row, the column corresponding to the next digit of the key. If that cell is populated, forward there — the next node shares one more digit.
+
+3. **Routing table miss** (rare): your routing table has a gap. Scan all three data structures ($\mathcal{L}$, $\mathcal{R}$, $\mathcal{M}$) for any node that both (a) matches at least as many prefix digits as you do and (b) is numerically closer to the target. Forward there. Progress is still guaranteed — each hop strictly decreases the distance.
+
+### 5.6 Performance and Reliability
+
+**Routing complexity:** $O(\log_{2^b} N)$ hops. With $b=4$ and $N=100{,}000$: $\log_{16}(100{,}000) \approx 4$ hops. Experimentally confirmed:
+
+| Hop count | Fraction of lookups |
+|---|---|
+| 2 hops | 1.5% |
+| 3 hops | 16.4% |
+| 4 hops | 64% |
+| 5 hops | 17% |
+
+Average: ~4 hops for 100,000 nodes (2.5 hops for 1,000 nodes). With a complete routing table, hop count would be 30% lower.
+
+**Why so fast?** Each hop increases the prefix match by one base-$2^b$ digit. That means each hop reduces the search space by a factor of $2^b = 16$. The number of hops needed to reduce a space of $N$ to 1 is $\log_{16}(N)$ — logarithmic search by construction.
+
+---
+
+## 6. Node Arrival: Joining the Ring
+
+### 6.1 The Join Procedure
+
+When node $X$ wants to join:
+
+1. $X$ locates a **nearby** node $A$ (bootstrapping). $A$ can be found via **expanding ring multicast**: $X$ broadcasts a "who is near me?" message with TTL=1, then TTL=2, expanding the search radius until it finds at least one responsive Pastry node. This avoids flooding the whole network while still guaranteeing discovery of a nearby peer.
+2. $X$ routes a **join message** through the network toward the node $Z$ whose node ID is numerically closest to $X$'s own node ID.
+3. Every node on the path from $A$ to $Z$ sends its routing table to $X$.
+4. $X$ uses all this information to initialize its three tables.
+5. $X$ transmits its state to all nodes in $\mathcal{L} \cup \mathcal{R} \cup \mathcal{M}$ so they can update their own tables.
+
+```mermaid
+sequenceDiagram
+    participant X as New Node X
+    participant A as Nearby Node A
+    participant Bi as Path Nodes B₁…Bₙ
+    participant Z as Closest Node Z
+
+    X->>A: join message (route toward X's node ID)
+    A->>Bi: forward join message
+    Bi->>Z: forward join message
+    A-->>X: send routing table row 1
+    Bi-->>X: send routing table rows 2…n
+    Z-->>X: send leaf set
+    X->>Z: update: I have arrived
+```
+
+### 6.2 Initializing the Three Tables
+
+**Neighborhood set:** $A$ is physically close to $X$ (that's how $X$ found it). So $X$ simply copies $A$'s neighborhood set. Geographic proximity is inherited.
+
+**Leaf set:** $Z$ is the closest node to $X$ in the ID space. $X$ copies $Z$'s leaf set and adjusts it around its own position — these are the nodes immediately adjacent to $X$ on the ring.
+
+**Routing table:** this is the clever part. Each node $B_i$ on the path from $A$ to $Z$ has exactly $i$ digits of its prefix matching $X$'s ID (because each step of routing increases the prefix match by one). So $B_i$'s $(i+1)$-th routing table row already covers nodes sharing $i$ digits with $X$ — exactly what $X$ needs for its $(i+1)$-th row. $X$ copies row $i+1$ from $B_i$'s table. The first row (no prefix match needed) comes from $A$.
+
+**Why this is efficient:** $X$ does not need to contact the entire network. It only contacts the $O(\log N)$ nodes along the routing path, and each contributes exactly the right row of the routing table.
+
+### 6.3 Maintaining Locality on Join
+
+**The induction argument (intuition, not proof):** assume every existing node already has a well-localized routing table — i.e., all its routing table entries point to nearby nodes. When $X$ joins:
+
+- $X$ starts from $A$, which is geographically close.
+- The routing path $A \to B_1 \to \cdots \to Z$ stays "fairly close" to $X$ throughout, because each $B_i$ was close to $A$ (by the induction assumption applied to $B_i$'s own routing table).
+- Since $X$ copies row $i+1$ from $B_i$, and $B_i$ is fairly close, $X$'s row $i+1$ also points to nearby nodes.
+- Therefore $X$ inherits locality.
+
+The induction base case holds trivially: when the network has one node, the property is vacuously true. New joins preserve it. **Induction hypothesis proved.**
+
+---
+
+## 7. Node Departure and Failure: Keeping the Ring Alive
+
+### 7.1 Graceful vs Non-Graceful Departure
+
+A node can leave the network in two fundamentally different ways:
+
+- **Graceful departure**: the node knows it is leaving. It can notify its neighbors, transfer its stored records to the next-closest node, and update routing tables. This is clean but rare in practice — machines crash, connections drop, users close applications without warning.
+- **Non-graceful departure (failure)**: the node simply disappears. No notification, no data transfer. This is the common case and the one the protocol must be designed for.
+
+Pastry's design is specifically built around the assumption that departures are usually non-graceful. The redundancy mechanism below is the answer.
+
+### 7.2 Redundancy: Why Store at Neighbors?
+
+Suppose node $X$ holds the record "node $Q$ has file $F_1$." If $X$ fails without warning — which is the common case — that record is lost. The next query for $F_1$ will route to $Y$ (the next closest node), which knows nothing.
+
+**The fix: each node stores a copy of what its neighbors would normally store.** Specifically, every node stores the key-value records that would belong to the $L/2$ nodes to its immediate left and right on the ring.
+
+**Careful: this is not a full replication of everyone's data.** Node $Y$ only stores *what would be stored at $X$ by the DHT rule*, not what $X$ itself happens to hold for other reasons. This keeps the storage overhead bounded.
+
+**Why $L/2$ copies?** The failure guarantee says delivery is possible unless $L/2$ adjacent nodes fail simultaneously. With $L/2$ redundant copies distributed around the neighborhood, you need to lose all of them at once before data becomes unavailable.
+
+### 7.3 Repairing the Leaf Set
+
+Nodes might fail or leave without notice. When node $\mathcal{L}_{-k}$ (a leaf at position $-k$, where $-L/2 < k < 0$) is detected as failed:
+
+1. Contact the furthest-away leaf on the same side: $\mathcal{L}_{-L/2}$.
+2. Get its leaf set.
+3. Merge the received leaf set with your own.
+4. For any new nodes discovered, **ping them** to verify they are actually alive before adding them.
+
+**Why ping?** The received leaf set might itself be stale. A node that appears in $\mathcal{L}_{-L/2}$'s leaf set might also have failed. Always verify before trusting.
+
+**Keep-alive messages:** every Pastry node periodically sends heartbeat messages to all nodes it is connected to. This gives early warning of failures, so repair can happen proactively rather than reactively.
+
+### 7.4 Repairing the Routing Table
+
+When routing table entry $\mathcal{R}(l, d)$ fails:
+
+1. **Try a lateral replacement:** contact $\mathcal{R}(l, d')$ for some $d' \neq d$ (a different node in the same row, i.e., one that shares the same prefix length). Ask it for a node at the same position.
+2. **If no lateral replacement works, look further:** ask $\mathcal{R}(l+1, d')$ — a node with an even longer prefix match. It likely has richer knowledge of that region of the ring.
+
+**Intuition:** nodes with longer shared prefixes tend to know more about the detailed structure of that ID region — they're "deeper" into the same neighborhood of the ring.
+
+### 7.5 Repairing the Neighborhood Set
+
+The neighborhood set requires a different repair strategy because it tracks physical proximity, not ID proximity:
+
+1. Each node **periodically pings** all nodes in its neighborhood set.
+2. If a neighbor is found dead, contact the *remaining* neighbors and ask for *their* neighborhood sets.
+3. Merge, verify, and repair.
+
+**Why go to neighbors?** If your geographic neighbor is dead, your other geographic neighbors are likely to know about nearby nodes — they share the same physical region.
+
+---
+
+## 8. Tolerating Byzantine Failures
+
+Byzantine failures — where nodes lie, corrupt messages, or behave maliciously — require additional mechanisms beyond fail-stop handling:
+
+- **Multiple entries per routing table cell**: store several alternative nodes per cell so a single malicious/incorrect entry can be detected and bypassed.
+- **Randomize the routing strategy**: don't always take the same route; randomization makes it harder for an adversary to reliably intercept queries.
+- **Periodic IP broadcasts and expanding-ring multicasts**: reconnect network components that may have become disconnected due to failures or attacks.
+
+---
+
+## 9. Experimental Results
+
+**Simulation setup:** 100,000 nodes, each running a Java-based VM, each assigned coordinates in a Euclidean plane (to model geographic distances).
+
+**Key findings:**
+
+- Hop count grows **linearly with $\log N$** — confirming the $O(\log_{2^b} N)$ prediction.
+- At 1,000 nodes: ~2.5 hops average.
+- At 100,000 nodes: ~4 hops average.
+- With a complete routing table (no missing entries): hop count would be **30% lower**.
+- Hop count distribution for 100,000 nodes and 200,000 lookups: 64% of queries complete in exactly 4 hops.
+
+---
+
+# Part II — Proofs and Mathematical Derivations
+
+> Read this after Part I. All notation defined here is consistent with Part I.
+
+## P1. Why $O(\log_{2^b} N)$ Steps Suffice: The Prefix-Match Convergence Proof
+
+**What we want to show:** after $m = c + \log_{16}(N)$ hops (with $c$ a small constant), it is virtually certain that no other node exists that shares more than $m$ hex digits of prefix with the key. This means routing *must* have converged — there's no one further to forward to.
+
+**Setup (with $b=4$, base $= 2^b = 16$):**
+
+The probability that two randomly hashed IDs share the same first hex digit is $1/16$ (each digit is uniformly distributed). The probability they share the first $m$ digits is $16^{-m}$.
+
+Therefore, the probability that a specific node does **not** share a prefix of length $m$ with the key is $1 - 16^{-m}$.
+
+With $N$ nodes (all independent):
+
+$$P(\text{no node shares a prefix of length } m \text{ with the key}) = (1 - 16^{-m})^N$$
+
+**Setting $m = c + \log_{16}(N)$:**
+
+$$P = (1 - 16^{-m})^N = (1 - 16^{-c} \cdot 16^{-\log_{16}(N)})^N = \left(1 - \frac{16^{-c}}{N}\right)^N$$
+
+Let $\lambda = 16^{-c}$. Rewrite:
+
+$$P = \left(1 - \frac{\lambda}{N}\right)^N = \left[\left(1 - \frac{\lambda}{N}\right)^{N/\lambda}\right]^\lambda$$
+
+Applying the standard limit $\lim_{N \to \infty}(1 - \lambda/N)^{N/\lambda} = e^{-1}$:
+
+$$\boxed{P = e^{-\lambda} = e^{-16^{-c}}}$$
+
+**Reading the result:**
+
+| $c$ | $\lambda = 16^{-c}$ | $P = e^{-\lambda}$ |
+|---|---|---|
+| 0 | 1 | $e^{-1} \approx 0.37$ |
+| 1 | $1/16 \approx 0.063$ | $\approx 0.94$ |
+| 2 | $1/256 \approx 0.004$ | $\approx 0.996$ |
+| 3 | $\approx 2.4\times10^{-4}$ | $\approx 0.9998$ |
+
+By $c = 2$: the probability that *any* node in the entire network shares more than $m = 2 + \log_{16}(N)$ digits of prefix with the key is essentially zero. So after $2 + \log_{16}(N)$ hops, prefix routing has converged with near certainty.
+
+**The $O(\log N)$ conclusion:**
+
+$$\text{routing hops} \leq m = c + \log_{16}(N) = O(\log_{16}(N)) = O(\log_{2^b}(N))$$
+
+**Worked example** with $N = 1{,}000{,}000$:
+
+$$\log_{16}(10^6) = \log_{16}(16^5) = 5$$
+
+So $m = c + 5 \approx 7$ hops at most — even for a million-node network.
+
+**Why does the search space shrink exponentially per hop?** Each hex digit of the key occupies 4 bits. Matching one more digit means you have narrowed the target region of the ring by a factor of $16 = 2^4$. After $k$ matched digits, you are looking at a region of size $N / 16^k$. Setting $N / 16^k = 1$ gives $k = \log_{16}(N)$ — exactly the number of routing hops needed.
+
+---
+
+## P2. Maintaining Locality on Join: The Induction Argument
+
+**Claim:** if all existing nodes have well-localized routing tables (all entries point to nearby nodes), then when a new node $X$ joins using the Pastry join procedure, $X$'s routing table is also well-localized.
+
+**Proof by induction on the join order:**
+
+**Base case:** a network with one node trivially satisfies the property (no routing table entries to worry about).
+
+**Inductive step:** assume all existing nodes have well-localized routing tables. Node $X$ joins via nearby node $A$.
+
+The join message routes from $A$ toward $Z$ (the node closest to $X$'s node ID). Let $B_i$ be the $i$-th node along this path. By the routing protocol, $B_i$ shares $i$ digits of prefix with $X$.
+
+The induction assumption says $B_i$'s routing table is well-localized — all its entries point to nearby nodes.
+
+$X$ copies row $i+1$ of its routing table from $B_i$'s row $i+1$. We need to show those entries are near to $X$:
+
+- $B_i$ shares $i$ prefix digits with $X$.
+- $B_i$ was reached from $A$, which is geographically close to $X$.
+- Each routing step stays "in the neighborhood" because the induction assumption guarantees $B_i$'s entries point to nearby nodes.
+- Since $B_i$ is close to $X$ (transitively via $A$), $B_i$'s row $i+1$ entries are also close to $X$.
+
+Therefore $X$'s row $i+1$ is populated with nearby nodes — locality is preserved.
+
+Since this holds for all rows $i = 1, \ldots, 32$, $X$'s entire routing table is well-localized.
+
+**Induction hypothesis proved.** $\square$
+
+**The practical consequence:** locality is not an accident. The join procedure is explicitly designed so that routing-table rows are obtained from nodes that are simultaneously (a) ID-space-close (sharing prefix digits) and (b) network-space-close (reachable via short physical hops). The two notions of closeness are coupled by the join path, which ensures each $B_i$ is both.
 """
             },
-            "pastry-protocol": {
-                "title": "The Pastry DHT Protocol",
-                "content": """# The Pastry DHT Protocol
+            "02-freenet": {
+                "title": "The Freenet Protocol",
+                "content": """# Freenet: 3rd Generation Peer-to-Peer Networks
 
-Pastry is a structured peer-to-peer overlay network designed to implement a Distributed Hash Table (DHT). Unlike Chord's ring-based numeric distance, Pastry routes messages based on **Prefix Matching** and incorporates physical network topology to optimize routing latency.
+*Lecture notes — Smruti R. Sarangi, IIT Delhi*
+*Source paper: Clarke et al., "Freenet: A Distributed Anonymous Information Storage and Retrieval System," Designing Privacy Enhancing Technologies, Springer, 2001*
+*Course page: [COL 819 — Advanced Computer Networks, IIT Delhi (2021)](https://www.cse.iitd.ac.in/~srsarangi/courses/2021/col_819_2021/index.html)*
 
----
+> **Academic purpose only.** Freenet is studied here purely as a computer science system. Understanding how anonymization networks work is necessary for anyone who wants to study, regulate, or investigate them. The discussion neither endorses nor promotes any misuse.
 
-## 1. Identifier Space and Routing Table
-
-Pastry identifiers (both Node IDs and Key IDs) are $128$-bit numbers, typically represented in base $2^b$ (usually $b=4$, representing hexadecimal).
-
-### 1.1 Node State
-Each Pastry node maintains three key data structures:
-
-1.  **Routing Table**: Organized into $128/b$ rows and $2^b$ columns.
-    *   Row $r$ contains contacts whose IDs match the current node's ID in the first $r$ digits, but differ at digit $r+1$.
-2.  **Leaf Set ($L$)**: A set of $L$ closest nodes in the identifier space (typically $L/2$ numerically smaller, $L/2$ numerically larger). Used for final delivery.
-3.  **Neighborhood Set ($M$)**: A list of $M$ nodes that are physically closest in the network (based on ping latency/RTT). Used to maintain locality.
+> **Structure:** Part I covers every concept and mechanism cleanly with intuition. No math, no proofs. Part II is a summary of the evaluation results. There is no heavy mathematics in this topic — the "proof" here is the protocol design itself and the anonymity argument.
 
 ---
 
-## 2. Pastry Routing Algorithm
+## Table of Contents
 
-When a node receives a message with key $D$:
-
-1.  **Check Leaf Set**: If $D$ falls within the range of the Leaf Set, forward the message directly to the node in the Leaf Set numerically closest to $D$.
-2.  **Check Routing Table**: If not in the Leaf Set, find the length of the common prefix between the current node ID and $D$. Let this prefix length be $l$.
-    *   Look up the routing table entry at row $l$, column $d$ (where $d$ is the $(l+1)$-th digit of $D$).
-    *   If the entry exists, forward to that node.
-3.  **Fallback**: If no such entry exists, forward to a node from all available sets (Routing, Leaf, Neighborhood) that matches prefix length $l$ and is numerically closer to $D$ than the current node.
-
-> **Complexity**: Lookups complete in $O(\\log_{2^b} N)$ routing steps.
-
----
-
-## 3. Proximity Routing (Network Locality)
-
-Pastry leverages the Neighborhood Set to achieve **Proximity Routing**. During routing table initialization, a joining node requests states from nearby nodes. It copies routing rows from nodes that match its prefix digits and are physically close, ensuring that each routing hop travels the minimum physical network distance possible.
-"""
-            },
-            "bittorrent-protocol": {
-                "title": "The BitTorrent P2P Protocol",
-                "content": """# The BitTorrent P2P Protocol
-
-BitTorrent is a highly popular peer-to-peer file distribution protocol. Unlike DHT overlays which focus on key routing, BitTorrent optimizes for high-throughput, parallel replication of large files across unstable networks.
-
----
-
-## 1. BitTorrent Terminology and Components
-
-BitTorrent splits files into small, equal-sized pieces (typically $256\\text{ KB}$ to $2\\text{ MB}$) to allow parallel downloading.
-
-*   **Torrent File**: Metadata containing piece hashes, file sizes, and the tracker URL.
-*   **Tracker**: A centralized HTTP/HTTPS server that maintains a list of peers downloading the torrent.
-*   **Seeder**: A peer that has a complete copy of the file and is only uploading.
-*   **Leecher**: A peer that is actively downloading and uploading pieces.
-*   **Swarm**: The group of all peers participating in sharing a specific torrent.
+- [1. Where Freenet Fits: The P2P Progression](#1-where-freenet-fits-the-p2p-progression)
+- [2. Design Goals](#2-design-goals)
+- [3. Freenet = Gnutella + Pastry + Anonymity](#3-freenet-gnutella-pastry-anonymity)
+- [4. The Freenet Node](#4-the-freenet-node)
+- [5. Querying: How You Find a File](#5-querying-how-you-find-a-file)
+  - [5.1 Steps in a Query](#51-steps-in-a-query)
+  - [5.2 Failure Handling During a Query](#52-failure-handling-during-a-query)
+  - [5.3 Search Quality: How the Network Improves Over Time](#53-search-quality-how-the-network-improves-over-time)
+- [6. Data Storage: How You Insert a File](#6-data-storage-how-you-insert-a-file)
+  - [6.1 The Insert Procedure](#61-the-insert-procedure)
+  - [6.2 Two Termination Strategies](#62-two-termination-strategies)
+  - [6.3 Beating Security on Insert: Lying About Ownership](#63-beating-security-on-insert-lying-about-ownership)
+  - [6.4 Advantages of This Storage Mechanism](#64-advantages-of-this-storage-mechanism)
+- [7. Data Management: Finite Storage and LRU](#7-data-management-finite-storage-and-lru)
+- [8. Encryption for Deniability](#8-encryption-for-deniability)
+- [9. Message Format and Protocol Details](#9-message-format-and-protocol-details)
+  - [9.1 Message Fields](#91-message-fields)
+  - [9.2 The TTL Vulnerability and the Depth Field Fix](#92-the-ttl-vulnerability-and-the-depth-field-fix)
+  - [9.3 Timers and Reliability](#93-timers-and-reliability)
+  - [9.4 Message Types](#94-message-types)
+- [10. Naming, Searching, and Security](#10-naming-searching-and-security)
+  - [10.1 Organizing Files Without a Central Directory](#101-organizing-files-without-a-central-directory)
+  - [10.2 Sender Anonymity](#102-sender-anonymity)
+  - [10.3 Pre-routing and Layered Encryption](#103-pre-routing-and-layered-encryption)
+- [11. Summary: The Four Pillars of Freenet Anonymity](#11-summary-the-four-pillars-of-freenet-anonymity)
+- [12. Evaluation](#12-evaluation)
+  - [12.1 Setup](#121-setup)
+  - [12.2 Results: Successful Requests vs. Number of Queries](#122-results-successful-requests-vs-number-of-queries)
+  - [12.3 Results: Hops vs. Number of Queries](#123-results-hops-vs-number-of-queries)
 
 ---
 
-## 2. Swarm Dynamics and Algorithms
+## 1. Where Freenet Fits: The P2P Progression
 
-To maximize download speeds and prevent "freeriding," BitTorrent employs decentralized auction-like algorithms:
+| Generation | System | Key Property | Main Weakness |
+|---|---|---|---|
+| 1st | Napster | Centralized index, P2P transfer | One legal and technical point of failure — the server |
+| 2nd | Gnutella | Decentralized, broadcast search | No anonymity; IP addresses visible along the path |
+| 3rd | DHTs (Pastry, Chord…) | Structured $O(\log N)$ routing | Nodes along the path know who is searching for what |
+| 3rd+ | **Freenet** | DHT-like routing + anonymization | Still partial (not total) anonymity; no guaranteed delivery time |
 
-### 2.1 Rarest-First Selection
-To prevent pieces from dying out in the swarm, leechers query their connected neighbors for their piece maps and download the **rarest pieces first**. This ensures high piece diversity in the swarm.
+Freenet's unique contribution is not speed or efficiency — it's **anonymity**. Both the requester and the original provider of a file are hidden from the rest of the network, to a degree not achieved by any of the earlier systems.
 
-### 2.2 Choking Algorithm (Tit-for-Tat)
-Each peer limits the number of concurrent uploads (typically to 4) by "choking" (refusing to send data to) other peers. It updates these decisions every 10 seconds:
-
-1.  **Symmetric Exchange**: The peer measures the download rates from all connected neighbors. It unchokes the **4 peers** that are currently providing the highest download rates.
-2.  **Optimistic Unchoking**: Every 30 seconds, the peer unchokes a **random peer**, regardless of its upload contribution. This allows new peers to acquire their first pieces and discovers faster uploaders.
+Freenet is a direct precursor to the modern **dark web** and influenced the design of networks like Tor.
 
 ---
 
-## 3. Trackerless Torrents (Kademlia DHT)
+## 2. Design Goals
 
-Modern BitTorrent clients do not rely on central trackers. Instead, they use a structured Kademlia DHT overlay:
+Freenet was explicitly designed around four goals, in this priority order:
 
-*   **Nodes as Trackers**: The swarm information is mapped to a key (the torrent's *InfoHash*).
-*   **Kademlia Routing**: Routing is based on the XOR metric:
-    $$d(x, y) = x \\oplus y$$
-    Peers store contacts in $k$-buckets based on their XOR distance.
+**Anonymity** — it must not be possible to determine the true origin of a file (who inserted it) or the identity of who is requesting it.
+
+**Deniability of storers** — a node that is caching and forwarding data must be able to credibly deny that it knows what it is storing or who originally created the content. This is the legal protection layer.
+
+**Efficient storage** — the system should organize data intelligently (similar keys cluster together) so lookups can succeed quickly.
+
+**Reliability** — the system should deliver data consistently, even in a network where nodes join and leave unpredictably.
+
+**A critical design consequence:** all storage in Freenet is explicitly **temporary**, not permanent. Data that is not frequently accessed eventually gets evicted (via LRU policy). This is partly a technical choice and partly a legal one — a node can claim it did not deliberately retain any specific content.
+
+---
+
+## 3. Freenet = Gnutella + Pastry + Anonymity
+
+The cleanest way to understand Freenet is as a combination of two things you already know, plus a layer of deliberate obfuscation:
+
+```
+Freenet ≈ Gnutella (flooding-style neighbor queries)
+        + Pastry (key-based routing toward numerically closer nodes)
+        + Anonymity mechanisms (fake ownership, no origin tracing)
+```
+
+**From Gnutella:** queries are sent to neighbor nodes, which forward them onward. There's a TTL field to prevent infinite flooding. There's a pseudo-random query ID to prevent cycles.
+
+**From Pastry:** each node maintains a routing table of key→address mappings. When forwarding a query, you don't just flood randomly — you forward to the neighbor whose known keys are *numerically closest* to the key you're looking for. This gives directional, informed routing rather than pure broadcast.
+
+**What Freenet adds:** a deliberate system of fake ownership claims, origin hiding, and message obfuscation that makes it very difficult to identify who published or requested any particular file.
+
+---
+
+## 4. The Freenet Node
+
+Each Freenet node maintains two local structures:
+
+**Local data store** — actual cached copies of files (or file chunks) that this node holds. Storage is finite and managed via LRU eviction.
+
+**Routing table** — a dynamic table with entries of the form:
+
+| Key | Address | Content (?) |
+|---|---|---|
+| hash of some file | IP of a node that *might* have it | Optional cached content |
+
+The `(?)` on content is important — the routing table records *where* data might be, but a node is not required to store the content itself. It may just know a pointer.
+
+**Critical constraint: 1-hop visibility only.** A node knows only its *immediate* neighbors — it has no view of the wider network. This is a deliberate design choice for anonymity: you cannot reveal information about nodes you don't know. The routing table grows organically over time as queries traverse the network and new entries are created along successful paths.
+
+There is also a **degree of trust** between a node and its direct neighbors — they know each other is *participating* in the protocol, but cannot verify whether the other is the original requester of any given query or just forwarding on someone else's behalf.
+
+---
+
+## 5. Querying: How You Find a File
+
+### 5.1 Steps in a Query
+
+Suppose you want to find a file named `song.mp3`.
+
+```mermaid
+flowchart LR
+    A["Requester A"] -->|"1: hash(song.mp3) = key K\n lookup closest key in routing table"| B["Node B"]
+    B -->|"2: forward toward closest key to K"| C["Node C"]
+    C -->|"3: forward..."| E["Node E (has file)"]
+    E -->|"4: Send.Data (claims to be owner)"| C
+    C -->|"5: cache + create routing entry\n forward reply"| B
+    B -->|"6: cache + create routing entry\n forward reply"| A
+```
+
+Step by step:
+
+1. The requesting node hashes the file name to get key $K$.
+2. In its routing table, it finds the entry whose key is *numerically closest* to $K$ and forwards the request to that node's address.
+3. Each intermediate node repeats: find the routing table entry with the key closest to $K$, forward there.
+4. When a node that has the file is found, it returns the file contents **and claims to be the owner** — even if it is not the original creator, just a caching intermediary.
+5. The reply travels back hop by hop along the same path.
+6. Every node on the return path **caches a copy of the file** and **creates a new routing table entry** pointing to whoever supplied it (which may be a fake owner — see §6.3).
+
+**Why do intermediate nodes cache?** This is the mechanism by which popular data gets widely replicated. Every successful query spreads the file to all intermediate nodes. Future queries for the same file have a shorter path to travel — and more fake owners to confuse trackers.
+
+**Why does every node claim to be the owner?** This is the core anonymity mechanism. If every node that has ever touched a file claims ownership, a legal investigator facing dozens of "owners" in a large network cannot determine which one actually created it.
+
+### 5.2 Failure Handling During a Query
+
+A query can fail for two reasons: the path creates a **cycle** (the pseudo-random query ID detects this — a node refuses to forward a query it has already seen), or a node simply has no further routing table entries to try.
+
+When a node cannot forward:
+- It first tries the **second-closest key** in its routing table instead of the closest.
+- It can keep trying progressively further keys.
+- The TTL field decrements at every hop regardless, so the query eventually dies if nothing is found.
+
+**Dynamic TTL reduction:** if the network is congested (too many messages), nodes can reduce the TTL faster than one-per-hop to shed load. Nodes can also use the TTL value to prioritize which queued request to process next — higher remaining TTL = more urgent.
+
+### 5.3 Search Quality: How the Network Improves Over Time
+
+Freenet starts cold — routing tables are sparse and searches fail often. Over time:
+
+**Information disseminates.** Every successful query plants routing table entries and cached files along its path. The more queries the network processes, the richer every node's routing table becomes.
+
+**Nodes aggregate files with similar keys.** Because routing always moves toward numerically closer keys, a node tends to accumulate cached copies of files whose keys are numerically near its own routing table entries. Over time, a node becomes a de-facto specialist for a neighborhood of the key space.
+
+**Popular data replicates widely.** A heavily-requested file gets cached by every node that ever handled a query for it. This makes popular data easy to find and extremely hard to eradicate.
+
+**Routing tables grow without revealing identities.** New entries get created whenever a query path passes through a node, but the node only learns the next hop — not the full path. The network map is discovered incrementally and anonymously.
+
+---
+
+## 6. Data Storage: How You Insert a File
+
+### 6.1 The Insert Procedure
+
+To insert a file into the Freenet network:
+
+1. The user creates a key: `key = hash(filename)`.
+2. The user sends an `insert` message to their own local node, containing: `(file, key, TTL)`.
+3. The local node checks its routing table:
+   - If `key` is already there → it returns the existing contents (collision — see below).
+   - If not → it finds the closest key in its routing table and **forwards the insert message** in that direction.
+4. This forwarding continues, hop by hop, toward the node whose routing table entry is closest to `key`.
+5. The file eventually lands at a node that cannot find anyone closer — and that node stores it.
+
+**The crucial anonymity property of insertion:** the original owner does **not** keep a copy. The file is sent away into the network, routed toward a node with numerically similar keys, and stored there. The inserter's connection to the content is immediately severed — the file is now geographically and topologically far from whoever created it.
+
+### 6.2 Two Termination Strategies
+
+There are two ways an insert can legitimately end:
+
+**Strategy 1 — Closest key:** the insert propagates until it reaches a node where no neighbor has a closer key. That node stores the file. This is the more intelligent approach — the file lands as close as possible to its "correct" position in the key space, which makes future lookups efficient.
+
+**Strategy 2 — TTL exhaustion:** the insert is forwarded $k$ hops in the direction of the closest key, and when the TTL reaches 0, whatever node currently holds it stores it. This is simpler but less precise about placement.
+
+In both cases, on success:
+- The terminal node (and possibly the inserter's own node) add the file and key to their stores.
+- Every node on the path adds the key and a routing entry to its table.
+- Every node caches a copy of the file.
+- The original inserter is notified via back-propagation.
+
+### 6.3 Beating Security on Insert: Lying About Ownership
+
+When a node on the insertion path caches the file and creates a routing table entry, what address does it record as the "source"?
+
+It has two options, both of which add anonymity:
+
+- **Claim itself as the owner**: record its own IP address in the routing entry. Anyone querying this node in the future will be told "I am the owner."
+- **Point to a neighbor**: record the address of whichever neighbor it forwarded to (or received from). This creates a further layer of indirection.
+
+Both strategies create **fake owners**. In a large network, dozens or hundreds of nodes along the paths of all queries that have ever touched this file will all claim ownership. An investigator faces an impossible signal-to-noise problem: who among all these claimants actually created the file?
+
+**The hash collision case:** if during insertion the target node already has a file with the same key (hash collision), it passes the data *back upstream* to the node that sent it, which then caches it locally. This also means the file gets stored, just at a different node.
+
+### 6.4 Advantages of This Storage Mechanism
+
+**Files land near nodes with similar keys.** This is not accidental — the routing always moves toward numerically closer keys, so the file naturally lands in a neighborhood of the key space where future lookups will also naturally arrive. Insertion and retrieval use the same routing logic, so they converge to the same location.
+
+**Information about new files disseminates quickly.** Every node on the insert path gets a routing entry. From the moment of insertion, $O(\text{TTL})$ nodes already know where the file is.
+
+**Deliberate hash collision attacks are difficult.** An attacker trying to spam the network with fake inserts to displace legitimate files would need to predict hash outputs — cryptographically hard. Legitimate collisions are handled gracefully by bouncing the file to the upstream node.
+
+---
+
+## 7. Data Management: Finite Storage and LRU
+
+Both the routing table and the data store are **finite structures**. They cannot grow indefinitely. The management policy is **LRU (Least Recently Used)**:
+
+- When a new file or routing entry must be stored and there's no space, the oldest, least-recently-accessed entry is evicted.
+- This ensures old, unpopular data gradually disappears from the network.
+
+**Legal implication of LRU:** a node can claim it did not deliberately retain any specific content — files it once held may have been silently evicted to make room for newer traffic. The node had no editorial control over what it stored. This is the **deniability of storers** design goal in action.
+
+This also means Freenet provides **no guarantee of permanence**. Files that are not actively requested will eventually fall out of the network. Popular files self-replicate (via caching on query paths) and effectively become permanent. Rare files gradually disappear.
+
+---
+
+## 8. Encryption for Deniability
+
+Deniability can be strengthened further using encryption. The mechanism:
+
+- When inserting a file, the original owner **encrypts the file content using the file key** (or a derived key).
+- The encrypted content circulates through the network — nodes store and forward it without being able to read it.
+- Any node that knows the key can **decrypt** the content; nodes that don't know the key cannot.
+
+**The deniability argument:** a node storing an encrypted file can honestly say it had no idea what content it held — it could not distinguish an illegal file from a legal one because everything was encrypted ciphertext. The "I didn't know what I was storing" defense has real legal weight in some jurisdictions.
+
+**The catch:** the final consumer must know the decryption key, and that key cannot be distributed via Freenet itself (that would defeat the encryption). Key sharing must happen through some other out-of-band channel. This is a significant practical limitation of the encryption approach.
+
+**Participation alone may be illegal:** in many jurisdictions, merely running a Freenet node that routes and caches content — even without knowing what that content is — may be sufficient for legal liability depending on local law. The encryption argument provides a defense but not a guarantee.
+
+---
+
+## 9. Message Format and Protocol Details
+
+### 9.1 Message Fields
+
+Freenet messages are self-contained packets, sent over either TCP (reliable) or UDP (unreliable). Every message — whether a query or an insert — contains three mandatory fields:
+
+| Field | Size | Purpose |
+|---|---|---|
+| Transaction ID | 64 bits | Uniquely identifies this transaction; prevents cycles (a node won't forward a transaction ID it has already seen) |
+| TTL counter | Variable | Decremented at every hop; kills the message when it reaches 0 |
+| Depth field | Variable | Starts at a random value, **incremented** at every hop; used to defeat TTL-based tracing attacks |
+
+### 9.2 The TTL Vulnerability and the Depth Field Fix
+
+**The attack:** an eavesdropper (e.g., a law enforcement node) inside the network can observe the TTL value on a passing message. If TTL was initialized to 10 and the eavesdropper sees TTL=5, it deduces the requester is exactly 5 hops away — and can use triangulation to narrow down the source.
+
+There are two defenses:
+
+**Defense 1 — Random TTL propagation:** when the TTL field reaches 1 (about to die), instead of stopping, the node probabilistically continues forwarding the message to other nodes. This adds random noise to the apparent "distance" of the source.
+
+**Defense 2 — The depth field (the main fix):**
+
+The depth field starts at a **random positive value** (not zero) and is incremented at every hop. When the destination node (the one that has the file) is about to send the reply back, it sets:
+
+$$\text{TTL}_{\text{return}} = \text{depth}_{\text{current}}$$
+
+**Why this works:**
+
+Say the true distance from requester to destination is $k$ hops. The depth field started at some random value $r > 0$ and was incremented $k$ times, so at the destination it equals $r + k$.
+
+The return TTL is set to $r + k$, which is guaranteed to be $\geq k$ (the message won't die in transit) but is not *equal* to $k$ (an eavesdropper can't measure the exact distance). How much greater than $k$ it is depends on $r$, which is unknown to any eavesdropper.
+
+**The three constraints satisfied:**
+- TTL must be $\geq k$: otherwise the reply dies before reaching the requester.
+- TTL must not be exactly $k$: otherwise an eavesdropper learns the exact distance.
+- The excess above $k$ must be random: otherwise the eavesdropper could infer $k$ from the TTL anyway.
+
+The depth field with a random initialization satisfies all three.
+
+```mermaid
+sequenceDiagram
+    participant R as Requester
+    participant M as Middle Node (eavesdropper)
+    participant D as Destination
+
+    R->>M: query, TTL=10, depth=5 (random start)
+    Note over M: sees TTL=9, depth=6. Knows it's ≥1 hop from source. Cannot tell exact distance.
+    M->>D: query, TTL=8, depth=7
+    Note over D: distance from R = 2 hops. depth=7. Sets return TTL=7.
+    D-->>M: reply, TTL=6
+    Note over M: sees TTL=6. Cannot determine if R is 1 or 6 hops away.
+    M-->>R: reply, TTL=5
+```
+
+### 9.3 Timers and Reliability
+
+For every request, the requester starts an **absolute timer**. If the timer expires with no reply:
+- It infers failure.
+- It may try again with a different routing path.
+
+Downstream nodes that are still processing (congestion, slow search) can send a **`Reply.Restart`** message to the requester. On receiving this, the requester **extends its timer** — it knows the request is still in flight, just delayed. This prevents premature failure declarations in a slow but functioning network.
+
+### 9.4 Message Types
+
+| Message | When sent | Meaning |
+|---|---|---|
+| `Send.Data` | File found | Success; includes file content and (possibly fake) source ID |
+| `Reply.NotFound` | TTL reached 0 with no result | No file found within the TTL radius |
+| `Request.Continue` | No more paths, TTL > 0 | Stuck — requester should try other routing table entries |
+| `Reply.Restart` | Downstream node congested | "Still working, extend your timer" |
+
+---
+
+## 10. Naming, Searching, and Security
+
+### 10.1 Organizing Files Without a Central Directory
+
+**The problem:** in a large anonymous network, how does a user find files without a central search engine?
+
+A central directory or Google-like search engine is incompatible with anonymity — whoever maintains the index becomes a legal target, and the index itself reveals what content exists in the network.
+
+**The solution — distributed metadata files:**
+
+Indirect files containing metadata are scattered throughout the network. A directory is itself a file in Freenet, with a key. It contains a mapping from keywords to the keys of actual files.
+
+For complex searches, multiple keyword-index files can exist independently. Searching for a file by multiple terms means:
+1. Query the network for the keyword-A index file → get a set of keys.
+2. Query for the keyword-B index file → get another set of keys.
+3. Take the intersection → keys of files matching both terms.
+
+This is a fully distributed search with no central coordinator.
+
+**Content integrity:** to ensure a file has not been tampered with in transit, a **content hash** can accompany the file. Any node receiving the file can verify the hash; if it doesn't match, the file was corrupted or deliberately altered.
+
+**Bookmark lists:** in jurisdictions where operating a Freenet directory is legally safe, node operators can publish bookmark lists — collections of keys to notable files, shared via the same Freenet mechanisms.
+
+### 10.2 Sender Anonymity
+
+Sender anonymity means a neighbor cannot tell whether the node it is talking to is the original requester or merely a forwarding relay.
+
+**Why this holds:** since every node participates in forwarding queries on behalf of others, any given query arriving at node $B$ from node $A$ could have originated at $A$, or it could have originated at some unknown node further back in the chain that asked $A$ to forward it. There is no way for $B$ to distinguish these cases.
+
+**The 1-hop visibility rule is the key:** a node only knows its immediate neighbors. It cannot see two hops back. This structural constraint — not any cryptographic trick — is what provides sender anonymity at the routing level.
+
+**Message-level eavesdroppers:** a passive attacker who can read messages between specific pairs of nodes can potentially correlate timing and content to infer who is requesting what. Defense: encrypt all messages between node pairs. This prevents eavesdroppers from learning which key is being requested even if they can observe traffic volume.
+
+### 10.3 Pre-routing and Layered Encryption
+
+If a requester has a detailed enough routing table (knows the full path to the destination), it can use **pre-routing**: it decides the entire routing path in advance and encrypts the message in successive layers, one per hop.
+
+```
+Message for destination D, path: A → B → C → D
+
+Encrypted as: Encrypt_A( Encrypt_B( Encrypt_C( Encrypt_D( payload ) ) ) )
+```
+
+At each hop, the node peels one layer of encryption (using its private key), revealing only the address of the next hop. No node can see further than one hop ahead, and no node can determine who the original sender is.
+
+**Limitation:** this only works if the requester knows the full path, which requires a detailed routing table. In practice, routing tables are incomplete and pre-routing is used selectively.
+
+---
+
+## 11. Summary: The Four Pillars of Freenet Anonymity
+
+Everything in Freenet's design reduces to four mechanisms working together:
+
+**Pillar 1 — Request denial (1-hop visibility):** a node can never verify whether its neighbor is the original requester or just a relay. Every node plausibly deniable as "just forwarding."
+
+**Pillar 2 — Sender denial (fake ownership):** every node that touches a file during a successful query claims to be the owner. Multiple fake owners across the network make it impossible to identify the true original creator.
+
+**Pillar 3 — Insertion anonymity:** the original inserter does not keep the file. It is routed away to a remote node. The inserter's causal link to the content is severed as soon as the insert is complete.
+
+**Pillar 4 — TTL obfuscation via the depth field:** the depth field with a random initial value prevents an eavesdropper from inferring the number of hops to the source from the TTL value.
+
+```mermaid
+flowchart TD
+    A["Freenet Anonymity"] --> B["Request Denial\n(1-hop visibility only)"]
+    A --> C["Sender Denial\n(fake ownership claims)"]
+    A --> D["Insertion Anonymity\n(file sent away from creator)"]
+    A --> E["TTL Obfuscation\n(randomized depth field)"]
+    B --> F["Requester identity hidden"]
+    C --> F
+    C --> G["Provider identity hidden"]
+    D --> G
+    E --> F
+```
+
+No single pillar is sufficient alone. Together, they make Freenet substantially more anonymous than any previous P2P system — though not perfectly so. Timing attacks, traffic analysis, and infiltration by adversarial nodes can still yield partial information.
+
+---
+
+## 12. Evaluation
+
+### 12.1 Setup
+
+| Parameter | Value |
+|---|---|
+| Network size | 500 to 900 nodes |
+| Items per node | 40 |
+| Routing table size | 50 addresses max |
+| Network topology | Linear chain (worst case — not a realistic best-case topology) |
+| Query load tested | 50 to 1200 queries |
+
+The chain topology is deliberately conservative — it forces messages to travel long paths and gives fewer routing shortcuts than a realistic random-graph topology. Results should be interpreted as lower bounds.
+
+### 12.2 Results: Successful Requests vs. Number of Queries
+
+**The key finding: success rate rises rapidly with query volume due to information dissemination.**
+
+| Node count | Success at low query rate | Success at high query rate |
+|---|---|---|
+| 500 nodes | ~20% (at 50 queries) | ~100% (at 300 queries) |
+| 600–900 nodes | ~10% (at start) | ~100% (at 400–500 queries) |
+
+**Interpretation:** the "warm-up" period reflects the cold-start problem — a fresh network has sparse routing tables and low replication. As queries run, information spreads, routing tables fill in, and popular files get replicated widely. After warm-up, essentially all queries succeed.
+
+**The trade-off with node count:** larger networks have lower initial success rates (more nodes = harder to find any one file before information disseminates) and a longer warm-up. But they reach the same ~100% ceiling eventually.
+
+The important practical takeaway: **Freenet is not a fast-start system.** It is designed for steady-state operation in a mature network, not immediate responsiveness in a fresh one.
+
+### 12.3 Results: Hops vs. Number of Queries
+
+**The key finding: hop count drops quadratically as query volume increases.**
+
+- At 20 queries: ~50 hops average.
+- At 600+ queries: ~10 hops average.
+- More nodes = more hops (larger network = more distance to cover).
+
+**Why hops decrease with more queries:** as more queries run, routing tables fill in with entries closer to the keys being requested. The informed routing (forward toward the closest key) becomes more effective as the routing tables become richer. What was a 50-hop grope through an unfamiliar network becomes a 10-hop directed walk through a well-mapped one.
+
+The quadratic decrease is faster than linear — each additional query improves routing quality not just for itself but for all future queries that travel similar paths. The benefit of each query compounds.
+
+**The limitation of the chain topology:** in a real network with richer connectivity, both the initial hop counts and the warm-up time would be substantially lower. The chain is a stress test, not a representative deployment scenario.
 """
             }
         }

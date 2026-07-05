@@ -1,3 +1,16 @@
+---
+title: The Freenet Protocol
+subject: distributed-systems
+chapter: 03-dhts
+tags:
+- distributed-systems
+- systems
+date: '2026-06-24'
+updated: '2026-06-24'
+status: complete
+difficulty: advanced
+---
+
 # Freenet: 3rd Generation Peer-to-Peer Networks
 
 *Lecture notes — Smruti R. Sarangi, IIT Delhi*
@@ -14,7 +27,7 @@
 
 - [1. Where Freenet Fits: The P2P Progression](#1-where-freenet-fits-the-p2p-progression)
 - [2. Design Goals](#2-design-goals)
-- [3. Freenet = Gnutella + Pastry + Anonymity](#3-freenet--gnutella--pastry--anonymity)
+- [3. Freenet = Gnutella + Pastry + Anonymity](#3-freenet-gnutella-pastry-anonymity)
 - [4. The Freenet Node](#4-the-freenet-node)
 - [5. Querying: How You Find a File](#5-querying-how-you-find-a-file)
   - [5.1 Steps in a Query](#51-steps-in-a-query)
@@ -121,12 +134,15 @@ Suppose you want to find a file named `song.mp3`.
 
 ```mermaid
 flowchart LR
-    A["Requester A"] -->|"1: hash(song.mp3) = key K\n lookup closest key in routing table"| B["Node B"]
+    A["Requester A"] -->|"1: hash(song.mp3) = key K
+ lookup closest key in routing table"| B["Node B"]
     B -->|"2: forward toward closest key to K"| C["Node C"]
     C -->|"3: forward..."| E["Node E (has file)"]
     E -->|"4: Send.Data (claims to be owner)"| C
-    C -->|"5: cache + create routing entry\n forward reply"| B
-    B -->|"6: cache + create routing entry\n forward reply"| A
+    C -->|"5: cache + create routing entry
+ forward reply"| B
+    B -->|"6: cache + create routing entry
+ forward reply"| A
 ```
 
 Step by step:
@@ -214,7 +230,7 @@ Both strategies create **fake owners**. In a large network, dozens or hundreds o
 
 **Files land near nodes with similar keys.** This is not accidental — the routing always moves toward numerically closer keys, so the file naturally lands in a neighborhood of the key space where future lookups will also naturally arrive. Insertion and retrieval use the same routing logic, so they converge to the same location.
 
-**Information about new files disseminates quickly.** Every node on the insert path gets a routing entry. From the moment of insertion, $O(\text{TTL})$ nodes already know where the file is.
+**Information about new files disseminates quickly.** Every node on the insert path gets a routing entry. From the moment of insertion, $O(	ext{TTL})$ nodes already know where the file is.
 
 **Deliberate hash collision attacks are difficult.** An attacker trying to spam the network with fake inserts to displace legitimate files would need to predict hash outputs — cryptographically hard. Legitimate collisions are handled gracefully by bouncing the file to the upstream node.
 
@@ -273,7 +289,7 @@ There are two defenses:
 
 The depth field starts at a **random positive value** (not zero) and is incremented at every hop. When the destination node (the one that has the file) is about to send the reply back, it sets:
 
-$$\text{TTL}_{\text{return}} = \text{depth}_{\text{current}}$$
+$$	ext{TTL}_{	ext{return}} = 	ext{depth}_{	ext{current}}$$
 
 **Why this works:**
 
@@ -385,10 +401,14 @@ Everything in Freenet's design reduces to four mechanisms working together:
 
 ```mermaid
 flowchart TD
-    A["Freenet Anonymity"] --> B["Request Denial\n(1-hop visibility only)"]
-    A --> C["Sender Denial\n(fake ownership claims)"]
-    A --> D["Insertion Anonymity\n(file sent away from creator)"]
-    A --> E["TTL Obfuscation\n(randomized depth field)"]
+    A["Freenet Anonymity"] --> B["Request Denial
+(1-hop visibility only)"]
+    A --> C["Sender Denial
+(fake ownership claims)"]
+    A --> D["Insertion Anonymity
+(file sent away from creator)"]
+    A --> E["TTL Obfuscation
+(randomized depth field)"]
     B --> F["Requester identity hidden"]
     C --> F
     C --> G["Provider identity hidden"]

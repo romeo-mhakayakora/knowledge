@@ -1,5 +1,5 @@
 ---
-title: Paxos and Raft Consensus Protocols
+title: "Paxos and Raft Consensus Protocols"
 ---
 
 # Paxos and Raft Consensus Protocols

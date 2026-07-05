@@ -1,5 +1,5 @@
 ---
-title: Consistency Models and the CAP Theorem
+title: "Consistency Models and the CAP Theorem"
 ---
 
 # Consistency Models and the CAP Theorem

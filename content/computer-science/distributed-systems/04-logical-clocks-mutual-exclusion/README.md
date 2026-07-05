@@ -1,5 +1,5 @@
 ---
-title: Logical Clocks and Mutual Exclusion
+title: "Logical Clocks and Mutual Exclusion"
 ---
 
 # Logical Clocks and Mutual Exclusion

@@ -1,5 +1,5 @@
 ---
-title: Distributed MST and the FLP Result
+title: "Distributed MST and the FLP Result"
 ---
 
 # Distributed MST and the FLP Result

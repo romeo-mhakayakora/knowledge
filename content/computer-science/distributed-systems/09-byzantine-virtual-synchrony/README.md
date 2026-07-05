@@ -1,5 +1,5 @@
 ---
-title: Byzantine Generals and Virtual Synchrony
+title: "Byzantine Generals and Virtual Synchrony"
 ---
 
 # Byzantine Generals and Virtual Synchrony

@@ -1,5 +1,5 @@
 ---
-title: Amazon Dynamo, Facebook Cassandra, and Google Percolator
+title: "Amazon Dynamo, Facebook Cassandra, and Google Percolator"
 ---
 
 # Amazon Dynamo, Facebook Cassandra, and Google Percolator
