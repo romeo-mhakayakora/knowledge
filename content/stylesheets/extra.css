@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 
 /* ═══════════════════════════════════
    DESIGN SYSTEM VARIABLE DEFINITIONS
@@ -6,16 +6,17 @@
 
 :root {
   /* Font Family Stack */
-  --font-stack: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-stack: 'Assistant', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Light Mode Color Tokens */
-  --color-bg: #FFFFFF;
-  --color-bg-elevated: #FFFFFF;
-  --color-text-primary: #1D1D1F;
-  --color-text-muted: #6E6E73;
-  --color-text-tertiary: #86868B;
-  --color-borders: #D2D2D7;
-  --color-accent: #0071E3;
+  /* Light Mode Color Tokens (Warm-Cream & Terracotta) */
+  --color-bg: #FEF7EC;
+  --color-bg-elevated: #FEF7EC;
+  --color-text-primary: #2F2F2F;
+  --color-text-muted: #6B6B6B;
+  --color-text-tertiary: #8E8E93;
+  --color-borders: rgba(170, 170, 170, 0.25);
+  --color-accent: #E25C5C;
 
   /* Hero Section (Always Dark/Near-Black) */
   --hero-bg: #050505;
@@ -23,18 +24,18 @@
   --hero-text-muted: #A1A1A6;
   --hero-border: #424245;
   --hero-stat-value: #F5F5F7;
-  --hero-accent: #2997FF;
+  --hero-accent: #F47272;
 }
 
 [data-md-color-scheme="slate"] {
-  /* Dark Mode Color Tokens */
-  --color-bg: #16181c;
-  --color-bg-elevated: #1e2024;
-  --color-text-primary: #F5F5F7;
-  --color-text-muted: #A1A1A6;
+  /* Dark Mode Color Tokens (Off-Black & Coral) */
+  --color-bg: #1A1A1A;
+  --color-bg-elevated: #232323;
+  --color-text-primary: #E2E2E2;
+  --color-text-muted: #9E9E9E;
   --color-text-tertiary: #6E6E73;
-  --color-borders: #424245;
-  --color-accent: #2997FF;
+  --color-borders: rgba(255, 255, 255, 0.08);
+  --color-accent: #F47272;
 }
 
 /* ═══════════════════════════════════
@@ -46,7 +47,7 @@
   --md-primary-fg-color--light: var(--color-bg) !important;
   --md-primary-fg-color--dark: var(--color-bg) !important;
   --md-accent-fg-color: var(--color-accent) !important;
-  --md-accent-fg-color--transparent: rgba(0, 113, 227, 0.1) !important;
+  --md-accent-fg-color--transparent: rgba(226, 92, 92, 0.1) !important;
 
   --md-default-bg-color: var(--color-bg) !important;
   --md-default-bg-color--light: var(--color-bg) !important;
@@ -67,7 +68,7 @@
   --md-primary-fg-color--light: var(--color-bg) !important;
   --md-primary-fg-color--dark: var(--color-bg) !important;
   --md-accent-fg-color: var(--color-accent) !important;
-  --md-accent-fg-color--transparent: rgba(41, 151, 255, 0.1) !important;
+  --md-accent-fg-color--transparent: rgba(244, 114, 114, 0.1) !important;
 
   --md-default-bg-color: var(--color-bg) !important;
   --md-default-bg-color--light: var(--color-bg) !important;
@@ -91,12 +92,6 @@ body,
 .md-typeset, 
 .md-typeset p, 
 .md-typeset li,
-.md-typeset h1, 
-.md-typeset h2, 
-.md-typeset h3, 
-.md-typeset h4, 
-.md-typeset h5, 
-.md-typeset h6,
 .domain-link,
 .domain-count,
 .activity-title,
@@ -108,6 +103,15 @@ body,
 .md-header,
 .md-footer {
   font-family: var(--font-stack) !important;
+}
+
+.md-typeset h1, 
+.md-typeset h2, 
+.md-typeset h3, 
+.md-typeset h4, 
+.md-typeset h5, 
+.md-typeset h6 {
+  font-family: var(--font-serif) !important;
 }
 
 .md-content__inner {
@@ -584,4 +588,66 @@ body,
     width: 100% !important;
   }
 }
+
+/* ═══════════════════════════════════
+   EXPLICIT THEMATIC OVERRIDES (PORTFOLIO INTEGRATION)
+   ═══════════════════════════════════ */
+
+/* Guarantee warm-cream / dark background across all layout containers */
+html, 
+body, 
+.md-container, 
+.md-main, 
+.md-sidebar, 
+.md-content, 
+.md-content__inner,
+.md-footer,
+.md-search-result__meta,
+.md-search-result__list {
+  background-color: var(--color-bg) !important;
+}
+
+/* Ensure sidebars nav also match the background exactly */
+.md-nav,
+.md-nav--primary,
+.md-nav--secondary,
+.md-nav__list,
+.md-nav__item,
+.md-sidebar__inner {
+  background-color: var(--color-bg) !important;
+}
+
+/* Apply editorial Lora serif font globally to all headings */
+h1, h2, h3, h4, h5, h6, 
+.md-typeset h1, 
+.md-typeset h2, 
+.md-typeset h3, 
+.md-typeset h4, 
+.md-typeset h5, 
+.md-typeset h6,
+.homepage-section-label,
+.md-header__topic {
+  font-family: var(--font-serif) !important;
+}
+
+/* Force link color and active indicators to terracotta accent */
+.md-typeset a,
+.domain-link,
+.backlink-item,
+.md-nav__link--active,
+.md-nav__item--active > .md-nav__link,
+.md-footer-meta a:hover {
+  color: var(--color-accent) !important;
+}
+
+/* Form inputs & active search states */
+.md-search__form {
+  background-color: var(--color-bg-elevated) !important;
+  border-color: var(--color-borders) !important;
+}
+
+.md-search__input {
+  background-color: var(--color-bg-elevated) !important;
+}
+
 
