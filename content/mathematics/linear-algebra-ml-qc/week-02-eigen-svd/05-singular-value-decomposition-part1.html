@@ -6,6 +6,28 @@
   <title>SVD Part 1: The Swiss Army Knife of Data Science - Linear Algebra Wiki</title>
   <link rel="stylesheet" href="notes-style.css">
   <script>
+    (function() {
+      let theme = 'light';
+      try {
+        for (let i = 0; i < localStorage.length; i++) {
+          let key = localStorage.key(i);
+          if (key.endsWith('.__palette')) {
+            let val = JSON.parse(localStorage.getItem(key));
+            if (val && val.color && val.color.scheme === 'slate') {
+              theme = 'dark';
+            }
+          }
+        }
+      } catch (e) {}
+      
+      if (theme === 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        theme = 'dark';
+      }
+      
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+  <script>
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -18,7 +40,6 @@
       }
     };
   </script>
-  
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
