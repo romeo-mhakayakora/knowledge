@@ -7,7 +7,7 @@ Course notes connecting linear algebra foundations to machine learning and quant
 | Week | Focus | Status | Notes |
 |---|---|---|---|
 | 01 | Vector spaces and projections | Not started | Geometry, subspaces, orthogonality, least squares |
-| 02 | Eigenvalues and SVD | Not started | Orthogonal matrices, diagonalization, positive definiteness, SVD |
+| 02 | Eigenvalues and SVD | Not started | Gram-Schmidt, eigenvalues, Spectral Theorem, Rayleigh quotient, PSD, SVD |
 | 03 | PCA and Markov ideas | Planned | Add when this part of the course is live |
 | 04 | Quantum linear algebra | Planned | Add when this part of the course is live |
 
@@ -16,7 +16,7 @@ Course notes connecting linear algebra foundations to machine learning and quant
 | Item | Done |
 |---|---|
 | Week 01 notes scaffolded | [ ] |
-| Week 02 notes scaffolded | [ ] |
+| Week 02 notes scaffolded | [x] |
 | Week 03 folder prepared | [ ] |
 | Week 04 folder prepared | [ ] |
 | Cheatsheets folder prepared | [ ] |
