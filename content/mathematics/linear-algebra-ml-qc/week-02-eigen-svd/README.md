@@ -4,11 +4,11 @@
 
 | Lesson | Topic | Status |
 |---|---|---|
-| 01 | Gram-Schmidt process, QR decomposition | Not started |
-| 02 | Eigenvalues and eigenvectors, spectral theorem | Not started |
-| 03 | Diagonalization, Positive semidefinite matrices | Not started |
-| 04 | Rayleigh quotient | Not started |
-| 05 | Singular value decomposition | Not started |
+| [01](01-gram-schmidt-qr-decomposition.md) | Gram-Schmidt process, QR decomposition | Completed |
+| [02](02-eigenvalues-eigenvectors-spectral-theorem.md) | Eigenvalues and eigenvectors, spectral theorem | Completed |
+| [03](03-diagonalization-semidefinite.md) | Diagonalization, Positive semidefinite matrices | Completed |
+| [04](04-rayleigh-quotient.md) | Rayleigh quotient | Completed |
+| [05](05-singular-value-decomposition-part1.md) | SVD Part 1: Swiss Army Knife of Data Science | Completed |
 
 ## Summary
 
