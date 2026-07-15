@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/04-rayleigh-quotient/">
       
       
-        <link rel="prev" href="../02-eigenvalues-eigenvectors/">
+        <link rel="prev" href="../03-diagonalization-semidefinite/">
       
       
-        <link rel="next" href="../04-symmetric-positive-definite/">
+        <link rel="next" href="../05-singular-value-decomposition/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>03: Diagonalization and Powers - Knowledge</title>
+        <title>Lesson 4: Rayleigh quotient - Knowledge</title>
       
     
     
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="03: Diagonalization and Powers - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers.png" />
+<meta property="og:title" content="Lesson 4: Rayleigh quotient - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/04-rayleigh-quotient.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/04-rayleigh-quotient/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="03: Diagonalization and Powers - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-powers.png" />
+<meta property="twitter:title" content="Lesson 4: Rayleigh quotient - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/04-rayleigh-quotient.png" />
 </head>
   
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#03-diagonalization-and-powers" class="md-skip">
+        <a href="#lesson-4-rayleigh-quotient" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              03: Diagonalization and Powers
+              Lesson 4: Rayleigh quotient
             
           </span>
         </div>
@@ -3550,8 +3550,6 @@
       
         
       
-        
-      
     
     
     
@@ -3608,14 +3606,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-orthogonal-matrices-gram-schmidt/" class="md-nav__link">
+      <a href="../01-gram-schmidt-qr-decomposition/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    01: Orthogonal Matrices and Gram-Schmidt
+    Lesson 1: Gram-Schmidt process, QR decomposition
   
 
     
@@ -3636,14 +3634,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-eigenvalues-eigenvectors/" class="md-nav__link">
+      <a href="../02-eigenvalues-eigenvectors-spectral-theorem/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    02: Eigenvalues and Eigenvectors
+    Lesson 2: Eigenvalues and eigenvectors, spectral theorem
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-diagonalization-semidefinite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 3: Diagonalization, Positive semidefinite matrices
   
 
     
@@ -3680,7 +3706,7 @@
   <span class="md-ellipsis">
     
   
-    03: Diagonalization and Powers
+    Lesson 4: Rayleigh quotient
   
 
     
@@ -3698,7 +3724,7 @@
   <span class="md-ellipsis">
     
   
-    03: Diagonalization and Powers
+    Lesson 4: Rayleigh quotient
   
 
     
@@ -3724,10 +3750,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Overview
       
     </span>
   </a>
@@ -3735,10 +3761,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-the-rayleigh-quotient" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. The Rayleigh Quotient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-courant-fischer-minimax-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Courant-Fischer Minimax Theorem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Courant-Fischer Minimax Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#achievability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achievability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generalization-to-other-eigenvalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generalization to Other Eigenvalues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-geometric-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Geometric Interpretation
       
     </span>
   </a>
@@ -3761,70 +3837,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-symmetric-positive-definite/" class="md-nav__link">
+      <a href="../05-singular-value-decomposition/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    04: Symmetric Positive Definite Matrices
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05-positive-definite-minima/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    05: Positive Definite Matrices and Minima
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-svd/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    06: Singular Value Decomposition
+    Lesson 5: Singular value decomposition
   
 
     
@@ -7477,10 +7497,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Overview
       
     </span>
   </a>
@@ -7488,10 +7508,60 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-the-rayleigh-quotient" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. The Rayleigh Quotient
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-courant-fischer-minimax-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Courant-Fischer Minimax Theorem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Courant-Fischer Minimax Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#achievability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Achievability
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generalization-to-other-eigenvalues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generalization to Other Eigenvalues
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-geometric-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Geometric Interpretation
       
     </span>
   </a>
@@ -7521,15 +7591,28 @@
   
 
 
-<h1 id="03-diagonalization-and-powers">03: Diagonalization and Powers<a class="headerlink" href="#03-diagonalization-and-powers" title="Permanent link">&para;</a></h1>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<h1 id="lesson-4-rayleigh-quotient">Lesson 4: Rayleigh quotient<a class="headerlink" href="#lesson-4-rayleigh-quotient" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Analyzing the Rayleigh quotient as an optimization tool for symmetric matrices, and understanding its connection to eigenvalues.</p>
+<hr />
+<h2 id="1-the-rayleigh-quotient">1. The Rayleigh Quotient<a class="headerlink" href="#1-the-rayleigh-quotient" title="Permanent link">&para;</a></h2>
+<p>For a real symmetric matrix <span class="arithmatex">\(A\)</span>, the <strong>Rayleigh Quotient</strong> <span class="arithmatex">\(R(A, x)\)</span> for a non-zero vector <span class="arithmatex">\(x\)</span> is defined as:
+$<span class="arithmatex">\(R(A, x) = \frac{x^T A x}{x^T x}\)</span>$</p>
+<hr />
+<h2 id="2-courant-fischer-minimax-theorem">2. Courant-Fischer Minimax Theorem<a class="headerlink" href="#2-courant-fischer-minimax-theorem" title="Permanent link">&para;</a></h2>
+<p>The Rayleigh quotient is bounded by the minimum and maximum eigenvalues of <span class="arithmatex">\(A\)</span>:
+$<span class="arithmatex">\(\lambda_{\min} \le \frac{x^T A x}{x^T x} \le \lambda_{\max}\)</span>$</p>
+<h3 id="achievability">Achievability<a class="headerlink" href="#achievability" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Determine when a matrix is diagonalizable.</li>
-<li>Use diagonalization to compute matrix powers.</li>
-<li>Connect diagonalization to repeated transformations.</li>
+<li>The minimum value <span class="arithmatex">\(\lambda_{\min}\)</span> is achieved when <span class="arithmatex">\(x\)</span> is the eigenvector corresponding to <span class="arithmatex">\(\lambda_{\min}\)</span>.</li>
+<li>The maximum value <span class="arithmatex">\(\lambda_{\max}\)</span> is achieved when <span class="arithmatex">\(x\)</span> is the eigenvector corresponding to <span class="arithmatex">\(\lambda_{\max}\)</span>.</li>
 </ul>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>Add lecture notes here.</p>
+<h3 id="generalization-to-other-eigenvalues">Generalization to Other Eigenvalues<a class="headerlink" href="#generalization-to-other-eigenvalues" title="Permanent link">&para;</a></h3>
+<p>For any eigenvalue <span class="arithmatex">\(\lambda_k\)</span> (sorted <span class="arithmatex">\(\lambda_1 \le \lambda_2 \le \dots \le \lambda_n\)</span>):
+$<span class="arithmatex">\(\lambda_k = \min_{\dim(S) = k} \max_{x \in S, x \neq 0} R(A, x)\)</span>$</p>
+<hr />
+<h2 id="3-geometric-interpretation">3. Geometric Interpretation<a class="headerlink" href="#3-geometric-interpretation" title="Permanent link">&para;</a></h2>
+<p>Geometrically, if you project the unit sphere under the quadratic form <span class="arithmatex">\(x^T A x\)</span>, the extrema of the Rayleigh quotient trace out the principal axes of the resulting multidimensional ellipsoid. This property forms the mathematical foundation of principal component analysis (PCA).</p>
 
   
     
@@ -7542,7 +7625,7 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 15, 2026 10:53:58 UTC">July 15, 2026</span>
       </span>
     
   </aside>
@@ -7579,7 +7662,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../02-eigenvalues-eigenvectors/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 02: Eigenvalues and Eigenvectors">
+          <a href="../03-diagonalization-semidefinite/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lesson 3: Diagonalization, Positive semidefinite matrices">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7589,20 +7672,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                02: Eigenvalues and Eigenvectors
+                Lesson 3: Diagonalization, Positive semidefinite matrices
               </div>
             </div>
           </a>
         
         
           
-          <a href="../04-symmetric-positive-definite/" class="md-footer__link md-footer__link--next" aria-label="Next: 04: Symmetric Positive Definite Matrices">
+          <a href="../05-singular-value-decomposition/" class="md-footer__link md-footer__link--next" aria-label="Next: Lesson 5: Singular value decomposition">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                04: Symmetric Positive Definite Matrices
+                Lesson 5: Singular value decomposition
               </div>
             </div>
             <div class="md-footer__button md-icon">

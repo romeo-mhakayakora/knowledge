@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors-spectral-theorem/">
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../01-gram-schmidt-qr-decomposition/">
       
       
-        <link rel="next" href="../02-eigenvalues-eigenvectors/">
+        <link rel="next" href="../03-diagonalization-semidefinite/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>01: Orthogonal Matrices and Gram-Schmidt - Knowledge</title>
+        <title>Lesson 2: Eigenvalues and eigenvectors, spectral theorem - Knowledge</title>
       
     
     
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="01: Orthogonal Matrices and Gram-Schmidt - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt.png" />
+<meta property="og:title" content="Lesson 2: Eigenvalues and eigenvectors, spectral theorem - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors-spectral-theorem.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors-spectral-theorem/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="01: Orthogonal Matrices and Gram-Schmidt - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/01-orthogonal-matrices-gram-schmidt.png" />
+<meta property="twitter:title" content="Lesson 2: Eigenvalues and eigenvectors, spectral theorem - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors-spectral-theorem.png" />
 </head>
   
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#01-orthogonal-matrices-and-gram-schmidt" class="md-skip">
+        <a href="#lesson-2-eigenvalues-and-eigenvectors-spectral-theorem" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              01: Orthogonal Matrices and Gram-Schmidt
+              Lesson 2: Eigenvalues and eigenvectors, spectral theorem
             
           </span>
         </div>
@@ -3550,8 +3550,6 @@
       
         
       
-        
-      
     
     
     
@@ -3605,6 +3603,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-gram-schmidt-qr-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 1: Gram-Schmidt process, QR decomposition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -3624,7 +3650,7 @@
   <span class="md-ellipsis">
     
   
-    01: Orthogonal Matrices and Gram-Schmidt
+    Lesson 2: Eigenvalues and eigenvectors, spectral theorem
   
 
     
@@ -3642,7 +3668,7 @@
   <span class="md-ellipsis">
     
   
-    01: Orthogonal Matrices and Gram-Schmidt
+    Lesson 2: Eigenvalues and eigenvectors, spectral theorem
   
 
     
@@ -3668,10 +3694,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Overview
       
     </span>
   </a>
@@ -3679,13 +3705,69 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-eigenvalues-and-eigenvectors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Eigenvalues and Eigenvectors
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Eigenvalues and Eigenvectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-characteristic-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Characteristic Equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-spectral-theorem-for-symmetric-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Spectral Theorem for Symmetric Matrices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Spectral Theorem for Symmetric Matrices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theorem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theorem Statement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-properties-of-symmetric-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Properties of Symmetric Matrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3705,14 +3787,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../02-eigenvalues-eigenvectors/" class="md-nav__link">
+      <a href="../03-diagonalization-semidefinite/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    02: Eigenvalues and Eigenvectors
+    Lesson 3: Diagonalization, Positive semidefinite matrices
   
 
     
@@ -3733,14 +3815,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-diagonalization-powers/" class="md-nav__link">
+      <a href="../04-rayleigh-quotient/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    03: Diagonalization and Powers
+    Lesson 4: Rayleigh quotient
   
 
     
@@ -3761,70 +3843,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-symmetric-positive-definite/" class="md-nav__link">
+      <a href="../05-singular-value-decomposition/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    04: Symmetric Positive Definite Matrices
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05-positive-definite-minima/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    05: Positive Definite Matrices and Minima
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-svd/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    06: Singular Value Decomposition
+    Lesson 5: Singular value decomposition
   
 
     
@@ -7477,10 +7503,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Overview
       
     </span>
   </a>
@@ -7488,13 +7514,69 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-eigenvalues-and-eigenvectors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Eigenvalues and Eigenvectors
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Eigenvalues and Eigenvectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-characteristic-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Characteristic Equation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-spectral-theorem-for-symmetric-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The Spectral Theorem for Symmetric Matrices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. The Spectral Theorem for Symmetric Matrices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#theorem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Theorem Statement
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-properties-of-symmetric-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Properties of Symmetric Matrices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -7521,15 +7603,33 @@
   
 
 
-<h1 id="01-orthogonal-matrices-and-gram-schmidt">01: Orthogonal Matrices and Gram-Schmidt<a class="headerlink" href="#01-orthogonal-matrices-and-gram-schmidt" title="Permanent link">&para;</a></h1>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Define orthogonal and orthonormal vectors.</li>
-<li>Understand orthogonal matrices.</li>
-<li>Use Gram-Schmidt to build an orthonormal basis.</li>
-</ul>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>Add lecture notes here.</p>
+<h1 id="lesson-2-eigenvalues-and-eigenvectors-spectral-theorem">Lesson 2: Eigenvalues and eigenvectors, spectral theorem<a class="headerlink" href="#lesson-2-eigenvalues-and-eigenvectors-spectral-theorem" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Understanding eigenvectors as invariant directions under linear transformations, and the Spectral Theorem as the geometric decomposition of real symmetric matrices.</p>
+<hr />
+<h2 id="1-eigenvalues-and-eigenvectors">1. Eigenvalues and Eigenvectors<a class="headerlink" href="#1-eigenvalues-and-eigenvectors" title="Permanent link">&para;</a></h2>
+<p>For a square matrix <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span>, a non-zero vector <span class="arithmatex">\(v\)</span> is an <strong>eigenvector</strong> with <strong>eigenvalue</strong> <span class="arithmatex">\(\lambda\)</span> if:
+$<span class="arithmatex">\(Av = \lambda v\)</span>$</p>
+<h3 id="the-characteristic-equation">The Characteristic Equation<a class="headerlink" href="#the-characteristic-equation" title="Permanent link">&para;</a></h3>
+<p>To find the eigenvalues, solve the characteristic polynomial:
+$<span class="arithmatex">\(\det(A - \lambda I) = 0\)</span>$</p>
+<p>For each eigenvalue <span class="arithmatex">\(\lambda_i\)</span>, find the corresponding eigenvectors by finding the null space (eigenspace) of <span class="arithmatex">\(A - \lambda_i I\)</span>:
+$<span class="arithmatex">\((A - \lambda_i I)v = 0\)</span>$</p>
+<hr />
+<h2 id="2-the-spectral-theorem-for-symmetric-matrices">2. The Spectral Theorem for Symmetric Matrices<a class="headerlink" href="#2-the-spectral-theorem-for-symmetric-matrices" title="Permanent link">&para;</a></h2>
+<p>A matrix <span class="arithmatex">\(A\)</span> is real <strong>symmetric</strong> if <span class="arithmatex">\(A = A^T\)</span>. Symmetric matrices have remarkably clean spectral properties.</p>
+<h3 id="theorem-statement">Theorem Statement<a class="headerlink" href="#theorem-statement" title="Permanent link">&para;</a></h3>
+<p>Every real symmetric matrix <span class="arithmatex">\(A\)</span> can be decomposed into:
+$<span class="arithmatex">\(A = Q \Lambda Q^T = \sum_{i=1}^{n} \lambda_i q_i q_i^T\)</span>$</p>
+<p>Where:
+- <strong><span class="arithmatex">\(Q\)</span></strong>: An orthogonal matrix (<span class="arithmatex">\(Q^T Q = I\)</span>) whose columns <span class="arithmatex">\(\{q_1, \dots, q_n\}\)</span> are orthonormal eigenvectors of <span class="arithmatex">\(A\)</span>.
+- <strong><span class="arithmatex">\(\Lambda\)</span></strong>: A diagonal matrix containing the real eigenvalues <span class="arithmatex">\(\lambda_1, \dots, \lambda_n\)</span>.</p>
+<h3 id="key-properties-of-symmetric-matrices">Key Properties of Symmetric Matrices<a class="headerlink" href="#key-properties-of-symmetric-matrices" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Real Eigenvalues</strong>: All eigenvalues of a real symmetric matrix are guaranteed to be real.</li>
+<li><strong>Orthogonal Eigenspaces</strong>: Eigenvectors corresponding to distinct eigenvalues are orthogonal.</li>
+<li><strong>Orthonormal Basis</strong>: There exists an orthonormal basis of <span class="arithmatex">\(\mathbb{R}^n\)</span> consisting entirely of eigenvectors of <span class="arithmatex">\(A\)</span>.</li>
+</ol>
 
   
     
@@ -7542,7 +7642,7 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 15, 2026 10:53:58 UTC">July 15, 2026</span>
       </span>
     
   </aside>
@@ -7579,7 +7679,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Week 02: Eigenvalues and SVD">
+          <a href="../01-gram-schmidt-qr-decomposition/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lesson 1: Gram-Schmidt process, QR decomposition">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7589,20 +7689,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Week 02: Eigenvalues and SVD
+                Lesson 1: Gram-Schmidt process, QR decomposition
               </div>
             </div>
           </a>
         
         
           
-          <a href="../02-eigenvalues-eigenvectors/" class="md-footer__link md-footer__link--next" aria-label="Next: 02: Eigenvalues and Eigenvectors">
+          <a href="../03-diagonalization-semidefinite/" class="md-footer__link md-footer__link--next" aria-label="Next: Lesson 3: Diagonalization, Positive semidefinite matrices">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                02: Eigenvalues and Eigenvectors
+                Lesson 3: Diagonalization, Positive semidefinite matrices
               </div>
             </div>
             <div class="md-footer__button md-icon">

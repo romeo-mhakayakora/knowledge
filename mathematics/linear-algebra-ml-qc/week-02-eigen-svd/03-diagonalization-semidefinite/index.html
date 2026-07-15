@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-semidefinite/">
       
       
-        <link rel="prev" href="../01-orthogonal-matrices-gram-schmidt/">
+        <link rel="prev" href="../02-eigenvalues-eigenvectors-spectral-theorem/">
       
       
-        <link rel="next" href="../03-diagonalization-powers/">
+        <link rel="next" href="../04-rayleigh-quotient/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>02: Eigenvalues and Eigenvectors - Knowledge</title>
+        <title>Lesson 3: Diagonalization, Positive semidefinite matrices - Knowledge</title>
       
     
     
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="02: Eigenvalues and Eigenvectors - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors.png" />
+<meta property="og:title" content="Lesson 3: Diagonalization, Positive semidefinite matrices - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-semidefinite.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-semidefinite/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="02: Eigenvalues and Eigenvectors - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/02-eigenvalues-eigenvectors.png" />
+<meta property="twitter:title" content="Lesson 3: Diagonalization, Positive semidefinite matrices - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/03-diagonalization-semidefinite.png" />
 </head>
   
   
@@ -89,7 +89,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#02-eigenvalues-and-eigenvectors" class="md-skip">
+        <a href="#lesson-3-diagonalization-positive-semidefinite-matrices" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              02: Eigenvalues and Eigenvectors
+              Lesson 3: Diagonalization, Positive semidefinite matrices
             
           </span>
         </div>
@@ -3550,8 +3550,6 @@
       
         
       
-        
-      
     
     
     
@@ -3608,14 +3606,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../01-orthogonal-matrices-gram-schmidt/" class="md-nav__link">
+      <a href="../01-gram-schmidt-qr-decomposition/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    01: Orthogonal Matrices and Gram-Schmidt
+    Lesson 1: Gram-Schmidt process, QR decomposition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-eigenvalues-eigenvectors-spectral-theorem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lesson 2: Eigenvalues and eigenvectors, spectral theorem
   
 
     
@@ -3652,7 +3678,7 @@
   <span class="md-ellipsis">
     
   
-    02: Eigenvalues and Eigenvectors
+    Lesson 3: Diagonalization, Positive semidefinite matrices
   
 
     
@@ -3670,7 +3696,7 @@
   <span class="md-ellipsis">
     
   
-    02: Eigenvalues and Eigenvectors
+    Lesson 3: Diagonalization, Positive semidefinite matrices
   
 
     
@@ -3696,10 +3722,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Overview
       
     </span>
   </a>
@@ -3707,13 +3733,58 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-diagonalization-and-powers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Diagonalization and Powers
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Diagonalization and Powers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#application-matrix-powers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application: Matrix Powers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-positive-semidefinite-psd-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Positive Semidefinite (PSD) Matrices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Positive Semidefinite (PSD) Matrices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equivalent-characterizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equivalent Characterizations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3733,14 +3804,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../03-diagonalization-powers/" class="md-nav__link">
+      <a href="../04-rayleigh-quotient/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    03: Diagonalization and Powers
+    Lesson 4: Rayleigh quotient
   
 
     
@@ -3761,70 +3832,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-symmetric-positive-definite/" class="md-nav__link">
+      <a href="../05-singular-value-decomposition/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    04: Symmetric Positive Definite Matrices
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05-positive-definite-minima/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    05: Positive Definite Matrices and Minima
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06-svd/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    06: Singular Value Decomposition
+    Lesson 5: Singular value decomposition
   
 
     
@@ -7477,10 +7492,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#goals" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Goals
+        Overview
       
     </span>
   </a>
@@ -7488,13 +7503,58 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
+  <a href="#1-diagonalization-and-powers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Notes
+        1. Diagonalization and Powers
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1. Diagonalization and Powers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#application-matrix-powers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Application: Matrix Powers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-positive-semidefinite-psd-matrices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Positive Semidefinite (PSD) Matrices
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Positive Semidefinite (PSD) Matrices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#equivalent-characterizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Equivalent Characterizations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -7521,15 +7581,32 @@
   
 
 
-<h1 id="02-eigenvalues-and-eigenvectors">02: Eigenvalues and Eigenvectors<a class="headerlink" href="#02-eigenvalues-and-eigenvectors" title="Permanent link">&para;</a></h1>
-<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<h1 id="lesson-3-diagonalization-positive-semidefinite-matrices">Lesson 3: Diagonalization, Positive semidefinite matrices<a class="headerlink" href="#lesson-3-diagonalization-positive-semidefinite-matrices" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>Reconstructing matrices into diagonal forms, and identifying the properties and geometries of positive semidefinite matrices.</p>
+<hr />
+<h2 id="1-diagonalization-and-powers">1. Diagonalization and Powers<a class="headerlink" href="#1-diagonalization-and-powers" title="Permanent link">&para;</a></h2>
+<p>A square matrix <span class="arithmatex">\(A\)</span> is <strong>diagonalizable</strong> if it is similar to a diagonal matrix:
+$<span class="arithmatex">\(A = S \Lambda S^{-1}\)</span>$</p>
 <ul>
-<li>Define eigenvalues and eigenvectors.</li>
-<li>Interpret eigenvectors as directions preserved by a matrix.</li>
-<li>Solve simple eigenvalue problems.</li>
+<li><strong><span class="arithmatex">\(S\)</span></strong>: A matrix whose columns are <span class="arithmatex">\(n\)</span> linearly independent eigenvectors of <span class="arithmatex">\(A\)</span>.</li>
+<li><strong><span class="arithmatex">\(\Lambda\)</span></strong>: The diagonal matrix of eigenvalues.</li>
 </ul>
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<p>Add lecture notes here.</p>
+<h3 id="application-matrix-powers">Application: Matrix Powers<a class="headerlink" href="#application-matrix-powers" title="Permanent link">&para;</a></h3>
+<p>Diagonalization makes computing high powers of a matrix trivial:
+$<span class="arithmatex">\(A^k = S \Lambda^k S^{-1}\)</span>$</p>
+<hr />
+<h2 id="2-positive-semidefinite-psd-matrices">2. Positive Semidefinite (PSD) Matrices<a class="headerlink" href="#2-positive-semidefinite-psd-matrices" title="Permanent link">&para;</a></h2>
+<p>A symmetric matrix <span class="arithmatex">\(A \in \mathbb{R}^{n \times n}\)</span> is <strong>positive semidefinite (PSD)</strong>, denoted as <span class="arithmatex">\(A \succeq 0\)</span>, if:
+$<span class="arithmatex">\(x^T A x \ge 0 \quad \text{for all } x \in \mathbb{R}^n\)</span>$</p>
+<p>It is <strong>positive definite (PD)</strong>, denoted as <span class="arithmatex">\(A \succ 0\)</span>, if:
+$<span class="arithmatex">\(x^T A x &gt; 0 \quad \text{for all } x \neq 0\)</span>$</p>
+<h3 id="equivalent-characterizations">Equivalent Characterizations<a class="headerlink" href="#equivalent-characterizations" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Eigenvalues</strong>: All eigenvalues are non-negative (<span class="arithmatex">\(\lambda_i \ge 0\)</span> for PSD; <span class="arithmatex">\(\lambda_i &gt; 0\)</span> for PD).</li>
+<li><strong>Gram Matrix</strong>: <span class="arithmatex">\(A\)</span> can be written as <span class="arithmatex">\(A = B^T B\)</span> for some matrix <span class="arithmatex">\(B\)</span>.</li>
+<li><strong>Pivots</strong>: All pivots in elimination are non-negative (positive for PD).</li>
+</ol>
 
   
     
@@ -7542,7 +7619,7 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 20, 2026 16:28:04 UTC">June 20, 2026</span>
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 15, 2026 10:53:58 UTC">July 15, 2026</span>
       </span>
     
   </aside>
@@ -7579,7 +7656,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../01-orthogonal-matrices-gram-schmidt/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 01: Orthogonal Matrices and Gram-Schmidt">
+          <a href="../02-eigenvalues-eigenvectors-spectral-theorem/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Lesson 2: Eigenvalues and eigenvectors, spectral theorem">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -7589,20 +7666,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                01: Orthogonal Matrices and Gram-Schmidt
+                Lesson 2: Eigenvalues and eigenvectors, spectral theorem
               </div>
             </div>
           </a>
         
         
           
-          <a href="../03-diagonalization-powers/" class="md-footer__link md-footer__link--next" aria-label="Next: 03: Diagonalization and Powers">
+          <a href="../04-rayleigh-quotient/" class="md-footer__link md-footer__link--next" aria-label="Next: Lesson 4: Rayleigh quotient">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                03: Diagonalization and Powers
+                Lesson 4: Rayleigh quotient
               </div>
             </div>
             <div class="md-footer__button md-icon">
