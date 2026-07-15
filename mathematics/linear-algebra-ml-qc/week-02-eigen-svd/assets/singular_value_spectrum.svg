@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 350" width="100%" height="auto" style="background: transparent; font-family: 'Assistant', sans-serif;">
+  <!-- Grid Lines -->
+  <line x1="80" y1="50" x2="550" y2="50" stroke="rgba(170, 170, 170, 0.15)" stroke-width="1" />
+  <line x1="80" y1="110" x2="550" y2="110" stroke="rgba(170, 170, 170, 0.15)" stroke-width="1" />
+  <line x1="80" y1="170" x2="550" y2="170" stroke="rgba(170, 170, 170, 0.15)" stroke-width="1" />
+  <line x1="80" y1="230" x2="550" y2="230" stroke="rgba(170, 170, 170, 0.15)" stroke-width="1" />
+  <line x1="80" y1="290" x2="550" y2="290" stroke="rgba(170, 170, 170, 0.3)" stroke-width="1.5" />
+
+  <!-- Y-Axis Labels -->
+  <text x="65" y="55" font-size="12" fill="var(--text-muted)" text-anchor="end">100</text>
+  <text x="65" y="115" font-size="12" fill="var(--text-muted)" text-anchor="end">75</text>
+  <text x="65" y="175" font-size="12" fill="var(--text-muted)" text-anchor="end">50</text>
+  <text x="65" y="235" font-size="12" fill="var(--text-muted)" text-anchor="end">25</text>
+  <text x="65" y="295" font-size="12" fill="var(--text-muted)" text-anchor="end">0</text>
+
+  <!-- Y-Axis Title -->
+  <text x="25" y="170" font-size="12" font-weight="600" fill="var(--text-muted)" transform="rotate(-90 25 170)" text-anchor="middle" letter-spacing="0.05em">SINGULAR VALUE SIZE</text>
+
+  <!-- X-Axis Labels -->
+  <text x="110" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₁</text>
+  <text x="150" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₂</text>
+  <text x="190" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₃</text>
+  <text x="230" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₄</text>
+  <text x="270" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₅</text>
+  <text x="310" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₆</text>
+  <text x="350" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₇</text>
+  <text x="390" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₈</text>
+  <text x="430" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₉</text>
+  <text x="470" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">σ₁₀</text>
+  <text x="510" y="315" font-size="12" fill="var(--text-muted)" text-anchor="middle">...</text>
+
+  <!-- X-Axis Title -->
+  <text x="310" y="340" font-size="12" font-weight="600" fill="var(--text-muted)" text-anchor="middle" letter-spacing="0.05em">COMPONENT INDEX (RANK)</text>
+
+  <!-- Bars (Terracotta theme gradient/accent) -->
+  <!-- values: 220 (100%), 140 (63%), 60 (27%), 35 (16%), 20 (9%), 12 (5%), 8 (3.6%), 6 (2.7%), 5 (2.2%), 4 (1.8%) -->
+  <!-- base y is 290 -->
+  <rect x="98" y="70" width="24" height="220" rx="3" fill="var(--accent-color)" opacity="0.95" />
+  <rect x="138" y="150" width="24" height="140" rx="3" fill="var(--accent-color)" opacity="0.85" />
+  <rect x="178" y="230" width="24" height="60" rx="3" fill="var(--accent-color)" opacity="0.75" />
+  <rect x="218" y="255" width="24" height="35" rx="3" fill="var(--accent-color)" opacity="0.65" />
+  <rect x="258" y="270" width="24" height="20" rx="3" fill="var(--accent-color)" opacity="0.55" />
+  <rect x="298" y="278" width="24" height="12" rx="3" fill="var(--accent-color)" opacity="0.45" />
+  <rect x="338" y="282" width="24" height="8" rx="3" fill="var(--accent-color)" opacity="0.35" />
+  <rect x="378" y="284" width="24" height="6" rx="3" fill="var(--accent-color)" opacity="0.25" />
+  <rect x="418" y="285" width="24" height="5" rx="3" fill="var(--accent-color)" opacity="0.15" />
+  <rect x="458" y="286" width="24" height="4" rx="3" fill="var(--accent-color)" opacity="0.1" />
+
+  <!-- Curve line connecting bars -->
+  <path d="M 110 70 Q 150 150 190 230 T 270 270 T 350 282 T 430 285" fill="none" stroke="var(--accent-color)" stroke-width="2.5" stroke-dasharray="4 4" opacity="0.8" />
+
+  <!-- Elbow Annotation -->
+  <path d="M 245 190 L 195 220" fill="none" stroke="var(--accent-color)" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="255" y="185" font-size="12" font-weight="600" fill="var(--accent-color)">The "Elbow" (Sudden drop)</text>
+  <text x="255" y="202" font-size="11" fill="var(--text-muted)">Low-rank truncation point</text>
+
+  <!-- Markers for Arrow -->
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--accent-color)" />
+    </marker>
+  </defs>
+</svg>

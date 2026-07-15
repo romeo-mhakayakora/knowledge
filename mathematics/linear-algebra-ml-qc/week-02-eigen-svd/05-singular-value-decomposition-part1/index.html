@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition/">
+        <link rel="canonical" href="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition-part1/">
       
       
         <link rel="prev" href="../04-rayleigh-quotient/">
@@ -25,7 +25,7 @@
     
     
       
-        <title>05 singular value decomposition - Knowledge</title>
+        <title>05 singular value decomposition part1 - Knowledge</title>
       
     
     
@@ -61,15 +61,15 @@
     
   
 <meta property="og:type" content="website" />
-<meta property="og:title" content="05 singular value decomposition - Knowledge" />
-<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition.png" />
+<meta property="og:title" content="05 singular value decomposition part1 - Knowledge" />
+<meta property="og:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition-part1.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition/" />
+<meta property="og:url" content="https://romeo-mhakayakora.github.io/knowledge/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition-part1/" />
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:title" content="05 singular value decomposition - Knowledge" />
-<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition.png" />
+<meta property="twitter:title" content="05 singular value decomposition part1 - Knowledge" />
+<meta property="twitter:image" content="https://romeo-mhakayakora.github.io/knowledge/assets/images/social/mathematics/linear-algebra-ml-qc/week-02-eigen-svd/05-singular-value-decomposition-part1.png" />
 </head>
   
   
@@ -120,7 +120,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              05 singular value decomposition
+              05 singular value decomposition part1
             
           </span>
         </div>
@@ -3727,7 +3727,7 @@
   <span class="md-ellipsis">
     
   
-    05 singular value decomposition
+    05 singular value decomposition part1
   
 
     
@@ -7398,55 +7398,181 @@
     <div class="post-meta-details">
       <span class="post-category-tag">Linear Algebra</span>
       <span class="post-separator">&bull;</span>
-      <span class="post-date-tag">July 15, 2026</span>
+      <span class="post-date-tag">July 16, 2026</span>
     </div>
-    <h1 class="post-full-title">Singular value decomposition</h1>
-    <p class="post-lead-intro">Generalizing diagonalizations to any matrix and decomposing linear mappings geometrically.</p>
+    <h1 class="post-full-title">SVD Part 1: The Swiss Army Knife of Data Science</h1>
+    <p class="post-lead-intro">A data-driven generalization of the Fourier transform from eigenfaces to recommender systems.</p>
   </header>
 
   <div class="post-body-content">
+    <h2>The Algorithm That Quietly Runs the Internet</h2>
     <p>
-      Reconstructing any rectangular or square matrix into orthogonal and diagonal components, representing the ultimate generalization of the Spectral Theorem.
+      Here is a fun thought experiment: what single mathematical technique powers Google search, Netflix recommendations, facial recognition at airports, and noise reduction in your phone calls? The answer is not some exotic deep learning architecture or a proprietary algorithm cooked up in a Silicon Valley lab. It is a beautifully elegant piece of linear algebra that has been around in one form or another for nearly a century. It is called the <strong>Singular Value Decomposition</strong>, or SVD for short, and if you work with data in any capacity, it is arguably the most useful tool you have never heard of.
+    </p>
+    <p>
+      <em>"The SVD is one of the most important algorithms if you want to actually use linear algebra to make money."</em> That bold claim is entirely justified. The SVD shows up everywhere — from the Google PageRank algorithm that decides which links appear first when you search, to the recommender systems at Amazon and Netflix that somehow know what you want before you do, to the facial recognition algorithms that can pick your face out of a crowd in a fraction of a second.
+    </p>
+    <p>
+      In this first post, we will focus on the big picture. What is the SVD, what does it do, and why should you care? We will keep the math light and the intuition heavy. In Part 2, we will roll up our sleeves and get into the mechanics: how the decomposition actually works, how to truncate it for data compression, and how it connects to Principal Component Analysis (PCA). Let us dive in.
     </p>
 
     <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(170,170,170,0.15);">
 
-    <h2>1. The Singular Value Decomposition (SVD)</h2>
+    <h2>Meet Your Data Matrix</h2>
     <p>
-      Every real $m \times n$ matrix $A$ can be factored into:
-      $$A = U \Sigma V^T$$
+      Before we can talk about the SVD, we need to talk about its input: a data matrix. This is not as scary as it sounds. Imagine you have a collection of things you want to analyze, and each thing can be described by a list of numbers. Stack those lists side by side as columns, and you have a data matrix. That is it. That is the entire starting point.
+    </p>
+
+    <h3>Faces, Flow Fields, and Genes</h3>
+    <p>
+      Let us make this concrete with three examples, all drawn from real-world applications. First, suppose you are building a facial recognition system. You take a photo of a person — say, a one-megapixel image — and you reshape those one million pixel values into a single tall, skinny column vector. Do this for a thousand different people, and you get a matrix with a million rows and a thousand columns. Each column is a person, and each row is a pixel position. This matrix IS your dataset, and it is enormous.
     </p>
     <p>
-      Where:
+      Second, imagine you are studying fluid dynamics — perhaps airflow over an aircraft wing. You run a simulation or an experiment and capture snapshots of the flow field at successive moments in time. Each snapshot is a grid of velocity values at thousands of points in space. Reshape each snapshot into a column, and now your matrix has spatial information in the rows and temporal evolution in the columns. This is exactly how engineers at Boeing, NASA, and research labs around the world analyze complex flows.
     </p>
-    <ul>
-      <li><strong>$U$:</strong> An $m \times m$ orthogonal matrix ($U^T U = I$) whose columns are the <strong>left singular vectors</strong> of $A$ (eigenvectors of $A A^T$).</li>
-      <li><strong>$\Sigma$:</strong> An $m \times n$ diagonal-like matrix containing the non-negative <strong>singular values</strong> $\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r > 0$ on the diagonal, sorted in descending order.</li>
-      <li><strong>$V$:</strong> An $n \times n$ orthogonal matrix ($V^T V = I$) whose columns are the <strong>right singular vectors</strong> of $A$ (eigenvectors of $A^T A$).</li>
-    </ul>
+    <p>
+      Third, consider a genomics study. You have gene expression data from a group of patients: each column is a patient, each row is a gene, and each entry tells you how strongly that gene is expressed in that patient. You might have twenty thousand genes and a few hundred patients, giving you a large but very sparse matrix where most of the interesting structure is hidden. In all three cases, the challenge is the same: you have a massive matrix, and you need to find the important patterns buried inside it. That is precisely what the SVD does for you.
+    </p>
 
     <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(170,170,170,0.15);">
 
-    <h2>2. Geometric Interpretation</h2>
+    <h2>SVD in a Nutshell</h2>
     <p>
-      The SVD shows that any linear transformation can be decomposed into three simple geometric steps:
+      Here is the core idea in one sentence: the SVD takes your data matrix and breaks it into three simpler matrices whose product reconstructs the original exactly. In notation, if your data matrix is called $X$, then:
     </p>
-    <ol>
-      <li><strong>Rotation/Reflection</strong> in the domain space via $V^T$.</li>
-      <li><strong>Scaling</strong> along the coordinate axes via $\Sigma$.</li>
-      <li><strong>Rotation/Reflection</strong> in the codomain space via $U$.</li>
-    </ol>
+
+    <div class="math-block" style="text-align: center; margin: 1.8rem 0; font-family: var(--font-serif); font-size: 1.15rem; background-color: var(--secondary-bg); padding: 1.2rem; border-radius: 6px; border: 1px solid rgba(170,170,170,0.12);">
+      $$X = U \Sigma V^T$$
+    </div>
+
+    <p>
+      Think of this as a recipe. The matrix $U$ contains the patterns or building blocks found in your data. The matrix $\Sigma$ (capital Sigma) is a diagonal matrix that tells you how important each pattern is — it is like a ranking. And the matrix $V$ tells you how each of your original data points combines those patterns. Together, they give you a complete, lossless description of your data.
+    </p>
+    <p>
+      Here is a lovely analogy: the SVD is a data-driven generalization of the Fourier transform. The Fourier transform decomposes a signal into sine and cosine waves — universal, one-size-fits-all building blocks that work beautifully for periodic signals. But what if your data does not have nice periodic structure? What if you are looking at turbulent airflow over a wing, or the subtle variations between human faces? There is no off-the-shelf set of mathematical modes that captures that behavior. The SVD solves this problem by learning the building blocks directly from your data. The patterns in $U$ are not sines and cosines — they are whatever your data naturally wants to be decomposed into. That is why we call them tailored to the specific problem.
+    </p>
 
     <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(170,170,170,0.15);">
 
-    <h2>3. Connection to Symmetric Matrices</h2>
+    <h2>The Three Characters of the SVD Story</h2>
     <p>
-      The SVD of $A$ is deeply connected to the spectral decomposition of symmetric matrices:
-      $$A^T A = (V \Sigma^T U^T)(U \Sigma V^T) = V (\Sigma^T \Sigma) V^T$$
-      $$A A^T = (U \Sigma V^T)(V \Sigma^T U^T) = U (\Sigma \Sigma^T) U^T$$
+      One of the things that makes the SVD so powerful is that each of the three matrices has a clear, intuitive interpretation. Let us meet them one at a time, using the facial recognition example to keep things concrete.
+    </p>
+
+    <h3>$U$ — The Pattern Library</h3>
+    <p>
+      The columns of $U$ have the exact same shape as a column of your data matrix. In the face example, that means each column of $U$ is itself a one-million-dimensional vector — which can be reshaped back into a face-like image. These are the famous "eigenfaces" you may have heard about. The first column, $u_1$, captures the most dominant pattern of variation across all the faces in your dataset. Perhaps it encodes the overall lighting direction, or the shape of the jawline, or the distance between the eyes. The second column, $u_2$, captures the next most important pattern, and so on.
     </p>
     <p>
-      Thus, the singular values $\sigma_i$ are the square roots of the eigenvalues of the positive semidefinite symmetric matrix $A^T A$ (or $A A^T$).
+      The beautiful thing is that these patterns are hierarchically ordered. The SVD guarantees that $u_1$ explains more variance in your data than $u_2$, which explains more than $u_3$, and so on. This ordering is not arbitrary — it is mathematically optimal. In the fluid dynamics example, these columns become "eigenflows" — the dominant spatial patterns of the flow field, ranked by how much energy they carry.
+    </p>
+
+    <h3>$\Sigma$ — The Importance Ranking</h3>
+    <p>
+      The diagonal matrix $\Sigma$ tells you exactly how important each pattern is. Its entries — called singular values — are non-negative and arranged in decreasing order. The first singular value, $\sigma_1$, tells you how much of the total information in your data is captured by the first pattern alone. The second tells you how much the second pattern adds, and so on. This is where the magic happens: in most real-world datasets, the first few singular values are enormous, and the rest taper off rapidly to near zero.
+    </p>
+
+    <div class="figure-container" style="text-align: center; margin: 2rem 0;">
+      <img src="assets/singular_value_spectrum.svg" alt="Figure 1" style="max-width: 100%; height: auto; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+      <p class="figure-caption" style="font-family: var(--font-sans); font-size: 0.88rem; color: var(--text-muted); margin-top: 0.6rem;">
+        <strong>Figure 1:</strong> A typical singular value spectrum. The first few components dominate, and there is a clear "elbow" after which additional components add diminishing value.
+      </p>
+    </div>
+
+    <p>
+      Figure 1 shows a typical singular value spectrum. Notice how the first bar towers above the rest, and how the values drop off steeply before flattening out. That steep drop is sometimes called the "elbow," and it tells you something profound: you do not need all of your data to capture most of the information. The first few patterns — the ones with the largest singular values — contain almost everything that matters.
+    </p>
+
+    <h3>$V$ — The Recipe for Each Data Point</h3>
+    <p>
+      If $U$ is the pattern library and $\Sigma$ is the importance ranking, then $V$ tells you the recipe for reconstructing each original data point. The rows of $V^T$ specify exactly how to mix the columns of $U$ (scaled by the singular values) to reconstruct each column of your original data matrix. In the face example, the first row of $V^T$ tells you the precise combination of eigenfaces needed to reconstruct the first person's face. In the fluid dynamics example, the rows of $V$ become "eigen time series" — they tell you how the amplitude of each spatial pattern varies over time as the flow evolves.
+    </p>
+    <p>
+      To frame this in terms of correlation: when you apply the SVD to a gene expression matrix, the first column of $U$ is a combination of genes that varies the most across patients, the first column of $V$ is a combination of patients that varies the most across genes, and the first singular value quantifies the strength of that correlation. These are sometimes called the "eigenperson" and the "eigengene" — the archetypal patient and the archetypal gene pattern that together capture the dominant signal in your data. This is the foundation of Principal Component Analysis, which we will explore in Part 2.
+    </p>
+
+    <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(170,170,170,0.15);">
+
+    <h2>Where You Have Already Met SVD</h2>
+    <p>
+      The SVD is not just a theoretical curiosity — it is an industrial workhorse. Here are some of the places where it is quietly doing heavy lifting every single day, often without anyone mentioning its name.
+    </p>
+
+    <div style="margin: 2rem 0; overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-family: var(--font-sans); font-size: 0.95rem;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--accent-color); text-align: left;">
+            <th style="padding: 0.75rem; width: 25%;">Application</th>
+            <th style="padding: 0.75rem; width: 45%;">How SVD Is Used</th>
+            <th style="padding: 0.75rem; width: 30%;">Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid rgba(170,170,170,0.15);">
+            <td style="padding: 0.75rem; font-weight: 600;">Google Search</td>
+            <td style="padding: 0.75rem;">PageRank uses the dominant eigenvector of the link matrix (computed via SVD).</td>
+            <td style="padding: 0.75rem;">Determines the order of search results you see every day.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(170,170,170,0.15);">
+            <td style="padding: 0.75rem; font-weight: 600;">Netflix / Amazon</td>
+            <td style="padding: 0.75rem;">Recommender systems decompose user-item rating matrices.</td>
+            <td style="padding: 0.75rem;">Powers the "Customers who bought this also bought" feature.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(170,170,170,0.15);">
+            <td style="padding: 0.75rem; font-weight: 600;">Facial Recognition</td>
+            <td style="padding: 0.75rem;">Eigenfaces from the SVD of face image matrices.</td>
+            <td style="padding: 0.75rem;">Used in security systems, phone unlock, and photo tagging.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(170,170,170,0.15);">
+            <td style="padding: 0.75rem; font-weight: 600;">Image Compression</td>
+            <td style="padding: 0.75rem;">Truncated SVD keeps only the top-$r$ components.</td>
+            <td style="padding: 0.75rem;">JPEG and similar formats use related ideas to shrink file sizes.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(170,170,170,0.15);">
+            <td style="padding: 0.75rem; font-weight: 600;">Noise Reduction</td>
+            <td style="padding: 0.75rem;">Small singular values often correspond to noise.</td>
+            <td style="padding: 0.75rem;">Removing them leaves a cleaner signal in audio, images, and sensors.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(170,170,170,0.15);">
+            <td style="padding: 0.75rem; font-weight: 600;">Linear Regression</td>
+            <td style="padding: 0.75rem;">Solves least-squares problems via pseudoinverse.</td>
+            <td style="padding: 0.75rem;">The engine behind fitting lines, curves, and models to data.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>
+      What makes the SVD so universally adopted? Three things. First, it is based on simple, interpretable linear algebra — no black boxes, no mysterious parameters to tune. Second, it is guaranteed to exist for any matrix, rectangular or square, and it is essentially unique. Third, it is scalable. Companies like Google and Netflix run SVD computations on datasets with billions of entries. The algorithm has been optimized over decades and is available in every major programming language with a single function call.
+    </p>
+
+    <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(170,170,170,0.15);">
+
+    <h2>Your First SVD in Three Lines of Python</h2>
+    <p>
+      One of the best things about the SVD is how ridiculously easy it is to compute. Here is all the code you need in Python:
+    </p>
+
+    <pre><code>import numpy as np
+
+# X is your data matrix (n rows x m columns)
+U, S, Vt = np.linalg.svd(X, full_matrices=False)
+
+# That is it. U, S, and Vt are your three matrices.
+# S is returned as a 1D array of singular values.</code></pre>
+
+    <p>
+      Three lines. That is the entire computation. In MATLAB it is similarly trivial: <code>[U,S,V] = svd(X, 'econ')</code>. In R it is <code>svd(X)</code>. The hard part is never computing the SVD — it is knowing what to do with it once you have it, and that is exactly what Part 2 of this series will cover. We will explore how to truncate the SVD for data compression, prove why the truncated version is mathematically optimal (the Eckart-Young theorem), and connect it all to PCA and linear regression.
+    </p>
+
+    <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(170,170,170,0.15);">
+
+    <h2>Coming Up in Part 2</h2>
+    <p>
+      In this post, we have covered the intuition: what the SVD is, what the three matrices mean, and why it matters. But we have barely scratched the surface of what you can do with it. In Part 2, we will get into the real mechanics. We will see how the SVD can be rewritten as a sum of rank-one matrices, why truncating that sum gives you the best possible low-rank approximation of your data (and what "best" means precisely), and how this connects to the broader world of dimensionality reduction and machine learning.
+    </p>
+    <p>
+      Until next time, remember: the next time Google gives you exactly the result you were looking for, or Netflix recommends a show you end up binging, there is a good chance the SVD had something to do with it.
     </p>
   </div>
 </article>
@@ -7462,7 +7588,7 @@
   <aside class="md-source-file">
     
       <span class="md-source-file__fact">
-        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 15, 2026 17:49:52 UTC">July 15, 2026</span>
+        Last updated <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 15, 2026 18:34:11 UTC">July 15, 2026</span>
       </span>
     
   </aside>
