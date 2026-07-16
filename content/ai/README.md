@@ -14,6 +14,7 @@ Artificial intelligence, machine learning, and deep learning.
 - **Computer Vision** — Image processing, object detection, scene understanding
 - **Reinforcement Learning** — MDPs, Q-learning, policy gradients
 - **Large Language Models** — Transformers, scaling, training
+- **[LLM Inference](llm-inference/index.md)** — Hardware execution, decoding, compression, engines, scheduling, optimizations, metrics, and production deployment.
 
 ## Prerequisites
 

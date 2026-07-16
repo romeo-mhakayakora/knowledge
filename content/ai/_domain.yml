@@ -12,6 +12,7 @@ subjects:
   - computer-vision
   - reinforcement-learning
   - llm
+  - llm-inference
 
 learning_outcomes:
   - Understand AI concepts and architectures
